@@ -1,0 +1,11 @@
+name: Comments
+modelClass: Reuniors\Comments\Models\Comments
+form: $/reuniors/comments/models/comments/fields.yaml
+defaultRedirect: reuniors/comments/comments
+create:
+    redirect: 'reuniors/comments/comments/update/:id'
+    redirectClose: reuniors/comments/comments
+update:
+    redirect: reuniors/comments/comments
+    redirectClose: reuniors/comments/comments
+preview: {  }

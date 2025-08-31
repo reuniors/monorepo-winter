@@ -1,0 +1,8 @@
+fields:
+    foods:
+        span: full
+        path: food_partial
+        context:
+            - update
+            - preview
+        type: partial

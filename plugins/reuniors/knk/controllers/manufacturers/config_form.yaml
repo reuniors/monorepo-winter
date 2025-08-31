@@ -1,0 +1,10 @@
+name: Manufacturers
+form: $/reuniors/knk/models/manufacturer/fields.yaml
+modelClass: Reuniors\Knk\Models\Manufacturer
+defaultRedirect: reuniors/knk/manufacturers
+create:
+    redirect: 'reuniors/knk/manufacturers/update/:id'
+    redirectClose: reuniors/knk/manufacturers
+update:
+    redirect: reuniors/knk/manufacturers
+    redirectClose: reuniors/knk/manufacturers

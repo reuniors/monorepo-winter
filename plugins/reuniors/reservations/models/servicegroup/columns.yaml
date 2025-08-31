@@ -1,0 +1,28 @@
+columns:
+    title:
+        label: title
+        type: text
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    active:
+        label: active
+        type: number
+    type:
+        label: type
+        type: number
+    sort_order:
+        label: sort_order
+        type: number
+    required:
+        label: required
+        type: text
+    min_selected:
+        label: min_selected
+        type: number
+    max_selected:
+        label: max_selected
+        type: number

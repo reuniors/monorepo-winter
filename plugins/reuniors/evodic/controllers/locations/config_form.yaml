@@ -1,0 +1,10 @@
+name: Locations
+form: $/reuniors/evodic/models/location/fields.yaml
+modelClass: Reuniors\Evodic\Models\Location
+defaultRedirect: reuniors/evodic/locations
+create:
+    redirect: 'reuniors/evodic/locations/update/:id'
+    redirectClose: reuniors/evodic/locations
+update:
+    redirect: reuniors/evodic/locations
+    redirectClose: reuniors/evodic/locations

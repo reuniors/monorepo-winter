@@ -1,0 +1,10 @@
+name: Tags
+form: $/reuniors/knk/models/tag/fields.yaml
+modelClass: Reuniors\Knk\Models\Tag
+defaultRedirect: reuniors/knk/tags
+create:
+    redirect: 'reuniors/knk/tags/update/:id'
+    redirectClose: reuniors/knk/tags
+update:
+    redirect: reuniors/knk/tags
+    redirectClose: reuniors/knk/tags

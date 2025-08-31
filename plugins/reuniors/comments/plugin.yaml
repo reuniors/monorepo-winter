@@ -1,0 +1,11 @@
+plugin:
+    name: 'Comments'
+    description: 'reuniors.comments::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-comments-o
+    homepage: ''
+navigation:
+    main-menu-item:
+        label: 'reuniors.comments::lang.comment.comments'
+        url: reuniors/comments/comments
+        icon: icon-comments-o

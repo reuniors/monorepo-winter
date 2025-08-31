@@ -1,0 +1,10 @@
+name: PromoCodes
+form: $/reuniors/reservations/models/promocode/fields.yaml
+modelClass: Reuniors\Reservations\Models\PromoCode
+defaultRedirect: reuniors/reservations/promocodes
+create:
+    redirect: 'reuniors/reservations/promocodes/update/:id'
+    redirectClose: reuniors/reservations/promocodes
+update:
+    redirect: reuniors/reservations/promocodes
+    redirectClose: reuniors/reservations/promocodes

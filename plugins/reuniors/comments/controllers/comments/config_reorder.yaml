@@ -1,0 +1,4 @@
+title: Comments
+modelClass: Reuniors\Comments\Models\Comments
+toolbar:
+    buttons: reorder_toolbar

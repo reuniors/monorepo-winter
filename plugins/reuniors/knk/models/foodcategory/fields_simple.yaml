@@ -1,0 +1,40 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    description:
+        label: 'reuniors.knk::lang.Description'
+        size: large
+        span: auto
+        type: textarea
+    parent:
+        label: 'reuniors.knk::lang.Parent Food Category'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+        scope: filterByRestaurantMenu
+tabs:
+    fields:
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'

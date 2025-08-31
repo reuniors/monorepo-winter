@@ -1,0 +1,21 @@
+subject = "Vaše rezervace termínu"
+layout = "default"
+==
+<p>
+    Dobrý den,<br />
+    <br />
+    děkujeme za vaší rezervaci. Níže posíláme potvrzení vámi zadaných údajů:<br />
+    <br />
+    Datum vyzvednutí: {{ reservation.date | date("d.m.Y H:i") }}<br />
+    <br />
+    Adresa: {{ reservation.street }}<br />
+    Jméno: {{ reservation.name }} {{ reservation.lastname }}<br />
+    E-mail: {{ reservation.email }}<br />
+    Telefon: {{ reservation.phone }}<br />
+    <br />
+    Vaše zpráva: {{ reservation.message }}<br />
+    <br />
+    Vaši rezervací jsme přijali {{ reservation.created_at | date("d.m.Y H:i") }} a co nejdříve vám jí potvrdíme.<br />
+    <br />
+    Děkujeme za {% if reservationsCount > 1 %}opakované {% endif %}využití našich služeb
+</p>

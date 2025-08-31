@@ -1,0 +1,29 @@
+columns:
+    title:
+        label: title
+        type: text
+        searchable: true
+        sortable: true
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+        sortable: true
+    active:
+        label: active
+        type: text
+        sortable: true
+    sort_order:
+        label: sort_order
+        type: text
+        sortable: true
+    city_id:
+        label: city_id
+        type: number
+        select: name
+        relation: city

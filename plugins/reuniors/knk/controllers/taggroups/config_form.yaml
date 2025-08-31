@@ -1,0 +1,10 @@
+name: TagGroups
+form: $/reuniors/knk/models/taggroup/fields.yaml
+modelClass: Reuniors\Knk\Models\TagGroup
+defaultRedirect: reuniors/knk/taggroups
+create:
+    redirect: 'reuniors/knk/taggroups/update/:id'
+    redirectClose: reuniors/knk/taggroups
+update:
+    redirect: reuniors/knk/taggroups
+    redirectClose: reuniors/knk/taggroups

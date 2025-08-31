@@ -1,0 +1,39 @@
+<?php namespace Reuniors\Evodic\Http\Actions\V1\Tag\Group;
+
+use Illuminate\Http\Request;
+use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Evodic\Classes\Helpers\S;
+use Reuniors\Evodic\Models\TagGroup;
+
+class UpdateTagGroupAction
+{
+    use asAction;
+
+    public function rules()
+    {
+        return [
+            'data' => ['required', 'array'],
+            'data.title' => ['required', 'string'],
+        ];
+    }
+
+    public function handle(array $attributes = [], TagGroup $tagGroup)
+    {
+        $data = $attributes['data'];
+
+        $data['name'] = S::camel($data['title']);
+
+        $tagGroup->update($data);
+
+        return [
+            'success' => true,
+            'data' => $tagGroup
+        ];
+    }
+
+    public function asController(Request $request, TagGroup $tagGroup)
+    {
+        $requestData = $request->all();
+        return $this->handle($requestData, $tagGroup);
+    }
+}

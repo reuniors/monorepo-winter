@@ -1,0 +1,25 @@
+{
+    "name": "janvince/smallcontactform",
+    "type": "october-plugin",
+    "description": "Simple contact form plugin for October CMS",
+    "homepage": "https://github.com/janvince/oc-smallcontactform-plugin",
+    "keywords": ["october", "cms", "plugin", "contact", "form"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jan Vince",
+            "email": "janvince@smallhill.cz"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "JanVince\\SmallContactForm\\": ""
+        }
+    },
+    "extra": {
+        "installer-name": "SmallContactForm"
+    }
+} 

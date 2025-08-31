@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.questionnaire::lang.plugin.name'
+    description: 'reuniors.questionnaire::lang.plugin.description'
+    author: reuniors
+    icon: oc-icon-question
+    homepage: ''

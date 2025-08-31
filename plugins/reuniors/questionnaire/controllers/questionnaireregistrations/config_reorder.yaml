@@ -1,0 +1,4 @@
+title: QuestionnaireRegistrations
+modelClass: Reuniors\Questionnaire\Models\QuestionnaireRegistration
+toolbar:
+    buttons: reorder_toolbar

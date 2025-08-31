@@ -1,0 +1,10 @@
+name: BannerZones
+form: $/reuniors/knk/models/bannerzone/fields.yaml
+modelClass: Reuniors\Knk\Models\BannerZone
+defaultRedirect: reuniors/knk/bannerzones
+create:
+    redirect: 'reuniors/knk/bannerzones/update/:id'
+    redirectClose: reuniors/knk/bannerzones
+update:
+    redirect: reuniors/knk/bannerzones
+    redirectClose: reuniors/knk/bannerzones

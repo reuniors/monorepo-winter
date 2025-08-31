@@ -1,0 +1,25 @@
+columns:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        type: text
+        searchable: true
+        sortable: true
+    food_addon_group_name:
+        label: 'Group Name'
+        type: number
+        select: title
+        relation: food_addon_group
+    name:
+        label: 'reuniors.knk::lang.Name'
+        type: text
+        searchable: true
+        sortable: true
+    sort_order:
+        label: 'Sort'
+        type: reorder_button
+    conditional_price:
+        label: price
+        type: text
+    active:
+        label: active
+        type: text

@@ -1,0 +1,8 @@
+fields:
+    food_addons:
+        span: full
+        path: foodaddons_partial
+        context:
+            - update
+            - preview
+        type: partial

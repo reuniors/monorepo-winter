@@ -1,0 +1,14 @@
+# ===================================
+#  List Column Definitions
+# ===================================
+
+columns:
+    path:
+        label: mohsin.rest::lang.node.path_label
+        searchable: true
+
+    is_enabled:
+        label: mohsin.rest::lang.node.enabled
+        type: partial
+        path: is_enabled
+        sortable: false

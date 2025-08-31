@@ -1,0 +1,23 @@
+fields:
+    title:
+        label: 'reuniors.haljina::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.haljina::lang.plugin.name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.haljina::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    has_standard_attributes:
+        label: 'reuniors.haljina::lang.Has standard attributes'
+        span: auto
+        type: switch

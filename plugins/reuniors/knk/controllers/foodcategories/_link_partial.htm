@@ -1,0 +1,15 @@
+<a
+        href="<?= Backend::url('reuniors/knk/food') ?>/update/<?= $record->id ?>"
+        target="_blank"
+        class="food-link"
+        style="color: #0d5fe6"
+>
+    Food Prices and Addons
+</a>
+<script>
+    $(document).ready(function () {
+        $('a.food-link').click(function (event) {
+            event.stopPropagation()
+        })
+    })
+</script>

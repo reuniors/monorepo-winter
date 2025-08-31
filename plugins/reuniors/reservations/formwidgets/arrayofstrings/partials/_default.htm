@@ -1,0 +1,9 @@
+<div class="array-of-strings-widget">
+    <input
+        type="text"
+        name="<?= $fieldName ?>"
+        value="<?= e(implode(',', $value ?? [])) ?>"
+        class="form-control"
+        placeholder="<?= e($placeholder) ?>"
+    >
+</div>

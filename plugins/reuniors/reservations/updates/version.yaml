@@ -1,0 +1,182 @@
+1.0.1:
+    - "Initialize plugin."
+1.0.2:
+    - "Created table reuniors_reservations_locations"
+    - builder_table_create_reuniors_reservations_locations.php
+1.0.3:
+    - "Created table reuniors_reservations_location_workers"
+    - builder_table_create_reuniors_reservations_location_workers.php
+1.0.4:
+    - "Updated table reuniors_reservations_location_workers"
+    - builder_table_update_reuniors_reservations_location_workers.php
+1.0.5:
+    - "Created table reuniors_reservations_locations_locations_workers"
+    - builder_table_create_reuniors_reservations_locations_locations_workers.php
+1.0.6:
+    - "Created table reuniors_reservations_working_hours"
+    - builder_table_create_reuniors_reservations_working_hours.php
+1.0.7:
+    - "Created table reuniors_reservations_working_days"
+    - builder_table_create_reuniors_reservations_working_days.php
+1.0.8:
+    - "Created table reuniors_reservations_locations_working_hours"
+    - builder_table_create_reuniors_reservations_locations_working_hours.php
+1.0.9:
+    - "Updated table reuniors_reservations_working_hours"
+    - builder_table_update_reuniors_reservations_working_hours.php
+1.0.10:
+    - "Created table reuniors_reservations_location_workers_shifts"
+    - builder_table_create_reuniors_reservations_location_workers_shifts.php
+1.0.11:
+    - "Created table reuniors_reservations_services_groups"
+    - builder_table_create_reuniors_reservations_services_groups.php
+1.0.12:
+    - "Created table reuniors_reservations_services"
+    - builder_table_create_reuniors_reservations_services.php
+1.0.13:
+    - "Created table reuniors_reservations_client_reservations"
+    - builder_table_create_reuniors_reservations_client_reservations.php
+1.0.14:
+    - "Created table reuniors_reservations_client_reservations_services"
+    - builder_table_create_reuniors_reservations_client_reservations_services.php
+1.0.15:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations.php
+1.0.16:
+    - "Created table reuniors_reservations_location_worker_discounts"
+    - builder_table_create_reuniors_reservations_location_worker_discounts.php
+1.0.17:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_2.php
+1.0.18:
+    - "Updated table reuniors_reservations_working_hours"
+    - builder_table_update_reuniors_reservations_working_hours_2.php
+1.0.19:
+    - "Updated table reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts.php
+1.0.20:
+    - "Updated table reuniors_reservations_location_workers"
+    - builder_table_update_reuniors_reservations_location_workers_2.php
+1.0.21:
+    - "Updated table reuniors_reservations_location_workers"
+    - builder_table_update_reuniors_reservations_location_workers_3.php
+1.0.22:
+    - "Updated table reuniors_reservations_services_groups"
+    - builder_table_update_reuniors_reservations_services_groups.php
+1.0.23:
+    - "Updated table reuniors_reservations_services"
+    - builder_table_update_reuniors_reservations_services.php
+1.0.24:
+    - "Created table reuniors_reservations_locations_services_groups"
+    - builder_table_create_reuniors_reservations_locations_services_groups.php
+1.0.25:
+    - "Updated table reuniors_reservations_services_groups"
+    - builder_table_update_reuniors_reservations_services_groups_2.php
+1.0.26:
+    - "Created table reuniors_reservations_location_workers_working_hours"
+    - builder_table_create_reuniors_reservations_location_workers_working_hours.php
+1.0.27:
+    - "Updated table reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts_2.php
+1.0.28:
+    - "Drop table reuniors_reservations_working_days"
+    - builder_table_delete_reuniors_reservations_working_days.php
+1.0.29:
+    - "Updated table reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts_3.php
+1.0.30:
+    - "Updated table reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts_4.php
+1.0.31:
+    - "Updated table reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts_5.php
+1.0.32:
+    - "Created table reuniors_reservations_clients"
+    - builder_table_create_reuniors_reservations_clients.php
+1.0.33:
+    - "Updated table reuniors_reservations_clients"
+    - builder_table_update_reuniors_reservations_clients.php
+1.0.34:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_3.php
+1.0.35:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_4.php
+1.0.36:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_5.php
+1.0.37:
+    - "Updated table reuniors_reservations_client_reservations_services"
+    - builder_table_update_reuniors_reservations_client_reservations_services.php
+1.0.38:
+    - "Updated table reuniors_reservations_clients"
+    - builder_table_update_reuniors_reservations_clients_2.php
+1.0.39:
+    - "Seed table seed_user_groups"
+    - seeds/seed_user_groups.php
+1.0.40:
+    - "Created table reuniors_reservations_notifications"
+    - builder_table_create_reuniors_reservations_notifications.php
+1.0.41:
+    - "Created table reuniors_reservations_users_notifications"
+    - builder_table_create_reuniors_reservations_users_notifications.php
+1.0.42:
+    - "Created table reuniors_reservations_client_reservations_notifications"
+    - builder_table_create_reuniors_reservations_client_reservations_notifications.php
+1.0.43:
+    - "Updated table reuniors_reservations_notifications"
+    - builder_table_update_reuniors_reservations_notifications.php
+1.0.44:
+    - "Created table reuniors_reservations_connected_devices"
+    - builder_table_create_reuniors_reservations_connected_devices.php
+1.0.45:
+    - "Updated table reuniors_reservations_notifications"
+    - builder_table_update_reuniors_reservations_notifications_2.php
+1.0.46:
+    - ignore
+1.0.47:
+    - "Updated table reuniors_reservations_notifications"
+    - builder_table_update_reuniors_reservations_notifications_3.php
+1.0.48:
+    - ignore
+1.0.49:
+    - "Created table reuniors_reservations_promo_codes"
+    - builder_table_create_reuniors_reservations_promo_codes.php
+1.0.50:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_6.php
+1.0.51:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_7.php
+1.0.52:
+    - "Updated table reuniors_reservations_client_reservations"
+    - builder_table_update_reuniors_reservations_client_reservations_8.php
+1.0.53:
+    - "Updated table reuniors_reservations_clients: add date_of_birth column"
+    - builder_table_update_reuniors_reservations_clients_3.php
+1.0.54:
+    - "Created table reuniors_reservations_client_stats"
+    - builder_table_create_reuniors_reservations_client_stats.php
+1.0.55:
+    - "Created table reuniors_reservations_worker_stats"
+    - builder_table_create_reuniors_reservations_worker_stats.php
+1.0.56:
+    - "Created table reuniors_reservations_news"
+    - builder_table_create_reuniors_reservations_news.php
+1.0.57:
+    - "ignore"
+1.0.58:
+    - "Seed worker user group"
+    - seeds/SeedUserGroupsTable.php
+1.0.59:
+    - "Added pauses field to reuniors_reservations_location_workers_shifts"
+    - builder_table_update_reuniors_reservations_location_workers_shifts_6.php
+1.0.60:
+    - "Added pauses field to reuniors_reservations_working_hours"
+    - builder_table_update_reuniors_reservations_working_hours_3.php
+1.0.61:
+    - "Add change requests table for scheduled data modifications"
+    - builder_table_create_reuniors_reservations_change_requests_table.php
+1.0.62:
+    - "Add description field to services table"
+    - builder_table_add_description_to_reuniors_reservations_services_table.php

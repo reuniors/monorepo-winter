@@ -1,0 +1,13 @@
+<a
+        href="<?= Backend::url('reuniors/knk/foodcategories') ?>/update/<?= $record->id ?>" target="_blank" class="food-category-link"
+        style="color: #0d5fe6"
+>
+    Foods
+</a>
+<script>
+    $(document).ready(function () {
+        $('a.food-category-link').click(function (event) {
+            event.stopPropagation()
+        })
+    })
+</script>

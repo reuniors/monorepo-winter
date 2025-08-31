@@ -1,0 +1,16 @@
+# ===================================
+#  Rest Behavior Config
+# ===================================
+
+# Allowed Rest Actions
+allowedActions:
+  index:
+      pageSize: 1000
+  store:
+  show:
+    relations: [ 'food_categories' ]
+  update:
+  destroy:
+
+# Model Class name
+modelClass: Reuniors\Knk\Models\RestaurantMenu

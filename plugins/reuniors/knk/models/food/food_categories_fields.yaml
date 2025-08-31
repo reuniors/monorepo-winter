@@ -1,0 +1,96 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+        required: true
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+        required: true
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+        required: true
+    price:
+        label: 'reuniors.knk::lang.Price'
+        span: auto
+        required: true
+        type: number
+    description:
+        label: 'reuniors.knk::lang.Description'
+        span: auto
+        type: textarea
+    online_order:
+        label: 'reuniors.knk::lang.Online Order'
+        span: auto
+        type: switch
+    food_category:
+        label: 'reuniors.knk::lang.Food Category'
+        nameFrom: name
+        hidden: true
+        descriptionFrom: description
+        span: auto
+        type: relation
+    _tag_name:
+        label: 'reuniors.knk::lang.Tag Name'
+        span: right
+        context:
+            - create
+        type: text
+    tag:
+        label: 'reuniors.knk::lang.Tag'
+        nameFrom: name
+        descriptionFrom: description
+        list: $/reuniors/knk/models/tag/locations_columns.yaml
+        span: right
+        readOnly: 0
+        context:
+            - create
+            - update
+            - preview
+        type: recordfinder
+    manufacturer:
+        label: 'reuniors.knk::lang.Manufacturer'
+        nameFrom: name
+        descriptionFrom: description
+        span: right
+        type: relation
+        emptyOption: None
+    food_image:
+        label: 'reuniors.knk::lang.Food Image'
+        mode: image
+        imageWidth: '500'
+        imageHeight: '500'
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: full
+        type: fileupload
+tabs:
+    fields:
+        has_addons:
+            label: 'reuniors.knk::lang.Has Addons'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Food Type'
+        has_prices:
+            label: 'reuniors.knk::lang.Has Prices (Sizes)'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Food Type'
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Food Type'

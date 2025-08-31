@@ -1,0 +1,16 @@
+columns:
+    name:
+        label: name
+        type: text
+    title:
+        label: title
+        type: text
+    sort_order:
+        label: sort_order
+        type: text
+    slug:
+        label: slug
+        type: text
+    parent_id:
+        label: parent_id
+        type: number

@@ -1,0 +1,24 @@
+fields:
+    title:
+        label: 'reuniors.evodic::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.evodic::lang.Name'
+        span: left
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.evodic::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    description:
+        label: 'reuniors.evodic::lang.Description'
+        span: full
+        size: large
+        type: richeditor

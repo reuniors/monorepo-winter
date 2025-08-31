@@ -1,0 +1,16 @@
+columns:
+    banner_zone_id:
+        label: banner_zone_id
+        type: number
+    name:
+        label: name
+        type: text
+    category_id:
+        label: category_id
+        type: number
+    text:
+        label: text
+        type: text
+    url:
+        label: url
+        type: text

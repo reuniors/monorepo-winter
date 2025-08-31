@@ -1,0 +1,10 @@
+name: FoodAddonGroups
+form: $/reuniors/knk/models/foodaddongroup/fields.yaml
+modelClass: Reuniors\Knk\Models\FoodAddonGroup
+defaultRedirect: reuniors/knk/foodaddongroups
+create:
+    redirect: 'reuniors/knk/foodaddongroups/update/:id'
+    redirectClose: reuniors/knk/foodaddongroups
+update:
+    redirect: reuniors/knk/foodaddongroups
+    redirectClose: reuniors/knk/foodaddongroups

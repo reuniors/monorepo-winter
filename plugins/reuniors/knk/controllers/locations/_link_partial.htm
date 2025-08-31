@@ -1,0 +1,15 @@
+<a
+        href="<?= Backend::url('reuniors/knk/locations') ?>/update/<?= $record->id ?>"
+        target="_blank"
+        class="location-to-link"
+        style="color: #0d5fe6"
+>
+    Link
+</a>
+<script>
+    $(document).ready(function () {
+        $('a.location-to-link').click(function (event) {
+            event.stopPropagation()
+        })
+    })
+</script>

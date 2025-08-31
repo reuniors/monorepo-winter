@@ -1,0 +1,15 @@
+subject = "PODSETNIK - Crni novembar - POPUST 30%"
+==
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+<a href="{{ link }}" style="display: block">
+    <img src="https://berbernica-tanja.rzr.rs/storage/app/media/black_friday_25.jpg" alt="Crni novembar - POPUST 30%" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;"/>
+</a>
+{% if description %}
+    <p>{{ description }}</p>
+{% endif %}
+
+{% if link %}
+    <a href="{{ link }}">{{ 'Idi na link' }}</a>
+{% endif %}

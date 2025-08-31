@@ -1,0 +1,32 @@
+plugin:
+    name: 'reuniors.evodic::lang.plugin.name'
+    description: 'reuniors.evodic::lang.plugin.description'
+    author: reuniors
+    icon: oc-icon-map-marker
+    homepage: ''
+navigation:
+    menu-evodic:
+        label: 'reuniors.evodic::lang.plugin.name'
+        url: reuniors/evodic/locations
+        icon: icon-location-arrow
+        sideMenu:
+            evodic-menu-location:
+                label: 'reuniors.evodic::lang.Locations'
+                url: reuniors/evodic/locations
+                icon: icon-home
+            evodic-menu-cities:
+                label: 'reuniors.evodic::lang.Cities'
+                url: reuniors/evodic/cities
+                icon: icon-building
+            evodic-menu-countries:
+                label: 'reuniors.evodic::lang.Countries'
+                url: reuniors/evodic/countries
+                icon: icon-globe
+            evodic-menu-tags:
+                label: 'reuniors.evodic::lang.Tags'
+                url: reuniors/evodic/tags
+                icon: icon-globe
+            evodic-menu-tag-groups:
+                label: 'reuniors.evodic::lang.Tag Groups'
+                url: reuniors/evodic/taggroups
+                icon: icon-globe

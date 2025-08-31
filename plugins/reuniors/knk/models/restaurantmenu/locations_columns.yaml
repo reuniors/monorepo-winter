@@ -1,0 +1,16 @@
+columns:
+    name:
+        label: name
+        type: text
+        searchable: true
+    title:
+        label: title
+        type: text
+        searchable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+    sort_order:
+        label: 'Sort'
+        type: reorder_button

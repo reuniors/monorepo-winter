@@ -1,0 +1,10 @@
+name: Services
+form: $/reuniors/reservations/models/service/fields.yaml
+modelClass: Reuniors\Reservations\Models\Service
+defaultRedirect: reuniors/reservations/services
+create:
+    redirect: 'reuniors/reservations/services/update/:id'
+    redirectClose: reuniors/reservations/services
+update:
+    redirect: reuniors/reservations/services
+    redirectClose: reuniors/reservations/services

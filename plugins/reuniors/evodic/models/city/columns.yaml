@@ -1,0 +1,24 @@
+columns:
+    id:
+        label: id
+        type: number
+    country:
+        label: country
+        type: text
+        select: name
+        relation: country
+    updated_at:
+        label: updated_at
+        type: datetime
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    description:
+        label: description
+        type: text
+    title:
+        label: title
+        type: text

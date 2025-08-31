@@ -1,0 +1,4 @@
+title: Banners
+modelClass: Reuniors\Knk\Models\Banner
+toolbar:
+    buttons: reorder_toolbar

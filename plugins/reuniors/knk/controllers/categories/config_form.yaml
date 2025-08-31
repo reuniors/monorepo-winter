@@ -1,0 +1,10 @@
+name: Categories
+form: $/reuniors/knk/models/category/fields.yaml
+modelClass: Reuniors\Knk\Models\Category
+defaultRedirect: reuniors/knk/categories
+create:
+    redirect: 'reuniors/knk/categories/update/:id'
+    redirectClose: reuniors/knk/categories
+update:
+    redirect: reuniors/knk/categories
+    redirectClose: reuniors/knk/categories

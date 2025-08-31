@@ -1,0 +1,23 @@
+<?php namespace Reuniors\Evodic\Updates;
+
+use Schema;
+use Winter\Storm\Database\Updates\Migration;
+
+class BuilderTableUpdateReuniorsEvodicLocationOwners extends Migration
+{
+    public function up()
+    {
+        Schema::table('reuniors_evodic_location_owners', function($table)
+        {
+            $table->integer('user_id')->nullable()->change();
+        });
+    }
+    
+    public function down()
+    {
+        Schema::table('reuniors_evodic_location_owners', function($table)
+        {
+            $table->integer('user_id')->nullable(false)->change();
+        });
+    }
+}

@@ -1,0 +1,12 @@
+list: $/reuniors/reservations/models/servicegroup/columns.yaml
+modelClass: Reuniors\Reservations\Models\ServiceGroup
+title: ServiceGroups
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'reuniors/reservations/servicegroups/update/:id'

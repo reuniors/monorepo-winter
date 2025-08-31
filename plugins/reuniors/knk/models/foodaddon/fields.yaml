@@ -1,0 +1,63 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    _conditional_price:
+        label: 'reuniors.knk::lang.Price'
+        span: auto
+        default: '0'
+        type: number
+    priority:
+        label: 'reuniors.knk::lang.Priority'
+        span: auto
+        default: '1000'
+        type: number
+    available:
+        label: 'reuniors.knk::lang.Available'
+        span: auto
+        default: 1
+        required: 1
+        type: switch
+    active:
+        label: 'reuniors.knk::lang.Active'
+        span: auto
+        default: 1
+        type: switch
+    addons_dependencies:
+        label: 'reuniors.knk::lang.Addon dependencies'
+        prompt: 'Add new combination'
+        span: full
+        type: repeater
+        form:
+            fields:
+                related_addons:
+                    label: 'reuniors.knk::lang.Dependency combination'
+                    prompt: 'Add new addon dependency'
+                    span: full
+                    type: repeater
+                    form:
+                        fields:
+                            related_addon_name:
+                                label: 'reuniors.knk::lang.Related Addon'
+                                showSearch: true
+                                span: full
+                                required: 1
+                                type: dropdown
+                combination_price:
+                    label: 'reuniors.knk::lang.Price'
+                    span: auto
+                    required: 0
+                    type: number
+                combination_active:
+                    label: 'reuniors.knk::lang.Active'
+                    span: auto
+                    default: 1
+                    type: switch

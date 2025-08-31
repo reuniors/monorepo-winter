@@ -1,0 +1,63 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    combine_type:
+        label: 'reuniors.knk::lang.Combine Type'
+        showSearch: 0
+        span: auto
+        type: dropdown
+    priority:
+        label: 'reuniors.knk::lang.Priority'
+        span: auto
+        default: '1000'
+        type: number
+    max_addons:
+        label: 'reuniors.knk::lang.Max Addons'
+        span: auto
+        default: '4'
+        type: number
+    min_required:
+        label: 'reuniors.knk::lang.Min Selected'
+        span: auto
+        default: '0'
+        required: 1
+        type: number
+    type:
+        label: 'reuniors.knk::lang.Type'
+        emptyOption: None
+        showSearch: true
+        span: auto
+        type: dropdown
+    input_type:
+        label: 'reuniors.knk::lang.Input Type'
+        showSearch: true
+        span: auto
+        default: checkbox
+        required: 1
+        type: dropdown
+    other_addons:
+        label: 'reuniors.knk::lang.Number of Other Addons (free)'
+        span: auto
+        default: '0'
+        type: number
+    is_required:
+        label: 'reuniors.knk::lang.Required'
+        span: auto
+        type: switch
+tabs:
+    fields:
+        pivot[active]:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'

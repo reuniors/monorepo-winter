@@ -1,0 +1,17 @@
+fields:
+    title:
+        label: 'reuniors.haljina::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.haljina::lang.plugin.name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    active:
+        label: 'reuniors.haljina::lang.Is Active'
+        span: auto
+        default: 1
+        type: switch

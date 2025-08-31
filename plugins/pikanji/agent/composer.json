@@ -1,0 +1,26 @@
+{
+    "name": "pikanji/agent",
+    "type": "october-plugin",
+    "description": "Agent detection plugin for October CMS",
+    "homepage": "https://github.com/pikanji/oc-agent-plugin",
+    "keywords": ["october", "cms", "plugin", "agent", "user-agent", "detection"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "pikanji",
+            "email": "pikanji@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "jenssegers/agent": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Pikanji\\Agent\\": ""
+        }
+    },
+    "extra": {
+        "installer-name": "Agent"
+    }
+} 

@@ -1,0 +1,10 @@
+name: Locations
+form: $/reuniors/knk/models/location/fields.yaml
+modelClass: Reuniors\Knk\Models\Location
+defaultRedirect: reuniors/knk/locations
+create:
+    redirect: 'reuniors/knk/locations/update/:id'
+    redirectClose: reuniors/knk/locations
+update:
+    redirect: reuniors/knk/locations
+    redirectClose: reuniors/knk/locations

@@ -1,0 +1,26 @@
+columns:
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+        sortable: true
+    description:
+        label: description
+        type: text
+    sort_order:
+        label: Sort
+        type: reorder_button
+    tag_group:
+        label: 'reuniors.evodic::lang.Tag Group'
+        type: text
+        select: title
+        relation: tag_group
+    priority:
+        label: 'reuniors.evodic::lang.Priority'
+        type: number
+        sortable: true

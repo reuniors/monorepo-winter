@@ -1,0 +1,5 @@
+<?php if ($value !== null) { ?>
+    <img src="<?php echo $value['path'] ?>" style="height: 50px" />
+<?php } elseif($record->cover_image) { ?>
+    <img src="<?php echo $record->cover_image['path'] ?>" style="height: 50px"  />
+<?php } ?>

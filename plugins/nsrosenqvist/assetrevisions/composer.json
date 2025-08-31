@@ -1,0 +1,25 @@
+{
+    "name": "nsrosenqvist/assetrevisions",
+    "type": "october-plugin",
+    "description": "Asset revisions plugin for October CMS",
+    "homepage": "https://github.com/nsrosenqvist/oc-assetrevisions-plugin",
+    "keywords": ["october", "cms", "plugin", "assets", "revisions"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "nsrosenqvist",
+            "email": "info@nsrosenqvist.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nsrosenqvist\\AssetRevisions\\": ""
+        }
+    },
+    "extra": {
+        "installer-name": "AssetRevisions"
+    }
+} 

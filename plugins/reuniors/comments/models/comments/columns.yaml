@@ -1,0 +1,11 @@
+columns:
+    content:
+        label: 'reuniors.comments::lang.comment.content'
+        type: text
+    status:
+        label: 'reuniors.comments::lang.comment.status'
+        valueFrom: statusAdmin
+    url:
+        type: partial
+        path: ~/plugins/reuniors/comments/models/comments/_url_column.htm
+

@@ -1,0 +1,85 @@
+fields:
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        type: text
+    banner_zone:
+        label: 'reuniors.knk::lang.Banner Zone'
+        nameFrom: name
+        descriptionFrom: description
+        emptyOption: None
+        span: auto
+        type: relation
+    banr_image:
+        label: 'reuniors.knk::lang.Image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    text:
+        label: 'reuniors.knk::lang.Content'
+        size: large
+        span: auto
+        type: textarea
+    category:
+        label: 'reuniors.knk::lang.Location Category'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    city:
+        label: 'reuniors.knk::lang.Region - City'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    locations:
+        span: full
+        path: locations_partial
+        context:
+            - update
+            - preview
+        type: partial
+        tab: 'reuniors.knk::lang.Locations'
+    connected_location:
+        label: 'reuniors.knk::lang.Connected Location'
+        nameFrom: name
+        descriptionFrom: description
+        list: $/reuniors/knk/models/location/columns.yaml
+        span: auto
+        type: recordfinder
+tabs:
+    fields:
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        url:
+            label: 'reuniors.knk::lang.Url'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Settings'
+        activation_at:
+            label: 'reuniors.knk::lang.Activation date'
+            mode: date
+            span: auto
+            type: datepicker
+            tab: 'reuniors.knk::lang.Settings'
+        deactivation_at:
+            label: 'reuniors.knk::lang.Deactivation date'
+            mode: date
+            span: auto
+            type: datepicker
+            tab: 'reuniors.knk::lang.Settings'
+        priority:
+            label: 'reuniors.knk::lang.Priority'
+            span: auto
+            default: '1000'
+            type: number
+            tab: 'reuniors.knk::lang.Settings'

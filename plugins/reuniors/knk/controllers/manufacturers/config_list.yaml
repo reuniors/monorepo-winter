@@ -1,0 +1,12 @@
+list: $/reuniors/knk/models/manufacturer/columns.yaml
+modelClass: Reuniors\Knk\Models\Manufacturer
+title: Manufacturers
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'reuniors/knk/manufacturers/update/:id'

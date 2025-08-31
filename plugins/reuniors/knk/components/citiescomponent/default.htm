@@ -1,0 +1,6 @@
+{% set cities = __SELF__.cities %}
+<div>
+    {% for city in cities %}
+        <a href="/{{ city.slug }}">{{ city.name }}</a>
+    {% endfor %}
+</div>

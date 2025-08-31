@@ -1,0 +1,10 @@
+name: Categories
+form: $/reuniors/haljina/models/category/fields.yaml
+modelClass: Reuniors\Haljina\Models\Category
+defaultRedirect: reuniors/haljina/categories
+create:
+    redirect: 'reuniors/haljina/categories/update/:id'
+    redirectClose: reuniors/haljina/categories
+update:
+    redirect: reuniors/haljina/categories
+    redirectClose: reuniors/haljina/categories

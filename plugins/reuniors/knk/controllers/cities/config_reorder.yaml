@@ -1,0 +1,4 @@
+title: Cities
+modelClass: Reuniors\Knk\Models\RegionCity
+toolbar:
+    buttons: reorder_toolbar

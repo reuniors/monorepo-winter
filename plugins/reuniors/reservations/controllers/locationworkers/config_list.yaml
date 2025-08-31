@@ -1,0 +1,12 @@
+list: $/reuniors/reservations/models/locationworker/columns.yaml
+modelClass: Reuniors\Reservations\Models\LocationWorker
+title: LocationWorkers
+noRecordsMessage: 'backend::lang.list.no_records'
+showSetup: true
+showCheckboxes: true
+recordsPerPage: 20
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: 'backend::lang.list.search_prompt'
+recordUrl: 'reuniors/reservations/locationworkers/update/:id'

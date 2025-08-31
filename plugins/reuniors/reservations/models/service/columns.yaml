@@ -1,0 +1,33 @@
+columns:
+    group_id:
+        label: 'group name'
+        type: number
+        select: title
+        relation: service_group
+    title:
+        label: title
+        type: text
+        sortable: true
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    active:
+        label: active
+        type: text
+    duration:
+        label: duration
+        type: number
+    price:
+        label: price
+        type: text
+        sortable: true
+    currency:
+        label: currency
+        type: number
+    sort_order:
+        label: sort_order
+        type: number
+        sortable: true

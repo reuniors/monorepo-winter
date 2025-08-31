@@ -1,0 +1,76 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    parent:
+        label: 'reuniors.knk::lang.Parent'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    combine_type:
+        label: 'reuniors.knk::lang.Combine Type'
+        showSearch: 0
+        span: auto
+        type: dropdown
+    tag_group_image:
+        label: 'reuniors.knk::lang.Image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    metadata:
+        label: 'reuniors.knk::lang.Other Data'
+        prompt: 'Add new item'
+        span: full
+        type: repeater
+        form:
+            fields:
+                icon:
+                    label: 'reuniors.knk::lang.Icon'
+                    span: auto
+                    type: text
+tabs:
+    fields:
+        show_on_search:
+            label: 'reuniors.knk::lang.Show on search'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        show_in_filters:
+            label: 'reuniors.knk::lang.Show In Filters'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        type:
+            label: 'reuniors.knk::lang.Type'
+            showSearch: true
+            span: auto
+            default: standard
+            type: dropdown
+            tab: 'reuniors.knk::lang.Settings'
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'

@@ -1,0 +1,19 @@
+columns:
+    title:
+        label: title
+        type: text
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    active:
+        label: active
+        type: text
+    main_owner_id:
+        label: main_owner_id
+        type: number
+    type:
+        label: type
+        type: number

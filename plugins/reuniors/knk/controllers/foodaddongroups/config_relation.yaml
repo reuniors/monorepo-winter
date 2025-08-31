@@ -1,0 +1,9 @@
+food_addons:
+    label: Food Addons
+    view:
+        list: $/reuniors/knk/models/foodaddon/columns.yaml
+        toolbarButtons: create|delete
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/foodaddon/fields.yaml
+        recordsPerPage: 10

@@ -1,0 +1,125 @@
+fields:
+    title:
+        label: 'reuniors.reservations::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.reservations::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.reservations::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    type:
+        label: 'reuniors.reservations::lang.Type'
+        showSearch: true
+        span: auto
+        type: dropdown
+    description:
+        label: 'reuniors.reservations::lang.Description'
+        size: ''
+        span: full
+        type: textarea
+    snippet:
+        label: 'reuniors.reservations::lang.Snippet'
+        size: ''
+        span: auto
+        type: textarea
+    services_groups:
+        label: 'reuniors.reservations::lang.Services Groups'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+tabs:
+    fields:
+        logo:
+            label: 'reuniors.reservations::lang.Logo'
+            mode: image
+            imageWidth: '150'
+            imageHeight: '150'
+            useCaption: true
+            thumbOptions:
+                mode: auto
+                extension: jpg
+            span: auto
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'
+        cover:
+            label: 'reuniors.reservations::lang.Cover'
+            mode: image
+            useCaption: true
+            thumbOptions:
+                mode: auto
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'
+        gallery:
+            label: 'reuniors.reservations::lang.Gallery'
+            mode: image
+            imageWidth: '1920'
+            imageHeight: '1080'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: full
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'
+        active:
+            label: 'reuniors.reservations::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'
+        google_map_url:
+            label: 'reuniors.reservations::lang.Google Map Url'
+            span: auto
+            type: text
+            tab: 'reuniors.reservations::lang.Settings'
+        wifi_password:
+            label: 'reuniors.reservations::lang.Wifi Password'
+            span: auto
+            type: text
+            tab: 'reuniors.reservations::lang.Settings'
+        'address_data[street]':
+            label: 'reuniors.reservations::lang.Street'
+            span: auto
+            type: text
+            tab: 'reuniors.reservations::lang.Address'
+        'address_data[street_number]':
+            label: 'reuniors.reservations::lang.Street Number'
+            span: auto
+            type: text
+            tab: 'reuniors.reservations::lang.Address'
+        'address_data[municipality]':
+            label: 'reuniors.reservations::lang.Municipality'
+            span: auto
+            type: text
+            tab: 'reuniors.reservations::lang.Address'
+        address_lat:
+            label: 'reuniors.reservations::lang.Address Lat'
+            span: left
+            type: number
+            tab: 'reuniors.reservations::lang.Address'
+        address_long:
+            label: 'reuniors.reservations::lang.Address Lng'
+            span: auto
+            type: number
+            tab: 'reuniors.reservations::lang.Address'
+        'phone_data[phone_numbers]':
+            label: 'reuniors.reservations::lang.Phone Numbers'
+            mode: array
+            separator: comma
+            customTags: true
+            useKey: false
+            span: full
+            type: taglist
+            tab: 'reuniors.reservations::lang.Address'

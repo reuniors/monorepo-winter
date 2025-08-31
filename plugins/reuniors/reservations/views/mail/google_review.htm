@@ -1,0 +1,24 @@
+subject = "Berbernica Tanja - Google ocena - POPUST 30%"
+==
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+<a href="{{ link }}" style="display: block">
+    <img src="https://berbernica-tanja.rzr.rs/storage/app/media/google_review.png" alt="Google review - POPUST 30%" style="width: 100%; max-width: 600px; margin: 0 auto; display: block;"/>
+</a>
+{% if description %}
+    <p>{{ description }}</p>
+{% endif %}
+
+{% if link %}
+    <a href="{{ link }}">{{ 'Idi na google review' }}</a>
+{% endif %}
+
+{% if promoCode %}
+    <p>Nakon što ste nas ocenili, možete rezervisati usluge sa promo kodom i iskoristiti 30% popusta. HVALA UNAPRED!</p>
+    <h3>Promo kod: {{ promoCode }}</h3>
+{% endif %}
+
+{% if reservationLink %}
+    <a href="{{ reservationLink }}">{{ 'Rezerviši usluge' }}</a>
+{% endif %}

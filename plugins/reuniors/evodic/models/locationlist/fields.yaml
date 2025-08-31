@@ -1,0 +1,12 @@
+fields:
+    title:
+        label: 'reuniors.evodic::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.evodic::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text

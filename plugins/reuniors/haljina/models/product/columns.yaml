@@ -1,0 +1,46 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    updated_at:
+        label: updated_at
+        type: datetime
+    deleted_at:
+        label: deleted_at
+        type: datetime
+    name:
+        label: name
+        type: text
+    slug:
+        label: slug
+        type: text
+    title:
+        label: title
+        type: text
+    description:
+        label: description
+        type: text
+    active:
+        label: active
+        type: text
+    activate_at:
+        label: activate_at
+        type: text
+    deactivate_at:
+        label: deactivate_at
+        type: text
+    user_id:
+        label: user_id
+        type: number
+    price:
+        label: price
+        type: text
+    status:
+        label: status
+        type: text
+    category_id:
+        label: category_id
+        type: number

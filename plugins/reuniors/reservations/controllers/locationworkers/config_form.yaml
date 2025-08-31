@@ -1,0 +1,10 @@
+name: LocationWorkers
+form: $/reuniors/reservations/models/locationworker/fields.yaml
+modelClass: Reuniors\Reservations\Models\LocationWorker
+defaultRedirect: reuniors/reservations/locationworkers
+create:
+    redirect: 'reuniors/reservations/locationworkers/update/:id'
+    redirectClose: reuniors/reservations/locationworkers
+update:
+    redirect: reuniors/reservations/locationworkers
+    redirectClose: reuniors/reservations/locationworkers

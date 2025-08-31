@@ -1,0 +1,20 @@
+columns:
+    title:
+        label: title
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+        sortable: true
+    url:
+        label: url
+        type: partial
+        path: link_partial
+    logo:
+        label: 'reuniors.knk::lang.Image'
+        type: partial
+        path: ~/plugins/reuniors/knk/models/location/_image_column.htm
+        sortable: false

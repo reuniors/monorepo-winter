@@ -1,0 +1,87 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    category_icon:
+        label: 'reuniors.knk::lang.Icon'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    parent:
+        label: 'reuniors.knk::lang.Parent'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    description:
+        label: 'reuniors.knk::lang.Description'
+        size: large
+        span: full
+        type: textarea
+tabs:
+    fields:
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        'metadata[case][nominativ]':
+            label: Nominativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][genitiv]':
+            label: Genitiv
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][dativ]':
+            label: Dativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][akuzativ]':
+            label: Akuzativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][vokativ]':
+            label: Vokativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][instrumental]':
+            label: Instrumental
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][lokativ]':
+            label: Lokativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[plural]':
+            label: 'reuniors.knk::lang.Plural'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'

@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.userextended::lang.plugin.name'
+    description: 'reuniors.userextended::lang.plugin.description'
+    author: reuniors
+    icon: oc-icon-user-plus
+    homepage: ''

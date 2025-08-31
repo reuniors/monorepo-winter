@@ -1,0 +1,45 @@
+<?php namespace reuniors\knk\Http\Actions\V1\RestaurantMenu;
+
+use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Knk\Models\Location;
+
+class RestaurantMenuActivationAction
+{
+    use asAction;
+
+    public function rules()
+    {
+        return [];
+    }
+
+    public function handle(Location $location, $restaurantMenuId)
+    {
+        $existingActiveMenu = $location->restaurant_menu()
+            ->where('active', 1)
+            ->first();
+
+        if ($existingActiveMenu && $existingActiveMenu->id !== $restaurantMenuId) {
+            $location->restaurant_menu()
+                ->where('id', $existingActiveMenu->id)
+                ->update([
+                    'active' => 0,
+                ]);
+        }
+
+        $location->restaurant_menu()
+            ->where('id', $restaurantMenuId)
+            ->firstOrFail()
+            ->update([
+                'active' => 1,
+            ]);
+
+        return [
+            'success' => true,
+        ];
+    }
+
+    public function asController(Location $location, $id)
+    {
+        return $this->handle($location, $id);
+    }
+}

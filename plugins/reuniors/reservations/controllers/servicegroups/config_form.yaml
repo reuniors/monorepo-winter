@@ -1,0 +1,10 @@
+name: ServiceGroups
+form: $/reuniors/reservations/models/servicegroup/fields.yaml
+modelClass: Reuniors\Reservations\Models\ServiceGroup
+defaultRedirect: reuniors/reservations/servicegroups
+create:
+    redirect: 'reuniors/reservations/servicegroups/update/:id'
+    redirectClose: reuniors/reservations/servicegroups
+update:
+    redirect: reuniors/reservations/servicegroups
+    redirectClose: reuniors/reservations/servicegroups

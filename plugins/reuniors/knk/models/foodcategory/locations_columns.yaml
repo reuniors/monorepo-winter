@@ -1,0 +1,23 @@
+columns:
+    name:
+        label: name
+        type: text
+    title:
+        label: title
+        type: text
+    parent[title]:
+        label: Parent
+        type: text
+    description:
+        label: description
+        type: text
+    slug:
+        label: slug
+        type: text
+    sort_order:
+        label: 'Sort'
+        type: reorder_button
+    url:
+        label: url
+        type: partial
+        path: link_partial

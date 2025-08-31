@@ -1,0 +1,29 @@
+columns:
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    has_regions:
+        label: has_regions
+        type: text
+        sortable: true
+    parent_city_id:
+        label: parent_city_id
+        type: number
+        sortable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+    snippet:
+        label: snippet
+        type: text
+    active:
+        label: active
+        type: text
+        sortable: true
+    sort_order:
+        label: sort
+        type: number
+        sortable: true

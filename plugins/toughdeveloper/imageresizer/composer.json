@@ -1,0 +1,25 @@
+{
+    "name": "toughdeveloper/imageresizer",
+    "type": "october-plugin",
+    "description": "Image resizer plugin for October CMS",
+    "homepage": "https://github.com/toughdeveloper/oc-imageresizer-plugin",
+    "keywords": ["october", "cms", "plugin", "image", "resize", "resizer"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "toughdeveloper",
+            "email": "info@toughdeveloper.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "ToughDeveloper\\ImageResizer\\": ""
+        }
+    },
+    "extra": {
+        "installer-name": "ImageResizer"
+    }
+} 

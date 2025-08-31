@@ -1,0 +1,17 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table reuniors_questionnaire_registration'
+    - builder_table_create_reuniors_questionnaire_registration.php
+1.0.3:
+    - 'Created table reuniors_questionnaire_registration_data'
+    - builder_table_create_reuniors_questionnaire_registration_data.php
+1.0.4:
+    - 'Updated table reuniors_questionnaire_registration_data'
+    - builder_table_update_reuniors_questionnaire_registration_data.php
+1.0.5:
+    - 'Updated table reuniors_questionnaire_registration_data'
+    - builder_table_update_reuniors_questionnaire_registration_data_2.php
+1.0.6:
+    - 'Updated table reuniors_questionnaire_registration'
+    - builder_table_update_reuniors_questionnaire_registration.php

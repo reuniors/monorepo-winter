@@ -1,0 +1,38 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    active:
+        label: 'reuniors.knk::lang.Active'
+        span: auto
+        type: switch
+    description:
+        label: 'reuniors.knk::lang.Description'
+        size: large
+        span: auto
+        type: textarea
+tabs:
+    fields:
+        food_categories:
+            span: full
+            path: foodcategories_partial
+            context:
+                - update
+                - preview
+            type: partial
+            tab: 'Food Categories'

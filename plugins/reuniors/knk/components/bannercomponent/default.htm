@@ -1,0 +1,9 @@
+{% set banners = __SELF__.banners %}
+<p>This is the default markup for component Banner</p>
+
+<small>You can delete this file if you want</small>
+<div>
+    {% for oneBanner in banners %}
+        {{ dump(oneBanner) }}
+    {% endfor %}
+</div>

@@ -1,0 +1,40 @@
+plugin:
+    name: 'reuniors.knk::lang.plugin.name'
+    description: 'reuniors.knk::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-paw
+    homepage: ''
+navigation:
+    knk:
+        label: 'Kuda na klopu'
+        url: reuniors/knk/locations
+        icon: icon-cutlery
+        sideMenu:
+            knk-locations:
+                label: 'reuniors.knk::lang.Locations'
+                url: reuniors/knk/locations
+                icon: icon-location-arrow
+            knk-categories:
+                label: 'reuniors.knk::lang.Categories'
+                url: reuniors/knk/categories
+                icon: icon-signal
+            knk-food-menu:
+                label: 'reuniors.knk::lang.Food Menu'
+                url: reuniors/knk/restaurantmenu
+                icon: icon-apple
+            knk-region-city:
+                label: 'reuniors.knk::lang.Region - City'
+                url: reuniors/knk/cities
+                icon: icon-automobile
+            knk-locations-tags:
+                label: 'reuniors.knk::lang.Tags'
+                url: reuniors/knk/tags
+                icon: icon-tags
+            knk-tag-groups:
+                label: 'reuniors.knk::lang.Tag Groups'
+                url: reuniors/knk/taggroups
+                icon: icon-th
+            knk-manufaturer:
+                label: 'reuniors.knk::lang.Manufacturers'
+                url: reuniors/knk/manufacturers
+                icon: icon-building

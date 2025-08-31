@@ -1,0 +1,16 @@
+fields:
+    tag:
+        label: 'reuniors.knk::lang.Tag'
+        nameFrom: name
+        descriptionFrom: description
+        list: $/reuniors/knk/models/tag/columns.yaml
+        span: auto
+        type: recordfinder
+    value:
+        label: 'reuniors.knk::lang.Value'
+        span: auto
+        type: text
+    show_in_list:
+        label: 'reuniors.knk::lang.Show In List'
+        span: auto
+        type: switch

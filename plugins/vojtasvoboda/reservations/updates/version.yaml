@@ -1,0 +1,27 @@
+1.0.1:
+    - First version of Reservations
+    - create_statuses_table.php
+    - create_reservations_table.php
+    - seed_statuses_table.php
+1.0.2: Add method getReservationByInterval() to facade to better extensibility.
+1.0.3: Count all reservations with same email and put it to the confirmation mail template.
+1.0.4: Add Spanish locale (thanks to Victor van Herpt)
+1.0.5: Returning customers function.
+1.0.6: Fix reservation datepicker JS.
+1.0.7: Add Admin confirmation function.
+1.0.8: Refactor plugin's mailers.
+1.0.9: Fix sending confirmation email to admin by locale chosed at backend.
+1.0.10: Enable backend date availability validation when reservation is changing.
+1.0.11: Fix form labels names.
+1.0.12: Add russian lang
+1.0.13: Add translate settings, add translate front, fix error
+1.1.0: Move configs to settings, add working days and opening hours, better validation of selected date.
+1.1.1: Put old method back for backward compatibility.
+1.1.2: Make date picker translatable to french.
+1.1.3: Fix working days
+1.1.4: Fix validations
+1.1.5: Add French translations (thanks to DamsFX)
+1.1.6: Add Spanish admin mail template (thanks to DamsFX)
+1.1.7: Translations fixes
+1.1.8: Romanian locale (thanks to Bogdan Barbalata)
+1.1.9: Dutch (Nederlands) translation (thanks to Albert van Osch)

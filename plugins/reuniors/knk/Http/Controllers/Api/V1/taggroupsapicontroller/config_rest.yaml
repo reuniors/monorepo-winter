@@ -1,0 +1,16 @@
+# ===================================
+#  Rest Behavior Config
+# ===================================
+
+# Allowed Rest Actions
+allowedActions:
+  index:
+      pageSize: 20
+  store:
+  show:
+    relations: [ 'tags' ]
+  update:
+  destroy:
+
+# Model Class name
+modelClass: Reuniors\Knk\Models\TagGroup

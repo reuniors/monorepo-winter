@@ -1,0 +1,541 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    snippet:
+        label: 'reuniors.knk::lang.Snippet'
+        span: auto
+        type: textarea
+    categories:
+        label: 'reuniors.knk::lang.Categories'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+    main_category:
+        label: 'reuniors.knk::lang.Main category'
+        nameFrom: title
+        descriptionFrom: description
+        emptyOption: None
+        span: auto
+        required: 1
+        type: relation
+    cover_image:
+        label: 'reuniors.knk::lang.Cover image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    logo:
+        label: 'reuniors.knk::lang.Logo'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    text:
+        label: 'reuniors.knk::lang.Content'
+        size: large
+        span: full
+        stretch: 0
+        type: richeditor
+    related_locations:
+        label: 'reuniors.knk::lang.Locations Relations'
+        span: full
+        path: relatedlocations_partial
+        context:
+            - update
+            - preview
+        type: partial
+        tab: 'Restaurant Menu'
+tabs:
+    fields:
+        city:
+            label: 'reuniors.knk::lang.Region - City'
+            nameFrom: name
+            descriptionFrom: description
+            span: auto
+            type: relation
+            emptyOption: None
+            tab: 'reuniors.knk::lang.Settings'
+        description:
+            label: 'reuniors.knk::lang.Description'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Settings'
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        activation_at:
+            label: 'reuniors.knk::lang.Activation time'
+            mode: datetime
+            span: auto
+            type: datepicker
+            tab: 'reuniors.knk::lang.Settings'
+        priority:
+            label: 'reuniors.knk::lang.Priority'
+            span: auto
+            default: '1000'
+            type: number
+            tab: 'reuniors.knk::lang.Settings'
+        user_id:
+            label: 'User id'
+            span: auto
+            default: '0'
+            readOnly: 1
+            type: number
+            tab: 'reuniors.knk::lang.Settings'
+        show_on_home:
+            label: 'reuniors.knk::lang.Home Page By City'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        show_on_home_global:
+            label: 'reuniors.knk::lang.Home Page All Cities'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        has_delivery:
+            label: 'reuniors.knk::lang.Has Delivery'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        has_online_delivery:
+            label: 'reuniors.knk::lang.Has Online Delivery'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        gallery:
+            label: 'reuniors.knk::lang.Gallery'
+            mode: image
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: full
+            type: fileupload
+            tab: 'reuniors.knk::lang.Settings'
+        average_price:
+            label: 'reuniors.knk::lang.Average Price'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Settings'
+        average_price_for_two:
+            label: 'reuniors.knk::lang.Average Price For Two'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Settings'
+        is_closed:
+            label: 'reuniors.knk::lang.Closed'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        restaurant_menu:
+            span: full
+            path: restaurantmenu_partial
+            context:
+                - update
+                - preview
+            type: partial
+            tab: 'reuniors.knk::lang.Restaurant Menu'
+        tags:
+            span: full
+            path: tags_partial
+            context:
+                - update
+                - preview
+            type: partial
+            tab: 'reuniors.knk::lang.Tags'
+        badge_tag_group:
+            label: 'reuniors.knk::lang.Badge Tag Group'
+            nameFrom: name
+            descriptionFrom: description
+            list: $/reuniors/knk/models/taggroup/columns.yaml
+            span: full
+            type: recordfinder
+            tab: 'reuniors.knk::lang.Tags'
+        'address_data[street]':
+            label: 'reuniors.knk::lang.Street Name'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'address_data[street_number]':
+            label: 'reuniors.knk::lang.Street Number'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'address_data[zip]':
+            label: 'reuniors.knk::lang.Zip Code'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'address_data[municipality]':
+            label: Municipality
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[phone_1]':
+            label: 'reuniors.knk::lang.Phone Number 1'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[phone_2]':
+            label: 'reuniors.knk::lang.Phone Number 2'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[mobile_1]':
+            label: 'reuniors.knk::lang.Mobile Number 1'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[mobile_2]':
+            label: 'reuniors.knk::lang.Mobile Number 2'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[delivery_1]':
+            label: 'reuniors.knk::lang.Delivery Phone Number 1'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[delivery_2]':
+            label: 'reuniors.knk::lang.Delivery Phone Number 2'
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Contact Info'
+        'phone_data[delivery_show_number]':
+            label: 'reuniors.knk::lang.Show delivery number'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Contact Info'
+        address_lat:
+            label: 'reuniors.knk::lang.Latitude'
+            span: left
+            type: number
+            tab: 'reuniors.knk::lang.Contact Info'
+        address_long:
+            label: 'reuniors.knk::lang.Longitude'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Contact Info'
+        'working_hours_data[from_day]':
+            label: 'reuniors.knk::lang.FromTo - From Day'
+            options:
+                monday: Monday
+                tuesday: Tuesday
+                wednesday: Wednesday
+                thursday: Thursday
+                friday: Friday
+                saturday: Saturday
+                sunday: Sunday
+            showSearch: true
+            span: auto
+            default: ''
+            type: dropdown
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[to_day]':
+            label: 'reuniors.knk::lang.FromTo - To Day'
+            options:
+                monday: Monday
+                tuesday: Tuesday
+                wednesday: Wednesday
+                thursday: Thursday
+                friday: Friday
+                saturday: Saturday
+                sunday: Sunday
+            showSearch: true
+            span: auto
+            default: ''
+            type: dropdown
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[monday_friday][start]':
+            label: 'reuniors.knk::lang.From To - Start Time'
+            mode: time
+            format: 'H:i:s'
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[monday_friday][end]':
+            label: 'reuniors.knk::lang.From To - End Time'
+            mode: time
+            format: 'H:i:s'
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[saturday][start]':
+            label: 'reuniors.knk::lang.Saturday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[saturday][end]':
+            label: 'reuniors.knk::lang.Saturday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[sunday][start]':
+            label: 'reuniors.knk::lang.Sunday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[sunday][end]':
+            label: 'reuniors.knk::lang.Sunday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[monday][start]':
+            label: 'reuniors.knk::lang.Monday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[monday][end]':
+            label: 'reuniors.knk::lang.Monday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[tuesday][start]':
+            label: 'reuniors.knk::lang.Tuesday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[tuesday][end]':
+            label: 'reuniors.knk::lang.Tuesday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[wednesday][start]':
+            label: 'reuniors.knk::lang.Wednesday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[wednesday][end]':
+            label: 'reuniors.knk::lang.Wednesday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[thursday][start]':
+            label: 'reuniors.knk::lang.Thursday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[thursday][end]':
+            label: 'reuniors.knk::lang.Thursday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[friday][start]':
+            label: 'reuniors.knk::lang.Friday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'working_hours_data[friday][end]':
+            label: 'reuniors.knk::lang.Friday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Working Hours'
+        'delivery_working_hours_data[from_day]':
+            label: 'reuniors.knk::lang.FromTo - From Day'
+            options:
+                monday: Monday
+                tuesday: Tuesday
+                wednesday: Wednesday
+                thursday: Thursday
+                friday: Friday
+                saturday: Saturday
+                sunday: Sunday
+            showSearch: true
+            span: auto
+            default: ''
+            type: dropdown
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[to_day]':
+            label: 'reuniors.knk::lang.FromTo - To Day'
+            options:
+                monday: Monday
+                tuesday: Tuesday
+                wednesday: Wednesday
+                thursday: Thursday
+                friday: Friday
+                saturday: Saturday
+                sunday: Sunday
+            showSearch: true
+            span: auto
+            default: ''
+            type: dropdown
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[monday_friday][start]':
+            label: 'reuniors.knk::lang.From To - Start Time'
+            mode: time
+            format: 'H:i:s'
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[monday_friday][end]':
+            label: 'reuniors.knk::lang.From To - End Time'
+            mode: time
+            format: 'H:i:s'
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[saturday][start]':
+            label: 'reuniors.knk::lang.Saturday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[saturday][end]':
+            label: 'reuniors.knk::lang.Saturday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[sunday][start]':
+            label: 'reuniors.knk::lang.Sunday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[sunday][end]':
+            label: 'reuniors.knk::lang.Sunday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[monday][start]':
+            label: 'reuniors.knk::lang.Monday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[monday][end]':
+            label: 'reuniors.knk::lang.Monday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[tuesday][start]':
+            label: 'reuniors.knk::lang.Tuesday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[tuesday][end]':
+            label: 'reuniors.knk::lang.Tuesday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[wednesday][start]':
+            label: 'reuniors.knk::lang.Wednesday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[wednesday][end]':
+            label: 'reuniors.knk::lang.Wednesday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[thursday][start]':
+            label: 'reuniors.knk::lang.Thursday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[thursday][end]':
+            label: 'reuniors.knk::lang.Thursday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[friday][start]':
+            label: 'reuniors.knk::lang.Friday Start Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        'delivery_working_hours_data[friday][end]':
+            label: 'reuniors.knk::lang.Friday End Time'
+            mode: time
+            span: auto
+            default: null
+            type: datepicker
+            tab: 'reuniors.knk::lang.Delivery Working Hours'
+        other_informations:
+            label: 'reuniors.knk::lang.Other Info'
+            span: full
+            path: otherinfo_partial
+            context:
+                - update
+                - preview
+            type: partial
+            tab: 'reuniors.knk::lang.Other'

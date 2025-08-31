@@ -1,0 +1,26 @@
+==
+{% if title %}
+    <h1>{{ title }}</h1>
+{% endif %}
+{% if description %}
+    <p>{{ description }}</p>
+{% endif %}
+
+
+{% if tableData %}
+    <table>
+        {% for key, value in tableData %}
+            <tr>
+                <td><b>{{ key }}</b></td>
+                <td>{{ value }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br/>
+    <br/>
+{% endif %}
+
+
+{% if link %}
+    <a href="{{ link }}">{{ 'Idi na link'|__ }}</a>
+{% endif %}

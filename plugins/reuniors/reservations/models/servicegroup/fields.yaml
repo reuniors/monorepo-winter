@@ -1,0 +1,57 @@
+fields:
+    title:
+        label: 'reuniors.reservations::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.reservations::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.reservations::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    type:
+        label: 'reuniors.reservations::lang.Type'
+        showSearch: true
+        span: auto
+        type: dropdown
+    description:
+        label: 'reuniors.reservations::lang.Description'
+        size: ''
+        span: full
+        type: textarea
+    min_selected:
+        label: 'reuniors.reservations::lang.Min Selected'
+        span: auto
+        default: '1'
+        type: number
+    max_selected:
+        label: 'reuniors.reservations::lang.Max Selected'
+        span: auto
+        default: '1'
+        type: number
+tabs:
+    fields:
+        active:
+            label: 'reuniors.reservations::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'
+        required:
+            label: 'reuniors.reservations::lang.Required'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'
+        input_type:
+            label: 'reuniors.reservations::lang.Input Type'
+            showSearch: 0
+            span: auto
+            type: dropdown
+            tab: 'reuniors.reservations::lang.Settings'

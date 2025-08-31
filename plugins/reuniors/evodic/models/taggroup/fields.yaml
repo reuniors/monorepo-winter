@@ -1,0 +1,76 @@
+fields:
+    title:
+        label: 'reuniors.evodic::lang.Title'
+        span: auto
+        type: text
+    parent:
+        label: 'reuniors.evodic::lang.Parent'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    name:
+        label: 'reuniors.evodic::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.evodic::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    combine_type:
+        label: 'reuniors.evodic::lang.Combine Type'
+        showSearch: 0
+        span: auto
+        type: dropdown
+    tag_group_image:
+        label: 'reuniors.evodic::lang.Image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    metadata:
+        label: 'reuniors.evodic::lang.Other Data'
+        prompt: 'Add new item'
+        span: full
+        type: repeater
+        form:
+            fields:
+                icon:
+                    label: 'reuniors.evodic::lang.Icon'
+                    span: auto
+                    type: text
+tabs:
+    fields:
+        show_on_search:
+            label: 'reuniors.evodic::lang.Show on search'
+            span: auto
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
+        show_in_filters:
+            label: 'reuniors.evodic::lang.Show In Filters'
+            span: auto
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
+        type:
+            label: 'reuniors.evodic::lang.Type'
+            showSearch: true
+            span: auto
+            default: standard
+            type: dropdown
+            tab: 'reuniors.evodic::lang.Settings'
+        active:
+            label: 'reuniors.evodic::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'

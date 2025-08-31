@@ -1,0 +1,15 @@
+<a
+    href="<?= Backend::url('reuniors/knk/foodaddongroups') ?>/update/<?= $record->id ?>?food_id=<?= $this->params[0] ?>"
+    target="_blank"
+    class="food-addon"
+    style="color: #0d5fe6"
+>
+    Food Addons
+</a>
+<script>
+    $(document).ready(function () {
+        $('a.food-addon').click(function (event) {
+            event.stopPropagation()
+        })
+    })
+</script>

@@ -1,0 +1,20 @@
+# ===================================
+#  Rest Behavior Config
+# ===================================
+
+# Allowed Rest Actions
+allowedActions:
+  index:
+      pageSize: 1000
+  store:
+  show:
+  update:
+  destroy:
+
+# Model Class name
+modelClass: Reuniors\Knk\Models\Action
+
+# Relations
+relationData:
+    mainClass: Reuniors\Knk\Models\Location
+    relationNames: ['change_actions']

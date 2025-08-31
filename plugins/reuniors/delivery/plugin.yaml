@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.delivery::lang.plugin.name'
+    description: 'reuniors.delivery::lang.plugin.description'
+    author: reuniors
+    icon: oc-icon-car
+    homepage: ''

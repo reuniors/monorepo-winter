@@ -1,0 +1,17 @@
+columns:
+    name:
+        label: name
+        type: text
+    title:
+        label: title
+        type: text
+    sort_order:
+        label: 'Sort'
+        type: reorder_button
+    active:
+        label: active
+        type: text
+    url:
+        label: url
+        type: partial
+        path: link_partial

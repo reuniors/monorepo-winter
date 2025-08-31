@@ -1,0 +1,4 @@
+title: Manufacturers
+modelClass: Reuniors\Knk\Models\Manufacturer
+toolbar:
+    buttons: reorder_toolbar

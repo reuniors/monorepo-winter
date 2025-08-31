@@ -1,0 +1,91 @@
+fields:
+    first_name:
+        label: 'First Name'
+        span: auto
+        type: text
+    last_name:
+        label: 'Last Name'
+        span: auto
+        type: text
+    'phone_data[phone_numbers]':
+        label: 'reuniors.reservations::lang.Phone Data'
+        mode: array
+        separator: comma
+        customTags: true
+        useKey: false
+        span: full
+        type: taglist
+    locations:
+        label: 'reuniors.reservations::lang.Locations'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+    description:
+        label: 'reuniors.reservations::lang.Description'
+        size: ''
+        span: auto
+        type: textarea
+tabs:
+    fields:
+        active:
+            label: 'reuniors.reservations::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'
+        status:
+            label: 'reuniors.reservations::lang.Status'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'reuniors.reservations::lang.Settings'
+        level:
+            label: 'reuniors.reservations::lang.Level'
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'reuniors.reservations::lang.Settings'
+        user:
+            label: 'reuniors.reservations::lang.User'
+            nameFrom: email
+            descriptionFrom: description
+            span: auto
+            type: relation
+            emptyOption: None
+            tab: 'reuniors.reservations::lang.Settings'
+        avatar:
+            label: Avatar
+            mode: image
+            imageWidth: '100'
+            imageHeight: '100'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'
+        certificates_photos:
+            label: 'Certificates Photos'
+            mode: image
+            imageWidth: '600'
+            imageHeight: '600'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: auto
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'
+        gallery:
+            label: 'reuniors.reservations::lang.Gallery'
+            mode: image
+            imageWidth: '1920'
+            imageHeight: '1080'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: auto
+            span: full
+            type: fileupload
+            tab: 'reuniors.reservations::lang.Gallery'

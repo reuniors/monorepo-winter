@@ -1,0 +1,19 @@
+columns:
+    name:
+        label: name
+        type: text
+    title:
+        label: title
+        type: text
+    slug:
+        label: slug
+        type: text
+    type:
+        label: type
+        type: text
+    description:
+        label: description
+        type: text
+    active:
+        label: active
+        type: text

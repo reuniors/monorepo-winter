@@ -1,0 +1,4 @@
+title: Tag
+modelClass: Reuniors\Evodic\Models\Tag
+toolbar:
+    buttons: reorder_toolbar

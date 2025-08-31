@@ -1,0 +1,15 @@
+{
+    "name": "reuniors/wintersocialite",
+    "description": "Adds support for OAuth-based Single Sign On (SSO) to the Winter/User through the use of Laravel Socialiate.",
+    "homepage": "https://github.com/wintercms/wn-sso-plugin",
+    "keywords": ["winter", "wintercms", "laravel", "socialite", "sso", "oauth", "facebook", "twitter", "google", "linkedin", "github", "gitlab", "bitbucket"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Janko Grbovic"
+        }
+    ],
+    "require": {
+        "wintercms/wn-user-plugin": "^2.2.0"
+    }
+}

@@ -1,0 +1,47 @@
+columns:
+    id:
+        label: ID
+        type: number
+        searchable: true
+        sortable: true
+    number:
+        label: vojtasvoboda.reservations::lang.reservation.number
+        type: text
+        invisible: true
+        sortable: true
+    date:
+        label: vojtasvoboda.reservations::lang.reservation.date
+        type: datetime
+        sortable: true
+        format: d.m.Y H:i
+    name:
+        label: vojtasvoboda.reservations::lang.reservation.name
+        type: text
+        searchable: true
+        sortable: true
+    email:
+        label: vojtasvoboda.reservations::lang.reservation.email
+        type: text
+        searchable: true
+        sortable: true
+    phone:
+        label: vojtasvoboda.reservations::lang.reservation.phone
+        type: text
+        searchable: true
+        sortable: true
+    status_id:
+        label: vojtasvoboda.reservations::lang.reservation.status
+        sortable: true
+        relation: status
+        select: ident
+    returning:
+        label: vojtasvoboda.reservations::lang.reservation.returning
+        type: text
+        invisible: true
+        sortable: false
+    created_at:
+        label: vojtasvoboda.reservations::lang.reservation.created_at
+        type: datetime
+        searchable: true
+        sortable: true
+        format: d.m.Y H:i:s

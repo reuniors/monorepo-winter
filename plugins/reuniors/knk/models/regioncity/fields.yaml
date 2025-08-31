@@ -1,0 +1,107 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+    has_regions:
+        label: 'reuniors.knk::lang.Has regions'
+        span: auto
+        type: switch
+    parent_city:
+        label: 'reuniors.knk::lang.Parent City'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    snippet:
+        label: 'reuniors.knk::lang.Snippet'
+        size: large
+        span: auto
+        type: textarea
+    description:
+        label: 'reuniors.knk::lang.Description'
+        size: ''
+        span: auto
+        type: richeditor
+    city_logo:
+        label: 'reuniors.knk::lang.City Logo'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+tabs:
+    fields:
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 0
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        'metadata[case][nominativ]':
+            label: Nominativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][genitiv]':
+            label: Genitiv
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][dativ]':
+            label: Dativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][akuzativ]':
+            label: Akuzativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][vokativ]':
+            label: Vokativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][instrumental]':
+            label: Instrumental
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[case][lokativ]':
+            label: Lokativ
+            span: auto
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[plural]':
+            label: 'reuniors.knk::lang.Plural'
+            span: left
+            type: text
+            tab: 'reuniors.knk::lang.Spelling'
+        'metadata[preposition]':
+            label: 'reuniors.knk::lang.Preposition'
+            options:
+                in: u
+                'on': na
+            showSearch: true
+            span: auto
+            default: in
+            type: dropdown
+            tab: 'reuniors.knk::lang.Spelling'

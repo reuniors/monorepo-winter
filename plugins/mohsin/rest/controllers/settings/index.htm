@@ -1,0 +1,58 @@
+<?php Block::put('breadcrumb') ?>
+    <ul>
+        <li><a href="<?= Backend::url('mohsin/rest/settings') ?>"><?= e(trans('mohsin.rest::lang.settings.plural')) ?></a></li>
+        <li><?= e(trans($this->pageTitle)) ?></li>
+    </ul>
+<?php Block::endPut() ?>
+
+<div class="layout">
+    <?= Form::ajax('onSave', [
+        'id' => 'apiSettingsForm',
+        'class' => 'layout-row',
+        'data' => 'redirect: 0'
+    ]) ?>
+
+        <div class="m-x">
+            <?= $this->formRender() ?>
+            <h4><?= e(trans('mohsin.rest::lang.settings.api_nodes_label')) ?></h4>
+        </div>
+
+        <?= $this->listRender() ?>
+    <?= Form::close() ?>
+
+    <div class="form-buttons">
+        <div class="loading-indicator-container">
+            <button
+                form="apiSettingsForm"
+                onclick="$('#apiSettingsForm').submit()"
+                data-hotkey="ctrl+s, cmd+s"
+                data-load-indicator="<?= e(trans('backend::lang.form.saving_name', ['name'=>$formRecordName])) ?>"
+                class="btn btn-primary">
+                <?= e(trans('backend::lang.form.save')) ?>
+            </button>
+            <span class="btn-text">
+                or <a href="<?= Backend::url('system/settings') ?>"><?= e(trans('backend::lang.form.cancel')) ?></a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- Specific assets for this page only -->
+<style>
+    td { vertical-align: middle !important; }
+</style>
+<script>
+    jQuery(document).ready(function($) {
+        function checkSwitches() {
+            $("[data-check|='oc']").each(function() {
+                $(this).find('input').on('change', function() {
+                  this.value = this.checked ? 1 : 0;
+                });
+            });
+        }
+        checkSwitches();
+        $(document).ajaxComplete(function() {
+            checkSwitches();
+        });
+    });
+</script>

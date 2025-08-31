@@ -1,0 +1,4 @@
+title: Categories
+modelClass: Reuniors\Knk\Models\Category
+toolbar:
+    buttons: reorder_toolbar

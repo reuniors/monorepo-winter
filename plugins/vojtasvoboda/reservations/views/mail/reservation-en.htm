@@ -1,0 +1,26 @@
+subject = "Your reservation"
+layout = "default"
+==
+<p>
+    Hello,<br />
+    <br />
+    thank you for your reservation. Below you can find reservation summary:<br />
+    <br />
+    Date and time: {{ reservation.date | date("d.m.Y H:i") }}<br />
+    <br />
+    Address: {{ reservation.street }}<br />
+    Name: {{ reservation.name }} {{ reservation.lastname }}<br />
+    Email: {{ reservation.email }}<br />
+    Phone: {{ reservation.phone }}<br />
+    <br />
+    Your message: {{ reservation.message }}<br />
+    <br />
+    We accept your reservation at {{ reservation.created_at | date("d.m.Y H:i") }} and send you confirmation as soon as possible.<br />
+    <br />
+    {% if reservationsCount == 1 %}
+    We hope that you enjoy your first experience!
+    <br />
+    {% endif %}
+    <br />
+    Thank you for using our services
+</p>

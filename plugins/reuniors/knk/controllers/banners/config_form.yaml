@@ -1,0 +1,10 @@
+name: Banners
+form: $/reuniors/knk/models/banner/fields.yaml
+modelClass: Reuniors\Knk\Models\Banner
+defaultRedirect: reuniors/knk/banners
+create:
+    redirect: 'reuniors/knk/banners/update/:id'
+    redirectClose: reuniors/knk/banners
+update:
+    redirect: reuniors/knk/banners
+    redirectClose: reuniors/knk/banners

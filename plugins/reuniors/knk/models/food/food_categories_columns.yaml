@@ -1,0 +1,19 @@
+columns:
+    name:
+        label: name
+        type: text
+        searchable: true
+    description:
+        label: description
+        type: text
+    slug:
+        label: slug
+        type: text
+        searchable: true
+    sort_order:
+        label: 'Sort'
+        type: reorder_button
+    url:
+        label: url
+        type: partial
+        path: link_partial

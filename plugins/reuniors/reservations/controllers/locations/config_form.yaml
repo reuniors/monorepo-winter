@@ -1,0 +1,10 @@
+name: Locations
+form: $/reuniors/reservations/models/location/fields.yaml
+modelClass: Reuniors\Reservations\Models\Location
+defaultRedirect: reuniors/reservations/locations
+create:
+    redirect: 'reuniors/reservations/locations/update/:id'
+    redirectClose: reuniors/reservations/locations
+update:
+    redirect: reuniors/reservations/locations
+    redirectClose: reuniors/reservations/locations

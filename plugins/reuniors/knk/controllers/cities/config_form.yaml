@@ -1,0 +1,10 @@
+name: Cities
+form: $/reuniors/knk/models/regioncity/fields.yaml
+modelClass: Reuniors\Knk\Models\RegionCity
+defaultRedirect: reuniors/knk/cities
+create:
+    redirect: 'reuniors/knk/cities/update/:id'
+    redirectClose: reuniors/knk/cities
+update:
+    redirect: reuniors/knk/cities
+    redirectClose: reuniors/knk/cities

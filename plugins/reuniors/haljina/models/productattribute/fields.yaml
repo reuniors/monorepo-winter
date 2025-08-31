@@ -1,0 +1,32 @@
+fields:
+    title:
+        label: Title
+        span: auto
+        type: text
+    name:
+        label: Name
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    type:
+        label: Type
+        span: auto
+        type: dropdown
+    description:
+        label: Description
+        size: ''
+        span: full
+        type: textarea
+    is_standard:
+        label: 'reuniors.haljina::lang.Is Standard'
+        span: auto
+        type: switch

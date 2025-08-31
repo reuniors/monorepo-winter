@@ -1,0 +1,25 @@
+{
+    "name": "onepilot/logswidget",
+    "type": "october-plugin",
+    "description": "Logs widget plugin for October CMS",
+    "homepage": "https://github.com/onepilot/oc-logswidget-plugin",
+    "keywords": ["october", "cms", "plugin", "logs", "widget"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "onepilot",
+            "email": "info@onepilot.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Onepilot\\LogsWidget\\": ""
+        }
+    },
+    "extra": {
+        "installer-name": "LogsWidget"
+    }
+} 

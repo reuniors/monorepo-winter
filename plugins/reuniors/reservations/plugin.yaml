@@ -1,0 +1,32 @@
+plugin:
+    name: 'reuniors.reservations::lang.plugin.name'
+    description: 'reuniors.reservations::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-clock-o
+    homepage: ''
+navigation:
+    main-menu-reservations:
+        label: 'reuniors.reservations::lang.Reservations'
+        url: reuniors/reservations/locations
+        icon: icon-clock-o
+        sideMenu:
+            side-menu-locations:
+                label: 'reuniors.reservations::lang.Locations'
+                url: reuniors/reservations/locations
+                icon: icon-map-marker
+            side-menu-location-workers:
+                label: Workers
+                url: reuniors/reservations/locationworkers
+                icon: icon-users
+            side-menu-service-groups:
+                label: 'reuniors.reservations::lang.Service Groups'
+                url: reuniors/reservations/servicegroups
+                icon: icon-th-list
+            side-menu-services:
+                label: 'reuniors.reservations::lang.Services'
+                url: reuniors/reservations/services
+                icon: icon-stethoscope
+            side-menu-promo-codes:
+                label: 'reuniors.reservations::lang.Promo Codes'
+                url: reuniors/reservations/promocodes
+                icon: icon-dollar

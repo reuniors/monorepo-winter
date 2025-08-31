@@ -1,0 +1,72 @@
+fields:
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: name
+            type: slug
+        type: text
+tabs:
+    fields:
+        'image_meta[width]':
+            label: 'reuniors.knk::lang.Image Width'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[height]':
+            label: 'reuniors.knk::lang.Image Height'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[mode]':
+            label: 'reuniors.knk::lang.Mode'
+            options:
+                exact: exact
+                portrait: portrait
+                landscape: landscape
+                auto: auto
+                crop: crop
+            emptyOption: None
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[extension]':
+            label: 'reuniors.knk::lang.Extension'
+            options:
+                auto: auto
+                jpg: jpg
+                jpeg: jpeg
+                gif: gif
+                png: png
+            emptyOption: None
+            showSearch: true
+            span: auto
+            type: dropdown
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[offset_x]':
+            label: 'reuniors.knk::lang.Offset X'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[offset_y]':
+            label: 'reuniors.knk::lang.Offset Y'
+            span: auto
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[quality]':
+            label: 'reuniors.knk::lang.Quality'
+            span: auto
+            placeholder: '0 - 100'
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'
+        'image_meta[sharpen]':
+            label: 'reuniors.knk::lang.Sharpen'
+            span: auto
+            placeholder: '0 - 100'
+            type: number
+            tab: 'reuniors.knk::lang.Image Metadata'

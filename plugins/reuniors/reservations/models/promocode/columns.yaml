@@ -1,0 +1,25 @@
+columns:
+    location_id:
+        label: 'reuniors.reservations::lang.Location'
+        type: text
+        select: title
+        relation: location
+    name:
+        label: name
+        type: text
+        searchable: true
+    is_active:
+        label: is_active
+        type: switch
+    activate_at:
+        label: activate_at
+        type: datetime
+    deactivate_at:
+        label: deactivate_at
+        type: datetime
+    discount_value:
+        label: discount_value
+        type: number
+    in_percent:
+        label: in_percent
+        type: switch

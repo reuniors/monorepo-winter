@@ -1,0 +1,23 @@
+food_type_prices:
+    label: Food Prices
+    view:
+        list: $/reuniors/knk/models/foodtypeprice/columns.yaml
+        toolbarButtons: create|delete
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/foodtypeprice/fields.yaml
+        recordsPerPage: 10
+food_addon_groups:
+    label: Food Addons Groups
+    view:
+        list: $/reuniors/knk/models/foodaddongroup/columns.yaml
+        toolbarButtons: link|create|unlink|delete
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/foodaddongroup/food_fields.yaml
+        recordsPerPage: 10
+        scope: filterByFoodMenu
+    pivot:
+        form: $/reuniors/knk/models/foodaddongroup/food_pivot_fields.yaml
+        recordsPerPage: 10
+        scope: filterByFoodMenu

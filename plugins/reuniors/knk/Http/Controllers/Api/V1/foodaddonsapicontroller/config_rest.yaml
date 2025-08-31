@@ -1,0 +1,16 @@
+# ===================================
+#  Rest Behavior Config
+# ===================================
+
+# Allowed Rest Actions
+allowedActions:
+  index:
+      pageSize: 1000
+  store:
+  show:
+    relations: [ 'food_addon_group' ]
+  update:
+  destroy:
+
+# Model Class name
+modelClass: Reuniors\Knk\Models\FoodAddon

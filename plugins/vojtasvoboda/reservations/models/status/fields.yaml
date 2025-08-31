@@ -1,0 +1,24 @@
+fields:
+    name:
+        label: vojtasvoboda.reservations::lang.status.name
+        span: full
+        disabled: 0
+        required: 1
+        type: text
+    ident:
+        label: vojtasvoboda.reservations::lang.status.ident
+        span: full
+        required: 1
+        context:
+            - create
+        preset:
+            field: name
+            type: slug
+        type: text
+    color:
+        label: vojtasvoboda.reservations::lang.status.color
+        type: colorpicker
+    enabled:
+        label: vojtasvoboda.reservations::lang.status.enabled
+        span: full
+        type: checkbox

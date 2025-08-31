@@ -1,0 +1,16 @@
+tabs:
+    fields:
+        # Daily Limit
+        free_package_daily_limit:
+            span: left
+            label: 'Daily Limit'
+            comment: 'Daily Limit'
+            type: number
+            tab: 'Free Package'
+        # Photo Limit
+        free_package_photo_limit:
+            span: right
+            label: 'Photo Limit'
+            comment: 'Photo Limit'
+            type: number
+            tab: 'Free Package'

@@ -1,0 +1,10 @@
+name: FoodCategories
+form: $/reuniors/knk/models/foodcategory/fields.yaml
+modelClass: Reuniors\Knk\Models\FoodCategory
+defaultRedirect: reuniors/knk/foodcategories
+create:
+    redirect: 'reuniors/knk/foodcategories/update/:id'
+    redirectClose: reuniors/knk/foodcategories
+update:
+    redirect: reuniors/knk/foodcategories
+    redirectClose: reuniors/knk/foodcategories

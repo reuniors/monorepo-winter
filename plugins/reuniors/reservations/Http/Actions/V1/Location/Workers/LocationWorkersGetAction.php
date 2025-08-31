@@ -1,0 +1,38 @@
+<?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers;
+
+use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Reservations\Models\LocationWorker;
+
+class LocationWorkersGetAction
+{
+    use asAction;
+
+    public function rules()
+    {
+        return [
+            'locationSlug' => 'string',
+        ];
+    }
+
+    public function handle(array $attributes)
+    {
+        $perPage = $attributes['perPage'] ?? 15;
+
+        $locationWorkersQuery = LocationWorker::feWorkers([
+            ...$attributes
+        ]);
+
+        return $locationWorkersQuery
+            ->paginate($perPage);
+    }
+
+    public function asController()
+    {
+        $requestData = request()->all();
+
+        return [
+            'data' => $this->handle($requestData),
+            'success' => true,
+        ];
+    }
+}

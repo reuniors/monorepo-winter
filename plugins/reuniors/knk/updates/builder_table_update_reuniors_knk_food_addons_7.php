@@ -1,0 +1,23 @@
+<?php namespace Reuniors\Knk\Updates;
+
+use Schema;
+use Winter\Storm\Database\Updates\Migration;
+
+class BuilderTableUpdateReuniorsKnkFoodAddons7 extends Migration
+{
+    public function up()
+    {
+        Schema::table('reuniors_knk_food_addons', function($table)
+        {
+            $table->smallInteger('available')->unsigned()->default(1);
+        });
+    }
+
+    public function down()
+    {
+        Schema::table('reuniors_knk_food_addons', function($table)
+        {
+            $table->dropColumn('available');
+        });
+    }
+}

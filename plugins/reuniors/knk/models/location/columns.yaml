@@ -1,0 +1,42 @@
+columns:
+    name:
+        label: name
+        type: text
+        searchable: true
+        sortable: true
+    slug:
+        label: slug
+        type: text
+        searchable: true
+        sortable: true
+    title:
+        label: title
+        type: text
+        searchable: true
+        sortable: true
+    activation_at:
+        label: activation_at
+        type: text
+    active:
+        label: active
+        type: text
+    sort_order:
+        label: 'Sort'
+        type: reorder_button
+    city:
+        label: 'reuniors.knk::lang.Region - City'
+        type: text
+        select: name
+        relation: city
+    updated_at:
+        label: updated_at
+        type: datetime
+    logo:
+        label: 'reuniors.knk::lang.Image'
+        type: partial
+        path: ~/plugins/reuniors/knk/models/location/_image_column.htm
+        sortable: false
+    priority:
+        label: 'reuniors.knk::lang.Priority'
+        type: number
+        sortable: true

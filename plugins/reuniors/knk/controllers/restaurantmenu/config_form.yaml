@@ -1,0 +1,10 @@
+name: RestaurantMenu
+form: $/reuniors/knk/models/restaurantmenu/fields.yaml
+modelClass: Reuniors\Knk\Models\RestaurantMenu
+defaultRedirect: reuniors/knk/restaurantmenu
+create:
+    redirect: 'reuniors/knk/restaurantmenu/update/:id'
+    redirectClose: reuniors/knk/restaurantmenu
+update:
+    redirect: reuniors/knk/restaurantmenu
+    redirectClose: reuniors/knk/restaurantmenu

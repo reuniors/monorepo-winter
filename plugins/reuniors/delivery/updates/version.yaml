@@ -1,0 +1,19 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table reuniors_delivery_drivers'
+    - builder_table_create_reuniors_delivery_drivers.php
+1.0.3:
+    - 'Created table reuniors_delivery_orders'
+    - builder_table_create_reuniors_delivery_orders.php
+1.0.4:
+    - 'Updated table reuniors_delivery_orders'
+    - builder_table_update_reuniors_delivery_orders.php
+1.0.5:
+    - 'Updated table reuniors_delivery_drivers'
+    - builder_table_update_reuniors_delivery_drivers.php
+1.0.6:
+    - 'Updated table reuniors_delivery_orders'
+1.0.7:
+    - 'Production FIX: Updated table reuniors_delivery_orders'
+    - builder_table_update_reuniors_delivery_orders_2.php

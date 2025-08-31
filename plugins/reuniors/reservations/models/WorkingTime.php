@@ -1,0 +1,66 @@
+<?php
+namespace Reuniors\Reservations\Models;
+
+use Model;
+
+/**
+ * Model
+ */
+class WorkingTime extends Model
+{
+    use \Winter\Storm\Database\Traits\Validation;
+
+    const DATES_CODES = [
+        'mon' => 'mon',
+        'tue' => 'tue',
+        'wed' => 'wed',
+        'thu' => 'thu',
+        'fri' => 'fri',
+        'sat' => 'sat',
+        'sun' => 'sun',
+    ];
+
+    /**
+     * @var string The database table used by the model.
+     */
+    public $table = 'reuniors_reservations_working_hours';
+
+    /**
+     * @var array Validation rules
+     */
+    public $rules = [
+        'days_codes' => ['array', 'in:mon,tue,wed,thu,fri,sat,sun'],
+    ];
+
+    protected $jsonable = [
+        'days_codes',
+        'pauses',
+    ];
+
+    protected $fillable = [
+        'time_from',
+        'time_to',
+        'name',
+        'days_codes',
+        'active',
+        'shift',
+        'pause_time_from',
+        'pause_time_to',
+        'pauses'
+    ];
+
+    public $belongsToMany = [
+        'locations' => [
+            'Reuniors\Reservations\Models\Location',
+            'table' => 'reuniors_reservations_locations_working_hours',
+            'key' => 'working_hours_id',
+            'otherKey' => 'location_id',
+        ],
+        'workers' => [
+            'Reuniors\Reservations\Models\LocationWorker',
+            'table' => 'reuniors_reservations_location_workers_working_hours',
+            'key' => 'working_hours_id',
+            'otherKey' => 'location_worker_id',
+        ],
+    ];
+}

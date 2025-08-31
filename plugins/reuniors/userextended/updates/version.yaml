@@ -1,0 +1,26 @@
+1.0.1:
+    - 'Initialize plugin.'
+1.0.2:
+    - 'Created table reuniors_userextended_addresses'
+    - builder_table_create_reuniors_userextended_addresses.php
+1.0.3:
+    - 'Created table reuniors_userextended_users_addresses'
+    - builder_table_create_reuniors_userextended_users_addresses.php
+1.0.4:
+    - 'Created table reuniors_userextended_user_settings'
+    - builder_table_create_reuniors_userextended_user_settings.php
+1.0.5:
+    - 'Updated table reuniors_userextended_addresses'
+    - builder_table_update_reuniors_userextended_addresses.php
+1.0.6:
+    - 'Updated table reuniors_userextended_addresses'
+    - builder_table_update_reuniors_userextended_addresses_2.php
+1.0.7:
+    - 'Drop table reuniors_userextended_users_addresses'
+    - builder_table_delete_reuniors_userextended_users_addresses.php
+1.0.8:
+    - 'Updated table reuniors_userextended_addresses'
+    - builder_table_update_reuniors_userextended_addresses_3.php
+1.0.9:
+    - 'Updated table reuniors_userextended_addresses'
+    - builder_table_update_reuniors_userextended_addresses_4.php

@@ -1,0 +1,10 @@
+name: Currencies
+form: $/reuniors/haljina/models/currency/fields.yaml
+modelClass: Reuniors\Haljina\Models\Currency
+defaultRedirect: reuniors/haljina/currencies
+create:
+    redirect: 'reuniors/haljina/currencies/update/:id'
+    redirectClose: reuniors/haljina/currencies
+update:
+    redirect: reuniors/haljina/currencies
+    redirectClose: reuniors/haljina/currencies

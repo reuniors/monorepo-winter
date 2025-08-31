@@ -1,0 +1,39 @@
+restaurant_menu:
+    label: Restaurant Menu
+    view:
+        list: $/reuniors/knk/models/restaurantmenu/locations_columns.yaml
+        toolbarButtons: link|unlink
+        showSorting: true
+    manage:
+        showSearch: true
+        recordsPerPage: 10
+tags:
+    label: Tag
+    view:
+        list: $/reuniors/knk/models/tag/locations_columns.yaml
+        toolbarButtons: create|link|unlink
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/tag/fields.yaml
+        recordsPerPage: 10
+        showSearch: true
+related_locations:
+    label: Related Locations
+    view:
+        list: $/reuniors/knk/models/location/related_columns.yaml
+        toolbarButtons: link|unlink
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/location/related_fields.yaml
+        recordsPerPage: 10
+        showSearch: true
+other_informations:
+    label: Other Info
+    view:
+        list: $/reuniors/knk/models/locationotherinformation/columns.yaml
+        toolbarButtons: create|delete
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/locationotherinformation/fields.yaml
+        recordsPerPage: 10
+        showSearch: true

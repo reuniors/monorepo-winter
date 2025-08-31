@@ -1,0 +1,12 @@
+columns:
+    tag_id:
+        label: 'reuniors.knk::lang.Tag'
+        type: number
+        select: title
+        relation: tag
+    value:
+        label: 'reuniors.knk::lang.Value'
+        type: text
+    sort_order:
+        label: 'Sort'
+        type: reorder_button

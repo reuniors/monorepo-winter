@@ -1,0 +1,7 @@
+{% set categories = __SELF__.categories %}
+{% set city = __SELF__.city %}
+<div>
+    {% for category in categories %}
+        {{ dump(category) }}
+    {% endfor %}
+</div>

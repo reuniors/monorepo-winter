@@ -1,0 +1,6 @@
+{% set locations = __SELF__.locations %}
+<div>
+    {% for location in locations %}
+        {{ dump(location) }}
+    {% endfor %}
+</div>

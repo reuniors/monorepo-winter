@@ -1,0 +1,16 @@
+columns:
+    id:
+        label: id
+        type: number
+    created_at:
+        label: created_at
+        type: datetime
+    code:
+        label: code
+        type: text
+    deactivate_at:
+        label: deactivate_at
+        type: text
+    active:
+        label: active
+        type: text

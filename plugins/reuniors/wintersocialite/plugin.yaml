@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.wintersocialite::lang.plugin.name'
+    description: 'reuniors.wintersocialite::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-users
+    homepage: ''

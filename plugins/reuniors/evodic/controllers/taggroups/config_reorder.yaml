@@ -1,0 +1,4 @@
+title: TagGroups
+modelClass: Reuniors\Evodic\Models\TagGroup
+toolbar:
+    buttons: reorder_toolbar

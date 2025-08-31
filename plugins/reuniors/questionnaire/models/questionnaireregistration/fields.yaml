@@ -1,0 +1,9 @@
+fields:
+    code:
+        label: 'reuniors.questionnaire::lang.Code'
+        span: auto
+        type: text
+    active:
+        label: 'reuniors.questionnaire::lang.Active'
+        span: auto
+        type: switch

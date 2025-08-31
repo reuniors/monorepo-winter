@@ -1,0 +1,9 @@
+food_categories:
+    label: Food Category
+    view:
+        list: $/reuniors/knk/models/foodcategory/locations_columns.yaml
+        toolbarButtons: create|delete
+        showSorting: true
+    manage:
+        form: $/reuniors/knk/models/foodcategory/fields_simple.yaml
+        recordsPerPage: 10

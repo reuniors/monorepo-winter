@@ -1,0 +1,10 @@
+name: QuestionnaireRegistrations
+form: $/reuniors/questionnaire/models/questionnaireregistration/fields.yaml
+modelClass: Reuniors\Questionnaire\Models\QuestionnaireRegistration
+defaultRedirect: reuniors/questionnaire/questionnaireregistrations
+create:
+    redirect: 'reuniors/questionnaire/questionnaireregistrations/update/:id'
+    redirectClose: reuniors/questionnaire/questionnaireregistrations
+update:
+    redirect: reuniors/questionnaire/questionnaireregistrations
+    redirectClose: reuniors/questionnaire/questionnaireregistrations

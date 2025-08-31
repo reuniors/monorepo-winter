@@ -1,0 +1,10 @@
+name: ProductSizes
+form: $/reuniors/haljina/models/productsize/fields.yaml
+modelClass: Reuniors\Haljina\Models\ProductSize
+defaultRedirect: reuniors/haljina/productsizes
+create:
+    redirect: 'reuniors/haljina/productsizes/update/:id'
+    redirectClose: reuniors/haljina/productsizes
+update:
+    redirect: reuniors/haljina/productsizes
+    redirectClose: reuniors/haljina/productsizes

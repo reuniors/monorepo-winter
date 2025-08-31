@@ -1,0 +1,10 @@
+name: Products
+form: $/reuniors/haljina/models/product/fields.yaml
+modelClass: Reuniors\Haljina\Models\Product
+defaultRedirect: reuniors/haljina/products
+create:
+    redirect: 'reuniors/haljina/products/update/:id'
+    redirectClose: reuniors/haljina/products
+update:
+    redirect: reuniors/haljina/products
+    redirectClose: reuniors/haljina/products

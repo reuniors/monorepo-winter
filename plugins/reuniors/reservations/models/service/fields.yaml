@@ -1,0 +1,46 @@
+fields:
+    title:
+        label: 'reuniors.reservations::lang.Title'
+        span: auto
+        type: text
+    name:
+        label: 'reuniors.reservations::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.reservations::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    duration:
+        label: 'Duration in Minutes'
+        span: auto
+        type: number
+    price:
+        label: 'reuniors.reservations::lang.Price'
+        span: auto
+        required: 1
+        type: number
+    currency:
+        label: 'reuniors.reservations::lang.Currency'
+        showSearch: true
+        span: auto
+        type: dropdown
+    service_group:
+        label: 'reuniors.reservations::lang.Service Group'
+        nameFrom: name
+        descriptionFrom: description
+        span: auto
+        type: relation
+tabs:
+    fields:
+        active:
+            label: 'reuniors.reservations::lang.Active'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'

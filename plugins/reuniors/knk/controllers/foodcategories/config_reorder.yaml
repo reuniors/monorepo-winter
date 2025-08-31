@@ -1,0 +1,4 @@
+title: FoodCategories
+modelClass: Reuniors\Knk\Models\FoodCategory
+toolbar:
+    buttons: reorder_toolbar

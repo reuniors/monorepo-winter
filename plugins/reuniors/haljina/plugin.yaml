@@ -1,0 +1,32 @@
+plugin:
+    name: 'reuniors.haljina::lang.plugin.name'
+    description: 'reuniors.haljina::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-slideshare
+    homepage: ''
+navigation:
+    main-menu-item-products:
+        label: Products
+        url: reuniors/haljina/products
+        icon: icon-cart-arrow-down
+        sideMenu:
+            side-menu-item-product-list:
+                label: 'Products List'
+                url: reuniors/haljina/products
+                icon: icon-list
+            side-menu-item-categories:
+                label: 'reuniors.haljina::lang.Categories'
+                url: reuniors/haljina/categories
+                icon: icon-th-large
+            side-menu-item-product-attributes:
+                label: 'Product Attributes'
+                url: reuniors/haljina/productattributes
+                icon: icon-sitemap
+            side-menu-item-currencies:
+                label: Currencies
+                url: reuniors/haljina/currencies
+                icon: icon-dollar
+            side-menu-item-product-sizes:
+                label: 'reuniors.haljina::lang.Product Sizes'
+                url: reuniors/haljina/productsizes
+                icon: icon-signal

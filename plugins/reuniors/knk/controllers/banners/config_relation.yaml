@@ -1,0 +1,9 @@
+locations:
+    label: Locations
+    view:
+        list: $/reuniors/knk/models/location/columns.yaml
+        toolbarButtons: link|unlink
+        showSorting: true
+    manage:
+        recordsPerPage: 10
+        showSearch: true

@@ -1,0 +1,13 @@
+fields:
+    title:
+        label: Title
+        span: auto
+        type: text
+    name:
+        label: Name
+        span: auto
+        type: text
+    slug:
+        label: Slug
+        span: auto
+        type: text

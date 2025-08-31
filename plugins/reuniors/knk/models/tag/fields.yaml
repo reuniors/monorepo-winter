@@ -1,0 +1,86 @@
+fields:
+    title:
+        label: 'reuniors.knk::lang.Title'
+        span: auto
+        type: text
+    tag_group:
+        label: 'reuniors.knk::lang.Tag Group'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    name:
+        label: 'reuniors.knk::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.knk::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    tag_image:
+        label: 'reuniors.knk::lang.Image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    'metadata[icon]':
+        label: 'reuniors.knk::lang.Icon'
+        span: auto
+        type: text
+    other_tag_groups:
+        label: 'reuniors.knk::lang.Other Tag Groups'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+    value:
+        label: 'reuniors.knk::lang.Value'
+        span: auto
+        type: number
+tabs:
+    fields:
+        show_on_search:
+            label: 'reuniors.knk::lang.Show on search'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        priority:
+            label: 'reuniors.knk::lang.Priority'
+            span: auto
+            default: '1000'
+            type: number
+            tab: 'reuniors.knk::lang.Settings'
+        show_in_filters:
+            label: 'reuniors.knk::lang.Show In Filters'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        description:
+            label: 'reuniors.knk::lang.Description'
+            size: ''
+            span: full
+            type: richeditor
+            tab: 'reuniors.knk::lang.Settings'
+        active:
+            label: 'reuniors.knk::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'
+        is_food_tag:
+            label: 'reuniors.knk::lang.Is Food-based tag'
+            span: auto
+            type: switch
+            tab: 'reuniors.knk::lang.Settings'

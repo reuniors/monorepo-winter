@@ -1,0 +1,19 @@
+columns:
+    id:
+        label: id
+        type: number
+    attachment_type:
+        label: attachment_type
+        type: text
+    attachment_id:
+        label: attachment_id
+        type: number
+    action_type:
+        label: action_type
+        type: text
+    status:
+        label: status
+        type: text
+    failure_reason:
+        label: failure_reason
+        type: text

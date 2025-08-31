@@ -1,0 +1,82 @@
+fields:
+    title:
+        label: 'reuniors.evodic::lang.Title'
+        span: auto
+        type: text
+    tag_group:
+        label: 'reuniors.evodic::lang.Tag Group'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+        emptyOption: None
+    name:
+        label: 'reuniors.evodic::lang.Name'
+        span: auto
+        preset:
+            field: title
+            type: camel
+        type: text
+    slug:
+        label: 'reuniors.evodic::lang.Slug'
+        span: auto
+        preset:
+            field: title
+            type: slug
+        type: text
+    tag_image:
+        label: 'reuniors.evodic::lang.Image'
+        mode: image
+        useCaption: true
+        thumbOptions:
+            mode: crop
+            extension: auto
+        span: auto
+        type: fileupload
+    'metadata[icon]':
+        label: 'reuniors.evodic::lang.Icon'
+        span: auto
+        type: text
+    other_tag_groups:
+        label: 'reuniors.evodic::lang.Other Tag Groups'
+        nameFrom: title
+        descriptionFrom: description
+        span: auto
+        type: relation
+tabs:
+    fields:
+        show_on_search:
+            label: 'reuniors.evodic::lang.Show on search'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
+        priority:
+            label: 'reuniors.evodic::lang.Priority'
+            span: auto
+            default: '1000'
+            type: number
+            tab: 'reuniors.evodic::lang.Settings'
+        show_in_filters:
+            label: 'reuniors.evodic::lang.Show In Filters'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
+        description:
+            label: 'reuniors.evodic::lang.Description'
+            size: ''
+            span: full
+            type: richeditor
+            tab: 'reuniors.evodic::lang.Settings'
+        active:
+            label: 'reuniors.evodic::lang.Active'
+            span: auto
+            default: 1
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
+        is_food_tag:
+            label: 'reuniors.evodic::lang.Is Food-based tag'
+            span: auto
+            type: switch
+            tab: 'reuniors.evodic::lang.Settings'
