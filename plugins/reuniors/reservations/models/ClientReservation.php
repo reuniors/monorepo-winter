@@ -132,6 +132,14 @@ class ClientReservation extends Model
             ->where('date', '>=', $dateAndTime)
             ->where('status', '!=', 3)
             ->get();
+        // Check if the start and end time is between the working hours
+        $workingHours = LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)->first();
+        if ($workingHours) {
+            if ($start->between($workingHours->start_time, $workingHours->end_time) || $end->between($workingHours->start_time, $workingHours->end_time)) {
+                return false;
+            }
+        }
+        // Check if the start and end time is between the reservations
         if (
             LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)
                 ->count() === 0

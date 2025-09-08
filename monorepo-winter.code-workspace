@@ -3,6 +3,9 @@
 		{
 			"name": "monorepo-winter",
 			"path": "."
+		},
+		{
+			"path": "../monorepo-ion-apps"
 		}
 	],
 	"settings": {
