@@ -63,6 +63,9 @@ return [
         'unban_selected_confirm' => 'Разблокировать выбранных пользователей?',
         'unban_selected_empty' => 'Нет выбранных пользователей для разблокировки.',
         'unban_selected_success' => 'Выбранные пользователи успешно разблокированы.',
+        'unsuspend' => 'Возобновить',
+        'unsuspend_success' => 'Пользователь был восстановлен.',
+        'unsuspend_confirm' => 'Возобновить этого пользователя?',
     ],
     'settings' => [
         'users' => 'Пользователи',
@@ -172,7 +175,6 @@ return [
         'code_param_desc' => 'Параметр, в котором передаётся код активации.',
         'force_secure' => 'Использовать HTTPS',
         'force_secure_desc' => 'Всегда перенаправлять через HTTPS.',
-        'invalid_user' => 'Пользователь с такими данным не найден.',
         'invalid_activation_code' => 'Неверный код активации.',
         'invalid_deactivation_pass' => 'Введенный Вами пароль некорректен.',
         'invalid_current_pass' => 'Текущий пароль который вы ввели - недействителен.',

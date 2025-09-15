@@ -1,0 +1,23 @@
+{
+    "name": "mikp/wn-sanctum-tokens-plugin",
+    "description": "Laravel Sanctum plugin for Winter CMS",
+    "homepage": "https://github.com/mik-p/wn-sanctum-tokens-plugin",
+    "type": "winter-plugin",
+    "license": "BSD-3",
+    "authors": [
+        {
+            "name": "mik-p",
+            "email": "mppritchard3@hotmail.com"
+        }
+    ],
+    "require": {
+        "composer/installers": "~1.0",
+        "winter/wn-user-plugin": "^2.0",
+        "laravel/sanctum": "^2.12",
+        "treeware/plant": "^0.1.0"
+    },
+    "extra": {
+        "installer-name": "sanctum",
+        "treeware": {}
+    }
+}

@@ -35,7 +35,15 @@
         "winter/wn-backend-module": "~1.2.0",
         "winter/wn-cms-module": "~1.2.0",
         "laravel/framework": "^9.1",
-        "wikimedia/composer-merge-plugin": "~2.1.0"
+        "wikimedia/composer-merge-plugin": "~2.1.0",
+        "kreait/laravel-firebase": "^5.8",
+        "lorisleiva/laravel-actions": "^v2.7",
+        "laravel/sanctum": "^v2.12",
+        "norotaro/wn-cors-plugin": "^1.0",
+        "laravel/socialite": "^5.9",
+        "stevebauman/purify": "^6.0",
+        "mikp/wn-sanctum-tokens-plugin": "^0.1.0",
+        "kreait/firebase-php": "^7.10"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.8",
@@ -81,7 +89,8 @@
     "config": {
         "allow-plugins": {
             "composer/installers": true,
-            "wikimedia/composer-merge-plugin": true
+            "wikimedia/composer-merge-plugin": true,
+            "treeware/plant": true
         }
     }
 }

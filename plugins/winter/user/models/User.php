@@ -5,6 +5,7 @@ use Auth;
 use Mail;
 use Event;
 use Config;
+use BackendAuth;
 use Carbon\Carbon;
 use Winter\Storm\Auth\Models\User as UserBase;
 use Winter\User\Models\Settings as UserSettings;
@@ -55,7 +56,7 @@ class User extends UserBase
         'created_ip_address',
         'last_ip_address'
     ];
-    
+
     /**
      * Reset guarded fields, because we use $fillable instead.
      * @var array The attributes that aren't mass assignable.
@@ -101,6 +102,31 @@ class User extends UserBase
         }
 
         Event::fire('winter.user.activate', [$this]);
+
+        return true;
+    }
+
+    /**
+     * Attempts to reset a user's password by matching the reset code generated with the user's.
+     *
+     * If user activation is enabled, the user will be activated as well.
+     *
+     * @param string $resetCode
+     * @param string $newPassword
+     * @return bool
+     */
+    public function attemptResetPassword($resetCode, $newPassword)
+    {
+        if (!parent::attemptResetPassword($resetCode, $newPassword)) {
+            return false;
+        }
+
+        if ($this->isActivatedByUser()) {
+            $this->activation_code = null;
+            $this->is_activated = true;
+            $this->activated_at = $this->freshTimestamp();
+            $this->forceSave();
+        }
 
         return true;
     }
@@ -493,9 +519,15 @@ class User extends UserBase
         /*
          * Extensibility
          */
-        $result = Event::fire('winter.user.getNotificationVars', [$this]);
-        if ($result && is_array($result)) {
-            $vars = call_user_func_array('array_merge', $result) + $vars;
+        $results = Event::fire('winter.user.getNotificationVars', [$this]);
+        if ($results && is_array($results)) {
+            $tempResults = [];
+            foreach ($results as $result) {
+                if ($result && is_array($result)) {
+                    $tempResults = array_merge($tempResults, $result);
+                }
+            }
+            $vars = $tempResults + $vars;
         }
 
         return $vars;
@@ -517,5 +549,35 @@ class User extends UserBase
     protected function generatePassword()
     {
         $this->password = $this->password_confirmation = Str::random(static::getMinPasswordLength());
+    }
+
+    //
+    // Impersonation
+    //
+
+    /**
+     * Check if this user can be impersonated by the provided impersonator
+     * Only backend users with the `winter.users.impersonate_user` permission are allowed to impersonate
+     * users.
+     *
+     * @param \Winter\Storm\Auth\Models\User|false $impersonator The user attempting to impersonate this user, false when not available
+     * @return boolean
+     */
+    public function canBeImpersonated($impersonator = false)
+    {
+        $user = BackendAuth::getUser();
+        if (!$user || !$user->hasAccess('winter.users.impersonate_user')) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Determines if activation is done by the user.
+     */
+    public function isActivatedByUser(): bool
+    {
+        return (UserSettings::get('activate_mode') === UserSettings::ACTIVATE_USER);
     }
 }
