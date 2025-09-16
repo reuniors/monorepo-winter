@@ -1,4 +1,4 @@
-<?php namespace Reuniors\Evodic\Updates\Seeds;
+<?php namespace Reuniors\Knk\Updates\Seeds;
 
 use Winter\Storm\Database\Updates\Seeder;
 use Winter\User\Models\UserGroup;

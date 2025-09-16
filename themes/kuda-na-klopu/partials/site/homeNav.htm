@@ -1,0 +1,65 @@
+description = "Scrolling Nav with Dropdown"
+
+[viewBag]
+
+[staticMenu]
+code = "mainmenu"
+==
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
+    <!-- Navbar brand -->
+    <a class="navbar-brand" href="{{ 'home'|page }}"><img src="{{ 'images/knk-logo.png'|media }}" alt="Kuda na klopu" /></a>
+
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a href="{{ 'home'|page }}" class="nav-link">
+                    {{ 'Naslovna'|_ }}
+                </a>
+            </li>
+        {% if this.param.citySlug and categoriesList %}
+        <!-- Links -->
+            {% for category in categoriesList.categories|slice(0,5) %}
+            <li class="nav-item {% if category.name == 'dostava' %}nav-item-red{% endif %}{% if loop.last %} d-lg-none d-xl-block{% endif %}">
+                <a href="{{ 'location/p20-locations-list'|page({categorySlug: category.slug}) }}" class="nav-link">
+                    {{ category.title }}
+                </a>
+            </li>
+            {% endfor %}
+        {% else %}
+            {% for city in cityList.cities|slice(0, 5) %}
+                <li class="nav-item{% if loop.last %} d-lg-none d-xl-block{% endif %}">
+                    <a href="{{ 'home'|page({citySlug: city.slug}) }}" class="nav-link">
+                        {{ city.title }}
+                    </a>
+                </li>
+            {% endfor %}
+        {% endif %}
+            <li class="nav-item header-user nav-item-red {{ user.name ? 'is-logged' : 'not-logged' }}">
+                <a href="#" class="nav-link btn-user-login">
+                    <i class="fa fa-user"></i>
+                    {{ user.name ? user.name : 'Ulogujte se'|_ }}
+                </a>
+            </li>
+            <li class="nav-item d-lg-none d-xl-block">
+                <div class="social-icons-div">
+                    <a href="#"><i class="fa fa-facebook-f"></i></a><a href="#"><i class="fa fa-instagram"></i></a><a href="#"><i class="fa fa-youtube"></i></a>
+                    <br>
+                </div>
+            </li>
+            <li class="nav-item">
+                &nbsp;
+            </li>
+        </ul>
+        <!-- Links -->
+    </div>
+    <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->

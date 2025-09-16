@@ -1,0 +1,61 @@
+<div class="row simple-menu">
+    <div class="col-12">
+        <br />
+
+        {% if foodMenu.relations_updated_at %}
+            <div class="alert-info" style="margin: 2px 0">
+                {{ 'Datum poslednjeg ažuriranja:' }}
+                <span class="float-right"><b>{{ foodMenu.relations_updated_at|date('d.m.Y.') }}</b></span>
+            </div>
+        {% else %}
+            <div class="alert alert-danger" role="alert">
+                {{ 'NAPOMENA: Stari jelovnik, bez cena.' }}
+            </div>
+        {% endif %}
+        <div class="food-list-wrapper">
+            {% for foodCategory in foodMenu.food_categories %}
+                <div class="one-meail-category">
+                    <h4 id="FoodListItem{{ loop.index }}">{{ foodCategory.title }}</h4>
+                    {% for food in foodCategory.foods %}
+                        {% set sizeGroup = food.food_addon_groups|first %}
+                        <div class="row">
+                            <div class="col col-sm meal-info">
+                                <div class="meal-title">
+                                    {{ food.title }}{% if food.description %} - {{ food.description }} {% endif %}
+                                </div>
+                            </div>
+                            {% if food.price and sizeGroup.food_addons is empty and foodMenu.relations_updated_at %}
+                            <div class="col text-right">
+                                <div class="meal-price"><b>{{ food.price }} RSD</b></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% if sizeGroup.food_addons is not empty and foodMenu.relations_updated_at %}
+                            {% for foodAddon in sizeGroup.food_addons %}
+                                {% if food.food_size_prices_by_id
+                                    and food.food_size_prices_by_id[foodAddon.id]
+                                    and food.food_size_prices_by_id[foodAddon.id].pivot.overridden_price
+                                %}
+                            <div class="row">
+                                <div class="col-1">
+                                    -
+                                </div>
+                                <div class="col">
+                                    {{ foodAddon.title }}
+                                </div>
+
+                                <div class="col text-right">
+                                    <b>
+                                    {{ food.food_size_prices_by_id[foodAddon.id].pivot.overridden_price }} RSD
+                                    </b>
+                                </div>
+                            </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -36,7 +36,7 @@ return [
     |
     */
 
-    'backendUri' => 'backend/admin',
+    'backendUri' => '/backend/admin',
 
     /*
     |--------------------------------------------------------------------------

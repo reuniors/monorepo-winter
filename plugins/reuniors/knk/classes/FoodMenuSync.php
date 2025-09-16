@@ -279,7 +279,7 @@ class FoodMenuSync
                                     continue;
                                 }
                                 foreach ($addonsGroups as $oneAddonsGroup) {
-                                    $addonGroupTitle = LanguageHelpers::getTranslated($oneAddonsGroup[self::ATTR_NAME]);
+                                    $addonGroupTitle = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($oneAddonsGroup[self::ATTR_NAME]);
                                     $foodAddonType = $oneAddonsGroup[self::ATTR_NAME] === 'Sizes' ? 'size' : null;
                                     $foodAddonGroupData = [
                                         'title' => $addonGroupTitle,
@@ -320,7 +320,7 @@ class FoodMenuSync
                                     if (!empty($oneAddonsGroup[self::ATTR_OPTIONS])) {
                                         $foodAddons = $oneAddonsGroup[self::ATTR_OPTIONS];
                                         foreach ($foodAddons as $oneAddon) {
-                                            $addonTitle = LanguageHelpers::getTranslated($oneAddon[self::ATTR_NAME]);
+                                            $addonTitle = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($oneAddon[self::ATTR_NAME]);
                                             $foodAddonData = [
                                                 'title' => $addonTitle,
                                                 'name' => S::camel($addonTitle, $oneAddon[self::ATTR_CODE]),
@@ -425,7 +425,7 @@ class FoodMenuSync
                                 'foodAddons' => []
                             ];
                             foreach ($foodAddonNames as $oneFoodAddon) {
-                                $addonTitle = LanguageHelpers::getTranslated($oneFoodAddon);
+                                $addonTitle = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($oneFoodAddon);
                                 $foodAddonData = [
                                     'title' => $addonTitle,
                                     'name' => S::camel($addonTitle),

@@ -195,7 +195,7 @@ class FoodMenuSyncWolt extends FoodMenuSync
                         continue;
                     }
                     foreach ($foodOptionsGroups as $oneAddonsGroup) {
-                        $addonGroupTitle = LanguageHelpers::getTranslated($oneAddonsGroup[self::ATTR_NAME]);
+                        $addonGroupTitle = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($oneAddonsGroup[self::ATTR_NAME]);
                         $foodAddonType = null; // $oneAddonsGroup[self::ATTR_TYPE] === 'choice' ? 'size' : null;
                         $maxAddons = $oneAddonsGroup[self::ATTR_CHOICE_CONFIG][self::ATTR_TOTAL_RANGE][self::ATTR_MAX] ?? null;
                         $minAddons = $oneAddonsGroup[self::ATTR_CHOICE_CONFIG][self::ATTR_TOTAL_RANGE][self::ATTR_MIN] ?? null;
@@ -240,7 +240,7 @@ class FoodMenuSyncWolt extends FoodMenuSync
                         if (!empty($oneAddonsGroup[self::ATTR_VALUES])) {
                             $foodAddons = $oneAddonsGroup[self::ATTR_VALUES];
                             foreach ($foodAddons as $oneAddon) {
-                                $addonTitle = LanguageHelpers::getTranslated($oneAddon[self::ATTR_NAME]);
+                                $addonTitle = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($oneAddon[self::ATTR_NAME]);
                                 $foodAddonData = [
                                     'title' => $addonTitle,
                                     'name' => S::camel($addonTitle, $oneAddon[self::ATTR_ID]),

@@ -1,0 +1,118 @@
+{% if location.gallery|length > 3  %}
+    <div class="location-images-wrapper">
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <button class="show-gallery btn btn-default d-lg-none d-block position-absolute fixed-bottom pull-right open-gallery-image" data-index="0">
+                    <i class="fas fa-camera"></i> {{ 'Galerija'|_ }}
+                </button>
+                <div class="thumb-hover-image">
+                    <a href="#" class="open-gallery-image" data-index="0">
+                        <img src="{{ location.gallery.0|resize(790, 390, {mode: 'crop'}) }}" alt="{{ location.title }}-0" class="img-fluid"
+                             width="790" height="390"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="col d-none d-md-block col-md-4">
+                <div class="row">
+                    <div class="col-12 col-md-6 d-none d-lg-block">
+                        <div class="thumb-hover-image right-images-thumb">
+                            <a href="#" class="open-gallery-image" data-index="1">
+                                <img src="{{ location.gallery.1|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-1" class="img-fluid"
+                                     width="250" height="250"
+                                />
+                            </a>
+                        </div>
+                        <div class="thumb-hover-image right-images-thumb">
+                            <a href="#" class="open-gallery-image" data-index="2">
+                                <img src="{{ location.gallery.2|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-2" class="img-fluid"
+                                    width="250" height="250"
+                                />
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-6 d-none d-md-block">
+                        {% if location.logo %}
+                        <div class="right-images-thumb">
+                            <img src="{{ location.logo|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-3" class="img-fluid"
+                                 width="250" height="250"
+                            />
+                        </div>
+                        {% endif %}
+                        <div class="right-images-thumb gallery-thumb-with-overlay d-none d-lg-block">
+                            <a id="OpenGalleryImages" href="#" class="open-gallery">
+                                <div class="image">
+                                    <img src="{{ location.gallery.3|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-4" class="img-fluid"
+                                         width="250" height="250"
+                                    />
+                                </div>
+                                <div class="text">
+                                    {{ 'Sve Slike'|_ }}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elseif location.gallery|length > 1 %}
+    <div class="location-images-wrapper">
+        <div class="row">
+            <div class="col-12 col-md-10">
+                <button class="show-gallery btn btn-default d-lg-none d-block position-absolute fixed-bottom pull-right open-gallery-image" data-index="0">
+                    <i class="fas fa-camera"></i> {{ 'Galerija'|_ }}
+                </button>
+                <div class="thumb-hover-image">
+                    <a href="#" class="open-gallery-image" data-index="0">
+                        <img src="{{ location.gallery.0|resize(990, 390, {mode: 'crop'}) }}" alt="{{ location.title }}-0" class="img-fluid"
+                            width="990" height="390"
+                        />
+                    </a>
+                </div>
+            </div>
+            <div class="col d-none d-md-block col-md-2">
+                <div class="row">
+                    <div class="col-12 col-lg-12 d-none d-md-block">
+                        {% if location.logo %}
+                        <div class="right-images-thumb">
+                            <img src="{{ location.logo|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-1" class="img-fluid"
+                                width="250" height="250"
+                            />
+                        </div>
+                        {% endif %}
+                        <div class="right-images-thumb gallery-thumb-with-overlay d-none d-lg-block">
+                            <a id="OpenGalleryImages" href="#" class="open-gallery">
+                                <div class="image">
+                                    <img src="{{ location.gallery.1|resize(250, 250, {mode: 'crop'}) }}" alt="{{ location.title }}-2" class="img-fluid"
+                                        width="250" height="250"
+                                    />
+                                </div>
+                                <div class="text">
+                                    {{ 'Sve Slike'|_ }}
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% elseif location.gallery|length == 1  %}
+    <div class="location-images-wrapper">
+        <div class="row">
+            <div class="col-12">
+                <button class="show-gallery btn btn-default d-lg-none d-block position-absolute fixed-bottom pull-right open-gallery-image" data-index="0">
+                    <i class="fas fa-camera"></i> {{ 'Galerija'|_ }}
+                </button>
+                <div class="thumb-hover-image">
+                    <a href="#" class="open-gallery-image" data-index="0">
+                        <img src="{{ location.gallery.0|resize(1390, 390, {mode: 'crop'}) }}" alt="{{ location.title }}-0" class="img-fluid"
+                            width="1390" height="390"
+                        />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

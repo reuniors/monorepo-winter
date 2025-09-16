@@ -1,0 +1,11 @@
+[viewBag]
+==
+{% for tagGroup in tagGroups %}
+  <optgroup label="{{ tagGroup.title }}">
+    {% for tag in tagGroup.tags %}
+      <option value="{{ tag.name }}">
+        {{ tag.title }}
+      </option>
+    {% endfor %}
+  </optgroup>
+{% endfor %}

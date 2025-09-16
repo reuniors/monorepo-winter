@@ -1,0 +1,1177 @@
+title = "Partneri | Rezervacije RZR"
+url = "/partneri" 
+layout = "ionicSimple"
+is_hidden = 0
+
+[locationsComponent]
+limit = 20
+showCover = true
+showAddress = true
+showType = true
+
+[contactForm] 
+==
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            <div class="flex items-center justify-center">
+                <img
+                    src="{{ 'assets/img/logo/rzr-rs-logo-big.png'|theme }}"
+                    alt="rzr logo"
+                    class="w-auto h-16 mr-2 py-2"
+                />
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <!-- Hero Section -->
+    <section class="hero-section text-center mb-12">
+        <div class="hero-content">
+            <h1 class="hero-title">Postanite naš partner</h1>
+            <p class="hero-description">
+                Mi pružamo sve potrebne alate i podršku za uspešno poslovanje. Kontaktirajte nas i saznaćete više o našim uslovima saradnje.
+            </p>
+            <a href="#contact-section" class="btn btn-primary mt-2">Kontaktirajte nas</a>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="partners-section mb-12">
+        <div class="section-header text-center mb-8">
+            <h2 class="section-title">
+                <ion-icon name="business-outline" class="title-icon"></ion-icon>
+                Lokacije partnera
+            </h2>
+            <p class="section-subtitle">Pregledajte sve naše aktivne partnere</p>
+        </div>
+
+        <!-- Fallback content when no partners -->
+        <div class="fallback-content" style="display: none;">
+            <ion-card class="fallback-card">
+                <ion-card-content class="text-center">
+                    <ion-icon name="business-outline" class="fallback-icon"></ion-icon>
+                    <h3 class="fallback-title">Trenutno nema aktivnih partnera</h3>
+                    <p class="fallback-description">
+                        Radimo na dodavanju novih partnera. Kontaktirajte nas ako želite da postanete naš partner.
+                    </p>
+                    <ion-button expand="block" color="primary" fill="outline" class="mt-4">
+                        <ion-icon name="mail-outline" slot="start"></ion-icon>
+                        Kontaktirajte nas
+                    </ion-button>
+                </ion-card-content>
+            </ion-card>
+        </div>
+
+        <!-- Sample partners for demonstration -->
+        <div class="sample-partners">
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mt-8">
+                {% for location in locationsData %}
+                <div class="location-card">
+                    <div class="flex">
+                        <div class="location-image">
+                            <img src="{{ location.logo.path }}" alt="{{ location.title }}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                            {# <div class="placeholder-image">
+                                <ion-icon name="cut-outline" class="placeholder-icon"></ion-icon>
+                            </div> #}
+                        </div>
+                        <div class="location-content">
+                            <h3 class="location-title">{{ location.title }}</h3>
+                            <p class="location-snippet">{{ location.snippet }}</p>
+                            <div class="location-actions">
+                                <a href="https://{{ location.slug }}.rzr.rs" class="btn btn-primary" target="_blank">Pogledaj detalje</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages-section mb-12">
+        <div class="section-header text-center mb-8">
+            <h2 class="section-title">
+                <ion-icon name="card-outline" class="title-icon"></ion-icon>
+                Paketi partnerstva
+            </h2>
+            <p class="section-subtitle">Izaberite paket koji najbolje odgovara vašim potrebama</p>
+        </div>
+
+        <div class="packages-grid">
+
+
+            <!-- Premium Package -->
+            <div class="package-card premium-package">
+                <div class="package-header">
+                    <div class="package-icon">
+                        <ion-icon name="diamond-outline"></ion-icon>
+                    </div>
+                    <h3 class="package-title">Premium</h3>
+
+                    <div class="free-trial-badge">
+                        <ion-icon name="gift"></ion-icon>
+                        <span>PROBAJ 3 MESECA POTPUNO BESPLATNO</span>
+                        <span class="text-xs">* BEZ OGRANIČENJA *</span>
+                    </div>
+                    <div class="package-price">
+                        <span class="price-amount">3.000 RSD</span>
+                        <span class="price-period">/mesečno</span>
+                    </div>
+                    <p class="package-subtitle">25.000 RSD godišnje (ušteda 11.000 RSD)</p>
+                </div>
+                
+                <div class="package-features">
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Zakazivanje bez ograničenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Web sajt</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Web aplikacija (zasebno za svakog partnera)</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Email obaveštenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Push obaveštenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Subdomen</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Detaljne statistike</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Neograničen broj radnika</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Neograničene vesti/obaveštenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Potpuna konfiguracija</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>PWA aplikacija</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>3+ template-a za odabir</span>
+                    </div>
+                </div>
+
+                <div class="package-actions">
+                    <ion-button expand="block" color="primary" class="package-button" href="#contact-section">
+                        <ion-icon name="rocket-outline" slot="start"></ion-icon>
+                        Započnite besplatno
+                    </ion-button>
+                </div>
+            </div>
+
+            <!-- Free Package -->
+            <div class="package-card free-package">
+                <div class="package-header">
+                    <div class="package-icon">
+                        <ion-icon name="gift-outline"></ion-icon>
+                    </div>
+                    <h3 class="package-title">Besplatno</h3>
+                    <div class="package-price">
+                        <span class="price-amount">0 RSD</span>
+                        <span class="price-period">/mesečno</span>
+                    </div>
+                    <p class="package-subtitle">Trenutno nedostupno</p>
+                </div>
+                
+                <div class="package-features">
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Zakazivanje bez ograničenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>Web sajt</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Web aplikacija (u okviru RZR aplikacije)</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Email obaveštenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>Push obaveštenja</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>Subdomen</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>Statistike</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Do 2 radnika</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>1 aktivna vest/obaveštenje</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="checkmark-circle" class="feature-icon included"></ion-icon>
+                        <span>Potpuna konfiguracija</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>PWA aplikacija</span>
+                    </div>
+                    <div class="feature-item">
+                        <ion-icon name="close-circle" class="feature-icon excluded"></ion-icon>
+                        <span>Odabir template-a</span>
+                    </div>
+                </div>
+
+                <div class="package-actions">
+                    <ion-button expand="block" color="medium" fill="outline" class="package-button">
+                        Trenutno nedostupno
+                    </ion-button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="contact-section" id="contact-section">
+        <div class="contact-container">
+            <div class="text-center mb-8">
+                <h2 class="contact-title">
+                    <ion-icon name="mail-outline" class="title-icon"></ion-icon>
+                    Kontaktirajte nas
+                </h2>
+                <p class="contact-description">
+                    Imate pitanja ili želite da postanete naš partner? Popunite
+                    formu ispod.
+                </p>
+            </div>
+
+            <div class="form-container">
+                {% component 'contactForm' %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Become Partner Section -->
+    <section class="become-partner-section">
+        <ion-card class="partner-card">
+            <ion-card-content>
+                <div class="partner-content">
+                    <h3 class="partner-title">Zašto RZR.rs?</h3>
+                    <p class="partner-description">
+                        Umesto da investirate u sopstvenu infrastrukturu i razvoj, koristite naše rešenje koje je već testirano i optimizovano za vaš posao.
+                    </p>
+                </div>
+
+                <!-- Cost Comparison Section -->
+                <div class="cost-comparison-section">
+                    <h4 class="comparison-title">Uporedite troškove</h4>
+                    
+                    <div class="cost-cards">
+                        <div class="cost-card traditional">
+                            <div class="cost-header">
+                                <ion-icon name="server-outline" class="cost-icon"></ion-icon>
+                                <h5>Sopstvena infrastruktura</h5>
+                            </div>
+                            <div class="cost-items">
+                                <div class="cost-item">
+                                    <span class="cost-label">Hosting (12 GB RAM, 12 CPU, 120 MB/s IO)</span>
+                                    <span class="cost-value">~400€ godišnje</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Domen</span>
+                                    <span class="cost-value">20€ godišnje</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Izrada sajta sa rezervacijom</span>
+                                    <span class="cost-value">minimum 5000€</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Održavanje i posebni zahtevi</span>
+                                    <span class="cost-value">dodatni troškovi</span>
+                                </div>
+                            </div>
+                            <div class="cost-total">
+                                <span class="total-label">Ukupno</span>
+                                <span class="total-value">: 5420€ + godišnji troškovi od ~500e</span>
+                            </div>
+                        </div>
+
+                        <div class="cost-card rzr">
+                            <div class="cost-header">
+                                <ion-icon name="checkmark-circle" class="cost-icon"></ion-icon>
+                                <h5>(vaš-naziv-domena).RZR.rs rešenje</h5>
+                            </div>
+                            <div class="cost-items">
+                                <div class="cost-item">
+                                    <span class="cost-label">Sve uključeno</span>
+                                    <span class="cost-value">✓</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Hosting i infrastruktura</span>
+                                    <span class="cost-value">✓</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Sajt sa rezervacijom</span>
+                                    <span class="cost-value">✓</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span class="cost-label">Održavanje i podrška</span>
+                                    <span class="cost-value">✓</span>
+                                </div>
+                            </div>
+                            <div class="cost-total">
+                                <span class="total-label">Ukupno</span>
+                                <span class="total-value">: 215€ godišnje</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="savings-highlight">
+                        <ion-icon name="trending-down" class="savings-icon"></ion-icon>
+                        <div class="savings-content">
+                            <h5>Ušteda vremena, novca i živaca!</h5>
+                            <p>Za sve potrebe izlazimo u susret - ne brinite o održavanju, sve je uključeno u cenu.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <ion-icon name="rocket-outline" class="benefit-icon rocket"></ion-icon>
+                        <h4 class="benefit-title">Brzi start</h4>
+                        <p class="benefit-description">Postanite partner u roku od 24h</p>
+                    </div>
+                    <div class="benefit-item">
+                        <ion-icon name="shield-checkmark-outline" class="benefit-icon security"></ion-icon>
+                        <h4 class="benefit-title">Sigurnost</h4>
+                        <p class="benefit-description">Sigurni i pouzdani sistemi</p>
+                    </div>
+                    <div class="benefit-item">
+                        <ion-icon name="trending-up-outline" class="benefit-icon growth"></ion-icon>
+                        <h4 class="benefit-title">Rast</h4>
+                        <p class="benefit-description">Povećajte svoj posao</p>
+                    </div>
+                </div>
+            </ion-card-content>
+        </ion-card>
+    </section>
+</ion-content>
+
+<style>
+/* Custom styles for the partners page */
+ion-content {
+    --background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    margin: -16px -16px 0 -16px;
+    padding: 60px 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Section Headers */
+.section-header {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.title-icon {
+    font-size: 2rem;
+    color: #4c841d;
+}
+
+.section-subtitle {
+    font-size: 1.125rem;
+    color: #6b7280;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Partners Grid */
+.location-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    position: relative;
+}
+
+.location-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    z-index: 1;
+}
+
+.location-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.location-image {
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    position: relative;
+    background: #000000;
+    flex-shrink: 0;
+    border-radius: 12px;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.location-image img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+    padding: 1rem;
+}
+
+.location-card:hover .location-image img {
+    transform: scale(1.05);
+}
+
+.placeholder-image {
+    display: none;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+}
+
+.placeholder-icon {
+    font-size: 2rem;
+    color: white;
+    opacity: 0.8;
+}
+
+.location-content {
+    padding: 1rem 1rem 1rem 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.location-title {
+    color: #1f2937;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.location-snippet {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.location-details {
+    margin-bottom: 1.5rem;
+}
+
+.location-type {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(76, 132, 29, 0.3);
+}
+
+.location-address {
+    margin: 0.5rem 0;
+    color: #6b7280;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.location-actions {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.875rem 2rem;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-width: 140px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    border: none;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(76, 132, 29, 0.4);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #3d6a17 0%, #243f0d 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px -3px rgba(76, 132, 29, 0.5);
+}
+
+/* Fallback Content */
+.fallback-card {
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    background: white;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.fallback-icon {
+    font-size: 4rem;
+    color: #4c841d;
+    margin-bottom: 1rem;
+}
+
+.fallback-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.fallback-description {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Contact Section */
+.contact-section {
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    margin: 0 -16px;
+    padding: 4rem 2rem;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+}
+
+.contact-container {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.contact-description {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.form-container {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+/* Become Partner Section */
+.become-partner-section {
+    margin-top: 4rem;
+}
+
+.partner-card {
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background: white;
+    overflow: hidden;
+}
+
+.partner-content {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.partner-icon {
+    font-size: 4rem;
+    color: #4c841d;
+    margin-bottom: 1.5rem;
+}
+
+.partner-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.partner-description {
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 auto;
+    font-size: 1.125rem;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 16px;
+    background: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.benefit-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.benefit-icon.rocket { color: #10b981; }
+.benefit-icon.security { color: #3b82f6; }
+.benefit-icon.growth { color: #8b5cf6; }
+
+.benefit-title {
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.benefit-description {
+    color: #6b7280;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.partner-button {
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Packages Section */
+.packages-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 4rem 2rem;
+    margin: 0 -16px;
+    position: relative;
+    overflow: hidden;
+}
+
+.packages-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="10" cy="10" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+}
+
+.packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.package-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    border: 1px solid #e5e7eb;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.package-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #4c841d 0%, #2d5010 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 1;
+}
+
+.free-trial-badge {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+    animation: pulse-glow 2s ease-in-out infinite alternate;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.free-trial-badge ion-icon {
+    font-size: 1.25rem;
+    animation: bounce 1s ease-in-out infinite;
+    flex-shrink: 0;
+}
+
+.free-trial-badge span {
+    line-height: 1.2;
+}
+
+.free-trial-badge .text-xs {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    font-weight: 600;
+}
+
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+        transform: scale(1);
+    }
+    100% {
+        box-shadow: 0 6px 20px rgba(245, 158, 11, 0.6);
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px);
+    }
+    60% {
+        transform: translateY(-2px);
+    }
+}
+
+.package-header {
+    padding: 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.package-icon {
+    font-size: 3rem;
+    color: #4c841d;
+    margin-bottom: 1rem;
+}
+
+.package-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.package-price {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #4c841d;
+    margin-bottom: 0.5rem;
+}
+
+.package-subtitle {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.package-features {
+    padding: 0 1rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    text-align: left;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.feature-item ion-icon {
+    width: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+}
+
+.feature-item span {
+    flex: 1;
+    line-height: 1.4;
+}
+
+.feature-icon {
+    font-size: 1.2rem;
+}
+
+.feature-icon.included {
+    color: #10b981; /* Green for included */
+}
+
+.feature-icon.excluded {
+    color: #ef4444; /* Red for excluded */
+}
+
+.package-actions {
+    padding: 2rem;
+    text-align: center;
+}
+
+.package-button {
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 0.875rem 2rem;
+    min-width: 200px;
+}
+
+/* Cost Comparison Section */
+.cost-comparison-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #f8fafc;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+}
+
+.comparison-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.cost-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.cost-card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.08);
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cost-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    color: #4c841d;
+}
+
+.cost-icon {
+    font-size: 2.5rem;
+}
+
+.cost-card h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 1rem;
+}
+
+.cost-items {
+    margin-bottom: 1.5rem;
+}
+
+.cost-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+    color: #6b7280;
+}
+
+.cost-item .cost-label {
+    font-weight: 500;
+    color: #374151;
+}
+
+.cost-item .cost-value {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.cost-total {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.savings-highlight {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #f59e0b;
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 15px;
+    margin-top: 2rem;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+}
+
+.savings-icon {
+    font-size: 2rem;
+    color: white;
+}
+
+.savings-content h5 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.savings-content p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .location-content {
+        padding: 1.5rem;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .contact-section {
+        padding: 2rem 1rem;
+    }
+    
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .packages-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cost-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.location-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.location-card:nth-child(1) { animation-delay: 0.1s; }
+.location-card:nth-child(2) { animation-delay: 0.2s; }
+.location-card:nth-child(3) { animation-delay: 0.3s; }
+.location-card:nth-child(4) { animation-delay: 0.4s; }
+.location-card:nth-child(5) { animation-delay: 0.5s; }
+.location-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Show actual component if it has data */
+.actual-partners:not(:empty) {
+    display: block !important;
+}
+
+.actual-partners:not(:empty) + .sample-partners {
+    display: none;
+}
+</style>
+<script>
+// Show fallback content if no partners are found
+document.addEventListener('DOMContentLoaded', function() {
+    const actualPartners = document.querySelector('.actual-partners');
+    const samplePartners = document.querySelector('.sample-partners');
+    const fallbackContent = document.querySelector('.fallback-content');
+    
+    // Check if actual partners component has content
+    if (actualPartners && actualPartners.children.length === 0) {
+        fallbackContent.style.display = 'block';
+        samplePartners.style.display = 'block';
+    }
+});
+</script>
+

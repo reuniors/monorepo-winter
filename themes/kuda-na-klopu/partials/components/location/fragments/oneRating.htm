@@ -1,0 +1,19 @@
+<div class="col-12">
+    <div class="row">
+        <div class="col-12 rating-block">
+            <span class="rating-type-label">
+            {{ ratingTypeLabel }}
+            </span>
+            <div class="float-right">
+                <input id="input-rating-{{ ratingKey }}"
+                       name="rating_{{ ratingKey }}"
+                       class="kv-ltr-theme-fas-star-2 rating-loading"
+                       data-ratingtype="{{ ratingKey }}"
+                    {% if location.rating_by_type[ratingKey].location_rating_history %}
+                        value="{{ location.rating_by_type[ratingKey].location_rating_history.grade - 4 }}"
+                    {% endif %}
+                />
+            </div>
+        </div>
+    </div>
+</div>

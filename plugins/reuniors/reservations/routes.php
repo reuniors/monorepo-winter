@@ -49,7 +49,7 @@ use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestExecuteActi
 use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestGetEntityAction;
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/reservations', 'middleware' => [
         'bindings',
         'userLanguage',
         JsonMiddleware::class,

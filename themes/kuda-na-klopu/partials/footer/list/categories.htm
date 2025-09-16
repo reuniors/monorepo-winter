@@ -1,0 +1,7 @@
+{% for category in categories %}
+    <li>
+        <a href="{{ 'location/p20-locations-list'|page({categorySlug: category.slug}) }}">
+            {{ category.title }}
+        </a>
+    </li>
+{% endfor %}

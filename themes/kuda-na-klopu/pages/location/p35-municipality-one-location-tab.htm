@@ -1,0 +1,22 @@
+title = "Lokacija Tab"
+url = "/:citySlug/:municipalitySlug/:categorySlug/:slug/:tab"
+is_hidden = 0
+layout = "Search"
+
+[viewBag]
+localeTitle[en] = "Location Tab"
+==
+<?php
+function onInit() {
+    $cmsController = new Cms\Classes\Controller;
+    $citySlug = $this->param('citySlug');
+    $municipalitySlug = $this->param('municipalitySlug');
+    $categorySlug = $this->param('categorySlug');
+    $slug = $this->param('slug');
+    $tab = $this->param('tab');
+
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    return $controller->municipalityOneLocationTab($citySlug, $municipalitySlug, $categorySlug, $slug, $tab);
+}
+?>
+==

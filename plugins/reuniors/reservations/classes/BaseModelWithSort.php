@@ -2,7 +2,7 @@
 
 use Model;
 use Illuminate\Support\Facades\DB;
-use Reuniors\Reservations\Classes\Helpers\ReorderDataHelper;
+use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Log;
 
 abstract class BaseModelWithSort extends Model

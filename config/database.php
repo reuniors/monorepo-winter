@@ -57,6 +57,18 @@ return [
             'url' => env('DATABASE_URL'),
             'username' => env('DB_USERNAME', ''),
         ],
+
+        'mariadb' => [
+            'driver'    => 'mysql',
+            'host'      => env('MYSQL_HOST', 'localhost'),
+            'port'      => 3306,
+            'database' => env('DB_DATABASE', 'monorepo_winter'),
+            'username'  => env('DB_USERNAME', 'root'),
+            'password'  => env('DB_PASSWORD', ''),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
         'pgsql' => [
             'charset' => 'utf8',
             'database' => env('DB_DATABASE', 'winter'),

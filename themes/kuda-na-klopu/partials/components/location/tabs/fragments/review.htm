@@ -1,0 +1,101 @@
+[commentsPost]
+relatedToAttachment = "location"
+slug = "{{ :slug }}"
+==
+<div class="row flex-column-reverse flex-md-row">
+    <div class="col-12 col-lg-8 left-panel">
+        <div class="comments">
+            <ul>
+                {% partial "comments/list" posts=posts %}
+            </ul>
+        </div>
+        {# {% partial 'comments/default' attachmentId=location.id attachmentField='location' commentsPost=commentsPost %} #}
+    </div>
+    <div class="col-12 col-lg-4 right-panel white-background">
+{#        <div class="row">#}
+{#            <div class="col-12 col-lg-12">#}
+{#                {{ 'Opšti utisak o restoranu' }}:#}
+{#            </div>#}
+{#            <div class="col-12 col-lg-12 col-xl btn-group-toggle general-rating-wrapper">#}
+{#                <input id="input-rating-general"#}
+{#                       name="input-rating-general"#}
+{#                       class="kv-ltr-theme-fas-star rating-loading"#}
+{#                       data-ratingtype="general"#}
+{#                    {% if location.rating_by_type['general'].location_rating_history %}#}
+{#                        value="{{ location.rating_by_type['general'].location_rating_history.grade - 4 }}"#}
+{#                    {% endif %}#}
+{#                />#}
+{#            </div>#}
+{#            <div class="col-12 btn-group-default">#}
+{#                <button class="btn btn-default advanced-grade active"#}
+{#                        data-request="locationData::onRun"#}
+{#                        data-request-data="locationId: {{ location.id }}"#}
+{#                        data-request-update="'components/location/rating': '#ratingContent'">#}
+{#                    {{ 'Napredno ocenjivanje'|_ }}#}
+{#                </button>#}
+{#            </div>#}
+{#        </div>#}
+        <form
+            class="review-form"
+            data-request="locationData::onAdvancedRating"
+            data-request-url="{{ 'location/p50-one-location'|page }}"
+            data-request-data="{
+                location_id: {{ location.id }}, with_rating: 1, attachment_id: {{ location.id }},
+                attachment_field: 'location'
+            }"
+        >
+            <h4 data-toggle="collapse" data-target="#UserReviewGradeBox" aria-expanded="true">
+                {{ 'Vaš utisak'|_ }}
+            </h4>
+            <div class="row collapse show" id="UserReviewGradeBox">
+                {% for ratingKey,ratingType in ratingTypes %}
+                    {% partial 'components/location/fragments/oneRating'
+                        ratingTypeLabel=ratingType.label|_
+                        ratingKey=ratingKey
+                    %}
+                {% endfor %}
+            </div>
+            {% if location.badge_tag_group.tags.length > 0 %}
+            <h4 data-toggle="collapse" data-target="#UserReviewBadgeBox" aria-expanded="true">
+                {{ 'Preporuke'|_ }}
+            </h4>
+            <div class="row collapse show" data-toggle="buttons" id="UserReviewBadgeBox">
+                {% for tag in location.badge_tag_group.tags %}
+                    <div class="col-12 col-sm-6 btn-group-toggle rating-badge">
+                        <label class="btn btn-default {% if tag.location_badge_history and tag.location_badge_history.user_badge_history %}active{% endif %}">
+                            <input id="badge{{ tag.name }}"
+                                   type="checkbox"
+                                   name="badges[]"
+                                   value="{{ tag.name }}"
+                                {% if tag.location_badge_history and tag.location_badge_history.user_badge_history %}
+                                    checked
+                                {% endif %}
+                            > {{ tag.title }}
+                        </label>
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <h4 data-toggle="collapse" data-target="#UserReviewCommentBox" aria-expanded="true">{{ 'Komentar'|_ }}</h4>
+            <div class="form-group collapse show" id="UserReviewCommentBox">
+                <textarea
+                    placeholder=" {{ 'Ovde unesite komentar'|_ }}"
+                    class="form-control" id="comment-text"
+                    name="content" cols="50" rows="10"
+                    required
+                ></textarea>
+            </div>
+
+            <!-- Submit Field -->
+            <div class="form-group btn-group-default">
+                <button type="submit"
+                        class="btn btn-default active"
+                >
+                    {{ 'Sačuvaj utisak'|_ }}
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>

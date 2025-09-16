@@ -1,0 +1,76 @@
+name: MainMenu
+items:
+    -
+        title: Naslovna
+        type: cms-page
+        code: ''
+        reference: kuda-na-klopu-kragujevac
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Restorani
+        nesting: ''
+        type: header
+        url: ''
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Kafane
+        nesting: ''
+        type: header
+        url: ''
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Picerije
+        nesting: ''
+        type: header
+        url: ''
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: Poslastice
+        nesting: ''
+        type: header
+        url: ''
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'
+    -
+        title: 'Brza hrana'
+        nesting: ''
+        type: header
+        url: ''
+        code: ''
+        reference: ''
+        cmsPage: ''
+        replace: ''
+        viewBag:
+            isHidden: '0'
+            cssClass: ''
+            isExternal: '0'

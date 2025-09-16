@@ -1,0 +1,33 @@
+{% for oneLocation in relatedLocations %}
+<div class="more-locations-wrapper">
+    <div class="more-locations-label"> {{ 'Još lokacija'|_ }}</div>
+    <div class="one-more-location">
+        <div class="image-wrapper">
+            <a href="{{ oneLocation.url }}">
+                {% if oneLocation.cover_image %}
+                    <img src="{{ oneLocation.cover_image|resize(50, 50, {mode: 'crop'}) }}" class="img-fluid"
+                        alt="{{ oneLocation.title }}-cover-image" width="50" height="50"
+                    />
+                {% else %}
+                    <img src="{{ 'images/restoran-no-image.jpg'|media|resize(50, 50, {mode: 'crop'}) }}" class="img-fluid"
+                         alt="No image" width="50" height="50"
+                    />
+                {% endif %}
+            </a>
+        </div>
+        <div class="info-wrapper">
+            <div class="location-title">
+                <a href="{{ oneLocation.url }}">{{ oneLocation.title }}</a>
+            </div>
+            <div class="location-address">
+                {% if oneLocation.address_data %}
+                    {{ oneLocation.address_data.street }} {{ oneLocation.address_data.street_number }},
+                    {{ oneLocation.address_data.municipality }}
+                {% else %}
+                    {{ 'Nepoznata lokacija'|_ }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

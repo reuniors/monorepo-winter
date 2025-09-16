@@ -15,7 +15,13 @@ return [
     |
     */
 
-    'paths' => [],
+    /*
+     * You can enable CORS for 1 or multiple paths.
+     * Example: ['api/*']
+     */
+    'paths' => [
+        'api/*'
+    ],
 
     'allowed_methods' => ['*'],
 

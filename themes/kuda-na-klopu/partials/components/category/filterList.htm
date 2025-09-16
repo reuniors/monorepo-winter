@@ -1,0 +1,24 @@
+<div class="one-filter-group">
+    <h4>{{ 'Kategorija'|_ }}</h4>
+    <div class="filter-content">
+        <div class="form-group">
+            <select class="form-control select-2-dropdown s2-default select-2-hidden-select"
+                    name="category"
+                    data-request="locationsList::onRun"
+                    data-request-update="'components/location/list': '#locationsData', 'infinityLoadLocations': '#infinityLoadLocations'"
+                    data-request-url="{{ 'location/p20-locations-list'|page }}"
+            >
+                <option value="">{{ 'Sve kategorije'|_ }}</option>
+                {% for category in categories %}
+                    <option value="{{ category.slug }}"
+                            {% if category.slug == this.param.categorySlug %}
+                            selected
+                            {% endif %}
+                    >
+                        {{ category.title }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>

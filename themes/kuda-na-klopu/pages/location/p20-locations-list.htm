@@ -1,0 +1,239 @@
+title = "Lista"
+url = "/:citySlug/:categorySlug"
+layout = "Search"
+is_hidden = 0
+
+[viewBag]
+localeTitle[en] = "Category"
+localeUrl[en] = "/:citySlug/:categorySlug"
+
+[locations locationsList]
+citySlug = "{{ :citySlug }}"
+categoriesSlug = "{{ :categorySlug }}"
+withTags = 1
+withBanners = 1
+withRelatedLocations = 1
+sortBy = "priority"
+sortByOrientation = "desc"
+perPage = 15
+pageNumber = "{{ :page }}"
+
+[category]
+categorySlug = "{{ :categorySlug }}"
+citySlug = "{{ :citySlug }}"
+cityWithMunicipality = 1
+
+[banner]
+categorySlug = "{{ :categorySlug }}"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+
+[tagGroups tagGroupsList]
+isParents = 0
+withChildren = 0
+withTags = 1
+showInFilters = 1
+tagsShowInFilters = 1
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+
+[foodMenu foodMenuList]
+==
+<?php
+function onStart()
+{
+    $citySlug = $this->param('citySlug');
+    $categorySlug = $this->param('categorySlug');
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    $return = $controller->municipalityHome($citySlug, $categorySlug, true);
+    if ($return) {
+        return $return;
+    }
+    $pluginName = 'Reuniors.Knk';
+
+    $this->addCss([
+        'assets/leaflet/leaflet.min.css',
+        'assets/css/placeholder-loading.min.css',
+    ], $pluginName);
+
+    $this->addJs([
+        'assets/js/select2.full.min.js',
+        'assets/js/owl.carousel.min.js',
+        'assets/js/auto-pager' . $this->minJs . '.js',
+        'assets/leaflet/leaflet.min.js',
+        'assets/js/locations-list.min.js',
+        'assets/js/chart.js',
+    ], $pluginName);
+}
+?>
+==
+<div class="search-content-wrapper grey-bg">
+    <div class="d-block d-lg-none fixed-bottom bottom-filter">
+        <button class="btn btn-default"
+                id="FilterBtn"
+                type="button">
+            <span class="filter-show">
+                {{ 'Filteri'|_ }}
+                <i class="fas fa-align-left"></i>
+            </span>
+            <span class="filter-hide d-none">
+                {{ 'Zatvori'|_ }}
+                <i class="fa fa-times" aria-hidden="true"></i>
+            </span>
+        </button>
+    </div>
+    <form
+        id="mainForm"
+        data-request="locationsList::onPageLocations"
+        data-request-url="{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}"
+        data-request-update="'components/location/list': '#locationsData'"
+        autocomplete="off"
+    >
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-lg-3 left-filter-col">
+                    <div class="left-col sticky-top d-none d-lg-block" id="FilterWrapper">
+                        <div class="map-wrapper open-popup-map">
+                            <a href="#" class="map-popup">
+                                <div class="view-map-btn">
+                                    <span class="show-map"><i class="fa fa-map-marker"></i> {{ 'Pogledaj mapu'|_ }}</span>
+                                    <span class="hide-map"><i class="fa fa-times"></i> {{ 'Zatvori mapu'|_ }}</span>
+                                </div>
+                                {% set resizedImage = 'images/left-col-map.jpg'|media|resize(450, 140, {mode: 'crop'}) %}
+                                <img src="{{ resizedImage }}" class="img-fluid" alt="Kuda na klopu mapa"
+                                     height="{{ resizedImage | imageHeightE }}" width="{{ resizedImage | imageWidthE }}"
+                                />
+                            </a>
+                        </div>
+                        {% if category.city.cities %}
+                        <div class="municipality-wrapper">
+                            {% partial 'components/city/filterMunicipality' cities=category.city.cities %}
+                        </div>
+                        {% endif %}
+                        <div class="category-wrapper">
+                            {% partial 'components/category/filterList' categories=categoriesList.categories %}
+                        </div>
+                        <div class="clear-filter-wrapper">
+                            <a href="javascript:void(0)"
+                               class="clear-filters"
+                               data-url="{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}"
+                            >
+                                {{ 'Obriši filtere' }}
+                            </a>
+                        </div>
+                        <div class="filters-wrapper" id="FiltersCheckboxes">
+                            {% partial 'components/tag/groupFiltersList' tagGroups=tagGroupsList.tagGroups %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-9 middle-restaurants-col">
+                    <div class="search-map">
+                        <span class="close-map">
+                            <i class="fa fa-times"></i>
+                        </span>
+                        <div class="map-content">
+                            <div id="mapOpenStreet" style="width: 100%; height: 450px">
+                                <br>
+                                {% partial 'helper/loader-1' %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search">
+                        <input
+                                id="searchLocations"
+                                class="form-control"
+                                name="filterByName"
+                                onkeyup="reloadLocationList('{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}')"
+                                data-track-input="true"
+                                type="text"
+                                placeholder="{{ 'Pretražite restorane...'|_ }}"
+                        />
+                        <input type="hidden" name="sort"/>
+                        <input type="hidden" name="orientation" value="desc"/>
+                        <div class="filter-sort dropdown">
+                            <a class="btn" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="sort-name">{{ 'Sortiranje'|_ }}</span>
+                                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Sortiranje'|_ }}"
+                                   onclick="reloadLocationListSort({sort: null, orientation: 'desc'})"
+                                >
+                                    {{ 'Standardno'|_ }}
+                                </a>
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Ocena'|_ }}"
+                                   onclick="reloadLocationListSort({sort: 'rating', orientation: 'desc'})"
+                                >
+                                    <i class="fa fa-star" aria-hidden="true"></i> {{ 'Ocena'|_ }}
+                                </a>
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Novo'|_ }}"
+                                   onclick="reloadLocationListSort({sort: 'new', orientation: 'desc'})"
+                                >
+                                    <i class="fa fa-fire" aria-hidden="true"></i> {{ 'Novo'|_ }}
+                                </a>
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Cena za dvoje'|_ }}"
+                                   onclick="reloadLocationListSort({sort: 'price_for_two', orientation: 'desc'})"
+                                >
+                                    <i class="fa fa-usd" aria-hidden="true"></i> {{ 'Cena za dvoje'|_ }}
+                                </a>
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Udaljenost'|_ }}"
+                                   onclick="reloadLocationListSort({sort: 'distance', orientation: 'desc'})"
+                                >
+                                    <i class="fa fa-compass" aria-hidden="true"></i> {{ 'Udaljenost'|_ }}
+                                </a>
+                                <a class="dropdown-item" href="javascript: void(0)"
+                                   data-sort-name="{{ 'Naziv'|_ }}"
+                                   onclick="reloadLocationListSort({sort: 'name', orientation: 'asc'})"
+                                >
+                                    <i class="fa fa-sort-alpha-asc" aria-hidden="true"></i> {{ 'Naziv'|_ }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="locationsData" class="row">
+                        {% partial 'components/location/list' locations=locationsList.locations %}
+                    </div>
+                    <div id="infinityLoadLocations">
+                        {% partial 'infinityLoadLocations' locations=locationsList.locations %}
+                    </div>
+                </div>
+{#                <div class="col-12">#}
+{#                    <img src="{{ 'images/right-col-banner.jpg'|theme }}" class="img-fluid"/>#}
+{#                </div>#}
+            </div>
+        </div>
+    </form>
+</div>
+{% put customScripts %}
+    <script type="application/javascript">
+        var iconUrl = '{{ 'assets/img/mappin/cupcake.png'|theme }}'
+        var locationListUrl = '{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}'
+        $(document).ready(function () {
+            $mainForm.on('ajaxComplete', function (event, context, data) {
+                if ('URLSearchParams' in window && context && context.handler && context.handler === 'locationsList::onPageLocations') {
+                    const searchParams = new URLSearchParams(window.location.search);
+                    const pages = searchParams.get("pages");
+                    searchParams.set("pages", (pages ? parseInt(pages) + 1 : 2).toString());
+                    const newSearch = '?' + searchParams.toString();
+                    const currentURL = window.location.origin + window.location.pathname + newSearch + window.location.hash;
+                    history.pushState({}, '', currentURL);
+                } else {
+                    const currentURL = window.location.origin + window.location.pathname + window.location.hash;
+                    history.pushState({}, '', currentURL);
+                }
+            });
+        });
+    </script>
+    <script
+        src="{{ [
+            "assets/js/custom/map#{minJs}.js"
+        ]|theme }}.js?v={{ knkPluginVersion }}"
+    ></script>
+{% endput %}

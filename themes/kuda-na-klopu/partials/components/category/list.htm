@@ -1,0 +1,19 @@
+[viewBag]
+==
+<h1>...</h1>
+<h3>Categories</h3>
+<div>
+    {% for category in categories %}
+    
+        <a 
+            href="{{ 'grad-location/p20-locations-list' | page({
+                citySlug: city.slug,
+                categorySlug: category.slug
+            }) }}"
+        >
+            {{ category.title }}
+        </a>
+        
+        <br>
+    {% endfor %}
+</div>

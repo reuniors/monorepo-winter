@@ -349,7 +349,10 @@ class Controller
         }
 
         CmsException::mask($this->page, 300);
-        $this->pageObj->onInit();
+        $onInit = $this->pageObj->onInit();
+        if ($onInit) {
+            return $onInit;
+        }
         CmsException::unmask();
 
         /**

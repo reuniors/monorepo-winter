@@ -2,7 +2,7 @@
 
 use Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Haljina\Classes\Helpers\ReorderDataHelper;
+use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Haljina\Models\Product;
 use Winter\Storm\Support\Facades\Input;
 

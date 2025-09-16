@@ -1,0 +1,82 @@
+title = "Lokacija - Restoran"
+url = "/:citySlug/:categorySlug/:slug"
+layout = "Search"
+is_hidden = 0
+
+[viewBag]
+localeTitle[en] = "Location - Restaurant"
+
+[location locationData]
+citySlug = "{{ :citySlug }}"
+municipalitySlug = "{{ :municipalitySlug }}"
+categorySlug = "{{ :categorySlug }}"
+slug = "{{ :slug }}"
+withGallery = 1
+withMenu = 1
+withTags = 1
+withCategories = 1
+withRelatedLocations = 1
+withBadges = 1
+withUserId = 1
+withLocationBadgesHistory = 1
+withUserBadgesHistory = 1
+withRatings = 1
+withOtherInfo = 1
+
+[foodMenu foodMenuData]
+
+[commentsPost]
+relatedToAttachment = "location"
+slug = "{{ :slug }}"
+==
+<?php
+function onStart()
+{
+    $citySlug = $this->param('citySlug');
+    $categorySlug = $this->param('categorySlug');
+    $slug = $this->param('slug');
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    $return = $controller->locationsMunicipality($citySlug, $categorySlug, $slug, true);
+    if ($return) {
+        return $return;
+    }
+    $pluginName = 'Reuniors.Knk';
+
+    $this->addCss([
+        'assets/css/placeholder-loading.min.css',
+        'assets/css/lightgallery.css',
+        'assets/leaflet/leaflet.min.css',
+        'assets/css/star-rating-svg.css',
+        'assets/css/star-rating.min.css',
+        'assets/css/theme.min.css',
+        'assets/css/owl.carousel.min.css',
+        'assets/css/owl.theme.default.min.css',
+    ], $pluginName);
+
+    $this->addJs('assets/js/knockout-3.5.1.min.js', $pluginName);
+
+    $this->addJs([
+        'assets/js/lightgallery/lightgallery.min.js',
+        'assets/js/lightgallery/lg-fullscreen.min.js',
+        'assets/js/lightgallery/lg-thumbnail.min.js',
+        'assets/js/lightgallery/lg-zoom.min.js',
+        'assets/js/lightgallery/lg-pager.min.js',
+        'assets/js/mixitup.min.js',
+        'assets/leaflet/leaflet.min.js',
+        'assets/js/jquery.star-rating-svg.js',
+        'assets/js/custom/food-menu' . $this->minJs . '.js',
+        'assets/js/star-rating.min.js',
+        'assets/js/theme.min.js',
+        'assets/js/owl.carousel.min.js',
+    ], $pluginName);
+}
+?>
+==
+<div class="grey-bg">
+    {% partial 'breadcrumbs/oneLocation' location=locationData.location %}
+    <div class="one-location-wrapper">
+        <div class="container">
+            {% partial 'components/location/data' location=locationData.location %}
+        </div>
+    </div>
+</div>

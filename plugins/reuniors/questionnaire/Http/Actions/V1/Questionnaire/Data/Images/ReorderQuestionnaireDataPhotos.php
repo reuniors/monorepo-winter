@@ -2,7 +2,7 @@
 
 use Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Questionnaire\Classes\Helpers\ReorderDataHelper;
+use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
 class ReorderQuestionnaireDataPhotos

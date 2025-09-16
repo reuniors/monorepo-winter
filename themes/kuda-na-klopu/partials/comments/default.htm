@@ -1,0 +1,15 @@
+{% set posts = commentsPost.posts %}
+
+<div class="col-xs-6" id="comments-content">
+    {% if(user or commentsPost.settings.allow_guest) %}
+        {% partial "comments/form" %}
+
+    {% endif %}
+    <div class="comments">
+        <ul>
+            {% partial "comments/list" posts=posts %}
+        </ul>
+    </div>
+</div>
+
+

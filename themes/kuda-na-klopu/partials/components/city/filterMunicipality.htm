@@ -1,0 +1,18 @@
+<div class="one-filter-group">
+    <h4>{{ 'Opština'|_ }}</h4>
+    <div class="filter-content">
+        <div class="form-group">
+            <select class="form-control select-2-dropdown s2-default"
+                    name="municipality"
+                    data-request="locationsList::onRun"
+                    data-request-update="'components/location/list': '#locationsData', 'infinityLoadLocations': '#infinityLoadLocations'"
+                    data-request-url="{{ 'location/p20-locations-list'|page }}"
+            >
+                <option value="{{ this.param.citySlug }}">{{ 'Sve opštine'|_ }}</option>
+                {% for city in cities %}
+                    <option value="{{ city.slug }}">{{ city.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>

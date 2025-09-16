@@ -1,0 +1,187 @@
+[banner sponsorBanners]
+bannerZone = "Sponzorisano 1"
+citySlug = "{{ :citySlug }}"
+categorySlug = "{{ :categorySlug }}"
+locationSlug = "{{ :slug }}"
+withConnectedLocation = 1
+sortBy = "sort_order"
+sortByOrientation = "desc"
+perPage = 2
+pageNumber = "{{ :page }}"
+
+[banner deliveryBanners]
+bannerZone = "Profil - Dostava"
+citySlug = "{{ :citySlug }}"
+categorySlug = "{{ :categorySlug }}"
+locationSlug = "{{ :slug }}"
+withConnectedLocation = 1
+sortBy = "sort_order"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+==
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-8 left-panel">
+        <div class="row central-content">
+            <div class="col-12">
+                <div class="description">
+                    {{ location.text|raw }}
+                </div>
+            </div>
+
+            {% if location.other_informations|length > 0 %}
+            <div class="col-12">
+                <h4>{{ 'Ostale informacije'|_ }}</h4>
+                <div class="row">
+                    {% partial 'components/location/fragments/otherInfo' otherInformations=location.other_informations %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="col-12 right-panel-item d-block d-lg-none" id="mobileLocationWrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="d-block d-lg-none">{{ 'Lokacije'|_ }}</h4>
+                    </div>
+                </div>
+            </div>
+
+            {% if location.badge_tag_group.tags %}
+            <div class="col-12">
+                <h4>{{ 'Posetioci su istakli'|_ }}</h4>
+                <div class="row">
+                    <div class="col-12">
+                        {% for badge in location.badge_tag_group.tags %}
+                            {% if badge.location_badge_history %}
+                                <span class="badge badge-pill badge-primary location-badge">
+                                    <span>
+                                        {{ badge.title }}
+                                    </span>
+                                    </br>
+                                    <span>{{ badge.location_badge_history.selected_count }} <i class="fa fa-thumbs-up"></i></span>
+                                </span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+{#            {% if location.favorite_foods|length > 0 %}#}
+{#            <div class="col-12">#}
+{#                <h4>{{ 'Omiljena jela'|_ }}</h4>#}
+{#                <div class="row">#}
+{#                    <div class="col-12">#}
+{#                        {% for favorite_food in location.favorite_foods %}#}
+{#                            <span>#}
+{#                                {{ favorite_food.title }}{% if not loop.last %}, {% endif %}#}
+{#                            </span>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#            {% endif %}#}
+
+            {% if location.average_price or location.average_price_for_two %}
+            <div class="col-12">
+                <h4>{{ 'Prosečne cene'|_ }}</h4>
+                <div class="row average-prices">
+                    <div class="col-12 col-md-6">
+                        <h6>
+                            <span>
+                                &nbsp;<i class="fa fa-male" aria-hidden="true"></i>
+                                {{ 'Za jednu osobu:'|_ }}
+                            </span>
+                            <span class="span-full">
+                                <span class="font-bold">{{ location.average_price }} RSD</span>
+                            </span>
+                        </h6>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <h6>
+                            <i class="fa fa-male" aria-hidden="true"></i>
+                            <i class="fa fa-female" aria-hidden="true"></i>
+                            {{ 'Za dve osobe:'|_ }}
+                            <span class="span-full">
+                                <span class="font-bold">{{ location.average_price_for_two }} RSD</span>
+                            </span>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if sponsorBanners.banners|length > 0 %}
+            <div class="col-12 apart-element">
+                <h4>{{ 'Sponzorisano'|_ }}</h4>
+                {% partial 'banner/sponsorsList' sponsorBanners=sponsorBanners.banners %}
+            </div>
+            {% endif %}
+
+            {% if deliveryBanners.banners|length > 0 %}
+            <div class="col-12 apart-element">
+                <h4>{{ 'Dostava'|_ }}</h4>
+                <div class="row">
+                    <div class="col">
+                        <div class="banner-delivery-slider-wrapper">
+                            <div class="banner-delivery-slider owl-carousel owl-theme">
+                                {% partial 'banner/deliveryList' deliveryBanners=deliveryBanners.banners %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if commentsPost.reviews|length > 0 %}
+            <div class="col-12 apart-element">
+                <h4>{{ 'Poslednji utisci'|_ }}</h4>
+                <div class="comments">
+                    <ul>
+                        {% partial "comments/list-normal" posts=commentsPost.reviews %}
+                    </ul>
+                    <div class="form-group btn-group-default">
+                        <button class="other-reviews btn btn-default active">
+                            {{ 'Vidi ostale'|_ }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="col col-lg-4 right-panel">
+        <div class="row">
+            <div class="col-12 right-panel-item">
+                <div class="row" data-toggle="buttons" id="restaurantLocationData">
+                    <div class="col-12 restaurant-location-data">
+                        {% partial 'components/location/fragments/dataLocations' %}
+{#                        <div class="restaurants-locations-slider-wrapper">#}
+{#                            <div class="restaurants-locations-slider owl-carousel owl-theme">#}
+{#                            </div>#}
+{#                        </div>#}
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 right-panel-item">
+                <div class="row">
+                    {% partial 'components/location/fragments/similarList' locations=locationData.similarLocations %}
+                </div>
+            </div>
+            <div class="col-12 right-panel-item">
+                {% if location.cuisines %}
+                    <h4>{{ 'Kuhinje'|_ }}</h4>
+                    <div class="row">
+                        <div class="col">
+                            <div class="restaurants-type-slider-wrapper">
+                                <div class="restaurants-type-slider owl-carousel owl-theme">
+                                    {% partial 'components/tag/restaurantTypes' tags=location.cuisines link=('location/p20-locations-list'|page) %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

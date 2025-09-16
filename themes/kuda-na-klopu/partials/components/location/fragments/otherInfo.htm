@@ -1,0 +1,8 @@
+{% for otherInfo in otherInformations %}
+    {% if otherInfo.tag %}
+    <div class="col-6">
+{# <i class="{{ otherInfo.tag.metadata.icon }}" title="{{ otherInfo.value }}"></i> #}
+        <div class="info-with-check">{{ otherInfo.tag.title }}</div>
+    </div>
+    {% endif %}
+{% endfor %}

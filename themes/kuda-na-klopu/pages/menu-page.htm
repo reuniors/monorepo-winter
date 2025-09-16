@@ -1,0 +1,13 @@
+title = "Menu page"
+url = "/menu-partial"
+layout = "FeMenuLayout"
+is_hidden = 0
+==
+<!--Mask-->
+{% put headersScripts %}
+    {% partial 'feMenu/feMenuHead' %}
+{% endput %}
+
+{% put bodyScripts %}
+    {% partial 'feMenu/feMenuBody' %}
+{% endput %}

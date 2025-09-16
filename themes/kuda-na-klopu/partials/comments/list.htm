@@ -1,0 +1,55 @@
+{% if posts|length == 0 %}
+    <p>{{ 'Još uvek nema recenzija za ovaj lokal.' }}</p>
+{% endif %}
+{% for post in posts|reverse %}
+<li>
+    <div class="row comment" id="comment-{{post.id}}">
+        <div class="col-3 col-sm-2 comment-avatar">
+            {{post.avatar|raw}}
+            <div class="comment-name">{{post.name}}</div>
+        </div>
+        <div class="col comment-content">
+            <div class="comment-header">
+            {% if post.with_rating %}
+                <span class="user-rating badge badge-success
+                    {% if post.user.location_rating_history.rating_rounded_five %}
+                    gradient_{{ post.user.location_rating_history.rating_rounded_five }}
+                    {% else %}
+                    green
+                    {% endif %}"
+                    >
+                    <i class="fas fa-star"></i>
+                    {{ post.user.location_rating_history.avg_grade
+                    ? post.user.location_rating_history.avg_grade|round(1)
+                    : '--'
+                    }}
+                </span>
+            {% endif %}
+                <a class="comment-date" href="#comment-{{post.id}}">
+                    {{post.created_at.diffForHumans}}
+                </a>
+            </div>
+            <div>
+            {% if post.with_rating %}
+                <div class="badge-list">
+                {% for user_badge_history in post.user.user_badge_history %}
+                    <span class="info-with-check">{{ user_badge_history.location_badge_history.tag.title }}</span>
+                {% endfor %}
+                </div>
+            {% endif %}
+            </div>
+            <div class="font-bold">{{post.content|raw}}</div>
+            <div class="comment-footer">
+                <a class="comment-reply" onclick="Comment.replay(event,'{{post.id}}')">{{ 'Odgovori'|_ }}</a>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+    {% if post.children %}
+    <ul>
+        {% partial "commentsPost::list" posts=post.children %}
+    </ul>
+    {% endif %}
+</li>
+{% endfor %}

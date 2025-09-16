@@ -1,0 +1,110 @@
+<div class="container-fluid food-addons">
+    <!-- ko if: image -->
+    <img class="img-fluid" data-bind="attr:{src: image, alt: title}" />
+    <!-- /ko -->
+    <div class="row food-popup-header">
+        <div class="col-12 col-sm-8">
+            <h4>
+                <span data-bind="text: title"></span>
+            </h4>
+            <p data-bind="text: description"></p>
+        </div>
+        <div class="col-12 col-sm-4">
+            <div class="row">
+                <div class="col-12">
+                    <span data-bind="if: price() > 0" class="float-right food-popup-price">
+                        <b data-bind="text: price"></b> RSD
+                    </span>
+                </div>
+{#                <div class="col-12">#}
+{#                    <div class="select-quantity text-right">#}
+{#                        <span class="input-group-btn">#}
+{#                            <button class="btn btn-default btn-white btn-minus" type="button" data-bind="click: $root.subQuantity">#}
+{#                                <i class="fas fa-minus"></i>#}
+{#                            </button>#}
+{#                        </span>#}
+{#                        <span class="quantity-value text-center" data-bind="{text: quantity}"></span>#}
+{#                        <span class="input-group-btn">#}
+{#                            <button class="btn btn-default btn-red btn-plus" type="button" data-bind="click: $root.addQuantity">#}
+{#                                <i class="fas fa-plus"></i>#}
+{#                            </button>#}
+{#                        </span>#}
+{#                    </div>#}
+{#                </div>#}
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div>
+        <!-- ko if: $root.showRequiredMessage() -->
+        <div class="alert alert-danger" role="alert">
+            {{ 'Morate odabrati sva obavezna polja'|_ }}
+        </div>
+        <!-- /ko -->
+        <div class="row" data-bind="foreach: { data: foodAddonGroups, as: 'foodAddonGroup' }">
+            <div class="col-12">
+                <div class="font-bold group-title">
+                    <span data-bind="text: title"></span>
+                    <span class="addon-required" data-bind="if: foodAddonGroup.isExclusive">*</span>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <div class="row">
+                <!-- ko foreach: { data: foodAddonGroup.foodAddons, as: 'foodAddon' } -->
+                    <div class="col-12 col-md-6" data-bind="click: $root.toggleAssociation">
+                        <div class="card" style="margin-bottom: 10px">
+                            <div class="card-body">
+                                <p class="card-text" style="margin-bottom: 0">
+                                    <!-- ko if: foodAddonGroup.inputType == 'radio' -->
+                                    <input
+                                        type="radio"
+                                        data-bind="
+                                            checked: foodAddonGroup.SelectedAddon()
+                                                && foodAddonGroup.SelectedAddon().title,
+                                            checkedValue: foodAddon.title
+                                        "
+                                        required
+                                    />
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: foodAddonGroup.inputType == 'radio' -->
+                                    <input
+                                        type="checkbox"
+                                        data-bind="checked: Selected()"
+                                    />
+                                    <!-- /ko -->
+                                    <span data-bind="text: title" style="margin: 0 10px"></span>
+                                    <span class="float-right font-bold">
+                                        <span data-bind="text: price"></span> RSD
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                </div>
+                <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 btn-group-default text-center fixed-bottom">
+            <button type="button" class="btn btn-default active waves-effect waves-light bootbox-close-button">
+                {{ 'Zatvori'|_ }} <i class="fas fa-close"></i>
+            </button>
+        </div>
+        <br />
+    </div>
+{#    <div class="row">#}
+{#        <div class="col-12">#}
+{#            <div class="font-bold group-title">#}
+{#                {{ 'Napomena'|_ }}#}
+{#            </div>#}
+{#            <textarea name="note"></textarea>#}
+{#        </div>#}
+{#        <div class="col-12 btn-group-default text-center" data-bind="{ifnot: $root.updatingFoodData()}">#}
+{#            <button type="submit" class="btn btn-default active waves-effect waves-light" data-bind="click: $root.addToShoppingCart">#}
+{#                {{ 'Dodaj'|_ }} <i class="fas fa-calculator"></i>#}
+{#            </button>#}
+{#        </div>#}
+{#    </div>#}
+</div>

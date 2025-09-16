@@ -1,0 +1,42 @@
+[viewBag]
+==
+{% set checkedTags = [] %}
+{% for tagGroup in tagGroups %}
+    <div class="one-filter-group">
+        <h4>{{ tagGroup.title }}</h4>
+        <div class="filter-content">
+        {% for tag in tagGroup.tags %}
+            <div class="one-filter-row">
+                <input
+                    onchange="reloadLocationList('{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}')"
+{#                    data-request="locationsList::onRun"#}
+{#                    data-request-update="'components/location/list': '#locationsData', 'infinityLoadLocations': '#infinityLoadLocations'"#}
+{#                    data-request-url="{{ 'location/p20-locations-list'|page }}"#}
+                    class="magic-checkbox" type="checkbox"
+                    name="tags[]" id="filter{{ tag.name }}"
+                    value="{{ tag.slug }}" data-track-input
+                {% if tag.slug in locationSelectedTags %}
+                    {% set checkedTags = checkedTags|merge([tag.slug]) %}
+                    checked
+                {% endif %}
+                >
+                <label for="filter{{ tag.name }}">{{ tag.title }}</label>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+{% for selectedTag in locationSelectedTags %}
+    {% if selectedTag not in checkedTags %}
+        <div class="one-filter-row">
+            <input
+                onchange="reloadLocationList('{{ 'location/p20-locations-list'|page({ categorySlug: 'restorani' }) }}')"
+                class="magic-checkbox" type="checkbox"
+                name="tags[]" id="filter{{ selectedTag }}"
+                value="{{ selectedTag }}" data-track-input
+                checked
+            >
+            <label for="filter{{ selectedTag }}">{{ selectedTag }}</label>
+        </div>
+    {% endif %}
+{% endfor %}

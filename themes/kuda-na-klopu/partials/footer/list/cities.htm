@@ -1,0 +1,9 @@
+{% for city in cities %}
+    {% if city.slug != currentCity and not city.parent_city_id %}
+        <li>
+            <a href="{{ 'home'|page({citySlug: city.slug}) }}">
+                {{ city.title }}
+            </a>
+        </li>
+    {% endif %}
+{% endfor %}

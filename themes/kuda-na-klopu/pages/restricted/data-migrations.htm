@@ -1,0 +1,313 @@
+title = "Data Migrations"
+url = "/data-migrations"
+layout = "Search"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "user"
+allowedUserGroups[] = "admin"
+redirect = 404
+==
+<?php
+use Reuniors\Knk\Classes\FoodMenuSyncWolt;
+
+function onFoodMenuMigration()
+{
+    $foodMenuSync = new FoodMenuSyncWolt();
+    $postData = post();
+    if (!empty($postData['source'])) {
+        switch ($postData['source']) {
+            case 'do':
+                $foodMenuSync->syncDataFromDonesi($postData);
+                break;
+            case 'wolt':
+                return response()->json($foodMenuSync->syncDataFromWolt($postData));
+            break;
+            case 'old':
+                $foodMenuSync->syncDataFromOldMenu($postData);
+                break;
+            default;
+        }
+    }
+}
+
+function onStart()
+{
+    $pluginName = 'Reuniors.Knk';
+    $this->addCss('assets/css/fullImageBg.css', $pluginName);
+    $this->addCss('assets/css/select2.min.css', $pluginName);
+    $this->addCss('assets/css/magic-check.min.css', $pluginName);
+    $this->addCss('assets/css/owl.carousel.min.css', $pluginName);
+    $this->addCss('assets/css/owl.theme.default.min.css', $pluginName);
+    $this->addJs('assets/js/select2.full.min.js', $pluginName);
+    $this->addJs('assets/js/owl.carousel.min.js', $pluginName);
+    $this->addJs('assets/js/custom/migrations.js', $pluginName);
+
+    $this->addJs('assets/js/turn.js', $pluginName);
+}
+?>
+==
+<form
+    id="mainForm"
+    data-request="onFoodMenuMigration"
+>
+    <div class="container">
+        <br/><br/>
+        <div class="row">
+            <div class="col-12">
+                Izvor:
+                <select
+                    class="form-control"
+                    name="source"
+                >
+                    <option value="do">Donesi</option>
+                    <option value="wolt">Wolt</option>
+                    <option value="old">Kuda Na Klopu - Stari jelovnik</option>
+                </select>
+            </div>
+            <div class="select-migration-city col-md-3">
+                Grad:
+                <select
+                    class="form-control"
+                    id="selectCity"
+                    name="city_id"
+                    data-placeholder="{{ 'Grad'|_ }}"
+                >
+                    {% partial 'components/city/listDropdown' %}
+                </select>
+            </div>
+            <div class="col-md-3">
+                Restoran:
+                <select
+                    class="form-control"
+                    id="selectLocation"
+                    name="location_id"
+                    data-placeholder="{{ 'Restoran'|_ }}"
+                ></select>
+            </div>
+            <div class="col-md-4">
+                Url: <input name="url" style="width: 100%;">
+            </div>
+            <div class="col-md-2">
+                <button>Migriraj</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="container" id="flipbookWrapper">
+    <h1>Test</h1>
+    <div id="flipbook">
+        <div class="hard"> Turn.js </div>
+        <div class="hard"></div>
+        <div style="overflow-y: scroll"> I'm not entirely sure if this meets your needs, but perhaps it will spur some other ideas if not.
+
+            Here I'm using transition: scale() to manage the size of the div that needs to be proportionally scaled. transform-origin is set to top left to keep the div hugging the top left corner.
+
+            When the div requires scaling, its wrapping div is sized as well. This should allow other content on the page to flow correctly as the browser is resized. If the wrapping div doesn't exist, you can add one dynamically using $.wrap() though it may get 'interesting' figuring out which styles to transfer over to keep the overall layout working smoothly.
+
+            Demo Fiddle Demo with content
+
+            CSS:
+
+            #wrap {
+            position: relative;
+            width: 640px;
+            height: 480px;
+            background-color: red;
+            }
+            #outer {
+            position: relative;
+            width: 640px;
+            height: 480px;
+            background: url('http://placekitten.com/640/480') no-repeat center center;
+            -webkit-transform-origin: top left;
+            }
+            Code:
+
+            var maxWidth  = $('#outer').width();
+            var maxHeight = $('#outer').height();
+
+            $(window).resize(function(evt) {
+            var $window = $(window);
+            var width = $window.width();
+            var height = $window.height();
+            var scale;
+
+            // early exit
+            if(width >= maxWidth && height >= maxHeight) {
+            $('#outer').css({'-webkit-transform': ''});
+            $('#wrap').css({ width: '', height: '' });
+            return;
+            }
+
+            scale = Math.min(width/maxWidth, height/maxHeight);
+
+            $('#outer').css({'-webkit-transform': 'scale(' + scale + ')'});
+            $('#wrap').css({ width: maxWidth * scale, height: maxHeight * scale });
+            });
+            Share
+            Improve this answer
+            Follow
+            edited Sep 11 '13 at 22:45
+            answered Sep 11 '13 at 21:35
+
+            dc5
+            11.9k22 gold badges3232 silver badges4747 bronze badges
+            1
+            It works, thanks! One problem though is that it does not take surrounding paddings and margins into account... – Alexander Gladysh Sep 12 '13 at 6:46
+            1
+            Glad it works. You should be able to adjust the math to accommodate your layout - I took the short route to a demo using width()/height() – dc5 Sep 12 '13 at 6:49
+            This is very useful!! However, is there a work around for Firefox? – PrimalScientist Feb 1 '14 at 11:32
+            Thanks dc5 this is useful! @PrimalScientist if you notice in the code there're "-webkit-transform", u can replace it to "transform" or add in any other older modern browser support like "-moz-transform" – jihchuan Aug 21 '15 at 15:29
+            This works, but be careful about having percentages in your css. The percentages might then be calculated based on the scaled width instead of the maxWidth (original width). – kenecaswell Mar 27 '17 at 22:20
+            Show 1 more comment
+
+            4
+
+            I took the answer from dc5, and put it in a small function that allows you to set the scale based on window.
+
+            function scaleBasedOnWindow(elm, scale=1, fit=false){
+            if(!fit){
+            elm.style.transform='scale('+scale/Math.min(elm.clientWidth/window.innerWidth,elm.clientHeight/window.innerHeight)+')';
+            }else{
+            elm.style.transform='scale('+scale/Math.max(elm.clientWidth/window.innerWidth,elm.clientHeight/window.innerHeight)+')';
+            }
+            }
+            if you want the element to fit, and not get cut off, just change Math.min to Math.max, or just set the fit parameter of this function to true.
+
+            Minified Version:
+
+            function scaleBasedOnWindow(elm,scale=1,fit){if(!fit){elm.style.transform='scale('+scale/Math.min(elm.clientWidth/window.innerWidth,elm.clientHeight/window.innerHeight)+')';}else{elm.style.transform='scale('+scale/Math.max(elm.clientWidth/window.innerWidth,elm.clientHeight/window.innerHeight)+')';}}
+            Share
+            Improve this answer
+            Follow
+            edited Oct 20 '19 at 0:11
+            answered Oct 20 '19 at 0:05
+
+            SwiftNinjaPro
+            54533 silver badges1313 bronze badges
+            Add a comment
+
+            1
+
+            In case anyone building an full-screen application of let's say 1920x1080 and wants to perfectly fit in a smaller screen - e.g 1366x768. This is what I did in Vue.js - but can be done with pure js and css - based on answer above - the main importance is that I set the original width and height specifically otherwise it wasn't working for me:
+
+            App.vue (conditional class if lowres exists in localStorage)
+
+            <template>
+                <div id="external-app-wrapper" :class="{lowres: isLowRes}">
+                    <div id="internal-app-wrapper">
+                        <router-view />
+                    </div>
+                </div>
+            </template>
+            computed: {
+
+            isLowRes() {
+            return localStorage.getItem('lowres') !== null
+            } </div>
+        <div> Page 2 </div>
+        <div> Page 3 </div>
+        <div> Page 4 </div>
+        <div class="hard"></div>
+        <div class="hard"></div>
+    </div>
+</div>
+
+{% put customScripts %}
+<script type="text/javascript">
+    var $flipbook = $("#flipbook")
+    var $flipbookWrapper = $('#flipbookWrapper')
+    $flipbook.turn({
+        width: 400,
+        height: 500,
+        autoCenter: true
+    });
+    function scaleBasedOnWindow(elm, scale=1, fit=false){
+        console.log('wrapper', $flipbookWrapper.width())
+        console.log('flipbook', $flipbook.width())
+        if ($flipbook.width() > $flipbookWrapper.width()) {
+            $flipbook.css({
+                transform: 'scale(0.5)'
+            })
+        } else {
+            $flipbook.css({
+                transform: 'scale(1)'
+            })
+        }
+    }
+    $(window).resize(function () {
+        scaleBasedOnWindow(flipbook)
+    })
+</script>
+
+{% endput %}
+<style>
+    #flipbook{
+        width:400px;
+        height:500px;
+    }
+
+    #flipbook .page{
+        width:400px;
+        height:300px;
+        background-color:white;
+        line-height:300px;
+        font-size:20px;
+        text-align:center;
+    }
+
+    #flipbook .page-wrapper{
+        -webkit-perspective:2000px;
+        -moz-perspective:2000px;
+        -ms-perspective:2000px;
+        -o-perspective:2000px;
+        perspective:2000px;
+    }
+
+    #flipbook .hard{
+        background:#ccc !important;
+        color:#333;
+        -webkit-box-shadow:inset 0 0 5px #666;
+        -moz-box-shadow:inset 0 0 5px #666;
+        -o-box-shadow:inset 0 0 5px #666;
+        -ms-box-shadow:inset 0 0 5px #666;
+        box-shadow:inset 0 0 5px #666;
+        font-weight:bold;
+    }
+
+    #flipbook .odd{
+        background:-webkit-gradient(linear, right top, left top, color-stop(0.95, #FFF), color-stop(1, #DADADA));
+        background-image:-webkit-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        background-image:-moz-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        background-image:-ms-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        background-image:-o-linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        background-image:linear-gradient(right, #FFF 95%, #C4C4C4 100%);
+        -webkit-box-shadow:inset 0 0 5px #666;
+        -moz-box-shadow:inset 0 0 5px #666;
+        -o-box-shadow:inset 0 0 5px #666;
+        -ms-box-shadow:inset 0 0 5px #666;
+        box-shadow:inset 0 0 5px #666;
+
+    }
+
+    #flipbook .even{
+        background:-webkit-gradient(linear, left top, right top, color-stop(0.95, #fff), color-stop(1, #dadada));
+        background-image:-webkit-linear-gradient(left, #fff 95%, #dadada 100%);
+        background-image:-moz-linear-gradient(left, #fff 95%, #dadada 100%);
+        background-image:-ms-linear-gradient(left, #fff 95%, #dadada 100%);
+        background-image:-o-linear-gradient(left, #fff 95%, #dadada 100%);
+        background-image:linear-gradient(left, #fff 95%, #dadada 100%);
+        -webkit-box-shadow:inset 0 0 5px #666;
+        -moz-box-shadow:inset 0 0 5px #666;
+        -o-box-shadow:inset 0 0 5px #666;
+        -ms-box-shadow:inset 0 0 5px #666;
+        box-shadow:inset 0 0 5px #666;
+    }
+</style>

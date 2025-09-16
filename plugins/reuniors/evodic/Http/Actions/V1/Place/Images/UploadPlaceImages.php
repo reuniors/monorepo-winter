@@ -2,7 +2,7 @@
 
 use InvalidArgumentException;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Classes\Helpers\ReorderDataHelper;
+use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\Place;
 use Winter\Storm\Support\Facades\Input;

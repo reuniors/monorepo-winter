@@ -1,0 +1,145 @@
+description = "4 Column Footer"
+
+[viewBag]
+==
+<!--Footer-->
+<footer>
+    <!--Footer links-->
+    <div class="container">
+        <div class="top-footer-line">
+            <div class="left-logo">
+                <a href="/">
+                    {% set resizedImage = 'images/knk-logo.png'|media %}
+                    <img src="{{ resizedImage }}" class="img-fluid"
+                         height="70" width="70" alt="footer logo"
+                    />
+                </a>
+            </div>
+            <div class="right-choose-language">
+                <div class="btn-group">
+                    <div class="language-form-wrapper">
+                    {{ form_open() }}
+                        <select name="locale" data-request="onSwitchLocale" class="form-control">
+                            {% for code, name in locales %}
+                                <option value="{{ code }}" {{ code == activeLocale ? 'selected' }}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    {{ form_close() }}
+                    </div>
+                    <button class="btn btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-globe"></i> {{ locales[activeLocale] }}
+                    </button>
+                    <div class="dropdown-menu">
+                        {% for code, name in locales %}
+                            {% if code != activeLocale %}<a class="dropdown-item" href="{{ code }}">{{ name }}</a>{% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle-footer-line">
+            <div class="row">
+                {% if this.param.citySlug %}
+                <div class="col-6 col-sm-6 col-md">
+                    <h3>{{ 'Kategorije'|_ }}</h3>
+                    <ul>
+                        {% partial 'footer/list/categories' categories=categoriesList.categories %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="col-6 col-sm-6 col-md{% if not this.param.citySlug %} cities-column{% endif %}">
+                    <h3>{{ 'Ostali gradovi'|_ }}</h3>
+                    <ul>
+                        {% partial 'footer/list/cities' cities=cityList.cities currentCity=this.param.citySlug %}
+                        <li class="clearfix"></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-6 col-md">
+                    <h3>{{ 'Ostalo'|_ }}</h3>
+                    <ul>
+                        <li>
+                            <a href="{{ 'other/recepti'|page }}">
+                                {{ 'Recepti'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'other/kulinarske-price'|page }}">
+                                {{ 'Kulinarske priče'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'other/mapa-svih-objekata'|page }}">
+                                {{ 'Mapa svih objekata'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'other/pitajte-somelijea'|page }}">
+                                {{ 'Pitajte somelijea'|_ }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-6 col-sm-6 col-md">
+                    <h3>{{ 'Info'|_ }}</h3>
+                    <ul>
+                        <li>
+                            <a href="{{ 'info/marketing'|page }}">
+                                {{ 'Marketing'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'info/impresum'|page }}">
+                                {{ 'Impresum'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'info/uslovi-koriscenja'|page }}">
+                                {{ 'Uslovi Korišćenja'|_ }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ 'info/kontakt'|page }}">
+                                {{ 'Kontakt'|_ }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="bottom-footer-line">
+            <div class="left-slogan">
+                Vodič za lakši zalogaj
+            </div>
+            <div class="right-social">
+                <a href="#"><i class="fa fa-facebook-f"></i></a><a href="#"><i class="fa fa-instagram"></i></a><a href="#"><i class="fa fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger btn-floating btn-sm" id="btn-back-to-top">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
+    <!--Copyright-->
+    <div class="footer-copyright">
+        <div class="container-fluid">
+            © {{ 'now'|date('Y') }} Copyright ©Kuda na klopu. Sva prava zadržana. Onering - Reuniors
+        </div>
+    </div>
+    <!--/.Copyright-->
+    <script id="hidden-template" type="text/x-custom-template">
+{#        {% htmlcompress %}#}
+        {% partial 'account/default' %}
+{#        {% endhtmlcompress %}#}
+    </script>
+</footer>
+<!--/.Footer-->
+{% put customScripts %}
+    <script type="application/javascript">
+        var standardLabels = {
+            user: '{{ 'Korisnik'|_ }}'
+        }
+    </script>
+    <script src="{{ [
+        "assets/js/custom/standardFooter#{minJs}.js",
+    ]|theme }}.js?v={{ knkPluginVersion }}"></script>
+{% endput %}

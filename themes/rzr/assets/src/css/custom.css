@@ -1,0 +1,22 @@
+/**
+ * Custom CSS for theme goes here
+ */
+:root {
+    --ion-font-family: "Merriweather", sans-serif;
+}
+
+swiper-slide {
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #121212;
+}
+
+.swiper-slide-active {
+    animation: zoom 10s ease-in-out forwards;
+}
+
+@keyframes zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.3); }
+}

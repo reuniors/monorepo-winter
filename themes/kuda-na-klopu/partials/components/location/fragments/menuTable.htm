@@ -1,0 +1,90 @@
+{% if locationFoodMenu %}
+<div class="row" data-bind="visible: !$root.foodMenuSimpleMode()" id="MenuDataWrapper">
+    <div class="col-12 col-md-3 food-categories">
+        <div class="food-menu-list-title d-none d-md-block">{{ 'Kategorije'|_ }}</div>
+        <div id="FoodMenuList" class="nav nav-tabs flex-row flex-md-column d-none d-md-block">
+            <div class="food-menu-list-items">
+            {% for foodCategory in locationFoodMenu.food_categories %}
+                {% if foodCategory.title|length > 15 %}
+                    {% set foodCategoryTitle = foodCategory.title|slice(0, 15)|trim ~ ' ...' %}
+                {% else %}
+                    {% set foodCategoryTitle = foodCategory.title %}
+                {% endif %}
+                <div class="food-list-item">
+                    <a class="nav-item nav-link" href="#FoodListItem{{ loop.index }}">{{ foodCategoryTitle }}</a>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-9">
+        <div class="food-list-wrapper">
+            <br/>
+            {% if locationFoodMenu.relations_updated_at %}
+                <div class="alert-info" style="margin: 2px 0">
+                    {{ 'Datum poslednjeg ažuriranja:' }}
+                    <span class="float-right"><b>{{ locationFoodMenu.relations_updated_at|date('d.m.Y.') }}</b></span>
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    {{ 'NAPOMENA: Stari jelovnik, bez cena.' }}
+                </div>
+            {% endif %}
+            {% for foodCategory in locationFoodMenu.food_categories %}
+                <div class="one-meail-category">
+                    <h4 id="FoodListItem{{ loop.index }}">{{ foodCategory.title }}</h4>
+                    {% for food in foodCategory.foods %}
+                        <div class="row one-meal food-advance" data-name="{{ food.slug }}">
+                            <div class="col-12 col-sm meal-info">
+                                <div class="meal-title">
+                                    {{ food.title }}
+                                    {#                                    <span id="foodLike-{{ food.id }}">#}
+                                    {#                                        {%#}
+                                    {#                                            partial 'components/food/like'#}
+                                    {#                                            foodId=food.id#}
+                                    {#                                            isFoodLiked=food.user_like_history#}
+                                    {#                                            numberOfLikes=food.number_of_likes#}
+                                    {#                                        %}#}
+                                    {#                                    </span>#}
+                                </div>
+                            </div>
+                            <div class="col col-sm-12 order-sm-3 meal-info">
+                                <div class="meal-description">{{ food.description }}</div>
+                                <div class="row">
+                                    {% if locationFoodMenu.relations_updated_at %}
+                                    <div class="col">
+                                        <div class="meal-price">
+                                            {% if food.price %}
+                                                {{ food.price }} din
+                                            {% else %}
+                                                {{ 'Ima veličine'|_ }}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-auto order-sm-2 meal-image">
+                                {% if food.food_image.path %}
+                                    <img src="{{ food.food_image|resize(80, 80, {mode: 'crop'}) }}"
+                                         alt="{{ food.title }}" width="80" height="80"
+                                    >
+                                {% else %}
+                                    <i class="fas fa-utensils no-image-icon"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="alert alert-danger" role="alert">
+    {{ 'Nema jelovnika za ovaj restoran.' }}
+</div>
+{% endif %}
+<div id="FoodMenuSimple" data-bind="visible: $root.foodMenuSimpleMode()">
+    <a class="text-muted oc-loading">Učitavanje...</a>
+</div>

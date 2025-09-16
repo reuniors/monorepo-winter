@@ -1,0 +1,175 @@
+title = "Mapa Grada"
+url = "/:citySlug/mapa"
+is_hidden = 0
+layout = "Search"
+
+[viewBag]
+localeTitle[en] = "City map"
+localeUrl[en] = "/:citySlug/map"
+
+[locations locationsList]
+citySlug = "{{ :citySlug }}"
+withTags = 1
+withBanners = 1
+withRelatedLocations = 1
+sortBy = "priority"
+sortByOrientation = "desc"
+==
+<?php
+function onStart()
+{
+    $pluginName = 'Reuniors.Knk';
+    $this->addCss([
+        'assets/leaflet/leaflet.min.css',
+        'assets/css/placeholder-loading.min.css',
+    ], $pluginName);
+    $this->addJs([
+        'assets/leaflet/leaflet.min.js',
+        'assets/js/locations-list.js',
+        'assets/js/chart.js',
+    ], $pluginName);
+}
+?>
+==
+<div class="container">
+    <div class="map-content">
+        <div id="mapOpenStreet" style="width: 100%; height: 450px; margin: 50px 0">
+            <br>
+            {% partial 'helper/loader-1' %}
+        </div>
+    </div>
+</div>
+
+{% put customScripts %}
+    <script type="application/javascript">
+        var map;
+        var planes = [];
+        var $mapOpenStreet = $('#mapOpenStreet')
+
+        var PinIcon = L.Icon.extend({
+            options: {
+                iconUrl: '{{ 'assets/img/mappin/cupcake.png'|theme }}',
+                iconSize:     [20, 25],
+                shadowSize:   [20, 25],
+                iconAnchor:   [10, 35],
+                shadowAnchor: [4, 45],
+                popupAnchor:  [-3, -25]
+            }
+        });
+        var iconPins = {
+            '_': new PinIcon()
+        }
+        var getImageIcon = function(ratingRoundedFive) {
+            var grade = ratingRoundedFive
+                ? ratingRoundedFive/10
+                : '--';
+            var gradientClass = 'gradient_' + ratingRoundedFive;
+            var icon = L.divIcon({
+                className: 'custom-div-icon',
+                html: `<div class='marker-pin ${gradientClass}'><span>${grade}</span></div>`,
+                iconSize: [30, 30],
+                iconAnchor: [15, -10]
+            });
+            return icon
+        }
+        var restaurantPin = new PinIcon();
+        showMap = function() {
+            $.request('locationsList::onShowMap', {
+                success: function(data) {
+                    planes = []
+                    for (var key in data) {
+                        var item = data[key]
+                        if (parseFloat(item.address_lat) && parseFloat(item.address_long)) {
+                            planes.push([
+                                renderMapLocation(item),
+                                item.address_lat,
+                                item.address_long,
+                                item.rating_rounded_five,
+                                item.url,
+                            ])
+                        }
+                    }
+                    if (map) {
+                        resetMap()
+                        return
+                    }
+                    $mapOpenStreet.html('')
+                    if (window.mobileCheck) {
+                        map = L.map('mapOpenStreet', {
+                            dragging: false,
+                            tap: false
+                        })
+                    } else {
+                        map = L.map('mapOpenStreet')
+                    }
+                    var mapLink =
+                        '<a href="/">KNK</a>';
+                    L.tileLayer(
+                        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; ' + mapLink + ' Contributors',
+                            maxZoom: 18,
+                        }).addTo(map);
+
+                    if (planes.length) {
+                        setTimeout(resetMap, 300)
+                    }
+                }
+            });
+        }
+        showMap()
+
+        function resetMap() {
+
+            var ppp = planes;
+            var j = 0;
+
+            map.eachLayer(function (layer) {
+
+                if (layer._latlng != undefined) {
+                    map.removeLayer(layer);
+                }
+
+            });
+
+            var arrayOfLatLngs = []
+            for (var i = 0; i < ppp.length; i++) {
+                marker = new L
+                    .marker(
+                        [ ppp[i][1], ppp[i][2] ],
+                        { icon: getImageIcon(ppp[i][3]), customUrl: ppp[i][4] }
+                    )
+                    .bindPopup(ppp[i][0])
+                    .addTo(map);
+                marker.on('mouseover', function (e) {
+                    this.openPopup();
+                });
+                marker.on('mouseout', function (e) {
+                    this.closePopup();
+                })
+                marker.on('click', function (e) {
+                    window.location.href = this.options.customUrl
+                })
+                arrayOfLatLngs.push([ppp[i][1],ppp[i][2]])
+            }
+            if (arrayOfLatLngs.length) {
+                var bounds = new L.LatLngBounds(arrayOfLatLngs);
+                map.fitBounds(bounds);
+                setTimeout(function () {
+                    var zoom = map.getZoom()
+                    map.setZoom(zoom < 13 ? 13 : zoom)
+                }, 700)
+            }
+        }
+
+        function getImagePath(image) {
+            return image && image.path ? image.path : '';
+        }
+
+        function renderMapLocation(item) {
+            return `<div class="row" style="min-width:50px">
+                <div class="col-12" style="height: 50px; overflow: hidden"><img src="${getImagePath(item.cover_image)}" alt="${item.title}" style="width: 100%;" class="img-fluid" /></div>
+                <div class="col-12">${item.title}<hr/> Adresa: ${item.address_data.street} ${item.address_data.street_number} <hr></div>
+            </div>`
+        }
+    </script>
+{% endput %}

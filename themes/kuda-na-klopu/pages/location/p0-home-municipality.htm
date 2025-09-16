@@ -1,0 +1,19 @@
+title = "Grad Opština"
+url = "/:citySlug/:municipalitySlug/"
+is_hidden = 0
+layout = "Search"
+
+[viewBag]
+localeTitle[en] = "City Municipality"
+localeUrl[en] = "/:citySlug/:municipalitySlug/"
+==
+<?php
+function onInit() {
+    $cmsController = $this->controller;
+    $citySlug = $this->param('citySlug');
+    $municipalitySlug = $this->param('municipalitySlug');
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    return $controller->municipalityHome($citySlug, $municipalitySlug);
+}
+?>
+==

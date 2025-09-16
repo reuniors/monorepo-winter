@@ -20,7 +20,7 @@ use Reuniors\Haljina\Http\Middlewares\JsonMiddleware;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/haljina', 'middleware' => [
         JsonMiddleware::class,
         EnsureFrontendRequestsAreStateful::class
     ]],

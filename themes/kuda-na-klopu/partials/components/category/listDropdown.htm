@@ -1,0 +1,7 @@
+[viewBag]
+==
+{% for category in categories %}
+<option value="{{ category.slug }}">
+    {{ category.title }}
+</option>
+{% endfor %}

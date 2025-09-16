@@ -1,0 +1,42 @@
+[viewBag]
+==
+<div class="col-12">
+    <h4>{{ 'Slična mesta'|_ }}</h4>
+</div>
+{% for oneLocation in locations %}
+    {% set firstCategory =  oneLocation.categories|first ? oneLocation.categories|first : null %}
+    {% set locationUrl = locationUrl(oneLocation, this.param.citySlug) %}
+    {% set locationCategoryUrl = locationCategoryUrl(oneLocation, this.param.citySlug) %}
+    <div class="col-6 item">
+        <div class="row">
+            <div class="one-restaurant-grid col">
+                <div class="image-wrapper">
+                    <a href="{{ locationUrl }}">
+                        {% if oneLocation.cover_image %}
+                            <img src="{{ oneLocation.cover_image|resize(300, 200, {mode: 'crop'}) }}" class="img-fluid"
+                                alt="{{ oneLocation.title }}-cover-image-big" width="300" height="200"
+                            />
+                        {% else %}
+                            <img src="{{ 'images/restoran-no-image.jpg'|media|resize(300, 200, {mode: 'crop'}) }}" class="img-fluid"
+                                alt="No image" width="300" height="200"
+                            />
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="stars-and-category">
+                        <div class="location-item-text">
+                            <div class="title">
+                                <a href="{{ locationUrl }}">{{ oneLocation.title }}</a>
+                            </div>
+                            <div class="category">
+                                <a href="{{ locationCategoryUrl }}">{{ firstCategory.title }}</a>
+                            </div>
+                        </div>
+                        {% partial 'components/location/fragments/gradeRating' location=oneLocation locationUrl=locationUrl %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}

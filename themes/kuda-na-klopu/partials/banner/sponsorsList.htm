@@ -1,0 +1,37 @@
+[viewBag]
+==
+<div class="row sponsored-list">
+    {% for banner in sponsorBanners %}
+        {% if banner.connected_location %}
+        {% set firstCategory =  banner.connected_location.categories|first ? banner.connected_location.categories|first : null %}
+        {% set locationUrl = locationUrl(banner.connected_location, this.param.citySlug) %}
+        {% set locationCategoryUrl = locationCategoryUrl(banner.connected_location, this.param.citySlug) %}
+        <div class="col-12 col-md-6 item">
+            <div class="one-restaurant-grid col">
+                <div class="image-wrapper">
+                    <a href="{{ locationUrl }}">
+                        {% if banner.connected_location.cover_image %}
+                            <img src="{{ banner.connected_location.cover_image|resize(500, 200, {mode: 'crop'}) }}" class="img-fluid"
+                                 width="500" height="200" alt="{{ banner.connected_location.title }} sponzor"
+                            />
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="content">
+                    <div class="stars-and-category">
+                        <div class="location-item-text">
+                            <div class="title">
+                                <a href="{{ locationUrl }}">{{ banner.connected_location.title }}</a>
+                            </div>
+                            <div class="category">
+                                <a href="{{ locationCategoryUrl }}">{{ firstCategory.title }}</a>
+                            </div>
+                        </div>
+                        {% partial 'components/location/fragments/gradeRating' location=banner.connected_location locationUrl=locationUrl %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
+</div>

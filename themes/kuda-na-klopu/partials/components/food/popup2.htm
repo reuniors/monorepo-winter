@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <img style="width: 100%;" src="{{ food.food_image|resize(500, 200, {mode: 'crop'}) }}"
+         width="500" height="200" alt="{{ food.title }}"
+    />
+    <h4>{{ food.title }}</h4>
+    <p>Kisela pavlaka, biber, beli luk, pečurke, slanina, sir, pavlaka. Maksimalan broj dodataka: 4</p>
+    {% if food.price %}
+    <h4>
+        <b>{{ food.price }} RSD</b>
+    </h4>
+    {% endif %}
+    {% if foodCategory and foodCategory.food_class and foodCategory.food_class.food_class_types %}
+    <div class="food-sizes">
+        <h3>{{ 'Veličine'|_ }}</h3>
+        <div class="row" style="border: 1px solid #000">
+        {% for foodType in foodCategory.food_class.food_class_types %}
+            {% if food.foodTypes[foodType.name] %}
+                <div class="col-6">
+                    {{ foodType.title }}
+                </div>
+                <div class="col-6">
+                    {{ food.foodTypes[foodType.name].price }} RSD
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% if food.food_addon_groups %}
+    <div class="food-addons">
+        <h3>{{ 'Dodaci'|_ }}</h3>
+        <div class="row">
+        {% for addonGroup in food.food_addon_groups %}
+            <div class="col-12">
+                {{ addonGroup.title }}
+            </div>
+            <div class="col-12" style="border: 1px solid #000">
+                {% for addon in addonGroup.food_addons %}
+                    <div class="row">
+                        <div class="col-6">
+                            {{ addon.title }}
+                        </div>
+                        <div class="col-6">
+                            {{ addon.price }} RSD
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</div>
+

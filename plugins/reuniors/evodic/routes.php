@@ -71,7 +71,7 @@ use Reuniors\Evodic\Http\Middleware\ClearCacheMiddleware;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/evodic', 'middleware' => [
 //        \Barryvdh\Cors\HandleCors::class,
         'bindings',
         JsonMiddleware::class,

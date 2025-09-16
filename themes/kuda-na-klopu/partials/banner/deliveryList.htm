@@ -1,0 +1,21 @@
+[viewBag]
+==
+{% for banner in deliveryBanners %}
+    {% if banner.connected_location %}
+    {% set firstCategory =  banner.connected_location.categories|first ? banner.connected_location.categories|first : null %}
+    {% set locationUrl = locationUrl(banner.connected_location, this.param.citySlug) %}
+    {% set locationCategoryUrl = locationCategoryUrl(banner.connected_location, this.param.citySlug) %}
+    <div class="item">
+        <div class="image-wrapper">
+            <a href="{{ locationUrl }}">
+                {% if banner.connected_location.cover_image %}
+                    {% set resizedImage = banner.banr_image.path|resize(false, 650, {mode: 'crop'}) %}
+                    <img src="{{ resizedImage }}" height="650" width="650"
+                         class="img-fluid" style="width: 100%" alt="{{ banner.connected_location.title }}"
+                    />
+                {% endif %}
+            </a>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

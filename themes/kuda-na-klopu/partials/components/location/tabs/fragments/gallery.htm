@@ -1,0 +1,18 @@
+<div class="row white-background">
+    <div class="controls col-12">
+        <button type="button" class="btn btn-default" data-mixitup-control data-filter="all">{{ 'Sve slike'|_ }}</button>
+        <button type="button" class="btn btn-default" data-mixitup-control data-filter=".category-a">{{ 'Restoran'|_ }}</button>
+        <button type="button" class="btn btn-default" data-mixitup-control data-filter=".category-b">{{ 'Hrana'|_ }}</button>
+    </div>
+    <div class="gallery-images-wrapper">
+        {% for galleryImage in location.gallery|slice(start, length) %}
+            <div class="mix category-{{ loop.index < 5 ? 'a' : 'b' }} col-lg-3 col-md-4 col-sm-6 col-6">
+                <a href="{{ galleryImage.path }}" class="one-gallery-image mb-4 h-100" data-order="{{ loop.index }}">
+                    <img src="{{ galleryImage|resize(800, 600, {mode: 'crop'}) }}" class="img-fluid img-thumbnail"
+                        alt="{{ galleryImage.title ?? location.title }}-{{ loop.index }}" width="800" height="600"
+                    />
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% for addonGroup in food.food_addon_groups %}
+<tr>
+    <td>
+        <b>{{ 'Dodaci'|_ }}</b>
+    </td>
+    <td>
+        {{ addonGroup.title }}
+    </td>
+    <td>
+        {% for addon in addonGroup.food_addons %}
+            <p>{{ addon.title }} - {{ addon.price }} din</p>
+        {% endfor %}
+    </td>
+</tr>
+{% endfor %}

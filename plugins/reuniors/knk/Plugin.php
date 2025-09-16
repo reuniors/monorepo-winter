@@ -22,7 +22,7 @@ use Log;
 
 class Plugin extends PluginBase
 {
-    public $require = ['Winter.User'];
+    public $require = ['Winter.User', 'Reuniors.Base'];
 
     public function registerComponents()
     {

@@ -1,0 +1,38 @@
+<div class="info-row{% if workingTime %} working-hours{% endif %}">
+    <div class="left-label">
+        {{ 'Radno vreme:'|_ }}
+    </div>
+    {% if workingTime %}
+        <div class="right-value row">
+            {% for workingTime in workingTime %}
+                <div class="col-12">
+                    <span class="day-from-to font-bold">
+                        {{ workingTime.name }}:
+                    </span>
+                    {{ workingTime.time_from|date('H:i') }} - {{ workingTime.time_to|date('H:i') }}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="right-value">
+            &nbsp;{{ 'Nije definisano'|_ }}
+        </div>
+    {% endif %}
+</div>
+{% if deliveryWorkingTime.isNotEmpty() %}
+    <div class="info-row working-hours">
+        <div class="left-label delivery-time-label">
+            {{ 'Dostava'|_ }}
+        </div>
+        <div class="right-value delivery-time-value row">
+            {% for workingTime in deliveryWorkingTime %}
+                <div class="col-12">
+                    <span class="day-from-to font-bold">
+                        {{ workingTime.name }}:
+                    </span>
+                    {{ workingTime.time_from|date('H:i') }} - {{ workingTime.time_to|date('H:i') }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -1,0 +1,148 @@
+[viewBag]
+==
+{% if isMobile %}
+    {% set targetBlank = 'target="_blank"' %}
+{% else %}
+    {% set targetBlank = '' %}
+{% endif %}
+{% for oneLocation in locations %}
+    {% if oneLocation.isBanner %}
+        {% partial 'banner/oneBanner' banner=oneLocation style="margin-bottom: 30px;" %}
+    {% else %}
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="one-restaurant-wide with-more-locations">
+                <div class="image-and-content">
+                    {% set locationUrl = locationUrl(oneLocation, this.param.citySlug, this.param.categorySlug) %}
+                    <div class="image-and-right-content">
+                        <div class="content">
+                            <div class="image-wrapper">
+                                <a href="{{ locationUrl }}">
+                                    {% if oneLocation.logo %}
+                                        <img src="{{ oneLocation.logo|resize(800, 300, {mode: 'crop'}) }}" class="img-fluid"
+                                             alt="{{ oneLocation.title }} logo" width="800" height="300"
+                                        />
+                                    {% elseif oneLocation.cover_image %}
+                                        <img src="{{ oneLocation.cover_image|resize(800, 300, {mode: 'crop'}) }}"
+                                             class="img-fluid"
+                                             alt="{{ oneLocation.title }} pozadina" width="800" height="300"
+                                        />
+                                    {% else %}
+                                        <img
+                                            src="{{ 'images/restoran-no-image.jpg'|media|resize(800, 300, {mode: 'crop'}) }}"
+                                            class="img-fluid"
+                                            alt="Nema slike" width="800" height="300"
+                                        />
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="rating-and-votes">
+                                {% partial 'components/location/fragments/gradeRating' location=oneLocation locationUrl=locationUrl %}
+                                <div class="clearfix"></div>
+                                <div class="votes-count">
+                                    {{ oneLocation.rating_count }} {{ 'Ocena'|_ }}
+                                </div>
+                                {% if oneLocation.is_new %}
+                                    <div class="new-restaurant-badge">
+                                        {{ 'Novo'|_ }}
+                                    </div>
+                                {% endif %}
+                                <span
+                                    class="working-hours-icon"
+                                    data-toggle="collapse" data-target="#whCollapse{{ oneLocation.id }}"
+                                >
+                                    <i class="fas fa-clock float-right"></i>
+                                </span>
+                            </div>
+                            <div class="category">
+                                {% for category in oneLocation.categories %}
+                                    <a href="{{ 'location/p20-locations-list'|page({categorySlug: category.slug}) }}">
+                                        {{ category.title }}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <div class="title">
+                                <a href="{{ locationUrl }}">
+                                    {{ oneLocation.title }}
+                                </a>
+                            </div>
+                            <div class="address">
+                                {% if oneLocation.address_data %}
+                                    {{ oneLocation.address_data.street }} {{ oneLocation.address_data.street_number }},
+                                    {{ oneLocation.address_data.municipality }}
+                                {% else %}
+                                    {{ 'Nepoznata lokacija'|_ }}
+                                {% endif %}
+                            </div>
+                            <div class="description">
+                                {{ oneLocation.snippet | raw }}{% if oneLocation.text|length > 120 %} ...{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cuisines-and-working-hours collapse" id="whCollapse{{ oneLocation.id }}">
+                        {% if oneLocation.is_closed %}
+                            <h4>
+                        <span class="badge badge-danger">
+                            {{ 'Zatvoreno'|_ }}
+                        </span>
+                            </h4>
+                        {% endif %}
+                        {% if oneLocation.cuisines %}
+                            <div class="info-row">
+                                <div class="left-label">
+                                    {{ 'Kuhinja:'|_ }}
+                                </div>
+                                <div class="right-value">
+                                    &nbsp;{% for tag in oneLocation.cuisines %}
+                                    <a
+                                    href="?tags={{ tag.slug }}">{{ tag.title }}</a>{% if loop.last == false %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% partial 'components/location/fragments/listWorkingHours' workingTime=oneLocation.working_time deliveryWorkingTime=oneLocation.delivery_working_time %}
+                        <div class="info-row">
+                            <div class="left-label">
+                                {{ 'Cena za dvoje:'|_ }}
+                            </div>
+                            <div class="right-value">
+                                &nbsp;{% if oneLocation.average_price_for_two %}
+                                {{ oneLocation.average_price_for_two }} RSD
+                                {% else %}
+                                    {{ 'Nije definisano'|_ }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="view-menu-and-call{% if oneLocation.has_online_delivery %} order-online-and-profile{% endif %}">
+                    {% if oneLocation.has_online_delivery %}
+                        <a href="https://dostava.kudanaklopu.com/{{ oneLocation.delivery_url_path }}"
+                           class="order-online">
+                            <i class="fas fa-truck"></i> {{ 'Naruči online'|_ }}
+                        </a>
+                    {% else %}
+                        <a href="tel:{{ oneLocation.phone_data.phone_1 }}">
+                            <i class="fas fa-phone-alt"></i> {{ 'Pozovi'|_ }}
+                        </a>
+                    {% endif %}
+                    <a href="{{ locationUrl }}">
+                        <i class="fas fa-store-alt"></i> {{ 'Profil'|_ }}
+                    </a>
+                    {% if not oneLocation.has_online_delivery %}
+                        <a href="{{ locationUrl }}/{{ 'jelovnik'|_|lower }}">
+                            <i class="far fa-clipboard"></i> {{ 'Meni'|_ }}
+                        </a>
+                    {% endif %}
+                </div>
+                {% if oneLocation.related_locations %}
+                    {% partial 'components/location/fragments/relatedLocations' relatedLocations=oneLocation.related_locations %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+{% endfor %}
+{% if locations is empty %}
+    <h3>{{ 'Nema rezultata'|_ }}</h3>
+    <a class="trigger-clear-filters" href="javascript:void(0)">{{ 'Obrisi filtere'|_ }}</a>
+{% endif %}

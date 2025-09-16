@@ -1,0 +1,6 @@
+plugin:
+    name: "reuniors.theme-switcher::lang.plugin.name"
+    description: "reuniors.theme-switcher::lang.plugin.description"
+    author: Reuniors
+    icon: oc-icon-paint-brush
+    homepage: ""

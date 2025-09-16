@@ -1,0 +1,79 @@
+[localePicker]
+forceUrl = 1
+
+[cookieBanner]
+include_css = 1
+update_selector = "#gdpr-reload"
+==
+<?php
+function onInit()
+{
+    Globals::initData($this);
+}
+?>
+==
+{#{% htmlcompress %}#}
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="utf-8">
+    {#<meta http-equiv="x-ua-compatible" content="ie=edge">#}
+
+    <title>{{ this.page.pageMeta.metaData.title ?? this.page.title}}</title>
+
+    <meta name="description" content="{{ this.page.pageMeta.metaData.metaDescription ?? this.page.description }}" />
+
+    <meta property="og:title" content="{{ this.page.pageMeta.metaData.title ?? this.page.title }}" />
+    <meta property="og:description" content="{{ this.page.pageMeta.metaData.metaDescription ?? this.page.description }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ 'images/knk-logo.png'|media }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="217" />
+    <meta property="og:image:height" content="221" />
+
+
+    <meta name="color-scheme" content="light dark" />
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=no"
+    />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'assets/images/favicon.png'|theme }}" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Kuda na klopu" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="preload" href="/public/assets/preload-cover-33d8b217.webp" as="image">
+    <link href="{{ [
+        "assets/css/loading.css",
+    ]|theme }}.css?v={{ knkPluginVersion }}" rel="stylesheet">
+    <link rel="preload" href="/public/public/assets/fonts/Roboto/Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin>
+
+    {% placeholder headersScripts %}
+    {% if this.page.initialData.locationsData %}
+        {% for location in this.page.initialData.locationsData %}
+            {% if location.cover_image %}
+            <link rel="preload" href="{{ location.cover_image.pathByResolution.small }}" as="image">
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</head>
+<body style="background: #000000; height: 100vh">
+    {% page %}
+
+    <script>
+        window.__INIT_DATA__= {{ this.page.initialData|json_encode|raw }};
+    </script>
+    <div id="root">
+        <div class="initLoader wrapper">
+            <div class="loader">
+                <div class="loader-wheel"></div>
+                Loading...
+            </div>
+        </div>
+    </div>
+    {% placeholder bodyScripts %}
+</body>
+</html>
+{#{% endhtmlcompress %}#}

@@ -1,0 +1,22 @@
+==
+<?php
+function onStart()
+{
+    $pluginName = 'Reuniors.Knk';
+    $this->addCss('assets/css/editor/2.e3cf4cf6.chunk.css', $pluginName);
+    $this->addCss('assets/css/editor/main.fef4e73c.chunk.css', $pluginName);
+    $this->addJs('assets/js/custom/editor/runtime-main.aa129420.js', $pluginName);
+    $this->addJs('assets/js/custom/editor/2.6f600bc0.chunk.js', $pluginName);
+    $this->addJs('assets/js/custom/editor/main.1b9aff64.chunk.js', $pluginName);
+}
+?>
+==
+{% styles %}
+<div class="row simple-menu">
+    <div class="col-12">
+        <div class="food-list-wrapper">
+            <div id="root" data-location-id="{{ location.id }}"></div>
+        </div>
+    </div>
+</div>
+{% scripts %}

@@ -1,0 +1,19 @@
+/* Loading state styles */
+.loading {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.loading * {
+    visibility: hidden;
+}
+
+body.ready {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.3s ease-in;
+}
+
+body.ready * {
+    visibility: visible;
+} 

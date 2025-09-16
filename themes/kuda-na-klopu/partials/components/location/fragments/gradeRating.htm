@@ -1,0 +1,8 @@
+<div class="rating stars {% if location.rating_rounded_five %} gradient_{{ location.rating_rounded_five }}{% else %} gray{% endif %}">
+    <a href="{{ locationUrl }}/{{ 'utisci'|_ }}" class="rating-link">
+        {{ location.rating_average_grade
+        ? location.rating_average_grade|round(1)
+        : '--'
+        }}
+    </a>
+</div>

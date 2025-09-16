@@ -1,0 +1,114 @@
+[cities cityList]
+withMunicipality = 1
+sortBy = "parent_city_id"
+sortByOrientation = "asc"
+perPage = 20
+pageNumber = "{{ :page }}"
+
+[localePicker]
+forceUrl = 1
+
+[categories categoriesList]
+get_locations = 0
+citySlug = "{{ :citySlug }}"
+sortBy = "priority"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "all"
+==
+<?php
+function onInit()
+{
+    Globals::currentController($this);
+}
+?>
+==
+{#{% htmlcompress %}#}
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{{ this.page.title ?? pageMeta.metaData.title }}</title>
+
+    <meta name="description" content="{{ this.page.description ?? pageMeta.metaData.metaDescription }}" />
+
+    <meta property="og:title" content="{{ this.page.title ?? pageMeta.metaData.title }}" />
+    <meta property="og:description" content="{{ this.page.description ?? pageMeta.metaData.metaDescription }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ 'images/knk-logo.png'|media }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="217" />
+    <meta property="og:image:height" content="221" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'assets/images/favicon.png'|theme }}" />
+
+    <link href="{{ [
+        '@framework.extras',
+        'assets/css/bootstrap.min.css',
+        'assets/css/font-awesome.min.css',
+        'assets/css/mdb.min.css',
+    ]|theme }}.css" rel="stylesheet">
+
+    {% styles %}
+
+    <link href="{{ [
+        "assets/css/style#{minJs}.css",
+    ]|theme }}.css?v={{ knkPluginVersion }}" rel="stylesheet">
+
+    {% placeholder customCss %}
+<!--     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1702094346556342"
+ crossorigin="anonymous"></script> -->
+</head>
+<body onunload="">
+    {% partial 'site/homeNav' %}
+    {% page %}
+    {% partial 'footer/standard' %}
+    {% partial 'generalStrikePartial' %}
+
+
+    <script src="{{ [
+        'assets/js/jquery-3.2.1.min.js',
+        'assets/js/popper.min.js',
+        'assets/js/bootstrap.min.js',
+        'assets/js/bootstrap-toolkit.min.js',
+        'assets/js/mdb.min.js',
+        'assets/js/bootbox.min.js',
+        'assets/js/general-strike.js',
+    ]|theme }}.js"></script>
+
+    <script src="{{ [
+        "assets/js/common#{minJs}.js"
+    ]|theme }}.js?v={{ knkPluginVersion }}"></script>
+
+    <script src="{{ [
+        '@framework',
+        '@framework.extras',
+        'assets/js/framework-override.min.js'
+    ]|theme }}.js"></script>
+    {% scripts %}
+    {% placeholder customScripts %}
+    {% component 'cookieBanner' %}
+    {% if true or not gdprIsUndecided() and getEnv('APP_ENV') != 'development' %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-2FVQ9Q3KBC"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-2FVQ9Q3KBC');
+        </script>
+    {% endif %}
+</body>
+</html>
+{#{% endhtmlcompress %}#}

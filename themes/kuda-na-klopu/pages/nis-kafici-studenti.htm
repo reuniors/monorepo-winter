@@ -1,0 +1,53 @@
+title = "Nis | Kafići | Kuda na piće | Studenti"
+url = "/:citySlug/kafici-studenti"
+layout = "Search"
+is_hidden = 0
+==
+<?php
+function onInit() {
+    $allData = json_decode(file_get_contents('public/public/nis-restorani.json'), true);
+    $this['bars'] = array_filter($allData, function($item) {
+        return $item['isBar'] == true;
+    });
+}
+?>
+==
+<div class="container mt-4" id="pice">
+    <h1 style="text-transform: none" class="text-center">Kude na 'ladno? U Niš sa studenti!</h1>
+    <div class="row">
+        {% for restaurant in bars %}
+            <div class="col-md-6 mb-4">
+                <div class="card">
+                    <div class="row g-0">
+                        <div class="col-2 col-md-3 d-flex align-items-center p-0 pl-1 justify-content-center">
+                            <img src="/public/public/images/{{ restaurant.instagram }}.png" class="img-fluid rounded-start ml-4 max-w-12" alt="{{ restaurant.obj }}">
+                        </div>
+                        <div class="col-10 col-md-9 p-0">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ restaurant.obj }}</h5>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="text-truncate" style="max-width: 60%">
+                                        <a href="https://instagram.com/{{ restaurant.instagram }}" target="_blank" class="text-decoration-none text-truncate" style="max-width: 100%">
+                                            <i class="fab fa-instagram"></i> {{ restaurant.instagram }}
+                                        </a>
+                                    </div>
+                                    <div class="flex-shrink-0" style="white-space: nowrap">
+                                        <a href="{{ restaurant.googleLink }}" target="_blank" class="text-decoration-none">
+                                            <i class="fas fa-map-marker-alt"></i> Google
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <a href="/nis/restorani-studenti" class="btn btn-white btn-lg btn-block mt-4 mb-4">
+            Lista restorana koji pružaju podršku studentima >
+        </a>
+    </div>
+</div>
+

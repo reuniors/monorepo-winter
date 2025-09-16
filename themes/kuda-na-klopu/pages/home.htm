@@ -1,0 +1,231 @@
+title = "Kuda na klopu"
+description = "Kuda na klopu? Najbolji restorani, brza hrana, dostava, picerije, kafane ..."
+url = "/:citySlug?"
+layout = "Default"
+is_hidden = 0
+
+[category]
+categorySlug = "{{ :categorySlug }}"
+citySlug = "{{ :citySlug }}"
+withRedirect = 1
+isPost = 1
+
+[banner]
+bannerZone = "Pocetna ispod tipova restorana"
+categorySlug = "{{ :categorySlug }}"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+
+[banner banner2]
+bannerZone = "Pocetna iznad footera"
+categorySlug = "{{ :categorySlug }}"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+
+[tags tagsList]
+tagGroupSlug = "kuhinja"
+tagSlug = "{{ :tagSlug }}"
+
+[locations homeLocations]
+citySlug = "{{ :citySlug }}"
+categoriesSlug = "{{ :categorySlug }}"
+showOnHome = 1
+withTags = 0
+sortBy = "priority"
+sortByOrientation = "desc"
+perPage = 8
+pageNumber = "{{ :page }}"
+
+[tags tagsSpecial]
+tagGroupSlug = "izdvojeno"
+tagSlug = "{{ :tagSlug }}"
+
+[banner deliveryBanners]
+bannerZone = "Profil - Dostava"
+citySlug = "{{ :citySlug }}"
+withConnectedLocation = 1
+sortBy = "sort_order"
+sortByOrientation = "desc"
+perPage = 10
+pageNumber = "{{ :page }}"
+==
+<?php
+function onStart()
+{
+    $redirectHome = \Reuniors\Knk\Classes\Cookies::redirectHome($this);
+    if ($redirectHome) {
+        return $redirectHome;
+    }
+    $pluginName = 'Reuniors.Knk';
+    $this->addCss([
+        'assets/css/fullImageBg.css',
+        'assets/css/select2.min.css',
+        'assets/css/magic-check.min.css',
+        'assets/css/owl.carousel.min.css',
+        'assets/css/owl.theme.default.min.css',
+    ], $pluginName);
+    $this->addJs([
+        'assets/js/select2.full.min.js',
+        'assets/js/owl.carousel.min.js',
+    ], $pluginName);
+}
+?>
+==
+<!--Mask-->
+{% put customScripts %}
+    {% partial 'scripts/home' %}
+    <script type="application/javascript">
+        $(document).ready(function () {
+            initHome()
+        })
+    </script>
+{% endput %}
+<section class="head-search-wrapper">
+    <div class="container">
+        <div class="head-search-content">
+            <div class="head-search-title">
+                {{ 'Brzo do hrane'|_ }}
+            </div>
+            <div class="head-search-text">
+                {{ 'Pronađite najbolje restorane, picerije, poslastičarnice...'|_ }}
+            </div>
+            <div class="head-search-inputs-wrapper">
+                <!-- Result container -->
+                <form method="POST" action="{{ 'home'|page }}">
+                    <div class="row">
+                        <div class="select-locations col-md-3">
+                            <select name="city" class="form-control select-2-dropdown select-2-hidden-select" required id="citySelectFilter">
+                                <option value="">Lokacija</option>
+                                {% partial 'components/city/listDropdown' cities=cityList.cities currentCity=this.param.citySlug %}
+                            </select>
+                        </div>
+                        <div class="select-categories col-md-3 city-depending">
+                            <select name="category" class="form-control select-2-dropdown s2-default select-2-hidden-select">
+                                <option value="{{ 'gde-jesti'|_ }}" selected>{{ 'Sve kategorije'|_ }}</option>
+                                {% partial 'components/category/listDropdown' categories=categoriesList.categories %}
+                            </select>
+                        </div>
+                        <div class="select-tags col-md-4 city-depending" style="position: static">
+                            <select
+                                class="form-control js-data-example-ajax city-depending select-2-hidden-select"
+                                id="selectTagsFilter"
+                                name="tags_filters[]" data-placeholder="{{ 'Šta tražite...'|_ }}"
+                            >
+                            </select>
+                        </div>
+                        <div class="col-md-2 search-submit">
+                            <button type="submit" class="form-control btn">{{ 'Pretraži'|_ }}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="cities-section">
+    {% if not this.param.citySlug or this.param.citySlug == 'default' %}
+        <div class="container">
+            <div class="section-heading">
+                <h1 class="main-title">{{ 'Spisak gradova'|_ }}</h1>
+            </div>
+            <div class="row city-list">
+                {% partial 'components/city/list' %}
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="main-pages-slider-wrapper">
+                <div class="main-pages-slider owl-carousel owl-theme">
+                    {% partial 'static/mainPages' %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</section>
+<section class="fourth-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-5">
+                <div class="left-image-wrapper">
+                    {% set resizedImage = 'images/knk-app-image.png'|media %}
+                    <img src="{{ resizedImage }}" class="img-fluid" alt="Kuda na klopu aplikacija"
+                         height="{{ resizedImage | imageHeightE }}" width="{{ resizedImage | imageWidthE }}"
+                    />
+                </div>
+            </div>
+            <div class="col-12 col-md-7">
+                <div class="right-description">
+                    <h2>{{ 'Uskoro i mobilna aplikacija!'|_ }}</h2>
+                    <div class="first-row">
+                        {{ 'Uskoro nam stiže i aplikacija za Android i iOS mobilne uređaje.<br/> Koja će olakšati praćenje popusta, nagrađivanje aktivinih korisnika i druge zanimljivosti.'|raw }}
+                    </div>
+                    <div class="second-row">
+                        {{ 'Linkovi za download Kuda na klopu aplikaciju biće'|_ }}
+                    </div>
+                    <div class="icons">
+                        {% set resizedImage = 'images/applestore-icon.png'|media %}
+                        <img src="{{ resizedImage }}" alt="Kuda na klopu iOS aplikacija"
+                             height="45" width="160"
+                        />
+                        {% set resizedImage = 'images/googleplay-icon.png'|media %}
+                        <img src="{{ resizedImage }}" alt="Kuda na klopu android aplikacija"
+                             height="45" width="160"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% if this.param.citySlug and this.param.citySlug != 'default' %}
+<section class="second-section">
+    <div class="container">
+        <div class="section-heading">
+            <h1 class="main-title">{{ 'Dostava'|_ }}</h1>
+            <h5>{{ 'Restorani koji vrše dostavu'|_ }}</h5>
+        </div>
+        <div class="banner-delivery-slider-wrapper">
+            <div class="banner-delivery-slider owl-carousel owl-theme">
+                {% partial 'banner/deliveryList' deliveryBanners=deliveryBanners.banners %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+{#<section class="third-section">#}
+{#    <div class="container">#}
+{#        <div class="row">#}
+{#            <div class="col-12">#}
+{#                {% partial 'banner/bannerList' banners = banner.banners width=1200 height=300 %}#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</section>#}
+{% if this.param.citySlug and this.param.citySlug != 'default' %}
+<div class="fifth-section">
+    <div class="container">
+        <div class="row no-gutters gutter-8">
+            <div class="owl-carousel owl-theme" id="HomeLocationList">
+                {% partial 'components/location/homeList' locations=homeLocations.locations %}
+            </div>
+        </div>
+    </div>
+</div>
+<section class="sixth-section">
+    <div class="container">
+        {% if this.param.citySlug and this.param.citySlug != 'default' %}
+            <div class="section-heading">
+                <h1 class="main-title">{{ 'Tipovi Restorana'|_ }}</h1>
+                <h5>{{ 'Odaberite restorane na osnovu kuhinje i jela'|_ }}</h5>
+            </div>
+            <div class="restaurants-type-slider-wrapper">
+                <div class="restaurants-type-slider owl-carousel owl-theme">
+                    {% partial 'components/tag/restaurantTypes' tags=tagsList.tags %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endif %}

@@ -2,7 +2,7 @@
 
 use Auth;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Classes\Helpers\ReorderDataHelper;
+use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Evodic\Models\Location;
 
 class ReorderLocationImages

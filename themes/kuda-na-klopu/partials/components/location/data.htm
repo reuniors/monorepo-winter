@@ -1,0 +1,242 @@
+[viewBag]
+==
+{% if not this.param.tabValue %}
+    {% set currentTab = 'info' %}
+{% else %}
+    {% set currentTab = this.param.tabValue %}
+{% endif %}
+{% if not this.param.municipalitySlug or this.param.municipalitySlug == 'default' %}
+    {% set locationPage = 'location/p50-one-location' %}
+    {% set locationTabPage = 'location/p40-one-location-tab' %}
+{% else %}
+    {% set locationPage = 'location/p30-municipality-one-location' %}
+    {% set locationTabPage = 'location/p35-municipality-one-location-tab' %}
+{% endif %}
+{% if currentTab == 'review' %}
+    {% set titlePostfix = '- Utisci' %}
+{% elseif currentTab == 'menu' %}
+    {% set titlePostfix = '- Jelovnik' %}
+{% elseif currentTab == 'gallery' %}
+    {% set titlePostfix = '- Galerija' %}
+{% else %}
+    {% set titlePostfix = '' %}
+{% endif %}
+<div class="cover-image-and-info">
+    <div class="d-block d-lg-none fixed-bottom bottom-filter" data-bind="if: true"> {# (openCart() || shoppingCartData().length > 0) #}
+        <a class="btn btn-default"
+                id="FilterBtn"
+           href="tel:{{ location.phone_data.phone_1 }}"
+        >
+            <span class="filter-show">
+                <i class="fa fa-phone"></i>
+                {{ 'Pozovi'|_ }}
+            </span>
+        </a>
+{#        <button class="btn btn-default"#}
+{#                id="FilterBtn"#}
+{#                type="button"#}
+{#        >#}
+{#            <span class="filter-show" data-bind="click: toggleCart, ifnot: openCart()">#}
+{#                {{ 'Kalkulator'|_ }}#}
+{#                <span class="badge badge-primary" data-bind="{text: shoppingCartData().length}"></span>#}
+{#            </span>#}
+{#            <span class="filter-hide" data-bind="click: toggleCart, if: openCart()">#}
+{#                {{ 'Zatvori'|_ }}#}
+{#                <i class="fa fa-times" aria-hidden="true"></i>#}
+{#            </span>#}
+
+{#        </button>#}
+    </div>
+    {% partial 'components/location/fragments/galleryHeader' location=location %}
+    <div class="location-info">
+        <div class="title-and-rating">
+            <div class="left-info">
+                <h1>
+                    {{ location.title }} {{ titlePostfix }}
+                </h1>
+                {% if location.gov_support %}
+                    <h6>
+                        <span style="font-weight: bold; color: red">
+                        Napomena: 24.1.2025.
+                        </span>
+                        podržali vlast davanjem popusta, na dan kada su studenti pozvali na generalni štrajk.
+                    </h6>
+                {% endif %}
+                <ul class="categories list-inline">
+                    {% for category in location.categories %}
+                        <li class="category-link list-inline-item">
+                            <a href="{{ 'location/p20-locations-list'|page({categorySlug: category.slug}) }}">{{ category.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="phones">
+                    <i class="fas fa-phone-alt"></i>
+                {% if location.phone_data.phone_1 %}
+                    <a href="tel:{{ location.phone_data.phone_1 }}">{{ location.phone_data.phone_1 }}</a>
+                {% endif %}
+                    <span>&nbsp;</span>
+                {% if location.phone_data.mobile_1 %}
+                    <a href="tel:{{ location.phone_data.mobile_1 }}">{{ location.phone_data.mobile_1 }}</a>
+                {% endif %}
+                </div>
+                <div class="address">
+                    {{ location.address_data.street }} {{ location.address_data.street_number ?? '' }}
+                    {{ location.address_data.municipality ?? '' }}
+                </div>
+            {% if location.is_closed %}
+                <h2>
+                    <span class="badge badge-danger">
+                        {{ 'Zatvoreno'|_ }}
+                    </span>
+                </h2>
+            {% endif %}
+                <div class="working-hours">
+                    {% partial 'components/location/fragments/listWorkingHours' workingTime=location.working_time deliveryWorkingTime=location.delivery_working_time %}
+                </div>
+                {% if not oneLocation.has_online_delivery %}
+                {% endif %}
+            </div>
+            <div class="rating-wrapper">
+                <div class="rating-big {% if location.rating_rounded_five %} gradient_{{ location.rating_rounded_five }}{%  else %} green{% endif %}">
+                    {{ location.rating_average_grade
+                        ? location.rating_average_grade|round(1)
+                        : '--'
+                    }}
+                </div>
+                <div class="review-num">{{ location.rating_count }}</div>
+                <div class="review-text">{{ 'Ocena'|_ }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="one-restaurant-tabs tabs-wrapper">
+    <nav>
+        <div class="nav nav-tabs flex-column flex-sm-row" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link {% if currentTab == 'info' %}active data-loaded{% endif %}"
+               id="nav-about-location-tab" data-toggle="tab"
+               data-tab="info"
+               data-method="onTabInfo"
+               data-target="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"
+               data-request-update="'components/location/tabs/about': '#nav-home'"
+               data-request-history-url="{{ locationTabPage|page({tab: 'info'|_|lower}) }}"
+            >
+                {{ 'O restoranu'|_ }}
+            </a>
+            {% if location.has_online_delivery %}
+                <a class="nav-item nav-link green-text"
+                   href="https://dostava.kudanaklopu.com/{{ location.delivery_url_path }}"
+                   target="_blank"
+                >
+                    <i class="fas fa-truck"></i>
+                    {{ 'Naruči online'|_|capitalize }}
+                </a>
+            {% else %}
+                <a class="nav-item nav-link {% if currentTab == 'menu' %}active data-loaded{% endif %}"
+                   id="nav-menu-tab" data-toggle="tab"
+                   data-tab="menu"
+                   data-method="onTabMenu"
+                   data-target="#nav-menu" role="tab" aria-controls="nav-menu" aria-selected="false"
+                   data-request-update="'components/location/tabs/foodMenu': '#nav-menu'"
+                   data-request-history-url="{{ locationTabPage|page({tab: 'jelovnik'|_|lower}) }}"
+                >
+                    {{ 'Jelovnik'|_|capitalize }}
+                </a>
+            {% endif %}
+            <a class="nav-item nav-link {% if currentTab == 'review' %}active data-loaded{% endif %}"
+               id="nav-reviews-tab" data-toggle="tab"
+               data-tab="review"
+               data-method="onTabReview"
+               data-target="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false"
+               data-request-update="'components/location/tabs/review': '#nav-reviews'"
+               data-request-history-url="{{ locationTabPage|page({tab: 'utisci'|_|lower}) }}"
+            >
+                {{ 'Utisci'|_|capitalize }}
+            </a>
+            {% if location.gallery %}
+            <a class="nav-item nav-link {% if currentTab == 'gallery' %}active data-loaded{% endif %}"
+               id="nav-gallery-tab" data-toggle="tab"
+               data-tab="gallery"
+               data-method="onTabGallery"
+               data-target="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false"
+               data-request-update="'components/location/tabs/gallery': '#nav-gallery'"
+               data-request-history-url="{{ locationTabPage|page({tab: 'galerija'|_|lower}) }}"
+            >
+                {{ 'Galerija'|_|capitalize }}
+            </a>
+            {% endif %}
+            {% if userHasGroup('admin') %}
+            <div>
+{#                {{ 'Stari jelovnik'|_|capitalize }}#}
+                {{ location.id }}
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane restaurant-info fade {% if currentTab == 'info' %}show active{% endif %}"
+             id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"
+        >
+            {% if currentTab == 'info' %}
+                {% partial 'components/location/tabs/fragments/about' %}
+            {% else %}
+                {% partial 'helper/loader-1' %}
+            {% endif %}
+        </div>
+        <div class="tab-pane fade {% if currentTab == 'menu' %}show active{% endif %}"
+             id="nav-menu" role="tabpanel" aria-labelledby="nav-menu-tab"
+        >
+            {% if currentTab == 'menu' %}
+                {% partial 'components/location/tabs/fragments/foodMenu' isMenuLoaded=1 %}
+            {% else %}
+                {% partial 'helper/loader-1' %}
+            {% endif %}
+        </div>
+        <div class="tab-pane fade {% if currentTab == 'review' %}show active{% endif %}"
+             id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab"
+        >
+            {% if currentTab == 'review' %}
+                {% partial 'components/location/tabs/fragments/review' %}
+            {% else %}
+                {% partial 'helper/loader-1' %}
+            {% endif %}
+        </div>
+        {% if location.gallery %}
+        <div class="tab-pane fade {% if currentTab == 'gallery' %}show active{% endif %}"
+             id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab"
+        >
+            {% if currentTab == 'gallery' %}
+                {% partial 'components/location/tabs/fragments/gallery' %}
+            {% else %}
+                {% partial 'helper/loader-1' %}
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% put customScripts %}
+    <script type="application/javascript">
+        function popitup(url) {
+            var newwindow = window.open(url, 'name', 'height=600,width=500');
+            if (window.focus) {newwindow.focus()}
+            return false;
+        }
+        var newViewModel = new MyViewModel();
+        ko.applyBindings(newViewModel);
+        var loadedPage = '{{ currentTab }}';
+        var activeTab = '{{ currentTab }}';
+        var $galleryImagesWrapper;
+        var triggerGalleryIndex = null;
+        var dataLabels = {
+            loading: '{{ 'Učitavanje...'|_ }}'
+        };
+        var oneLocationPage = "{{ 'location/p50-one-location'|page }}";
+        var locationPage = "{{ locationPage|page }}";
+        var locationId = {{ location.id }};
+        var addressLat = {{ location.address_lat ?? 0 }};
+        var addressLong = {{ location.address_long ?? 0 }};
+    </script>
+    <script src="{{
+        "assets/js/custom/data#{minJs}.js"
+    |theme }}?v={{ knkPluginVersion }}"
+    ></script>
+{% endput %}

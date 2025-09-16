@@ -1,0 +1,9 @@
+[viewBag]
+==
+{% for city in cities %}
+    <div class="col-6 col-md-3 city-item">
+        <a href="{{ 'home' | page({ citySlug: city.slug }) }}">
+            {{ city.title }}
+        </a>
+    </div>
+{% endfor %}

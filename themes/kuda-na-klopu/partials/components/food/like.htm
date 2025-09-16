@@ -1,0 +1,31 @@
+<span class="food-recommend-wrapper">
+    <span class="number-of-recommends">({{ numberOfLikes }} {{ 'preporuka'|_ }})</span>
+{% if user %}
+    {% if isFoodLiked %}
+        <a data-request="foodMenuData::onFoodLike"
+              data-request-url="{{ 'location/p50-one-location'|page }}"
+              data-request-data="{food_id: {{ foodId }}, action: 'dislike'}"
+              data-request-update="'components/food/like': '#foodLike-{{ foodId }}'"
+              data-request-success="resetTooltip()"
+              data-request-before-update="hideTooltip()"
+              class="food-recommend"
+              data-toggle="tooltip" title="{{ 'Skloni preporuku'|_ }}"
+              href="javascript:void(0)"
+        >
+            {{ 'ukloni preporuku'|_ }}
+        </a>
+    {% else %}
+        <button data-request="foodMenuData::onFoodLike"
+                data-request-url="{{ 'location/p50-one-location'|page }}"
+                data-request-data="{food_id: {{ foodId }}, action: 'like'}"
+                data-request-update="'components/food/like': '#foodLike-{{ foodId }}'"
+                data-request-success="resetTooltip()"
+                data-request-before-update="hideTooltip()"
+                class="btn btn-primary btn-sm food-recommend"
+                data-toggle="tooltip" title="{{ 'Preporuči'|_ }}"
+        >
+            <i class="fa fa-thumbs-up"></i>
+        </button>
+    {% endif %}
+{% endif %}
+</span>

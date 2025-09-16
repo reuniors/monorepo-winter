@@ -1,0 +1,58 @@
+
+
+<div class="header-data absolute w-full h-full min-h-[500px] bg-black bg-opacity-50 z-40 text-center">
+    <div class="bg-transparent border-0 shadow-none p-4">
+        <img src="{{ locationData.logo.path }}" class="max-w-full max-h-64 inline" />
+    </div>
+
+    <div class="flex justify-center items-center">
+        <ion-select value="{{ activeLocale ?? 'rs' }}"
+            id="languageSelect"
+            labelPlacement="stacked" placeholder="{{ 'Izaberite jezik'|_ }}" class="text-center w-auto" color="dark" interface="action-sheet" mode="ios"
+            onIonChange="handleLanguageChange($event)"
+        >
+            <ion-icon slot="start" name="globe-outline" aria-hidden="true"></ion-icon>
+            <ion-select-option value="rs">Srpski</ion-select-option>
+            <ion-select-option value="eng">English</ion-select-option> 
+        </ion-select>
+    </div>
+
+    <ion-button color="dark" class="mt-6 uppercase text-lg" size="large" href="/zakazivanje">
+        <ion-icon name="calendar-outline" class="mr-2"></ion-icon>
+        <ion-label>{{ 'Online Zakazivanje'|_ }}</ion-label>
+    </ion-button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const languageSelect = document.getElementById('languageSelect');
+
+            languageSelect.addEventListener('ionChange', (event) => {
+                const selectedLanguage = event.detail.value;
+                if (selectedLanguage === 'eng') {
+                    window.location.href = '/eng';
+                } else if (selectedLanguage === 'rs') {
+                    window.location.href = '/rs';
+                }
+            });
+        });
+    </script>
+
+    <div class="text-center mt-2">
+        <ion-menu-button class="text-white size-2 text-lg">
+            <ion-icon name="cash-outline"></ion-icon>
+            <span class="ml-2">
+            {{ 'Cenovnik'|_ }}
+            </span>
+        </ion-menu-button>
+    </div>
+</div>
+
+<div class="w-full h-full min-h-[500px] -z-10">
+    <swiper-container
+        space-between="0" autoplay-delay="4500" autoplay-disable-on-interaction="false" class="h-full"
+    >
+        {% for image in locationData.gallery %}
+            <swiper-slide style="background-image: url({{ image.path|resize(1920, null, {mode:'crop'}) }})"></swiper-slide>
+        {% endfor %}
+    </swiper-container>
+</div>

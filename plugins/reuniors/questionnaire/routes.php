@@ -23,7 +23,7 @@ use Reuniors\Questionnaire\Http\Middleware\QuestionnaireToken;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/questionnaire', 'middleware' => [
         JsonMiddleware::class,
         EnsureFrontendRequestsAreStateful::class
     ]],

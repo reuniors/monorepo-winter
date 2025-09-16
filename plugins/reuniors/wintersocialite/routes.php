@@ -8,7 +8,7 @@ use reuniors\wintersocialite\Http\Actions\User\PrepareUserLoginOrRegisterNewActi
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/auth', 'middleware' => [
         JsonMiddleware::class,
     ]],
     function () {

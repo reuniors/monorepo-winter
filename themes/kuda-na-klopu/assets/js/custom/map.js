@@ -1,0 +1,252 @@
+var map;
+var planes = [];
+var $mainForm = $('#mainForm')
+var $mapOpenStreet = $('#mapOpenStreet')
+var $filterWrapper = $('#FilterWrapper')
+
+$(document).ready(function () {
+    // window.history.replaceState(null, null, window.location.pathname);
+    var $searchMapWrapper = $('.search-map');
+    var $openPopupMap = $('.open-popup-map');
+    var $filterSortDropdown = $('.filter-sort.dropdown');
+    $openPopupMap.click(function () {
+        $searchMapWrapper.slideToggle();
+        if (viewport.is('<lg')) {
+            $('#FilterBtn').trigger('click')
+        }
+        $('.view-map-btn', $openPopupMap).toggleClass('hide-map-btn')
+        if (!map) {
+            showMap()
+        }
+    });
+    $('.close-map').click(function () {
+        $searchMapWrapper.slideToggle();
+        $('.view-map-btn', $openPopupMap).toggleClass('hide-map-btn');
+    });
+    $('.dropdown-menu > a', $filterSortDropdown).click(function () {
+        $('#dropdownMenuButton .sort-name', $filterSortDropdown).html($(this).data('sort-name'));
+    });
+    $('#FilterBtn').click(function () {
+        var $this = $(this)
+        $filterWrapper.toggleClass('d-none')
+            .toggleClass('position-fixed')
+        $('.filter-show', $this).toggleClass('d-none')
+        $('.filter-hide', $this).toggleClass('d-none')
+    })
+
+    var $filterCheckboxes = $('#FiltersCheckboxes')
+    var wHeight = window.innerHeight
+    var $searchLocationsInput = $('#searchLocations')
+    var filterWrapperHeight = $filterWrapper.height()
+    var filterCheckboxesHeight = $filterCheckboxes.height()
+    if (filterWrapperHeight >= wHeight) {
+        var newFilterHeight = wHeight - (filterWrapperHeight - filterCheckboxesHeight) - 20
+        $filterCheckboxes.css({maxHeight: newFilterHeight + 'px'})
+    }
+    $('a.clear-filters').click(function () {
+        var $this = $(this)
+        var propagateClearFilter = false
+        if ($('input[type="checkbox"]:checked', $filterCheckboxes).length) {
+            $('input[type="checkbox"]:checked', $filterCheckboxes).each(function () {
+                var $checkbox = $(this)
+                $checkbox.prop('checked', false)
+            })
+            propagateClearFilter = true
+        }
+        if ($searchLocationsInput.val()) {
+            $searchLocationsInput.val('')
+            propagateClearFilter = true
+        }
+        if (propagateClearFilter) {
+            reloadLocationList($this.data('url'))
+        }
+    })
+    $('#locationsData').on('click', 'a.trigger-clear-filters', function () {
+        $('a.clear-filters').trigger('click')
+    })
+});
+var PinIcon = L.Icon.extend({
+    options: {
+        iconUrl: iconUrl,
+        iconSize:     [20, 25],
+        shadowSize:   [20, 25],
+        iconAnchor:   [10, 35],
+        shadowAnchor: [4, 45],
+        popupAnchor:  [-3, -25]
+    }
+});
+var iconPins = {
+    '_': new PinIcon()
+}
+updateSortInput = function (sort, orientation = 'desc') {
+    $('input[name="sort"]', $mainForm).val(sort)
+    $('input[name="orientation"]', $mainForm).val(orientation)
+}
+var getImageIcon = function (ratingRoundedFive) {
+    var grade = ratingRoundedFive
+        ? ratingRoundedFive/10
+        : '--';
+    var gradientClass = ratingRoundedFive
+        ? 'gradient_' + ratingRoundedFive
+        : 'location-no-rating';
+    var icon = L.divIcon({
+        className: 'custom-div-icon',
+        html: `<div class='marker-pin ${gradientClass}'><span>${grade}</span></div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, -10]
+    });
+    return icon
+}
+var restaurantPin = new PinIcon();
+$mainForm.change(function () {
+    if (map) {
+        showMap()
+    }
+})
+var showMap = function () {
+    $mainForm.request('locationsList::onShowMap', {
+        success: function (data) {
+            planes = []
+            for (var key in data) {
+                var item = data[key]
+                if (parseFloat(item.address_lat) && parseFloat(item.address_long)) {
+                    planes.push([
+                        renderMapLocation(item),
+                        parseFloat(item.address_lat),
+                        parseFloat(item.address_long),
+                        item.rating_rounded_five,
+                        item.url,
+                    ])
+                }
+            }
+            if (map) {
+                resetMap()
+                return
+            }
+            $mapOpenStreet.html('')
+            if (window.mobileCheck) {
+                map = L.map('mapOpenStreet', {
+                    dragging: false,
+                    tap: false
+                })
+            } else {
+                map = L.map('mapOpenStreet')
+            }
+            var mapLink =
+                '<a href="/">KNK</a>';
+            L.tileLayer(
+                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+                    attribution: '&copy; ' + mapLink + ' Contributors',
+                    maxZoom: 18,
+                }
+            ).addTo(map);
+
+            if (planes.length) {
+                setTimeout(resetMap, 300)
+            }
+        }
+    });
+}
+
+var resetMap = function () {
+    var ppp = planes;
+    var j = 0;
+
+    map.eachLayer(function (layer) {
+
+        if (layer._latlng != undefined) {
+            map.removeLayer(layer);
+        }
+
+    });
+
+    var arrayOfLatLngs = []
+    var latSum = 0
+    var longSum = 0
+
+    for (var i = 0; i < ppp.length; i++) {
+        marker = new L
+            .marker(
+                [ ppp[i][1], ppp[i][2] ],
+                { icon: getImageIcon(ppp[i][3]), customUrl: ppp[i][4] }
+            )
+            .bindPopup(ppp[i][0])
+            .addTo(map);
+        marker.on('mouseover', function (e) {
+            this.openPopup();
+        });
+        marker.on('mouseout', function (e) {
+            this.closePopup();
+        })
+        marker.on('click', function (e) {
+            if (window.mobileCheck) {
+                this.openPopup();
+            } else {
+                window.open(this.options.customUrl)
+            }
+        })
+        if (ppp[i][1] && ppp[i][2]) {
+            arrayOfLatLngs.push([ppp[i][1],ppp[i][2]])
+            latSum += ppp[i][1]
+            longSum += ppp[i][2]
+        }
+    }
+    if (arrayOfLatLngs.length) {
+        var numberOfCoords = arrayOfLatLngs.length
+        map.setView([latSum / numberOfCoords, longSum / numberOfCoords], 13)
+        // var bounds = new L.LatLngBounds(arrayOfLatLngs);
+        // map.fitBounds(bounds);
+        // setTimeout(function () {
+        //     var zoom = map.getZoom()
+        //     var numberOfCoords = arrayOfLatLngs.length
+        //     zoom = zoom < 13 ? 13 : zoom
+        //     map.setZoom(zoom)
+        //     // map.setView([latSum / numberOfCoords, longSum / numberOfCoords], zoom)
+        //     console.log(latSum / numberOfCoords + 2, longSum / numberOfCoords + 5)
+        //     map.panTo(new L.LatLng(2, 5));
+        // }, 700)
+    }
+}
+
+function getImagePath(image)
+{
+    return image && image.path ? image.path : '';
+}
+
+function renderLocationImage(item)
+{
+    if (item.cover_image && item.cover_image.path) {
+        return `<div class="col-12 map-item-img">
+            <img src="${getImagePath(item.cover_image)}" alt="${item.title}" class="img-fluid map-item-img" />
+        </div>`
+    }
+    return ''
+}
+
+function oneLocationLink(href) {
+    window.open(href)
+}
+
+function renderMapLocation(item)
+{
+    var streetNumber = item.address_data.street_number ? item.address_data.street_numbe : ''
+    return `<div class="row" style="min-width:50px" onclick="oneLocationLink('${item.url}')">${renderLocationImage(item)}
+                <div class="col-12">${item.title}<hr/> Adresa: ${item.address_data.street} ${streetNumber} <hr></div>
+            </div>`
+}
+
+var scrollToForm = function () {
+    window.scrollToElement($('#mainForm'))
+}
+
+function reloadLocationList(url, data)
+{
+    LocationList.load(url, data, 'scrollToForm()')
+}
+
+function reloadLocationListSort(data)
+{
+    LocationList.load(locationListUrl, data)
+    updateSortInput(data.sort, data.orientation)
+}

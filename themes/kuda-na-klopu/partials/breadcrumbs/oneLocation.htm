@@ -1,0 +1,18 @@
+description = "Location Profile"
+
+[viewBag]
+==
+<div class="breadcrumb-wrapper">
+    <div class="container">
+        <a href="{{ 'home'|page }}">
+            {{ 'Naslovna'|_ }}
+        </a>
+        <a href="{{ 'location/p12-locations-search'|page }}">
+            {{ currentCity.title }}
+        </a>
+        <a href="{{ 'location/p20-locations-list'|page }}">
+            {{ currentCategory.title }}
+        </a>
+        <span>{{ location.title }}</span>
+    </div>
+</div>

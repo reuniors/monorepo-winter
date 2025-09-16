@@ -1,0 +1,23 @@
+title = "Grad-Opština Kategorija"
+url = "/:citySlug/:municipalitySlug/:categorySlug"
+is_hidden = 0
+layout = "Search"
+
+[viewBag]
+localeTitle[en] = "City Municipality Category"
+localeUrl[en] = "/:citySlug/:municipalitySlug/:categorySlug"
+==
+<?php
+function onInit() {
+    $citySlug = $this->param('citySlug');
+    $municipalitySlug = $this->param('municipalitySlug');
+    $categorySlug = $this->param('categorySlug');
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    return $controller->locationsMunicipality($citySlug, $municipalitySlug, $categorySlug);
+}
+function onShowRating() {
+    $this['ratingTypes'] = $this->page['ratingTypes'] = Reuniors\Knk\Models\LocationRating::$ratingTypes;
+    $this['validRatings'] = $this->page['validRatings'] = Reuniors\Knk\Models\LocationRating::$validRatings;
+}
+?>
+==

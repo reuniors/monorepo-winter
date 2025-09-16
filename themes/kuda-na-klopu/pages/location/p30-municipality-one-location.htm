@@ -1,0 +1,18 @@
+title = "Lokacija - Restoran - 2"
+url = "/:citySlug/:municipalitySlug/:categorySlug/:slug"
+is_hidden = 0
+layout = "Search"
+==
+<?php
+function onInit() {
+    $cmsController = new Cms\Classes\Controller;
+    $citySlug = $this->param('citySlug');
+    $municipalitySlug = $this->param('municipalitySlug');
+    $categorySlug = $this->param('categorySlug');
+    $slug = $this->param('slug');
+
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    return $controller->municipalityOneLocation($citySlug, $municipalitySlug, $categorySlug, $slug);
+}
+?>
+==

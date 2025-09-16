@@ -1,0 +1,8 @@
+name: 'Kuda Na Klopu'
+description: ''
+author: Reuniors
+homepage: ''
+code: kuda-na-klopu
+require:
+    - RainLab.Pages
+    - RainLab.Blog

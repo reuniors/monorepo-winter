@@ -1,0 +1,25 @@
+title = "Berbernica Tanja"
+url = "/zakazivanje/:citySlug?*"
+layout = "FeLayout"
+description = "Berbernica Tanja"
+is_hidden = 0
+
+[locationComponent]
+slug = "{{ :slug }}"
+
+[localePicker]
+==
+<!--Mask-->
+{% put headersScripts %}
+    {% partial 'fe/feHead' %}
+{% endput %}
+
+{% put bodyScripts %}
+    {% partial 'fe/feBody' %}
+{% endput %}
+<script>
+    __INIT_DATA__ = {
+        {# locationData: {{ locationComponent.locationData|raw }}, #}
+        locale: "{{ activeLocale ?? 'rs' }}"
+    }
+</script>

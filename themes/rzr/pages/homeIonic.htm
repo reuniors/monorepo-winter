@@ -1,0 +1,149 @@
+title = "Home"
+url = "/"
+layout = "ionicLayout"
+is_hidden = 0
+
+[localePicker]
+==
+{# <ion-header> #}
+{#    <ion-toolbar> #}
+{#        <ion-grid> #}
+{#            <ion-row> #}
+{#                <ion-col size="6"> #}
+{#                    Adresa #}
+{#                </ion-col> #}
+{#            </ion-row> #}
+{#        </ion-grid> #}
+{#    </ion-toolbar> #}
+{# </ion-header> #}
+<ion-content class="ion-no-padding">
+    {% partial 'site/top' %}
+    <section class="pb-4 bg-transparent -mt-24">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap">
+                <div class="lg:pt-12 pt-0 w-full px-4 text-center z-50">
+                    <div
+                        class="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg"
+                    >
+                        <div class="px-4 py-2 flex-auto">
+                            <h1 class="text-xl text-gray-600 font-semibold">{{ locationData.snippet ?? locationData.title }}</h1>
+                            {# news #}
+                            {% if locationData.news.count > 0 %}
+                            <div class="w-full bg-gray-700 rounded-lg p-2 text-white mt-2">
+                                <h3 class="text-lg text-white font-semibold">
+                                    <ion-icon name="megaphone-outline" slot="start"></ion-icon>
+                                    {{ 'Obaveštenja'|_ }}
+                                </h3>
+                                {% for news in locationData.news %}
+                                    <p class="mt-1 mb-0 font-bold  text-left">
+                                        {{ news.title }}:
+                                    </p>
+                                    <p class="mt-0 mb-0 text-left">
+                                        {{ news.description }}
+                                    </p>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <p class="mt-0 mb-0 text-gray-600">
+                                {{ locationData.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- WORKERS -->
+    <section>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <h2 class="text-2xl py-2">
+                        <ion-icon name="people-outline" slot="start"></ion-icon>
+                        {{ 'Berberi'|_ }}
+                    </h2>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                {% for worker in locationData.workers %}
+                    <ion-col size="12" size-md="6" size-xl="4">
+                        <ion-card>
+                            <ion-card-header>
+                                <img src="{{ worker.avatar.path|resize(600, 450, {mode: 'crop'}) }}"
+                                     alt="{{ worker.name }}" class="w-full h-auto"/>
+                            </ion-card-header>
+                            <ion-card-content>
+                                <ion-card-title>{{ worker.full_name }}</ion-card-title>
+                                <div class="pt-2 text-lg">{{ worker.description }}</div>
+                            </ion-card-content>
+                            <ion-card-content>
+                                <ion-button expand="block" fill="outline" color="dark"
+                                            href="/zakazivanje/zakazi-novo?step=1&worker={{ worker.id }}">
+                                    {{ 'Zakazivanje termina'|_ }}
+                                </ion-button>
+                            </ion-card-content>
+                        </ion-card>
+                    </ion-col>
+                {% endfor %}
+            </ion-row>
+        </ion-grid>
+    </section>
+    <!-- Contact -->
+    <section>
+        <ion-grid>
+            <ion-row>
+                <ion-col>
+                    <h2 class="text-2xl py-2">
+                        <ion-icon name="time-outline" slot="start"></ion-icon>
+                        {{ 'Radno vreme'|_ }}
+                    </h2>
+                    <ion-list class="w-full">
+                        {% for workingTime in locationData.working_hours %}
+                            <ion-item>
+                                <ion-label slot="start">{{ workingTime.name }}</ion-label>
+                                <ion-label slot="end">{{ workingTime.time_from|date('H:i') }}
+                                    - {{ workingTime.time_to|date('H:i') }}</ion-label>
+                            </ion-item>
+                        {% endfor %}
+                    </ion-list>
+                </ion-col>
+                <ion-col size="12" size-md="6">
+                    <a href="{{ locationData.google_map_url }}" target="_blank">
+                        <img src="{{ 'assets/img/tanja-mapa.jpeg'|theme }}"
+                             alt="Frizersko Berberski Salon Tanja 2002 Kragujevac" class="w-full h-auto"/>
+                    </a>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </section>
+
+    <ion-footer>
+        <ion-toolbar>
+            <ion-title>
+                © <a href="https://rzr.rs">RZR.rs</a> | 2024
+            </ion-title>
+        </ion-toolbar>
+    </ion-footer>
+</ion-content>
+<ion-footer>
+    <ion-grid>
+        <ion-row class="ion-justify-content-between">
+            <ion-col size="9" size-md="auto">
+                <ion-item class="text-center" href="{{ locationData.google_map_url }}" detail="false" target="_blank">
+                    <ion-icon name="navigate-outline" class="mr-2"></ion-icon>
+                    <ion-text>
+                        {{ locationData.street_full }}
+                    </ion-text>
+                </ion-item>
+            </ion-col>
+            <ion-col class="text-right" size="3" size-md="auto">
+                <ion-item class="text-right justify-end bg-transparent"
+                          href="tel:{{ locationData.phone_data.phone_numbers[0] }}" detail="false" target="_blank">
+                    <ion-icon slot="end" name="call-outline" class="ion-no-margin"></ion-icon>
+                    <ion-text slot="end"
+                              class="hidden md:block">{{ locationData.phone_data.phone_numbers[0] }}</ion-text>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

@@ -1,0 +1,33 @@
+[locationComponent]
+==
+<!DOCTYPE html>
+<html lang="{{ activeLocale == 'eng' ? 'en' : 'sr' }}">
+<head>
+    <meta charset="utf-8">
+{#    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">#}
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{{ this.page.title ?? pageMeta.metaData.title }}</title>
+
+    <meta name="description" content="{{ this.page.description ?? pageMeta.metaData.metaDescription }}" />
+
+    <meta property="og:title" content="{{ this.page.title ?? pageMeta.metaData.title }}" />
+    <meta property="og:description" content="{{ this.page.description ?? pageMeta.metaData.metaDescription }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ 'assets/img/berbernica_tanja_cover.jpg'|theme }}" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="217" />
+    <meta property="og:image:height" content="221" />
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'assets/img/logo/favicon.ico'|theme }}" />
+{#    <link rel="shortcut icon" type="image/x-icon" href="{{ 'assets/images/favicon.png'|theme }}" />#}
+
+    {% placeholder headersScripts %}
+</head>
+<body onunload="">
+    {% page %}
+
+    <div id="root"></div>
+    {% placeholder bodyScripts %}
+</body>
+</html>

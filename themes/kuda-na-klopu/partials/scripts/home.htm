@@ -1,0 +1,26 @@
+<script type="application/javascript">
+    var $tagsList = $('<ul class="special-tags-list">\
+        {% for tag in tagsSpecial.tags %}\
+        <li data-key="{{ tag.slug }}" data-value="{{ tag.title }}" class="dropdown-item">\
+            <span class="tag-content">\
+                <i class="{{ tag.metadata.icon }}" aria-hidden="true"></i>\
+                {{ tag.title }}\
+            </span>\
+        </li>\
+        {% endfor %}\
+    </ul>')
+    var homeLabels = {
+        select2: {
+            errorLoading: '{{ 'Došlo je do greške'|_ }}',
+            maximumSelected: '{{ 'Pretraži odabrano'|_ }}',
+            inputTooShort_1: '{{ 'Potrebno je uneti najmanje '|_ }}',
+            inputTooShort_2: '{{ 'karaktera'|_ }}',
+            noResults: '{{ 'Nema rezultata'|_ }}',
+            searching: '{{ 'Pretražujem...'|_ }}',
+        },
+        search: '{{ 'Pretraga' }}'
+    }
+</script>
+<script src="{{ [
+    "assets/js/custom/homePage#{minJs}.js",
+]|theme }}.js?v={{ knkPluginVersion }}"></script>

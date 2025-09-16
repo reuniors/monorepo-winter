@@ -1,0 +1,16 @@
+title = "Location popup"
+url = "/location-popup/:locationId"
+is_hidden = 0
+
+[location]
+citySlug = "{{ :citySlug }}"
+municipalitySlug = "{{ :municipalitySlug }}"
+categorySlug = "{{ :categorySlug }}"
+slug = "{{ :slug }}"
+==
+<h3>Stari jelovnik</h3>
+{% if location.old_menu_data %}
+    {{ location.old_menu_data|raw }}
+{% else %}
+    Nema starog jelovnika
+{% endif %}

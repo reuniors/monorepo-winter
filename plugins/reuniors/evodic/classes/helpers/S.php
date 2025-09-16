@@ -14,7 +14,7 @@ class S extends Str
             ? strtolower($value)
             : $value;
         return parent::camel(
-            LanguageHelpers::getTranslated($value)
+            \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($value)
         );
     }
 
@@ -25,7 +25,7 @@ class S extends Str
             ? $asciiValue . ' ' . $extendTitle
             : $asciiValue;
         $title = $lc ? strtolower(Str::ascii($title)) : Str::ascii($title);
-        $title = LanguageHelpers::getTranslated($title);
+        $title = \Reuniors\Base\Classes\Helpers\LanguageHelpers::getTranslated($title);
         return parent::slug($title, $separator, $language);
     }
 }

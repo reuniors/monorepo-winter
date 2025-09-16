@@ -1,0 +1,12 @@
+description = "banner"
+
+[viewBag]
+==
+{% for oneBanner in banners %}
+    {% set width = width ? width : oneBanner.banner_zone.resize_data.width %}
+    {% set height = height ? height : oneBanner.banner_zone.resize_data.height %}
+    {% set options = oneBanner.banner_zone.resize_data.other %}
+    <img src="{{ oneBanner.banr_image|resize(width, height, options) }}" class="img-fluid"
+         width="{{ width }}" height="{{ height }}" alt="{{ oneBanner.banr_image.title ?? 'baner' }}"
+    />
+{% endfor %}

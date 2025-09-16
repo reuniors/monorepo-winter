@@ -1,0 +1,28 @@
+[viewBag]
+==
+{% set link = link ? link : ('location/p12-locations-search'|page) %}
+{% for tag in tags %}
+    {% if tag.tag_image %}
+    <div>
+        <div class="one-restaurant-type">
+            <div class="image-wrapper">
+                <a href="{{ link }}?tags={{ tag.slug }}">
+                    <img
+                        class="img-fluid"
+                        src="{{ tag.tag_image.path|resize(300, 200, {mode: 'crop'}) }}"
+                        data-src="{{ tag.tag_image.filename }}"
+                        alt="{{ tag.tag_image.description }}"
+                        height="200"
+                        width="300"
+                    />
+                </a>
+            </div>
+            <div class="title">
+                <a href="{{ link }}?tags={{ tag.slug }}">
+                    {{ tag.title }}
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endfor %}

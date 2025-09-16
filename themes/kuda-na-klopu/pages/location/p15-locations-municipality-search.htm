@@ -1,0 +1,23 @@
+title = "Pretraga Sve Kategorije"
+url = "/:citySlug/:municipalitySlug/gde-jesti"
+is_hidden = 0
+layout = "Search"
+
+[viewBag]
+localeTitle[en] = "Search for All Categories"
+localeUrl[en] = "/:citySlug/:municipalitySlug/search"
+==
+<?php
+function onInit() {
+    $cmsController = $this->controller;
+    $citySlug = $this->param('citySlug');
+    $municipalitySlug = $this->param('municipalitySlug');
+    $controller = new Reuniors\Knk\Controllers\FrontendHelpers();
+    return $controller->locationsSearch($citySlug, $municipalitySlug);
+}
+function onShowRating() {
+    $this['ratingTypes'] = $this->page['ratingTypes'] = Reuniors\Knk\Models\LocationRating::$ratingTypes;
+    $this['validRatings'] = $this->page['validRatings'] = Reuniors\Knk\Models\LocationRating::$validRatings;
+}
+?>
+==

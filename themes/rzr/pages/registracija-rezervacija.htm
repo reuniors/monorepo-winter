@@ -1,0 +1,15 @@
+title = "registracija-rezervacija"
+url = "/registracija-rezervacija"
+layout = "registrationLayout"
+is_hidden = 0
+
+[contactForm]
+==
+<?php
+function onStart()
+{
+    return Redirect::to('/partneri');
+}
+?>
+==
+

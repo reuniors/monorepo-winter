@@ -1,0 +1,7 @@
+[viewBag]
+==
+{% for city in cities %}
+    <option value="{{ city.slug }}" {% if currentCity == city.slug %} selected {% endif %}>
+        {{ city.title }}
+    </option>
+{% endfor %}

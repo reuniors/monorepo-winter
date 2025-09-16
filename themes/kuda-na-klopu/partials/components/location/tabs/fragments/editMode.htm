@@ -1,0 +1,39 @@
+<div class="row">
+    <ul class="nav nav-pills nav-fill">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">{{ 'Jelovnik' }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">{{ 'Dodaci' }}</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">NN</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+        </li>
+    </ul>
+</div>
+<script>
+    var initFoodData = function () {
+        {#newViewModel.foodList = {#}
+        {#    {% for foodCategory in location.foodMenu.food_categories %}#}
+        {#    {% for food in foodCategory.foods %}#}
+        {#    '{{ food.name }}': {#}
+        {#        id: {{ food.id }},#}
+        {#        image: '{% if food.food_image.path %}{{ food.food_image.path|resize(500, 200, {mode: 'crop'}) }}{% endif %}',#}
+        {#        title: '{{ food.title }}',#}
+        {#        description: '{{ food.description }}',#}
+        {#        price: {% if food.price %} {{ food.price }} {% else %} 0 {% endif %},#}
+        {#        foodAddonGroups: [],#}
+        {#    },#}
+        {#    {% endfor %}#}
+        {#    {% endfor %}#}
+        {#};#}
+        {#newViewModel.locationSlug = '{{ location.slug }}'#}
+        {#{% if not isMenuLoaded %}#}
+        {#ko.applyBindings(newViewModel, $('#menuTableData')[0]);#}
+        {#{% endif %}#}
+        {#newViewModel.toggleSimpleFoodMenuMode()#}
+    }
+</script>

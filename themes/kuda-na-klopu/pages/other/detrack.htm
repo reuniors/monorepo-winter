@@ -1,0 +1,49 @@
+title = "Detrack"
+url = "/detrack"
+layout = "Delivery"
+is_hidden = 0
+
+[account]
+paramCode = "code"
+forceSecure = 0
+requirePassword = 0
+
+[session]
+security = "all"
+allowedUserGroups[] = "owners"
+redirect = 404
+==
+<?php
+function onSendDeliveryOrder()
+{
+    $t = time();
+    $data = post();
+    $delivery = new Detrack\DetrackCore\Resource\Job([
+      "date" => date("Y-m-d", $t),
+      "do_number" => time(),
+      "address" => $data['address'],
+      "instructions" => $data['instructions'],
+      "job_time" => $data['job_time'],
+    ]);
+    
+    $delivery->save();
+}
+?>
+==
+<div class="container">
+    <!-- AJAX enabled form -->
+    <form data-request="onSendDeliveryOrder" data-request-update="deliveryStatus: '#myDiv'" method="POST">
+    
+        <!-- Input two values -->
+        <input name="address" placeholder="Adresa">
+        <input name="instructions" placeholder="Instrukcije">
+        <input name="job_time" placeholder="Vreme" type="time">
+    
+        <!-- Action button -->
+        <button type="submit">Posalji porudzbini</button>
+    
+    </form>
+    
+    <!-- Result container -->
+    <div id="myDiv"></div>
+</div>

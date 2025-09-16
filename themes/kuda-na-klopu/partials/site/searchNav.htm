@@ -1,0 +1,89 @@
+description = "Nav with Dropdown"
+
+[viewBag]
+
+[staticMenu]
+code = "mainmenu"
+
+==
+<?php
+function onStart()
+{
+    $pluginName = 'Reuniors.Knk';
+    $this->addCss([
+        'assets/css/magic-check.min.css',
+    ], $pluginName);
+    $this->addJs([
+        'assets/js/select2.full.min.js',
+    ], $pluginName);
+}
+?>
+==
+<!--Navbar-->
+<div class="navbar navbar-expand-lg navbar-dark search-navbar">
+    <div class="container-fluid">
+        <!-- Navbar brand -->
+        <a class="navbar-brand" href="{{ 'home'|page }}">
+            {% set resizedImage = 'images/knk-logo.png'|media %}
+            <img src="{{ resizedImage }}" class="img-fluid" alt="Kuda na klopu logo"
+                 height="{{ resizedImage | imageHeightE }}" width="{{ resizedImage | imageWidthE }}"
+            />
+        </a>
+
+
+        <!-- Collapse button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse search-menu" id="navbarSupportedContent">
+            <div class="header-user {{ user.name ? 'is-logged' : 'not-logged' }} d-block d-lg-none" style="text-align: right">
+                <a href="#" class="btn-user-login">
+                    <i class="fa fa-user"></i>
+                    {{ user.name ? user.name : 'Ulogujte se'|_ }}
+                </a>
+            </div>
+            <!-- Links -->
+            <div class="mx-auto text-center header-navbar-search">
+                <form method="POST" action="{{ 'home'|page }}">
+                    <div class="row header-search-row">
+                        <div class="select-locations col-md-4 header-search-col">
+                            <select name="city"
+                                    class="form-control select-2-hidden-select select-2-header-dropdown"
+                                    id="citySelectFilter"
+                                    required
+                            >
+                                {% partial 'components/city/listDropdown' cities=cityList.cities currentCity=this.param.citySlug %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-lg-6 header-search-col">
+                            <select class="form-control js-data-example-ajax city-depending select-2-hidden-select"
+                                    id="selectTagsFilter"
+                                    name="tags_filters[]"
+                                    data-placeholder="{{ 'Šta tražite...'|_ }}"
+                            >
+                            </select>
+                        </div>
+                        <input type="hidden" value="{{ 'gde-jesti'|_ }}" name="category" />
+                        <div class="col-md-2 search-submit header-search-col">
+                            <button type="submit" class="form-control btn">Pretraži</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="header-user {{ user.name ? 'is-logged' : 'not-logged' }} d-none d-lg-block">
+                <a href="#" class="btn-user-login">
+                    <i class="fa fa-user"></i>
+                    {{ user.name ? user.name : 'Ulogujte se'|_ }}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% put customScripts %}
+<script src="{{
+    "assets/js/custom/searchNav#{minJs}.js"
+|theme }}"></script>
+{% endput %}
+<!--/.Navbar-->

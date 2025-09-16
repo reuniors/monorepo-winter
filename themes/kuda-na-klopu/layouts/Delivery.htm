@@ -1,0 +1,57 @@
+==
+<?php
+function onInit()
+{
+    Detrack\DetrackCore\Client\DetrackClientStatic::setApiKey(env('DETRACK_API_KEY'));
+}
+?>
+==
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>{{ this.page.title }}</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ 'assets/images/favicon.png'|theme }}" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{ 'assets/css/fontawesome-all.min.css'|theme }}">
+    <link rel="stylesheet" href="{{ 'assets/css/font-awesome.min.css'|theme }}">
+    <link rel="stylesheet" href="{{ 'assets/css/select2.min.css'|theme }}">
+    <link rel="stylesheet" href="{{ 'assets/css/magic-check.min.css'|theme }}">
+
+    <link href="{{ [
+        'assets/css/bootstrap.min.css',
+        'assets/css/mdb.min.css',
+    ]|theme }}.css" rel="stylesheet">
+
+    {% styles %}
+
+    <link href="{{ [
+        'assets/css/style.css',
+    ]|theme }}.css" rel="stylesheet">
+
+    {% placeholder customCss %}
+</head>
+<body data-spy="scroll" data-target="#FoodMenuList" data-offset="10">
+
+    {% partial 'site/searchNav' %}
+    {% page %}
+    {% partial 'footer/standard' %}
+
+    <script src="{{ [
+        'assets/js/jquery-3.2.1.min.js',
+        'assets/js/bootstrap.min.js',
+        'assets/js/mdb.min.js',
+        'assets/js/bootbox.min.js',
+        'assets/js/popper.min.js',
+        'assets/js/common.js'
+    ]|theme }}"></script>
+
+
+    {% framework extras %}
+    {% scripts %}
+    {% placeholder customScripts %}
+</body>
+</html>
