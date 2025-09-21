@@ -24,7 +24,7 @@ use Reuniors\Reservations\Http\Actions\V1\User\Client\WorkerClientDataGetOneActi
 use Reuniors\Reservations\Http\ActionsFe\FeGetActiveNewsAction;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 
-Route::group(['prefix' => 'api/v1', 'middleware' => [
+Route::group(['prefix' => 'api/v1/rzr', 'middleware' => [
     'bindings',
     'userLanguage',
     JsonMiddleware::class,

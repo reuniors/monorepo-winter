@@ -17,7 +17,12 @@
     ##
     # RewriteCond %{HTTPS} off
     # RewriteRule (.*) https://%{SERVER_NAME}/$1 [L,R=301]
-
+ ##
+    ## Authorization header
+    ##
+    RewriteCond %{HTTP:Authorization} ^(.*)
+    RewriteRule .* - [e=HTTP_AUTHORIZATION:%1]
+    
     ##
     ## Paths explicitly blocked from being handled by the server
     ##

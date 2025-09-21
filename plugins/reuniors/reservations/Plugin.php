@@ -1,9 +1,7 @@
 <?php
 namespace Reuniors\Reservations;
 
-use Illuminate\Support\Facades\Log;
 use Kreait\Laravel\Firebase\ServiceProvider;
-use Lorisleiva\Actions\ActionServiceProvider;
 use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservationPendingStatusAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Mail\SendGoogleReviewEmailAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Mail\SendPromoCodeToMailAction;
