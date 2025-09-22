@@ -4,7 +4,7 @@ namespace Reuniors\Knk\Models;
 use Winter\Storm\Database\Traits\Validation;
 use Winter\Storm\Support\Str;
 use Model;
-use Reuniors\Base\Models\City;
+use Reuniors\Knk\Models\RegionCity;
 
 /**
  * Model
@@ -33,7 +33,7 @@ class LocationLikesHistory extends Model
 
     public $belongsTo = [
         'location' => Location::class,
-        'city' => City::class,
+        'city' => RegionCity::class,
     ];
 
     protected static function boot()

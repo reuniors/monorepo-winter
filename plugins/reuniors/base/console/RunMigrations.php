@@ -105,11 +105,24 @@ class RunMigrations extends Command
                 $table->increments('id')->unsigned();
                 $table->timestamp('created_at')->nullable();
                 $table->timestamp('updated_at')->nullable();
-                $table->string('name');
+                $table->timestamp('deleted_at')->nullable();
+                $table->string('name', 191);
+                $table->string('slug', 191);
                 $table->text('description')->nullable();
-                $table->string('color')->nullable();
-                $table->integer('tag_group_id')->unsigned()->nullable();
-                $table->foreign('tag_group_id')->references('id')->on('reuniors_base_tag_groups')->onDelete('set null');
+                $table->text('metadata')->nullable();
+                $table->text('metadata_t')->nullable();
+                $table->integer('tag_group_id')->nullable()->unsigned();
+                $table->integer('sort_order')->default(0);
+                $table->string('title', 191);
+                $table->smallInteger('show_on_search')->unsigned()->default(0);
+                $table->smallInteger('show_in_filters')->unsigned()->default(1);
+                $table->bigInteger('priority')->default(1000);
+                $table->smallInteger('active')->unsigned()->default(0);
+                $table->integer('number_of_words')->nullable()->unsigned();
+                $table->smallInteger('is_food_tag')->unsigned()->default(1);
+                $table->string('icon')->nullable();
+                $table->double('value', 10, 0)->nullable();
+                // Foreign keys will be added after table creation
             });
         };
     }

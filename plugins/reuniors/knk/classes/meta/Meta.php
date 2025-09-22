@@ -8,7 +8,7 @@ use RainLab\Translate\Models\Message;
 use Reuniors\Knk\Classes\CacheData;
 use Reuniors\Knk\Classes\Helpers\ArrayH;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Base\Models\City;
+use Reuniors\Knk\Models\RegionCity;
 
 class Meta
 {
@@ -125,7 +125,7 @@ class Meta
         $cityData = $citiesData[$citySlug];
         $description = $categoryData['description']
             ? Message::trans($categoryData['description'], [
-                'in' => City::$prepositionOptions[
+                'in' => RegionCity::$prepositionOptions[
                     ArrayH::getDeepData('preposition', $cityData['metadata'], 'in')
                 ],
                 'city' => ArrayH::getDeepData('case.dativ', $cityData['metadata'], ''),

@@ -191,7 +191,7 @@ class Plugin extends PluginBase
             CustomHandler::class
         );
         UserModel::extend(function(UserModel $model) {
-            $model->belongsTo['city'] = ['\Reuniors\Base\Models\City'];
+            $model->belongsTo['city'] = ['\Reuniors\Knk\Models\RegionCity'];
             $model->hasMany['user_badge_history'] = [
                 'Reuniors\Knk\Models\UserBadgeHistory',
                 'key' => 'user_id'

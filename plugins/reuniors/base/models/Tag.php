@@ -26,6 +26,7 @@ class Tag extends Model
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
         'name',
+        'title',
         'description',
         ['slug', 'index' => true]
     ];
@@ -35,28 +36,39 @@ class Tag extends Model
      */
     protected $fillable = [
         'name',
-        'description',
-        'color',
-        'sort_order',
+        'title',
         'slug',
+        'description',
         'metadata',
-        'tag_group_id',
         'metadata_t',
+        'tag_group_id',
+        'sort_order',
         'show_on_search',
-        'priority',
         'show_in_filters',
+        'priority',
         'active',
         'number_of_words',
         'is_food_tag',
         'icon',
+        'value',
     ];
 
     /**
      * @var array Validation rules
      */
     public $rules = [
-        'name' => 'required|string|max:255',
-        'slug' => 'required|unique:reuniors_base_tags',
+        'name' => 'required|string|max:191',
+        'title' => 'required|string|max:191',
+        'slug' => 'required|string|max:191|unique:reuniors_base_tags',
+        'tag_group_id' => 'nullable|exists:reuniors_base_tag_groups,id',
+        'sort_order' => 'integer',
+        'show_on_search' => 'boolean',
+        'show_in_filters' => 'boolean',
+        'priority' => 'integer',
+        'active' => 'boolean',
+        'number_of_words' => 'nullable|integer',
+        'is_food_tag' => 'boolean',
+        'value' => 'nullable|numeric',
     ];
 
     /**

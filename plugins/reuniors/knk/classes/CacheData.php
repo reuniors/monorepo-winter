@@ -2,7 +2,7 @@
 
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Base\Models\City;
+use Reuniors\Knk\Models\RegionCity;
 use Cache;
 
 class CacheData
@@ -42,7 +42,7 @@ class CacheData
 
     protected static function getCitiesLocations()
     {
-        $cities = City::where('active', 1)
+        $cities = RegionCity::where('active', 1)
             ->get();
         $cachedCities = [];
         foreach ($cities as $city) {
@@ -84,7 +84,7 @@ class CacheData
     {
         $categories = Category::where('active', 1)
             ->get();
-        $cities = City::where('active', 1)
+        $cities = RegionCity::where('active', 1)
             ->get();
         $cachedCities = [];
         foreach ($cities as $city) {
@@ -149,12 +149,12 @@ class CacheData
     {
         switch ($name) {
             case 'city-data':
-                return City::where('active', 1)
+                return RegionCity::where('active', 1)
                     ->get(['slug', 'metadata', 'description', 'title', 'id', 'parent_city_id as parentCityId'])
                     ->keyBy('slug')
                     ->toArray();
             case 'cities-municipalities':
-                return City::where('active', 1)
+                return RegionCity::where('active', 1)
                     ->with('parent_city')
                     ->get()
                     ->pluck('parent_city.slug', 'slug');
@@ -168,7 +168,7 @@ class CacheData
                     ->keyBy('slug')
                     ->toArray();
             case 'cities-with-locations-count':
-                $allCities = City::query()
+                $allCities = RegionCity::query()
                     ->select(
                         'slug', 'title', 'id', 'parent_city_id as parentCityId'
                     )

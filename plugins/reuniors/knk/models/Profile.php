@@ -4,6 +4,7 @@ namespace Reuniors\Knk\Models;
 use System\Models\File;
 use Winter\User\Models\User;
 use Model;
+use Reuniors\Base\Models\Tag;
 
 class Profile extends Model
 {

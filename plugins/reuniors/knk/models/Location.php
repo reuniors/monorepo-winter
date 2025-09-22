@@ -7,8 +7,10 @@ use October\Rain\Database\Traits\SoftDelete;
 use October\Rain\Database\Traits\Sortable;
 use October\Rain\Database\Traits\Validation;
 use Reuniors\Comments\Models\Comments;
-use Reuniors\Base\Models\City;
+use Reuniors\Knk\Models\RegionCity;
 use Reuniors\Knk\Facades\Globals;
+use Reuniors\Base\Models\Tag;
+use Reuniors\Base\Models\TagGroup;
 use Reuniors\Knk\Models\FileImage\FileImageSquare;
 use Reuniors\Knk\Models\FileImage\FileImageWide;
 use Winter\Storm\Exception\ValidationException;
@@ -234,7 +236,7 @@ class Location extends MariaDbBase
     ];
 
     public $belongsTo = [
-        'city' => [City::class, 'order' => 'name'],
+        'city' => [RegionCity::class, 'order' => 'name'],
         'parent' => [Location::class, 'order' => 'name'],
         'badge_tag_group' => [
             TagGroup::class,

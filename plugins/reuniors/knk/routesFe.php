@@ -47,7 +47,7 @@ use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 
 Route::group(
     [
-        'prefix' => 'api/v1/fe',
+        'prefix' => 'api/v1/knk/fe',
         'middleware' => [
             JsonMiddleware::class,
             EnsureFrontendRequestsAreStateful::class,

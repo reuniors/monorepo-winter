@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\URL;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Base\Models\City;
+use Reuniors\Knk\Models\RegionCity;
 
 class CachePagesData
 {
@@ -179,12 +179,12 @@ class CachePagesData
     {
         switch ($name) {
             case 'city-data':
-                return City::where('active', 1)
+                return RegionCity::where('active', 1)
                     ->get(['slug', 'metadata', 'description', 'title'])
                     ->keyBy('slug')
                     ->toArray();
             case 'cities-municipalities':
-                return City::where('active', 1)
+                return RegionCity::where('active', 1)
                     ->with('parent_city')
                     ->get()
                     ->pluck('parent_city.slug', 'slug');

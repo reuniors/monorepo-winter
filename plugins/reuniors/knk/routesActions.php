@@ -27,7 +27,7 @@ use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 Route::get('proxy/video-review/image', FeGetLocationVideoReviewImageAction::class);
 
 Route::group(
-    ['prefix' => 'api/v1', 'middleware' => [
+    ['prefix' => 'api/v1/knk', 'middleware' => [
         JsonMiddleware::class,
         EnsureFrontendRequestsAreStateful::class,
         'throttle:60,1',

@@ -45,7 +45,7 @@ class Banner extends Model
             'order' => 'name'
         ],
         'city' => [
-            'Reuniors\Base\Models\City',
+            'Reuniors\Knk\Models\RegionCity',
             'order' => 'name'
         ],
         'connected_location' => [
