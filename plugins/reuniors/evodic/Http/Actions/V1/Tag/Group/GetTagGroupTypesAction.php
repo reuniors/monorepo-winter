@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class GetTagGroupTypesAction
 {

@@ -4,7 +4,7 @@ use Illuminate\Database\Query\JoinClause;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FeGetCityLocations extends BaseAction
 {
@@ -20,7 +20,7 @@ class FeGetCityLocations extends BaseAction
     public function handle(array $attributes = [])
     {
         $citySlug = $attributes['citySlug'];
-        $cityDataIds = RegionCity::query()
+        $cityDataIds = City::query()
             ->where('slug', $citySlug)
             ->orWhereHas('parent_city', function ($query) use ($citySlug) {
                 $query->where('slug', $citySlug);

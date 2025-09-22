@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Components;
 
 use Cms\Classes\ComponentBase;
-use Reuniors\Knk\Models\Tag;
+use Reuniors\Base\Models\Tag;
 
 class TagsComponent extends BaseKnkComponent
 {

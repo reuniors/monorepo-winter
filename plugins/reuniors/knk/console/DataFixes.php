@@ -14,9 +14,9 @@ use Reuniors\Knk\Models\Food;
 use Reuniors\Knk\Models\FoodAddonGroup;
 use Reuniors\Knk\Models\FoodCategory;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 use Reuniors\Knk\Models\RestaurantMenu;
-use Reuniors\Knk\Models\Tag;
+use Reuniors\Base\Models\Tag;
 use Symfony\Component\Console\Input\InputArgument;
 use Illuminate\Support\Facades\DB;
 use Winter\Storm\Network\Http;
@@ -252,13 +252,13 @@ class DataFixes extends Command
     {
 //        $citiesJson = Storage::disk('local')->get('uploads/private/serbianCities.json');
         $citiesJson = Http::get('https://gist.githubusercontent.com/urosran/98bc0de6f03c2fecc0b0e3fa15c706c5/raw/d0f73ae5b00b1e876fe3cece1a8d346e45fca757/srbija-svi-gradovi.json');
-        $localCities = RegionCity::get()->keyBy('title');
+        $localCities = City::get()->keyBy('title');
         if ($citiesJson) {
             $cities = json_decode($citiesJson, true);
             $citiesNames = array_column($cities, 'city');
             foreach ($cities as $city) {
                 if (!isset($localCities[($city['city'])])) {
-                    RegionCity::create([
+                    City::create([
                         'active' => false,
                         'title' => $city['city'],
                         'slug' => Str::slug($city['city']),
@@ -943,7 +943,7 @@ class DataFixes extends Command
     {
         $cityId = 1012;
         $bgCityId = 1007;
-        $city = RegionCity::where('id', $cityId);
+        $city = City::where('id', $cityId);
         $locationTitles = [];
         foreach ($locationTitles as $title) {
             $locations = Location::where('title', $title)

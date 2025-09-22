@@ -35,11 +35,11 @@ class LocationBadgeHistory extends Model
             'order' => 'name'
         ],
         'tag' => [
-            'Reuniors\Knk\Models\Tag',
+            'Reuniors\Base\Models\Tag',
             'order' => 'name'
         ],
         'tag_group' => [
-            'Reuniors\Knk\Models\TagGroup',
+            'Reuniors\Base\Models\TagGroup',
             'order' => 'name'
         ],
     ];

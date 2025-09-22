@@ -6,8 +6,8 @@ use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\LocationBadgeHistory;
 use Reuniors\Knk\Models\LocationRating;
 use Reuniors\Knk\Models\LocationRatingHistory;
-use Reuniors\Knk\Models\Tag;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\Tag;
+use Reuniors\Base\Models\TagGroup;
 use Reuniors\Knk\Models\UserBadgeHistory;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 

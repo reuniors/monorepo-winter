@@ -52,7 +52,7 @@ class LocationWorker extends Model
     protected $jsonable = ['metadata', 'phone_data'];
 
     public $belongsTo = [
-        'city' => 'Reuniors\Evodic\Models\City',
+        'city' => 'Reuniors\Base\Models\City',
         'user' => 'RainLab\User\Models\User',
     ];
 

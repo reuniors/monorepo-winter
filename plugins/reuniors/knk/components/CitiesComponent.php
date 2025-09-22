@@ -5,7 +5,7 @@ use App;
 use Reuniors\Knk\Classes\HelperCommon;
 use Url;
 use Cms\Classes\ComponentBase;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class CitiesComponent extends BaseKnkComponent
 {
@@ -43,7 +43,7 @@ class CitiesComponent extends BaseKnkComponent
 
     public function getCities()
     {
-        return RegionCity::listFrontEnd([
+        return City::listFrontEnd([
             'withMunicipality' => $this->property('withMunicipality'),
             'perPage' => $this->property('perPage'),
             'pageNumber' => $this->property('pageNumber'),

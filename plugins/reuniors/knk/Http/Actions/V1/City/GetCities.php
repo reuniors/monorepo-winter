@@ -16,6 +16,7 @@ class GetCities
             'onlyConnected' => 'boolean',
         ];
     }
+    
     public function handle($attributes = [])
     {
         $cities = CacheData::get('cities-with-locations-count') ?? [];

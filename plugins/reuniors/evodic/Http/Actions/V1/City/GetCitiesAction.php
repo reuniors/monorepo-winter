@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\City;
 
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Models\City;
+use Reuniors\Base\Models\City;
 
 class GetCitiesAction
 {

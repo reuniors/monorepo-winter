@@ -1,4 +1,4 @@
 title: Countries
-modelClass: Reuniors\Evodic\Models\Country
+modelClass: Reuniors\Base\Models\Country
 toolbar:
     buttons: reorder_toolbar

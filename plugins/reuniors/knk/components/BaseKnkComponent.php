@@ -12,7 +12,7 @@ use Reuniors\Knk\Classes\Redirect404Exception;
 use Cache;
 use App;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 use System\Models\PluginVersion;
 
 abstract class BaseKnkComponent extends ComponentBase
@@ -201,8 +201,8 @@ abstract class BaseKnkComponent extends ComponentBase
             if ($hasTab) {
                 $pageFileName = $tabPage;
             }
-            $pageFileName = $hasMunicipality && isset(RegionCity::$linkMunicipalityPages[$pageFileName])
-                ? RegionCity::$linkMunicipalityPages[$pageFileName]
+            $pageFileName = $hasMunicipality && isset(City::$linkMunicipalityPages[$pageFileName])
+                ? City::$linkMunicipalityPages[$pageFileName]
                 : $pageFileName;
             $canonicalUrl = $cmsController->pageUrl($pageFileName, $properties);
             $defaultPostfix = '/default';

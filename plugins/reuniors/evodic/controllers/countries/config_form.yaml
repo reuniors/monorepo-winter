@@ -1,6 +1,6 @@
 name: Countries
 form: $/reuniors/evodic/models/country/fields.yaml
-modelClass: Reuniors\Evodic\Models\Country
+modelClass: Reuniors\Base\Models\Country
 defaultRedirect: reuniors/evodic/countries
 create:
     redirect: 'reuniors/evodic/countries/update/:id'

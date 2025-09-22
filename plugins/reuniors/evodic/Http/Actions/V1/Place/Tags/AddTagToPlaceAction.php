@@ -2,7 +2,7 @@
 
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Evodic\Models\Place;
-use Reuniors\Evodic\Models\Tag;
+use Reuniors\Base\Models\Tag;
 use Illuminate\Http\Request;
 
 class AddTagToPlaceAction

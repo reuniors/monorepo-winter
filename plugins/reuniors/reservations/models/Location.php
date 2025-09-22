@@ -68,7 +68,7 @@ class Location extends Model
 
     public $belongsTo = [
         'city' => [
-            'Reuniors\Reservations\Models\City',
+            'Reuniors\Base\Models\City',
             'key' => 'city_id',
         ],
     ];

@@ -8,7 +8,7 @@ use Reuniors\Knk\Classes\Meta\Meta;
 use Reuniors\Knk\Classes\PageFeInit;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class KNKGlobals extends Facade
 {
@@ -26,7 +26,7 @@ class KNKGlobals extends Facade
         $categorySlug = $this->controller->param('categorySlug');
         $slug = $this->controller->param('slug');
         if ($citySlug) {
-            $this->controller['currentCity'] = $this->currentCity = RegionCity
+            $this->controller['currentCity'] = $this->currentCity = City
                 ::where('slug', $citySlug)
                 ->first();
             if ($categorySlug) {

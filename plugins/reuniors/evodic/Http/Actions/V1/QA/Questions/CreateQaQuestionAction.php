@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Evodic\Classes\Helpers\S;
-use Reuniors\Evodic\Models\QaQuestion;
+use Reuniors\Base\Models\QaQuestion;
 
 class CreateQaQuestionAction
 {

@@ -4,7 +4,7 @@ use Illuminate\Database\Query\JoinClause;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FeGetCitiesCategoriesLocations extends BaseAction
 {
@@ -19,11 +19,11 @@ class FeGetCitiesCategoriesLocations extends BaseAction
     {
         $perPage = $attributes['perPage'] ?? 100;
         $categoryModel = new Category;
-        $cityModel = new RegionCity;
+        $cityModel = new City;
         $categoryTable = $categoryModel->table;
         $cityTable = $cityModel->table;
 
-        $citiesCategories = RegionCity::crossJoin($categoryTable)
+        $citiesCategories = City::crossJoin($categoryTable)
             ->select("$cityTable.*", "$categoryTable.id as category_id", "$categoryTable.title as category_title", "$categoryTable.slug as category_slug")
             ->whereHas('locations', function ($query) use ($categoryTable) {
                 $query

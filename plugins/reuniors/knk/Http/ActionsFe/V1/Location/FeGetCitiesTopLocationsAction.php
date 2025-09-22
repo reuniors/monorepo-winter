@@ -5,7 +5,7 @@ use Reuniors\Knk\Classes\CacheData;
 use Reuniors\Knk\Classes\Enums\LocationCacheKeyEnum;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FeGetCitiesTopLocationsAction extends BaseAction
 {
@@ -55,7 +55,7 @@ class FeGetCitiesTopLocationsAction extends BaseAction
         );
 
         if ($citySlug) {
-            $city = RegionCity::query()
+            $city = City::query()
                 ->where('slug', $citySlug)
                 ->firstOrFail();
             $bestLocations = array_filter($bestLocations, function ($location) use ($city) {

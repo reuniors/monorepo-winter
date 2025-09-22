@@ -34,7 +34,7 @@ class LocationOtherInformation extends Model
 
     public $belongsTo = [
         'tag' => [
-            'Reuniors\Knk\Models\Tag',
+            'Reuniors\Base\Models\Tag',
             'order' => 'name'
         ],
         'location' => [

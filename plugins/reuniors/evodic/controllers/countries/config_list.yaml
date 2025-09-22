@@ -1,5 +1,5 @@
 list: $/reuniors/evodic/models/country/columns.yaml
-modelClass: Reuniors\Evodic\Models\Country
+modelClass: Reuniors\Base\Models\Country
 title: Countries
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

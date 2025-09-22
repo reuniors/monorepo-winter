@@ -1,4 +1,4 @@
 title: TagGroups
-modelClass: Reuniors\Knk\Models\TagGroup
+modelClass: Reuniors\Base\Models\TagGroup
 toolbar:
     buttons: reorder_toolbar

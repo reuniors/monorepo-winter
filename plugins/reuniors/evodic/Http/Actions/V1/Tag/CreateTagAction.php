@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Evodic\Classes\Helpers\S;
 use Reuniors\Evodic\Models\PlaceType;
-use Reuniors\Evodic\Models\Tag;
+use Reuniors\Base\Models\Tag;
 
 class CreateTagAction
 {

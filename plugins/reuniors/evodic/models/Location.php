@@ -87,7 +87,7 @@ class Location extends AbstractBaseModel
 
     public $belongsTo = [
         'city' => [
-            'Reuniors\Evodic\Models\City',
+            'Reuniors\Base\Models\City',
             'order' => 'name'
         ],
         'main_owner' => [
@@ -126,7 +126,7 @@ class Location extends AbstractBaseModel
 
     public $hasManyThrough = [
         'qaQuestions' => [
-            'Reuniors\Evodic\Models\QaQuestion',
+            'Reuniors\Base\Models\QaQuestion',
             'through' => 'Reuniors\Evodic\Models\QaAnswer',
             'key' => 'location_id',
             'throughKey' => 'qa_question_id',

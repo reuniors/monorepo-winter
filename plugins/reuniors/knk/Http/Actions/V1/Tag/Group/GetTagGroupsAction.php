@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Tag\Group;
 
 use Reuniors\Knk\Http\Actions\BaseAction;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class GetTagGroupsAction extends BaseAction
 {

@@ -2,4 +2,11 @@
     - Initialize plugin.
 
 1.0.2:
-    - Add shared helper classes (ReorderDataHelper, LanguageHelpers).
+    - "Create shared database tables for countries, cities, tags, tag groups, QA questions, translations, and change requests."
+    - builder_table_create_reuniors_base_countries.php
+    - builder_table_create_reuniors_base_cities.php
+    - builder_table_create_reuniors_base_tags.php
+    - builder_table_create_reuniors_base_tag_groups.php
+    - builder_table_create_reuniors_base_qa_questions.php
+    - builder_table_create_reuniors_base_translations.php
+    - builder_table_create_reuniors_base_change_requests.php

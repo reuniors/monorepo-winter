@@ -5,7 +5,7 @@ use Reuniors\Knk\Classes\HelperCommon;
 use Reuniors\Knk\Classes\Redirect404Exception;
 use Reuniors\Knk\Facades\Globals;
 use Reuniors\Knk\Models\Category;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class CategoriesComponent extends BaseKnkComponent
 {

@@ -71,7 +71,7 @@ class FoodCategory extends MariaDbBase
             self::class,
             'order' => 'name'
         ],
-        'tag' => ['Reuniors\Knk\Models\Tag', 'order' => 'name'],
+        'tag' => ['Reuniors\Base\Models\Tag', 'order' => 'name'],
     ];
 
     public $restaurant_menu_id_inject;

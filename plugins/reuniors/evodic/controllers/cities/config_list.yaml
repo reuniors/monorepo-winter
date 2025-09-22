@@ -1,5 +1,5 @@
 list: $/reuniors/evodic/models/city/columns.yaml
-modelClass: Reuniors\Evodic\Models\City
+modelClass: Reuniors\Base\Models\City
 title: Cities
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

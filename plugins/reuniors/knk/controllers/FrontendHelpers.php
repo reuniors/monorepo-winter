@@ -5,7 +5,7 @@ use Cms\Classes\Controller;
 use Cms\Classes\Page;
 use Cms\Classes\Theme;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FrontendHelpers extends Controller
 {
@@ -13,7 +13,7 @@ class FrontendHelpers extends Controller
     {
         $cmsController = new Controller();
 
-        $cityData = RegionCity::where('slug', $municipalitySlug)
+        $cityData = City::where('slug', $municipalitySlug)
             ->whereHas('parent_city', function($parentCityQuery) use ($citySlug) {
                 $parentCityQuery->where('slug', $citySlug);
             })
@@ -68,7 +68,7 @@ class FrontendHelpers extends Controller
     {
         $cmsController = new Controller();
 
-        $cityData = RegionCity::where('slug', $municipalitySlug)
+        $cityData = City::where('slug', $municipalitySlug)
             ->whereHas('parent_city', function($parentCityQuery) use ($citySlug) {
                 $parentCityQuery->where('slug', $citySlug);
             })
@@ -114,7 +114,7 @@ class FrontendHelpers extends Controller
                 'tabValue' => $tab,
             ]);
         } else {
-            $cityData = RegionCity::where('slug', $municipalitySlug)
+            $cityData = City::where('slug', $municipalitySlug)
                 ->whereHas('parent_city', function($parentCityQuery) use ($citySlug) {
                     $parentCityQuery->where('slug', $citySlug);
                 })

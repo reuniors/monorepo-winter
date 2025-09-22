@@ -55,7 +55,7 @@ class ListData extends Model
             'order' => 'name'
         ],
         'tag' => [
-            'Reuniors\Evodic\Models\Tag',
+            'Reuniors\Base\Models\Tag',
             'order' => 'name'
         ],
     ];

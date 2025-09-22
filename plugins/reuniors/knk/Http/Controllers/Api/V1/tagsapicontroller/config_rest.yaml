@@ -13,4 +13,4 @@ allowedActions:
   destroy:
 
 # Model Class name
-modelClass: Reuniors\Knk\Models\Tag
+modelClass: Reuniors\Base\Models\Tag

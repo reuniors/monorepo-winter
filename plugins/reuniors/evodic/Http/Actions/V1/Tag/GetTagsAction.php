@@ -5,7 +5,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Evodic\Http\Actions\V1\Tag\Group\GetTagGroupsAction;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\PlaceType;
-use Reuniors\Evodic\Models\Tag;
+use Reuniors\Base\Models\Tag;
 
 class GetTagsAction
 {

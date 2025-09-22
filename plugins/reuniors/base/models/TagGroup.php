@@ -1,10 +1,10 @@
-<?php namespace Reuniors\Evodic\Models;
+<?php namespace Reuniors\Base\Models;
 
 use Model;
 use October\Rain\Database\Traits\Sortable;
 
 /**
- * Model
+ * TagGroup Model
  */
 class TagGroup extends Model
 {
@@ -24,28 +24,31 @@ class TagGroup extends Model
     ];
 
     const TYPES = [
-        'location' => 'Apartmani',
-        'badge' => 'Bedzevi',
-        'destination' => 'Preporuke',
-        'other' => 'Ostalo',
+        'location' => 'Location',
+        'badge' => 'Badge',
+        'destination' => 'Destination',
+        'other' => 'Other',
     ];
 
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'reuniors_evodic_tag_groups';
+    public $table = 'reuniors_base_tag_groups';
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
-        'title',
-        'metadata_t',
+        'name',
+        'description',
         ['slug', 'index' => true]
     ];
 
+    /**
+     * @var array Fillable fields
+     */
     protected $fillable = [
         'name',
-        'title',
         'description',
+        'type',
         'sort_order',
         'slug',
         'metadata',
@@ -54,39 +57,34 @@ class TagGroup extends Model
         'show_on_search',
         'show_in_filters',
         'combine_type',
-        'type',
     ];
 
     /**
      * @var array Validation rules
      */
     public $rules = [
+        'name' => 'required|string|max:255',
+        'type' => 'nullable|string|max:50',
     ];
 
-    public $attachOne = [
-        'tag_group_image' => ['System\Models\File', 'order' => 'sort_order', 'delete' => true],
-    ];
-
+    /**
+     * @var array Relations
+     */
     public $belongsTo = [
-        'parent' => ['Reuniors\Evodic\Models\TagGroup', 'order' => 'sort_order']
-    ];
-
-    public $belongsToMany = [
-        'placeTypes' => [
-            'Reuniors\Evodic\Models\PlaceType',
-            'table' => 'reuniors_evodic_place_types_tag_groups',
-            'key' => 'tag_group_id',
-            'otherKey' => 'place_type_id',
-        ]
+        'parent' => ['Reuniors\Base\Models\TagGroup', 'order' => 'sort_order']
     ];
 
     public $hasMany = [
         'children' => [
-            'Reuniors\Evodic\Models\TagGroup',
+            'Reuniors\Base\Models\TagGroup',
             'key' => 'parent_id',
             'order' => 'sort_order'
         ],
-        'tags' => ['Reuniors\Evodic\Models\Tag']
+        'tags' => ['Reuniors\Base\Models\Tag']
+    ];
+
+    public $attachOne = [
+        'tag_group_image' => ['System\Models\File', 'order' => 'sort_order', 'delete' => true],
     ];
 
     public function getCombineTypeOptions()
@@ -109,12 +107,10 @@ class TagGroup extends Model
          * @var $showOnSearch
          * @var $tagsShowInFilters
          * @var $showInFilters
-         *
          * @var $sortBy
          * @var $sortByOrientation
          * @var $perPage
          * @var $pageNumber
-         *
          */
         extract(array_merge([
             'isParent'     => true,
@@ -129,11 +125,6 @@ class TagGroup extends Model
             'pageNumber'    => 1,
         ], $options));
 
-        $searchableFields = ['name', 'type'];
-
-        /*
-         * Slug
-         */
         if ($isParent) {
             $query->where('parent_id', null);
         }

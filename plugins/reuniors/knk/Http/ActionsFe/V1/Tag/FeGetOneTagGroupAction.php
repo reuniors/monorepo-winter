@@ -3,7 +3,7 @@
 namespace Reuniors\Knk\Http\ActionsFe\V1\Tag;
 
 use Reuniors\Knk\Http\Actions\BaseAction;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class FeGetOneTagGroupAction extends BaseAction
 {

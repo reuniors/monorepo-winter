@@ -26,6 +26,6 @@ class Manufacturer extends Model
     ];
 
     public $belongsTo = [
-        'city' => ['Reuniors\Knk\Models\RegionCity', 'order' => 'sort_order'],
+        'city' => ['Reuniors\Base\Models\City', 'order' => 'sort_order'],
     ];
 }

@@ -1,4 +1,4 @@
 title: Cities
-modelClass: Reuniors\Evodic\Models\City
+modelClass: Reuniors\Base\Models\City
 toolbar:
     buttons: reorder_toolbar

@@ -4,7 +4,7 @@ use Illuminate\Database\Query\JoinClause;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FeGetCityCategoriesLocations extends BaseAction
 {
@@ -22,7 +22,7 @@ class FeGetCityCategoriesLocations extends BaseAction
         $perPage = $attributes['perPage'] ?? 100;
         $locationsPerPage = $attributes['locationsPerPage'] ?? 6;
         $citySlug = $attributes['citySlug'];
-        $cityData = RegionCity::query()
+        $cityData = City::query()
             ->where('slug', $citySlug)
             ->firstOrFail();
 

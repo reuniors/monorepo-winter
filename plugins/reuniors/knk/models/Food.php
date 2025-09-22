@@ -74,7 +74,7 @@ class Food extends MariaDbBase
 
     public $belongsTo = [
         'food_category' => ['Reuniors\Knk\Models\FoodCategory', 'order' => 'name'],
-        'tag' => ['Reuniors\Knk\Models\Tag', 'order' => 'name'],
+        'tag' => ['Reuniors\Base\Models\Tag', 'order' => 'name'],
         'manufacturer' => ['Reuniors\Knk\Models\Manufacturer', 'order' => 'sort_order'],
     ];
 

@@ -1,6 +1,6 @@
 name: TagGroups
 form: $/reuniors/evodic/models/taggroup/fields.yaml
-modelClass: Reuniors\Evodic\Models\TagGroup
+modelClass: Reuniors\Base\Models\TagGroup
 defaultRedirect: reuniors/evodic/taggroups
 create:
     redirect: 'reuniors/evodic/taggroups/update/:id'

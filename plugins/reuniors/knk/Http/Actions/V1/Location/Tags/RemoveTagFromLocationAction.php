@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\Tag;
+use Reuniors\Base\Models\Tag;
 
 class RemoveTagFromLocationAction extends BaseAction
 {

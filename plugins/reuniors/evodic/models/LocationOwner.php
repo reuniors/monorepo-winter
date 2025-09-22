@@ -51,7 +51,7 @@ class LocationOwner extends AbstractBaseModel
 
     public $belongsTo = [
         'city' => [
-            'Reuniors\Evodic\Models\City',
+            'Reuniors\Base\Models\City',
             'key' => 'city_id',
         ],
         'user' => [

@@ -1,6 +1,6 @@
 plugin:
-    name: 'reuniors.base::lang.plugin.name'
-    description: 'reuniors.base::lang.plugin.description'
+    name: "reuniors.base::lang.plugin.name"
+    description: "reuniors.base::lang.plugin.description"
     author: Reuniors
     icon: oc-icon-anchor
-    homepage: ''
+    homepage: ""

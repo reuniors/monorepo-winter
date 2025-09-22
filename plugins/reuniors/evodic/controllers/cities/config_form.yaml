@@ -1,6 +1,6 @@
 name: Cities
 form: $/reuniors/evodic/models/city/fields.yaml
-modelClass: Reuniors\Evodic\Models\City
+modelClass: Reuniors\Base\Models\City
 defaultRedirect: reuniors/evodic/cities
 create:
     redirect: 'reuniors/evodic/cities/update/:id'

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Models\Tag;
+use Reuniors\Base\Models\Tag;
 
 class DeleteTagAction
 {

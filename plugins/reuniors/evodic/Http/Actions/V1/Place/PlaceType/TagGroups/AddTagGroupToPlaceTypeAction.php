@@ -2,7 +2,7 @@
 
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Evodic\Models\PlaceType;
-use Reuniors\Evodic\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 use Illuminate\Http\Request;
 
 class AddTagGroupToPlaceTypeAction

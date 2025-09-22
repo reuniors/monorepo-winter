@@ -31,8 +31,8 @@ use Reuniors\Knk\Http\Controllers\Api\V1\ActionsApiController;
 use Reuniors\Knk\Http\Middleware\JsonMiddleware;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
-use Reuniors\Knk\Models\Tag;
+use Reuniors\Base\Models\City;
+use Reuniors\Base\Models\Tag;
 use Illuminate\Support\Facades\Cache;
 
 require_once 'routesFe.php';
@@ -300,7 +300,7 @@ Route::get('/search-tags', function () {
 
 Route::get('/search-cities', function () {
     $q = input('q');
-    $citiesQuery = RegionCity::select('slug as id', 'title as text', 'slug')
+    $citiesQuery = City::select('slug as id', 'title as text', 'slug')
         ->where('active', 1)
         ->orderBy('sort_order');
     if (empty($q)) {

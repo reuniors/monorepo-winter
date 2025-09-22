@@ -1,5 +1,5 @@
 list: $/reuniors/knk/models/taggroup/columns.yaml
-modelClass: Reuniors\Knk\Models\TagGroup
+modelClass: Reuniors\Base\Models\TagGroup
 title: TagGroups
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

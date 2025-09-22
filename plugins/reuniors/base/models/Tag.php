@@ -1,10 +1,10 @@
-<?php namespace Reuniors\Evodic\Models;
+<?php namespace Reuniors\Base\Models;
 
 use Model;
 use October\Rain\Database\Traits\Sortable;
 
 /**
- * Model
+ * Tag Model
  */
 class Tag extends Model
 {
@@ -21,19 +21,22 @@ class Tag extends Model
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'reuniors_evodic_tags';
+    public $table = 'reuniors_base_tags';
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
-        'title',
-        'metadata_t',
+        'name',
+        'description',
         ['slug', 'index' => true]
     ];
 
+    /**
+     * @var array Fillable fields
+     */
     protected $fillable = [
         'name',
-        'title',
         'description',
+        'color',
         'sort_order',
         'slug',
         'metadata',
@@ -52,29 +55,27 @@ class Tag extends Model
      * @var array Validation rules
      */
     public $rules = [
-        'slug' => 'required|unique:reuniors_evodic_tags',
+        'name' => 'required|string|max:255',
+        'slug' => 'required|unique:reuniors_base_tags',
     ];
 
-    public $attachOne = [
-        'tag_image' => ['System\Models\File', 'order' => 'sort_order', 'delete' => true],
-    ];
-
+    /**
+     * @var array Relations
+     */
     public $belongsTo = [
-        'tag_group' => ['Reuniors\Evodic\Models\TagGroup', 'order' => 'sort_order']
+        'tag_group' => ['Reuniors\Base\Models\TagGroup', 'order' => 'sort_order']
     ];
 
     public $belongsToMany = [
         'other_tag_groups' => [
-            'Reuniors\Evodic\Models\TagGroup',
-            'table' => 'reuniors_evodic_tags_other_tag_groups',
+            'Reuniors\Base\Models\TagGroup',
+            'table' => 'reuniors_base_tags_other_tag_groups',
             'order' => 'sort_order'
         ],
-        'places' => [
-            'Reuniors\Evodic\Models\Place',
-            'table' => 'reuniors_evodic_places_tags',
-            'key' => 'tag_id',
-            'otherKey' => 'place_id',
-        ],
+    ];
+
+    public $attachOne = [
+        'tag_image' => ['System\Models\File', 'order' => 'sort_order', 'delete' => true],
     ];
 
     public function scopeListFrontEnd($query, $options)
@@ -83,7 +84,6 @@ class Tag extends Model
          * Default options
          * @var $tagSlug
          * @var $tagGroupSlug
-         *
          */
         extract(array_merge([
             'tagGroupSlug' => true,
@@ -111,7 +111,6 @@ class Tag extends Model
          * Default options
          * @var $searchString
          * @var $tagGroupSlug
-         *
          */
         extract(array_merge([
             'searchString' => null,
@@ -119,51 +118,8 @@ class Tag extends Model
         ], $options));
 
         if ($searchString !== null) {
-            $query->where('title', 'like', "%$searchString%");
+            $query->where('name', 'like', "%$searchString%");
         }
-    }
-
-    public static function tagFixSlugNameTitle($slug)
-    {
-        $newTag = [];
-        if (\Str::contains($slug, '-it-')) {
-            $slugExploded = explode('-', $slug);
-            foreach ($slugExploded as $slugPart) {
-                if ($slugPart == 'it') {
-                    break;
-                }
-                $newTag[] = $slugPart;
-            }
-        }
-        if (!empty($newTag)) {
-            $slug = implode('-', $newTag);
-        }
-        if (preg_match('/\\d/', $slug) > 0) {
-            $newTagTemp = [];
-            $slugExploded = explode('-', $slug);
-            $isFirst = true;
-            $hasNumbers = false;
-            foreach ($slugExploded as $slugPart) {
-                if (!$isFirst && preg_match('/\\d/', $slugPart) > 0) {
-                    $hasNumbers = true;
-                    break;
-                }
-                $isFirst = false;
-                $newTagTemp[] = $slugPart;
-            }
-            if ($hasNumbers && !empty($newTagTemp)) {
-                $newTag = $newTagTemp;
-            }
-        }
-        if (!empty($newTag)) {
-            $slug = implode('-', $newTag);
-            $title = ucfirst(implode(' ', $newTag));
-            return [
-                'slug' => $slug,
-                'title' => $title,
-            ];
-        }
-        return null;
     }
 
     public function beforeSave()

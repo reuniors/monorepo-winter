@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Country;
 
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Evodic\Models\Country;
+use Reuniors\Base\Models\Country;
 
 class GetCountriesAction
 {

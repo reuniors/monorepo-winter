@@ -1,6 +1,6 @@
 name: Tags
 form: $/reuniors/evodic/models/tag/fields.yaml
-modelClass: Reuniors\Evodic\Models\Tag
+modelClass: Reuniors\Base\Models\Tag
 defaultRedirect: reuniors/evodic/tags
 create:
     redirect: 'reuniors/evodic/tags/update/:id'

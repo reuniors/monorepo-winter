@@ -2,7 +2,7 @@
 
 use Reuniors\Knk\Classes\S;
 use Reuniors\Knk\Http\Actions\BaseAction;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class CreateTagGroupAction extends BaseAction
 {

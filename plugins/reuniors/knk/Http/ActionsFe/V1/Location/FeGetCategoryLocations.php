@@ -3,7 +3,7 @@
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 
 class FeGetCategoryLocations extends BaseAction
 {
@@ -22,7 +22,7 @@ class FeGetCategoryLocations extends BaseAction
         $citySlug = $attributes['citySlug'];
         $categorySlug = $attributes['categorySlug'];
 
-        $cityData = RegionCity::query()
+        $cityData = City::query()
             ->where('slug', $citySlug)
             ->firstOrFail();
 

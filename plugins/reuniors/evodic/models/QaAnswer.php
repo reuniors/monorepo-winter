@@ -23,7 +23,7 @@ class QaAnswer extends Model
     protected $fillable = ['qa_question_id', 'location_id', 'text', 'active'];
 
     public $belongsTo = [
-        'qaQuestion' => ['Reuniors\Evodic\Models\QaQuestion', 'key' => 'qa_question_id'],
+        'qaQuestion' => ['Reuniors\Base\Models\QaQuestion', 'key' => 'qa_question_id'],
         'location' => ['Reuniors\Evodic\Models\Location', 'key' => 'location_id']
     ];
 }

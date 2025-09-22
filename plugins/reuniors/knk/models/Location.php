@@ -7,6 +7,7 @@ use October\Rain\Database\Traits\SoftDelete;
 use October\Rain\Database\Traits\Sortable;
 use October\Rain\Database\Traits\Validation;
 use Reuniors\Comments\Models\Comments;
+use Reuniors\Base\Models\City;
 use Reuniors\Knk\Facades\Globals;
 use Reuniors\Knk\Models\FileImage\FileImageSquare;
 use Reuniors\Knk\Models\FileImage\FileImageWide;
@@ -233,7 +234,7 @@ class Location extends MariaDbBase
     ];
 
     public $belongsTo = [
-        'city' => [RegionCity::class, 'order' => 'name'],
+        'city' => [City::class, 'order' => 'name'],
         'parent' => [Location::class, 'order' => 'name'],
         'badge_tag_group' => [
             TagGroup::class,

@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Tinify\Exception;
@@ -128,7 +128,7 @@ class MigrateKnk extends Command
                 })
                 ->get()
                 ->keyBy('term_taxonomy_id');
-            $existingCities = RegionCity::get()
+            $existingCities = City::get()
                 ->keyBy('name');
             $existingCategories = Category::get()
                 ->keyBy('name');
@@ -155,7 +155,7 @@ class MigrateKnk extends Command
                 if (isset($existingCities[$cityName])) {
                     $newCity = $existingCities[$cityName];
                 } else {
-                    $newCity = new RegionCity();
+                    $newCity = new City();
                 }
                 $newCity->title = $city->name;
                 $newCity->name = camel_case(strtolower(Str::ascii($city->name)));

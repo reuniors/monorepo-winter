@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use Reuniors\Knk\Models\Location;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 use Vdlp\Sitemap\Classes\Contracts\DefinitionGenerator;
 use Vdlp\Sitemap\Classes\Dto\Definition;
 use Vdlp\Sitemap\Classes\Dto\Definitions;
@@ -14,7 +14,7 @@ final class SitemapDefinition implements DefinitionGenerator
         $definitions = new Definitions();
 
         $siteUrl = url('/');
-        $cities = RegionCity::where('active', 1)
+        $cities = City::where('active', 1)
             ->with('locations')
             ->with('locations.main_category')
             ->with('parent_city')

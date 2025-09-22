@@ -2,7 +2,7 @@
 
 use Cms\Classes\ComponentBase;
 use Reuniors\Knk\Classes\HelperCommon;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class TagGroupsComponent extends BaseKnkComponent
 {

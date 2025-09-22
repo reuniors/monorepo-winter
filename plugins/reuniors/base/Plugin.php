@@ -22,5 +22,10 @@ class Plugin extends PluginBase
         $this->app->singleton('reuniors.base.helpers.language', function () {
             return new \Reuniors\Base\Classes\Helpers\LanguageHelpers();
         });
+
+        // Register console commands
+        $this->registerConsoleCommand('reuniors.copy-data', 'Reuniors\Base\Console\CopyDataFromPlugins');
+        $this->registerConsoleCommand('reuniors.migrate-table', 'Reuniors\Base\Console\GenericTableMigrator');
+        $this->registerConsoleCommand('reuniors.run-migrations', 'Reuniors\Base\Console\RunMigrations');
     }
 }

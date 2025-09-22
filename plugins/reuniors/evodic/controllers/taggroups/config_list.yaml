@@ -1,5 +1,5 @@
 list: $/reuniors/evodic/models/taggroup/columns.yaml
-modelClass: Reuniors\Evodic\Models\TagGroup
+modelClass: Reuniors\Base\Models\TagGroup
 title: TagGroups
 noRecordsMessage: 'backend::lang.list.no_records'
 showSetup: true

@@ -8,7 +8,7 @@ use Reuniors\Knk\Models\Location;
 use Exception;
 use Reuniors\Knk\Models\LocationRating;
 use Reuniors\Knk\Models\LocationRatingHistory;
-use Reuniors\Knk\Models\RegionCity;
+use Reuniors\Base\Models\City;
 use Auth;
 use Response;
 use Reuniors\Knk\Models\UserBadgeHistory;
@@ -235,10 +235,10 @@ class LocationComponent extends BaseKnkComponent
                 $pageFileName = self::$addedCanonicalHeader['pageFileName'];
             } elseif (isset($properties['municipalitySlug'])) {
                 if ($hasTab) {
-                    $pageFileName = RegionCity::$linkMunicipalityPages[$tabPage];
+                    $pageFileName = City::$linkMunicipalityPages[$tabPage];
                 } else {
                     $pageFileName = $controller->getPage()->getBaseFileName();
-                    $pageFileName = RegionCity::$linkMunicipalityPages[$pageFileName];
+                    $pageFileName = City::$linkMunicipalityPages[$pageFileName];
                 }
             } else {
                 if ($hasTab) {

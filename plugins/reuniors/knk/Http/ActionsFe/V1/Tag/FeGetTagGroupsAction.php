@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Cache;
 use Reuniors\Knk\Http\Actions\BaseAction;
-use Reuniors\Knk\Models\TagGroup;
+use Reuniors\Base\Models\TagGroup;
 
 class FeGetTagGroupsAction extends BaseAction
 {
