@@ -48,15 +48,6 @@ class CreatePlaceAction extends BaseAction
             ],
         ]);
 
-        return [
-            'success' => true,
-            'data' => $newPlace
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $newPlace;
     }
 }

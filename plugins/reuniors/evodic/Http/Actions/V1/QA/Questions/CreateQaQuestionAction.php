@@ -25,14 +25,4 @@ class CreateQaQuestionAction extends BaseAction
 
         return QaQuestion::create($data);
     }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true
-        ];
-    }
 }

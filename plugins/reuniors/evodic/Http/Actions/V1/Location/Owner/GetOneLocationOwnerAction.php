@@ -12,17 +12,14 @@ class GetOneLocationOwnerAction extends BaseAction
         return [];
     }
 
-    public function handle(LocationOwner $locationOwner)
+    public function handle(array $attributes = [], LocationOwner $locationOwner = null)
     {
         $locationOwner->load(['city', 'city.country']);
-        return [
-            'success' => true,
-            'data' => $locationOwner
-        ];
+        return $locationOwner;
     }
 
-    public function asController(Request $request, LocationOwner $locationOwner)
+    public function asController(LocationOwner $locationOwner = null): array
     {
-        return $this->handle($locationOwner);
+        return parent::asController($locationOwner);
     }
 }

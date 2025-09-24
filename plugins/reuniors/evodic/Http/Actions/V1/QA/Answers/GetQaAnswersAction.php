@@ -15,7 +15,7 @@ class GetQaAnswersAction extends BaseAction
         ];
     }
 
-    public function handle(Location $location, array $attributes = [])
+    public function handle(array $attributes = [], Location $location = null)
     {
         $search = $attributes['search'] ?? null;
         $perPage = $attributes['perPage'] ?? 15;
@@ -28,15 +28,11 @@ class GetQaAnswersAction extends BaseAction
             });
         }
 
-        return [
-            'success' => true,
-            'data' => $qaAnswerQuery->paginate($perPage)
-        ];
+        return $qaAnswerQuery->paginate($perPage);
     }
 
-    public function asController(Request $request, Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($location, $requestData);
+        return parent::asController($location);
     }
 }

@@ -12,17 +12,15 @@ class DeletePlaceAction extends BaseAction
         return [];
     }
 
-    public function handle(Place $place)
+    public function handle(array $attributes = [], Place $place = null)
     {
         $place->delete();
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, Place $place)
+    public function asController(Place $place = null): array
     {
-        return $this->handle($place);
+        return parent::asController($place);
     }
 }

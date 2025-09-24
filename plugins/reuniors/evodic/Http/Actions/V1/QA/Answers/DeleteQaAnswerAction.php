@@ -15,7 +15,7 @@ class DeleteQaAnswerAction extends BaseAction
         return [];
     }
 
-    public function handle(Location $location, QaAnswer $qaAnswer)
+    public function handle(array $attributes = [], Location $location = null, QaAnswer $qaAnswer = null)
     {
         if ($location->id !== $qaAnswer->location_id) {
             throw new InvalidArgumentException('Location and QaAnswer do not match');
@@ -26,13 +26,11 @@ class DeleteQaAnswerAction extends BaseAction
 
         DeleteQaQuestionAction::run($qaQuestion);
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, Location $location, QaAnswer $qaAnswer)
+    public function asController(Location $location = null, QaAnswer $qaAnswer = null): array
     {
-        return $this->handle($location, $qaAnswer);
+        return parent::asController($location, $qaAnswer);
     }
 }

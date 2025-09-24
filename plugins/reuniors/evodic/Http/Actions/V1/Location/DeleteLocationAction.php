@@ -12,17 +12,15 @@ class DeleteLocationAction extends BaseAction
         return [];
     }
 
-    public function handle(Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $location->delete();
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, Location $location)
+    public function asController(Location $location = null): array
     {
-        return $this->handle($location);
+        return parent::asController($location);
     }
 }

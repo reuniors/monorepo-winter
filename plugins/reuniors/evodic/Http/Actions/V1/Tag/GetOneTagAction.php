@@ -12,16 +12,13 @@ class GetOneTagAction extends BaseAction
         return [];
     }
 
-    public function handle(Tag $tag)
+    public function handle(array $attributes = [], Tag $tag = null)
     {
-        return [
-            'success' => true,
-            'data' => $tag
-        ];
+        return $tag;
     }
 
-    public function asController(Request $request, Tag $tag)
+    public function asController(Tag $tag = null): array
     {
-        return $this->handle($tag);
+        return parent::asController($tag);
     }
 }

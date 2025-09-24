@@ -12,17 +12,15 @@ class DeleteTagAction extends BaseAction
         return [];
     }
 
-    public function handle(Tag $tag)
+    public function handle(array $attributes = [], Tag $tag = null)
     {
         $tag->delete();
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, Tag $tag)
+    public function asController(Tag $tag = null): array
     {
-        return $this->handle($tag);
+        return parent::asController($tag);
     }
 }

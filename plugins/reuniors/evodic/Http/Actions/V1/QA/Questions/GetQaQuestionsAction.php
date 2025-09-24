@@ -33,15 +33,6 @@ class GetQaQuestionsAction extends BaseAction
             });
         }
 
-        return [
-            'success' => true,
-            'data' => $qaQuestionQuery->paginate($perPage)
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $qaQuestionQuery->paginate($perPage);
     }
 }

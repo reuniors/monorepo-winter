@@ -12,21 +12,18 @@ class GetOneLocationAction extends BaseAction
         return [];
     }
 
-    public function handle(Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $location->load([
             'city', 'city.country', 'main_owner',
             'cover', 'logo', 'gallery',
         ]);
 
-        return [
-            'success' => true,
-            'data' => $location
-        ];
+        return $location;
     }
 
-    public function asController(Request $request, Location $location)
+    public function asController(Location $location = null): array
     {
-        return $this->handle($location);
+        return parent::asController($location);
     }
 }

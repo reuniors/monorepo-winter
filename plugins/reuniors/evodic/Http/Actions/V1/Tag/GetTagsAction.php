@@ -62,15 +62,6 @@ class GetTagsAction extends BaseAction
             }
         }
 
-        return [
-            'success' => true,
-            'data' => $tags->paginate($perPage)
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $tags->paginate($perPage);
     }
 }

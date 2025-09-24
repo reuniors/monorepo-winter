@@ -12,19 +12,17 @@ class DeleteQaQuestionAction extends BaseAction
         return [];
     }
 
-    public function handle(QaQuestion $qaQuestion)
+    public function handle(array $attributes = [], QaQuestion $qaQuestion = null)
     {
         if ($qaQuestion->answers()->get()->isEmpty()) {
             $qaQuestion->delete();
         }
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, QaQuestion $qaQuestion)
+    public function asController(QaQuestion $qaQuestion = null): array
     {
-        return $this->handle($qaQuestion);
+        return parent::asController($qaQuestion);
     }
 }

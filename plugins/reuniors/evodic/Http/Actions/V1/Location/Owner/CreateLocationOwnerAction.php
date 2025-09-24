@@ -46,15 +46,6 @@ class CreateLocationOwnerAction extends BaseAction
             'is_active' => true,
         ]);
 
-        return [
-            'success' => true,
-            'data' => $newLocationOwner
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $newLocationOwner;
     }
 }

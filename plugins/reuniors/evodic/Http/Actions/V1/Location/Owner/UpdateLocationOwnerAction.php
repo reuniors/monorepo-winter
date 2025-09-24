@@ -17,21 +17,17 @@ class UpdateLocationOwnerAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, LocationOwner $locationOwner)
+    public function handle(array $attributes = [], LocationOwner $locationOwner = null)
     {
         $data = $attributes['data'];
 
         $locationOwner->update($data);
 
-        return [
-            'success' => true,
-            'data' => $locationOwner
-        ];
+        return $locationOwner;
     }
 
-    public function asController(Request $request, LocationOwner $locationOwner)
+    public function asController(LocationOwner $locationOwner = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $locationOwner);
+        return parent::asController($locationOwner);
     }
 }

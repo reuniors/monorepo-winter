@@ -12,17 +12,14 @@ class RemoveLocationPlaceAction extends BaseAction
         return [];
     }
 
-    public function handle(Location $location, Place $place)
+    public function handle(array $attributes = [], Location $location = null, Place $place = null)
     {
         $location->places()->detach($place->id);
-        return [
-            'success' => true,
-            'data' => []
-        ];
+        return [];
     }
 
-    public function asController(Location $location, Place $place)
+    public function asController(Location $location = null, Place $place = null): array
     {
-        return $this->handle($location, $place);
+        return parent::asController($location, $place);
     }
 }

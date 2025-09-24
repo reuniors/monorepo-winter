@@ -53,15 +53,6 @@ class CreateLocationAction extends BaseAction
             $newLocation->location_owners()->attach($ownerId);
         }
 
-        return [
-            'success' => true,
-            'data' => $newLocation
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $newLocation;
     }
 }

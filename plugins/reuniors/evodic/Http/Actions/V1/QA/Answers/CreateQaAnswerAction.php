@@ -19,7 +19,7 @@ class CreateQaAnswerAction extends BaseAction
         ];
     }
 
-    public function handle(Location $location, array $attributes = [])
+    public function handle(array $attributes = [], Location $location = null)
     {
         $data = $attributes['data'];
         $qaQuestionId = $data['qa_question_id'];
@@ -40,13 +40,8 @@ class CreateQaAnswerAction extends BaseAction
         return QaAnswer::create($data);
     }
 
-    public function asController(Request $request, Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = $request->all();
-
-        return [
-            'success' => true,
-            'data' => $this->handle($location, $requestData)
-        ];
+        return parent::asController($location);
     }
 }

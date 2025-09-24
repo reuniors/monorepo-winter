@@ -12,17 +12,15 @@ class DeleteLocationOwnerAction extends BaseAction
         return [];
     }
 
-    public function handle(LocationOwner $locationOwner)
+    public function handle(array $attributes = [], LocationOwner $locationOwner = null)
     {
         $locationOwner->delete();
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Request $request, LocationOwner $locationOwner)
+    public function asController(LocationOwner $locationOwner = null): array
     {
-        return $this->handle($locationOwner);
+        return parent::asController($locationOwner);
     }
 }

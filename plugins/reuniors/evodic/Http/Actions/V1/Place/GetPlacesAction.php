@@ -40,17 +40,8 @@ class GetPlacesAction extends BaseAction
             });
         }
 
-        return [
-            'success' => true,
-            'data' => $placesQuery
+        return $placesQuery
                 ->whereNot('address_lat')
-                ->paginate()
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+                ->paginate();
     }
 }

@@ -12,16 +12,13 @@ class GetOnePlaceTypeAction extends BaseAction
         return [];
     }
 
-    public function handle(PlaceType $placeType)
+    public function handle(array $attributes = [], PlaceType $placeType = null)
     {
-        return [
-            'success' => true,
-            'data' => $placeType
-        ];
+        return $placeType;
     }
 
-    public function asController(Request $request, PlaceType $placeType)
+    public function asController(PlaceType $placeType = null): array
     {
-        return $this->handle($placeType);
+        return parent::asController($placeType);
     }
 }

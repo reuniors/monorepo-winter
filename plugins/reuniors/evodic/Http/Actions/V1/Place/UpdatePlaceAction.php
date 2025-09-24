@@ -20,7 +20,7 @@ class UpdatePlaceAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, Place $place)
+    public function handle(array $attributes = [], Place $place = null)
     {
         $data = Purify::clean(array_filter($attributes['data']));
         $workingHours = $attributes['workingTime'] ?? [];
@@ -68,15 +68,11 @@ class UpdatePlaceAction extends BaseAction
             $place->syncWorkingHours($deliveryWorkingHours, 'delivery_working_hours');
         }
 
-        return [
-            'success' => true,
-            'data' => $place
-        ];
+        return $place;
     }
 
-    public function asController(Request $request, Place $place)
+    public function asController(Place $place = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $place);
+        return parent::asController($place);
     }
 }

@@ -15,21 +15,17 @@ class UpdatePlaceTypeAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes = [], PlaceType $placeType)
+    public function handle(array $attributes = [], PlaceType $placeType = null)
     {
         $data = $attributes['data'];
 
         $placeType->update($data);
 
-        return [
-            'success' => true,
-            'data' => $placeType
-        ];
+        return $placeType;
     }
 
-    public function asController(Request $request, PlaceType $placeType)
+    public function asController(PlaceType $placeType = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $placeType);
+        return parent::asController($placeType);
     }
 }

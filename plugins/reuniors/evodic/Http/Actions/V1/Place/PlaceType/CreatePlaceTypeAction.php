@@ -26,15 +26,6 @@ class CreatePlaceTypeAction extends BaseAction
 
         $placeType = PlaceType::create($data);
 
-        return [
-            'success' => true,
-            'data' => $placeType
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $placeType;
     }
 }

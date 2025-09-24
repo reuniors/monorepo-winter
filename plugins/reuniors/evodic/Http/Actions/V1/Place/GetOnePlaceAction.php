@@ -12,7 +12,7 @@ class GetOnePlaceAction extends BaseAction
         return [];
     }
 
-    public function handle(Place $place)
+    public function handle(array $attributes = [], Place $place = null)
     {
         $place->load([
             'city', 'city.country',
@@ -21,14 +21,11 @@ class GetOnePlaceAction extends BaseAction
             'placeType'
         ]);
 
-        return [
-            'success' => true,
-            'data' => $place
-        ];
+        return $place;
     }
 
-    public function asController(Request $request, Place $place)
+    public function asController(Place $place = null): array
     {
-        return $this->handle($place);
+        return parent::asController($place);
     }
 }

@@ -20,7 +20,7 @@ class UpdateQaAnswerAction extends BaseAction
         ];
     }
 
-    public function handle(Location $location, QaAnswer $qaAnswer, array $attributes = [])
+    public function handle(array $attributes = [], Location $location = null, QaAnswer $qaAnswer = null)
     {
         $data = $attributes['data'];
         $oldQaQuestionId = $qaAnswer->qa_question_id;
@@ -50,15 +50,11 @@ class UpdateQaAnswerAction extends BaseAction
             DeleteQaQuestionAction::run($oldQaQuestion);
         }
 
-        return [
-            'success' => true,
-            'data' => $qaAnswer
-        ];
+        return $qaAnswer;
     }
 
-    public function asController(Request $request, Location $location, QaAnswer $qaAnswer)
+    public function asController(Location $location = null, QaAnswer $qaAnswer = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($location, $qaAnswer, $requestData);
+        return parent::asController($location, $qaAnswer);
     }
 }

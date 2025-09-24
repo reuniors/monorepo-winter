@@ -26,15 +26,6 @@ class CreateTagAction extends BaseAction
 
         $tag = Tag::create($data);
 
-        return [
-            'success' => true,
-            'data' => $tag
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $tag;
     }
 }

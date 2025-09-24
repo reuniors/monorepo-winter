@@ -18,7 +18,7 @@ class UploadPlaceImages extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, Place $place)
+    public function handle(array $attributes = [], Place $place = null)
     {
         $imageType = $attributes['imageType'];
         $fileAfterId = $attributes['fileAfterId'] ?? 0;
@@ -47,15 +47,11 @@ class UploadPlaceImages extends BaseAction
             );
         }
 
-        return [
-            'success' => true,
-            'data' => $imageData,
-        ];
+        return $imageData;
     }
 
-    public function asController(Place $place)
+    public function asController(Place $place = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $place);
+        return parent::asController($place);
     }
 }

@@ -20,7 +20,7 @@ class UpdateLocationAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $data = Purify::clean($attributes['data']);
         $addressData = $data['address_data'] ?? [];
@@ -48,15 +48,11 @@ class UpdateLocationAction extends BaseAction
 
         $location->update($data);
 
-        return [
-            'success' => true,
-            'data' => $location
-        ];
+        return $location;
     }
 
-    public function asController(Request $request, Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

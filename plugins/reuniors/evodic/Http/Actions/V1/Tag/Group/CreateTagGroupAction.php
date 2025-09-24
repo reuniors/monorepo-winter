@@ -25,15 +25,6 @@ class CreateTagGroupAction extends BaseAction
 
         $tagGroup = TagGroup::create($data);
 
-        return [
-            'success' => true,
-            'data' => $tagGroup
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return $tagGroup;
     }
 }
