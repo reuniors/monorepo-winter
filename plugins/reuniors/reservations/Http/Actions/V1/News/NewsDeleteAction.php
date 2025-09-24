@@ -2,7 +2,7 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\News;
 
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\News;
 
 class NewsDeleteAction extends BaseAction

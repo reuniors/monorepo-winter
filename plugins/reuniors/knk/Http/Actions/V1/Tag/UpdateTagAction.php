@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Tag;
 
 use Reuniors\Knk\Classes\S;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\Tag;
 
 class UpdateTagAction extends BaseAction

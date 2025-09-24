@@ -2,7 +2,7 @@
 namespace Reuniors\reservations\Http\Actions\V1\User\Client;
 
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Client;
 
 class WorkerClientDataGetOneAction extends BaseAction

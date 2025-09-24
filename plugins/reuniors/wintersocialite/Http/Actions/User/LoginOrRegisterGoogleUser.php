@@ -7,13 +7,12 @@ use ValidationException;
 use Request;
 use Auth;
 use Laravel\Socialite\Facades\Socialite;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\User\Models\User as UserModel;
 use Winter\User\Models\UserGroup;
 
-class LoginOrRegisterGoogleUser
+class LoginOrRegisterGoogleUser extends BaseAction
 {
-    use AsAction;
 
     public function rules()
     {
@@ -38,8 +37,9 @@ class LoginOrRegisterGoogleUser
             ->delete();
     }
 
-    public function handle($accessToken)
+    public function handle(array $attributes = [])
     {
+        $accessToken = $attributes['accessToken'];
         $googleUser = Socialite::driver('google')->userFromToken(
             $accessToken,
         );
@@ -99,15 +99,4 @@ class LoginOrRegisterGoogleUser
         return $this->responseUserToken($user, $accessToken);
     }
 
-    public function asController()
-    {
-        try {
-            $request = request();
-            return $this->handle($request->get('accessToken'));
-        } catch (\Throwable $th) {
-            return response()->json([
-                'message' => $th->getMessage(),
-            ], 500);
-        }
-    }
 }

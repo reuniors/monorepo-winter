@@ -2,13 +2,12 @@
 
 namespace reuniors\knk\http\actions\v1\city;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\CacheData;
 use Reuniors\Knk\Models\Category;
 
-class GetCities
+class GetCities extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {
@@ -34,9 +33,4 @@ class GetCities
         ];
     }
 
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
-    }
 }

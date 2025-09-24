@@ -2,7 +2,7 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\User\Client;
 
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\Client;
 use Reuniors\Reservations\Models\ClientReservation;
