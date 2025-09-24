@@ -2,15 +2,12 @@
 
 use Auth;
 use Illuminate\Support\Facades\DB;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Haljina\Models\Product;
 use Winter\Storm\Support\Facades\Input;
 
-class ReorderProductImagesAction
-{
-    use AsAction;
-
+class ReorderProductImagesAction extends BaseAction {
     public function rules()
     {
         return [

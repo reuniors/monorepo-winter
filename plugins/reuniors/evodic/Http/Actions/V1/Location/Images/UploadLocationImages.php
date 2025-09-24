@@ -1,14 +1,13 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Location\Images;
 
 use InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Evodic\Models\Location;
 use Winter\Storm\Support\Facades\Input;
 
-class UploadLocationImages
+class UploadLocationImages extends BaseAction
 {
-    use asAction;
     public function rules()
     {
         return [

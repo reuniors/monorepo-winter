@@ -2,7 +2,7 @@
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use System\Models\File;
 
 class GetFileContentAction extends BaseAction

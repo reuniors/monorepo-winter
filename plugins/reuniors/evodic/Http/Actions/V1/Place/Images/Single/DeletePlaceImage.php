@@ -1,11 +1,10 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Place\Images\Single;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Place;
 
-class DeletePlaceImage
+class DeletePlaceImage extends BaseAction
 {
-    use asAction;
     public function rules()
     {
         return [

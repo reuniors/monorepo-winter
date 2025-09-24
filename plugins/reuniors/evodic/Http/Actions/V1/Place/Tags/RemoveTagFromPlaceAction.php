@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Place\Tags;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Place;
 use Reuniors\Base\Models\Tag;
 
-class RemoveTagFromPlaceAction
-{
-    use AsAction;
-
+class RemoveTagFromPlaceAction extends BaseAction {
     public function rules()
     {
         return [];

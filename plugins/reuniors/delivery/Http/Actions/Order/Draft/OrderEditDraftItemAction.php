@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Delivery\Http\Actions\Order\Draft;
 
 use Exception;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Http\ActionsFe\V1\Location\FeGetOneLocation;
 
 class OrderEditDraftItemAction extends BaseAction

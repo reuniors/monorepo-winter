@@ -1,12 +1,9 @@
 <?php namespace reuniors\knk\Http\Actions\V1\RestaurantMenu;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
-class RestaurantMenuActivationAction
-{
-    use asAction;
-
+class RestaurantMenuActivationAction extends BaseAction {
     public function rules()
     {
         return [];

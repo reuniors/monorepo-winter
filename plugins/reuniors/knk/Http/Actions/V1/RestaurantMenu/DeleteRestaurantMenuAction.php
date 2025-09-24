@@ -1,15 +1,13 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\RestaurantMenu;
 
 use Illuminate\Support\Facades\DB;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\RestaurantMenu;
 use reuniors\questionnaire\enums\QuestionnaireStatusEnum;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class DeleteRestaurantMenuAction
-{
-    use asAction;
+class DeleteRestaurantMenuAction extends BaseAction {
     public function rules()
     {
         return [];

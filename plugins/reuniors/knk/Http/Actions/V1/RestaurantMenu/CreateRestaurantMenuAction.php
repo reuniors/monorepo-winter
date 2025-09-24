@@ -1,15 +1,12 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\RestaurantMenu;
 
 use Illuminate\Support\Facades\DB;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\RestaurantMenu;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class CreateRestaurantMenuAction
-{
-    use asAction;
-
+class CreateRestaurantMenuAction extends BaseAction {
     public function rules()
     {
         return [

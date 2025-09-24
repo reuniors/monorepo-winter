@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Location\Tags;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Base\Models\Tag;

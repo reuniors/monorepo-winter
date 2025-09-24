@@ -1,12 +1,9 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\Country;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\Country;
 
-class GetCountriesAction
-{
-    use AsAction;
-
+class GetCountriesAction extends BaseAction {
     public function rules()
     {
         return [

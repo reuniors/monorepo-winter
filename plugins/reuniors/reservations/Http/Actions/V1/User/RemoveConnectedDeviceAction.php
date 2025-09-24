@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\User;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\ConnectedDevice;
 use Auth;
 use Reuniors\Reservations\Models\Location;
 
-class RemoveConnectedDeviceAction
-{
-    use asAction;
-
+class RemoveConnectedDeviceAction extends BaseAction {
     public function rules(): array
     {
         return [

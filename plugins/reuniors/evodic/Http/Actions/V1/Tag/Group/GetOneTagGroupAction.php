@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Tag\Group;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\TagGroup;
 
-class GetOneTagGroupAction
+class GetOneTagGroupAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

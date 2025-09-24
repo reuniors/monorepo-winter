@@ -1,14 +1,12 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Services\Service;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\BaseChangeRequestAction;
 use Reuniors\Reservations\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
 class ServiceUpdateAction extends BaseChangeRequestAction
 {
-    use AsAction;
-
     public function getChildRules()
     {
         return [

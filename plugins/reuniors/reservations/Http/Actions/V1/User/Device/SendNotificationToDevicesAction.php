@@ -1,15 +1,12 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\User\Device;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Kreait\Firebase\Messaging\MessageTarget;
 use Reuniors\Reservations\Models\ConnectedDevice;
 
-class SendNotificationToDevicesAction
-{
-    use asAction;
-
+class SendNotificationToDevicesAction extends BaseAction {
     public function rules()
     {
         return [

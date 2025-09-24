@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Notification;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\reservations\Http\Enums\NotificationStatus;
 use Reuniors\Reservations\Models\Notification;
 use Auth;
 
-class NotificationUpdateAction
-{
-    use asAction;
-
+class NotificationUpdateAction extends BaseAction {
     public function rules()
     {
         return [

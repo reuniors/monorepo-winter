@@ -3,16 +3,13 @@
 use Auth;
 use Event;
 use Exception;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Request;
 use reuniors\wintersocialite\Http\Actions\User\Mail\SendUserAuthorizationMail;
 use Winter\User\Models\Settings as UserSettings;
 use Winter\User\Models\User;
 
-class PrepareUserLoginOrRegisterNewAction
-{
-    use AsAction;
-
+class PrepareUserLoginOrRegisterNewAction extends BaseAction {
     public function rules()
     {
         return [

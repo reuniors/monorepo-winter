@@ -5,7 +5,7 @@ namespace Reuniors\Delivery\Http\Actions\Driver;
 use Carbon\Carbon;
 use Exception;
 use Reuniors\Delivery\Models\Driver;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\wintersocialite\Http\Actions\User\UserRemoveExistingTokenAction;
 
 class DriverLoginWithCodeAction extends BaseAction

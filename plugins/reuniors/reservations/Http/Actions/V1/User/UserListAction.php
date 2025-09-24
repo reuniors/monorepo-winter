@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\User;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\User\Models\User;
 
 class UserListAction extends BaseAction
 {
-    use AsAction;
-
     public function rules()
     {
         return [

@@ -2,7 +2,7 @@
 namespace Reuniors\Knk\Http\Actions\V1\User;
 
 use Illuminate\Validation\ValidationException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\Storm\Auth\AuthException;
 use Winter\User\Models\Settings as UserSettings;
 use Winter\User\Models\User;
@@ -11,10 +11,7 @@ use Event;
 use Exception;
 use Request;
 
-class LoginAction
-{
-    use AsAction;
-
+class LoginAction extends BaseAction {
     public function rules()
     {
         return [

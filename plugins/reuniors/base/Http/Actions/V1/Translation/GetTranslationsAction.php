@@ -2,14 +2,12 @@
 
 use Reuniors\Base\Http\Actions\BaseAction;
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\Translate\Models\Locale;
 use Reuniors\Base\Classes\TranslationEntityRegistry;
 
 class GetTranslationsAction extends BaseAction
 {
-    use AsAction;
-
     public function rules()
     {
         return [

@@ -1,15 +1,12 @@
 <?php namespace reuniors\knk\Http\Actions\V1\Location\Images;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Questionnaire\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
-class ReorderLocationImages
-{
-    use AsAction;
-
+class ReorderLocationImages extends BaseAction {
     public function rules()
     {
         return [

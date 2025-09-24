@@ -1,14 +1,12 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\Images;
 
 use InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 use Winter\Storm\Support\Facades\Input;
 
-class UploadQuestionnaireDataPhotos
-{
-    use asAction;
+class UploadQuestionnaireDataPhotos extends BaseAction {
     public function rules()
     {
         return [

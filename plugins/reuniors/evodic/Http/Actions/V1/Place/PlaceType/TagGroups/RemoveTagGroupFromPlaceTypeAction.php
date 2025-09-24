@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Place\PlaceType\TagGroups;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\PlaceType;
 use Reuniors\Base\Models\TagGroup;
 use Illuminate\Http\Request;
 
-class RemoveTagGroupFromPlaceTypeAction
-{
-    use AsAction;
-
+class RemoveTagGroupFromPlaceTypeAction extends BaseAction {
     public function rules()
     {
         return [];

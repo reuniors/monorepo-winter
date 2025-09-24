@@ -3,7 +3,7 @@
 namespace Reuniors\Delivery\Http\Actions\Driver;
 
 use Reuniors\Delivery\Models\Driver;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\User\Models\User;
 use Winter\User\Models\UserGroup;
 

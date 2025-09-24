@@ -2,16 +2,13 @@
 
 namespace Reuniors\reservations\Http\Actions\V1\Notification;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Device\SendNotificationToDevicesAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Mail\SendNotificationAsEmail;
 use Reuniors\reservations\Http\Enums\NotificationStatus;
 use Reuniors\Reservations\Models\Notification;
 
-class NotificationCreateAction
-{
-    use asAction;
-
+class NotificationCreateAction extends BaseAction {
     public function rules()
     {
         return [

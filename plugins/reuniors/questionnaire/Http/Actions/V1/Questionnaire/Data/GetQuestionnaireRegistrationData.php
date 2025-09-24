@@ -1,12 +1,10 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
-class GetQuestionnaireRegistrationData
-{
-    use asAction;
+class GetQuestionnaireRegistrationData extends BaseAction {
     public function rules()
     {
         return [

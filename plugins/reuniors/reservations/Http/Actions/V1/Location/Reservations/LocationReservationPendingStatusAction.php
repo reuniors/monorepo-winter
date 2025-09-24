@@ -1,16 +1,13 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Reservations;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\reservations\Http\Actions\V1\Notification\NotificationCreateAction;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\ClientReservation;
 use Reuniors\WinterSocialite\Http\Enum\UserGroupCode;
 use Log;
 
-class LocationReservationPendingStatusAction
-{
-    use AsAction;
-
+class LocationReservationPendingStatusAction extends BaseAction {
     public function handle()
     {
         $now = now();

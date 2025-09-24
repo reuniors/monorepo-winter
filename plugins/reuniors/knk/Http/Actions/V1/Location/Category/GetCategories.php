@@ -2,13 +2,12 @@
 
 namespace reuniors\knk\http\actions\v1\location\category;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\CacheData;
 use Reuniors\Knk\Models\Category;
 
-class GetCategories
+class GetCategories extends BaseAction
 {
-    use asAction;
 
     const WITHOUT_CATEGORIES = ['zatvoreni-objekti', 'dostava'];
 

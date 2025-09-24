@@ -1,14 +1,13 @@
 <?php namespace reuniors\evodic\Http\Actions\V1\Place;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Classes\Helpers\S;
 use Reuniors\Evodic\Models\Place;
 use Stevebauman\Purify\Facades\Purify;
 
-class UpdatePlaceAction
+class UpdatePlaceAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

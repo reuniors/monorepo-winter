@@ -1,13 +1,11 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\List;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\questionnaire\enums\QuestionnaireStatusEnum;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
-class GetQuestionnairesDataList
-{
-    use asAction;
+class GetQuestionnairesDataList extends BaseAction {
     public function rules()
     {
         return [

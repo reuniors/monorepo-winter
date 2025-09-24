@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\PromoCode;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Client;
 use Reuniors\Reservations\Models\PromoCode;
 use Auth;
 
-class LocationPromoCodeFindOneAction
-{
-    use asAction;
-
+class LocationPromoCodeFindOneAction extends BaseAction {
     public function rules()
     {
         return [

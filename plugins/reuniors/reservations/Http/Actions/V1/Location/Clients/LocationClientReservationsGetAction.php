@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Clients;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\Location;
 
-class LocationClientReservationsGetAction
-{
-    use asAction;
-
+class LocationClientReservationsGetAction extends BaseAction {
     public function rules()
     {
         return [

@@ -2,16 +2,13 @@
 
 use Exception;
 use Illuminate\Support\Facades\DB;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\S;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Auth;
 
-class CreateLocationFromQuestionnaire
-{
-    use asAction;
-
+class CreateLocationFromQuestionnaire extends BaseAction {
     public function rules()
     {
         return [

@@ -1,15 +1,12 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\Product\Images;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Haljina\Models\Product;
 use Winter\Storm\Support\Facades\Input;
 
-class UploadProductImageAction
-{
-    use AsAction;
-
+class UploadProductImageAction extends BaseAction {
     public function rules()
     {
         return [

@@ -1,12 +1,11 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
-class GetOrCreateQuestionnaireRegistrationDataDraft
-{
-    use asAction;
+class GetOrCreateQuestionnaireRegistrationDataDraft extends BaseAction {
+    
 
     const QUESTIONNAIRE_LIMIT = 10;
 

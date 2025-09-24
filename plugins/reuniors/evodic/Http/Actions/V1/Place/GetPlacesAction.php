@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Place;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Place;
 
-class GetPlacesAction
+class GetPlacesAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

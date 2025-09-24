@@ -1,13 +1,12 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Tag\Group;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Classes\Helpers\S;
 use Reuniors\Base\Models\TagGroup;
 
-class UpdateTagGroupAction
+class UpdateTagGroupAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

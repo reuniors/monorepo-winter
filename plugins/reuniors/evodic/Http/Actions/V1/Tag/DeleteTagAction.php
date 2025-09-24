@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Tag;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\Tag;
 
-class DeleteTagAction
+class DeleteTagAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

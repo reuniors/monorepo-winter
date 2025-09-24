@@ -2,12 +2,11 @@
 
 use Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\Product;
 
-class RemoveDraftProductAction
+class RemoveDraftProductAction extends BaseAction
 {
-    use asAction;
     public function rules()
     {
         return [];

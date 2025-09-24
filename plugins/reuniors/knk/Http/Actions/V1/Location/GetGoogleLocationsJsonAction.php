@@ -2,7 +2,7 @@
 
 namespace reuniors\knk\Http\Actions\V1\Location;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 
 class GetGoogleLocationsJsonAction extends BaseAction
 {

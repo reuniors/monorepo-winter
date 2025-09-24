@@ -1,13 +1,11 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\questionnaire\enums\QuestionnaireStatusEnum;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Stevebauman\Purify\Facades\Purify;
 
-class UpdateQuestionnaireData
-{
-    use asAction;
+class UpdateQuestionnaireData extends BaseAction {
     public function rules()
     {
         return [

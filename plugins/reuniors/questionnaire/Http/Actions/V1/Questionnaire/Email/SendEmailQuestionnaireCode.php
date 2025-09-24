@@ -1,13 +1,10 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Email;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Mail;
 
-class SendEmailQuestionnaireCode
-{
-    use asAction;
-
+class SendEmailQuestionnaireCode extends BaseAction {
     public function rules()
     {
         return [

@@ -2,14 +2,11 @@
 
 use Auth;
 use Illuminate\Support\Str;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Http\Actions\V1\Product\Draft\CreateDraftProductAction;
 use Reuniors\Haljina\Http\Enums\ProductStatuses;
 
-class AddProductAction
-{
-    use AsAction;
-
+class AddProductAction extends BaseAction {
     public function rules()
     {
         return [

@@ -1,13 +1,10 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\RestaurantMenu;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\RestaurantMenu;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class GetRestaurantMenuListAction
-{
-    use asAction;
-
+class GetRestaurantMenuListAction extends BaseAction {
     public function rules()
     {
         return [

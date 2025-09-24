@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Image;
 
 use Illuminate\Support\Facades\Log;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use System\Models\File;
 use WebPConvert\WebPConvert;
 
-class ImageToWebpAction
-{
-    use AsAction;
-
+class ImageToWebpAction extends BaseAction {
     public function rules()
     {
         return [

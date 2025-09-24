@@ -1,12 +1,10 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Location\Images;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Location;
 
-class DeleteLocationImages
+class DeleteLocationImages extends BaseAction
 {
-    use asAction;
-
     public function rules()
     {
         return [

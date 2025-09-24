@@ -1,14 +1,13 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Tag;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Classes\Helpers\S;
 use Reuniors\Evodic\Models\PlaceType;
 use Reuniors\Base\Models\Tag;
 
-class CreateTagAction
+class CreateTagAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

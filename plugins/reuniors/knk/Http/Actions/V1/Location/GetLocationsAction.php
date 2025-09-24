@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Location;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\S;
 use Reuniors\Knk\Models\Location;
 
-class GetLocationsAction
+class GetLocationsAction extends BaseAction
 {
-    use asAction;
 
     const PER_PAGE = 30;
 

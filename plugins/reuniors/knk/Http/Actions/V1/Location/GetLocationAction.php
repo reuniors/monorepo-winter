@@ -1,18 +1,17 @@
 <?php namespace reuniors\knk\Http\Actions\V1\Location;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
-class GetLocationAction
+class GetLocationAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {
         return [];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         return [
             'success' => true,
@@ -29,9 +28,8 @@ class GetLocationAction
         ];
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

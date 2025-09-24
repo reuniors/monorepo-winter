@@ -1,11 +1,10 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location\VideoReview;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\LocationVideoReviewImage;
 
-class FeGetLocationVideoReviewImageAction
+class FeGetLocationVideoReviewImageAction extends BaseAction
 {
-    use AsAction;
 
     public function rules()
     {

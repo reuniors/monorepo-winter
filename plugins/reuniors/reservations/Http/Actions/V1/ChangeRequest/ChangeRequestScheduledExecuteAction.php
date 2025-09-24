@@ -1,15 +1,13 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\ChangeRequest;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\ChangeRequest;
 use Illuminate\Support\Facades\Log;
 
 class ChangeRequestScheduledExecuteAction extends BaseAction
 {
-    use AsAction;
-
     public function rules() { return []; }
 
     public function handle(array $attributes = [])

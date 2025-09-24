@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Delivery\Http\Actions\User;
 
 use Exception;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 
 class UserLoginAction extends BaseAction

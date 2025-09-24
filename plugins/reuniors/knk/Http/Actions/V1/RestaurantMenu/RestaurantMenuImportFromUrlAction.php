@@ -1,13 +1,10 @@
 <?php namespace reuniors\knk\Http\Actions\V1\RestaurantMenu;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\FoodMenuSyncWolt;
 use Reuniors\Knk\Models\Location;
 
-class RestaurantMenuImportFromUrlAction
-{
-    use AsAction;
-
+class RestaurantMenuImportFromUrlAction extends BaseAction {
     public function rules()
     {
         return [

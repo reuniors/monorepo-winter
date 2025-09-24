@@ -2,15 +2,12 @@
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts;
 
 use Carbon\Carbon;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\LocationWorker;
 use Reuniors\Reservations\Models\LocationWorkerShift;
 
-class LocationWorkingShiftsAddDayShiftAction
-{
-    use asAction;
-
+class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
     public function rules()
     {
         return [

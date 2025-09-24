@@ -1,13 +1,9 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\Product\profile;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\Product;
 
-class GetProfileProductsAction
-{
-    use AsAction;
-
-
+class GetProfileProductsAction extends BaseAction {
     public function handle($profileNickname, $filters = [])
     {
         return Product

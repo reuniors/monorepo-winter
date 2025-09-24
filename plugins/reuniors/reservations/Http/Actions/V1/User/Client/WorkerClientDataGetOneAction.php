@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\reservations\Http\Actions\V1\User\Client;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Client;
 
 class WorkerClientDataGetOneAction extends BaseAction
 {
-    use asAction;
-
     public function rules()
     {
         return [

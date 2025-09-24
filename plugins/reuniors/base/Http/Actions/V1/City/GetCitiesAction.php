@@ -1,12 +1,9 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\City;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\City;
 
-class GetCitiesAction
-{
-    use AsAction;
-
+class GetCitiesAction extends BaseAction {
     public function rules()
     {
         return [

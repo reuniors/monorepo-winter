@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\City;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Knk\Classes\CacheData;
 use Reuniors\Knk\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;

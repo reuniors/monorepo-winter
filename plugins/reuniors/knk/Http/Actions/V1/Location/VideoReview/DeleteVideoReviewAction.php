@@ -2,7 +2,7 @@
 
 namespace reuniors\knk\Http\Actions\V1\Location\VideoReview;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\LocationVideoReview;
 

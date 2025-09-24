@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\TagGroup;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\TagGroup;
 
-class GetTagGroupsAction
-{
-    use AsAction;
-
+class GetTagGroupsAction extends BaseAction {
     public function rules()
     {
         return [

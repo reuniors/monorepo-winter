@@ -1,14 +1,11 @@
 <?php namespace reuniors\wintersocialite\Http\Actions\User;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Classes\Device;
 use Winter\User\Models\User;
 use Auth;
 
-class LoginWithConfirmationCode
-{
-    use AsAction;
-
+class LoginWithConfirmationCode extends BaseAction {
     public function rules()
     {
         return [

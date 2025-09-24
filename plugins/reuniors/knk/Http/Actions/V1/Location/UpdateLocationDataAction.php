@@ -1,14 +1,11 @@
 <?php namespace reuniors\knk\Http\Actions\V1\Location;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Classes\S;
 use Reuniors\Knk\Models\Location;
 use Stevebauman\Purify\Facades\Purify;
 
-class UpdateLocationDataAction
-{
-    use asAction;
-
+class UpdateLocationDataAction extends BaseAction {
     public function rules()
     {
         return [

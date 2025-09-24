@@ -2,14 +2,11 @@
 
 namespace Reuniors\UserExtended\Http\Actions\User\Addresses;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 use Reuniors\UserExtended\Models\UserAddress;
 
-class UserAddressGetAllAction
-{
-    use AsAction;
-
+class UserAddressGetAllAction extends BaseAction {
     public function handle()
     {
         $user = Auth::getUser();

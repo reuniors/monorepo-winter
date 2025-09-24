@@ -1,14 +1,13 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\QA\Answers;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Http\Actions\V1\QA\Questions\CreateQaQuestionAction;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\QaAnswer;
 
-class CreateQaAnswerAction
+class CreateQaAnswerAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

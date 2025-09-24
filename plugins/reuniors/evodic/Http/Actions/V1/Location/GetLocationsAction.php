@@ -1,14 +1,13 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Location;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Location;
 use Auth;
 use Winter\Storm\Support\Facades\DB;
 
-class GetLocationsAction
-{
-    use AsAction;
+class GetLocationsAction extends BaseAction {
+    
     const PER_PAGE = 10;
 
     public function rules()

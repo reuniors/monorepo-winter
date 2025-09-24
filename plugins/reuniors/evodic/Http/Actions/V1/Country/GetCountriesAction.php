@@ -1,11 +1,10 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Country;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\Country;
 
-class GetCountriesAction
+class GetCountriesAction extends BaseAction
 {
-    use asAction;
 
     public function handle(array $attributes = [])
     {
@@ -15,9 +14,4 @@ class GetCountriesAction
         ];
     }
 
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
-    }
 }

@@ -2,13 +2,12 @@
 
 use http\Exception\InvalidArgumentException;
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\QaAnswer;
 
-class GetOneQaAnswerAction
+class GetOneQaAnswerAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

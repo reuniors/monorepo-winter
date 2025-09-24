@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Evodic\Http\ActionsOnFe\V1\Location;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\PlaceType;
 use Illuminate\Support\Facades\Cache;
 
-class GetLocationPlaceTypesAction
+class GetLocationPlaceTypesAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

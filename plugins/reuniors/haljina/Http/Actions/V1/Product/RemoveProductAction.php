@@ -1,12 +1,11 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\Product;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\Product;
 use Auth;
 
-class RemoveProductAction
+class RemoveProductAction extends BaseAction
 {
-    use asAction;
     public function rules()
     {
         return [

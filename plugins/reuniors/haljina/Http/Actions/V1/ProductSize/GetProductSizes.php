@@ -1,11 +1,10 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\ProductSize;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\ProductSize;
 
-class GetProductSizes
+class GetProductSizes extends BaseAction
 {
-    use asAction;
 
     public function handle()
     {

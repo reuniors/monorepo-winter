@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Language;
 
-use Reuniors\Evodic\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\Translate\Classes\Translator;
 use Winter\Translate\Models\Locale;
 

@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Administration;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerShiftsByDaysGetAction;
 use Reuniors\Reservations\Models\LocationWorker;
 
-class PrepareDaysReminder
-{
-    use AsAction;
-
+class PrepareDaysReminder extends BaseAction {
     public function reminderNotification()
     {
 

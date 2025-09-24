@@ -1,12 +1,9 @@
 <?php namespace reuniors\wintersocialite\Http\Actions\User\Mail;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Mail;
 
-class SendUserAuthorizationMail
-{
-    use AsAction;
-
+class SendUserAuthorizationMail extends BaseAction {
     public function handle($user)
     {
         Mail::sendTo($user, 'reuniors.wintersocialite::mail.authorization-confirmation', [

@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Translation;
 
 use Illuminate\Validation\Rule;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\evodic\Enums\TranslationTypesPath;
 
-class TranslationAddAction
-{
-    use AsAction;
-
+class TranslationAddAction extends BaseAction {
     public function rules()
     {
         return [

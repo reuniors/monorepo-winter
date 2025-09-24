@@ -2,7 +2,7 @@
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Reservations;
 
 use Carbon\Carbon;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCode\LocationPromoCodeFindOneAction;
 use Reuniors\reservations\Http\Actions\V1\Notification\NotificationCreateAction;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
@@ -13,10 +13,7 @@ use Reuniors\Reservations\Models\PromoCode;
 use Reuniors\Reservations\Models\Service;
 use Winter\User\Facades\Auth;
 
-class LocationReservationCreateAction
-{
-    use asAction;
-
+class LocationReservationCreateAction extends BaseAction {
     public function rules()
     {
         return [

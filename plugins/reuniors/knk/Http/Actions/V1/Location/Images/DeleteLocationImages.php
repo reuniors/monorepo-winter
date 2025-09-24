@@ -1,15 +1,14 @@
 <?php namespace reuniors\knk\Http\Actions\V1\Location\Images;
 
 use http\Exception\InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Questionnaire\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 use Winter\Storm\Support\Facades\Input;
 
-class DeleteLocationImages
+class DeleteLocationImages extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

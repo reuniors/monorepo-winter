@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\Tag;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\Tag;
 
-class DeleteTagAction
-{
-    use AsAction;
-
+class DeleteTagAction extends BaseAction {
     public function rules()
     {
         return [

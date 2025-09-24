@@ -1,14 +1,12 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\Images\Single;
 
 use http\Exception\InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 use Winter\Storm\Support\Facades\Input;
 
-class DeleteQuestionnaireDataPhoto
-{
-    use asAction;
+class DeleteQuestionnaireDataPhoto extends BaseAction {
     public function rules()
     {
         return [

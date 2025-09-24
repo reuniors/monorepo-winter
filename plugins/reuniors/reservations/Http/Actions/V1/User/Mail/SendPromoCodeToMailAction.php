@@ -1,17 +1,14 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\User\Mail;
 
 use Carbon\Carbon;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Mail;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\Client;
 use Reuniors\Reservations\Models\PromoCode;
 use Winter\User\Models\User;
 
-class SendPromoCodeToMailAction
-{
-    use asAction;
-
+class SendPromoCodeToMailAction extends BaseAction {
     public function rules(): array
     {
         return [

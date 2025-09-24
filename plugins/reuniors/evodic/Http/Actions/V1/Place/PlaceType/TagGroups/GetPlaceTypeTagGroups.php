@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Place\PlaceType\TagGroups;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\PlaceType;
 
-class GetPlaceTypeTagGroups
-{
-    use AsAction;
-
+class GetPlaceTypeTagGroups extends BaseAction {
     public function rules()
     {
         return [

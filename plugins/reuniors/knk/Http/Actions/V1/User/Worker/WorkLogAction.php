@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\User\Worker;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\UserWorkingTimeHistory;
 
-class WorkLogAction
-{
-    use asAction;
-
+class WorkLogAction extends BaseAction {
     public function rules()
     {
         return [];

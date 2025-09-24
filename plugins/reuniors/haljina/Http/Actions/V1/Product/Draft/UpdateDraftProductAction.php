@@ -2,14 +2,11 @@
 
 use Auth;
 use Illuminate\Support\Str;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Http\Actions\V1\ProductSize\CreateProductSize;
 use Reuniors\Haljina\Http\Actions\V1\ProductSize\FindProductSize;
 
-class UpdateDraftProductAction
-{
-    use AsAction;
-
+class UpdateDraftProductAction extends BaseAction {
     public function rules()
     {
         return [

@@ -1,12 +1,9 @@
 <?php namespace reuniors\wintersocialite\Http\Actions\User;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 
-class CompleteUserRegistration
-{
-    use asAction;
-
+class CompleteUserRegistration extends BaseAction {
     public function rules()
     {
         return [

@@ -4,7 +4,7 @@ use Auth;
 use Exception;
 use Reuniors\Delivery\Http\Enum\OrderStatusEnum;
 use Reuniors\Delivery\Models\Order;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Http\ActionsFe\V1\Location\FeGetOneLocation;
 
 class OrderCreateDraftAction extends BaseAction

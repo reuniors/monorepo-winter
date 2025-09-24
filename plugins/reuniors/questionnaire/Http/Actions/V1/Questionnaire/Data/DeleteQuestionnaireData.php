@@ -1,12 +1,10 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\questionnaire\enums\QuestionnaireStatusEnum;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class DeleteQuestionnaireData
-{
-    use asAction;
+class DeleteQuestionnaireData extends BaseAction {
     public function rules()
     {
         return [

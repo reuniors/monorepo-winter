@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Scraper;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Exception;

@@ -1,15 +1,12 @@
 <?php namespace reuniors\knk\Http\Actions\V1\RestaurantMenu\Food;
 
 use Illuminate\Http\UploadedFile;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Food;
 use Reuniors\Knk\Models\RestaurantMenu;
 use Winter\Storm\Support\Facades\Input;
 
-class UploadFoodPhoto
-{
-    use asAction;
-
+class UploadFoodPhoto extends BaseAction {
     public function rules()
     {
         return [

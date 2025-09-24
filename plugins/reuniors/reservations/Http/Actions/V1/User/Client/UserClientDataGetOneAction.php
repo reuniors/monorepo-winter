@@ -1,13 +1,10 @@
 <?php namespace Reuniors\reservations\Http\Actions\V1\User\Client;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 use Reuniors\Reservations\Models\Client;
 
-class UserClientDataGetOneAction
-{
-    use asAction;
-
+class UserClientDataGetOneAction extends BaseAction {
     public function handle(array $attributes)
     {
         $user = Auth::getUser();

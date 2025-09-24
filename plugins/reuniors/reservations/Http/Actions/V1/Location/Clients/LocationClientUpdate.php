@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Clients;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Client;
 use Auth;
 
-class LocationClientUpdate
-{
-    use asAction;
-
+class LocationClientUpdate extends BaseAction {
     public function rules()
     {
         return [

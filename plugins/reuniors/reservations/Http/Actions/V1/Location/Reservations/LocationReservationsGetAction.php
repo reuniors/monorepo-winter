@@ -1,12 +1,9 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Reservations;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 
-class LocationReservationsGetAction
-{
-    use asAction;
-
+class LocationReservationsGetAction extends BaseAction {
     public function rules()
     {
         return [

@@ -1,13 +1,12 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\Product\Draft;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Http\Enums\ProductStatuses;
 use Reuniors\Haljina\Models\Product;
 
-class GetDraftProductAction
+class GetDraftProductAction extends BaseAction
 {
-    use asAction;
 
     public function handle()
     {

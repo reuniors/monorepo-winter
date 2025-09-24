@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\User\Mail;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use mysql_xdevapi\Exception;
 use Mail;
 
-class SendNotificationAsEmail
-{
-    use asAction;
-
+class SendNotificationAsEmail extends BaseAction {
     public function rules(): array
     {
         return [

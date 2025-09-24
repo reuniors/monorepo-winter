@@ -1,14 +1,11 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\Images;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\Helpers\ReorderDataHelper;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistrationData;
 
-class ReorderQuestionnaireDataPhotos
-{
-    use AsAction;
-
+class ReorderQuestionnaireDataPhotos extends BaseAction {
     public function rules()
     {
         return [

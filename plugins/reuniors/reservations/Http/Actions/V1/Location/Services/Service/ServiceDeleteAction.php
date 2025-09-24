@@ -1,14 +1,12 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Services\Service;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Service;
 use Illuminate\Support\Facades\Log;
 
 class ServiceDeleteAction extends BaseAction
 {
-    use AsAction;
-
     public function rules()
     {
         return [];

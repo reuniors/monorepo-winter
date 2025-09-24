@@ -1,11 +1,10 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\General;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Log;
 
-class ProductionLoggingAction
-{
-    use AsAction;
+class ProductionLoggingAction extends BaseAction {
+    
 
     private const LOG_PARAM = 'logIt';
 

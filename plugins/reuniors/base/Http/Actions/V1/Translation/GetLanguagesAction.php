@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\Translation;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\Translate\Models\Locale;
 use Reuniors\Base\Http\Actions\BaseAction;
 

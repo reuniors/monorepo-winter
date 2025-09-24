@@ -1,11 +1,9 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Questionnaire;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class CreateQuestionnaireRegistration
-{
-    use asAction;
+class CreateQuestionnaireRegistration extends BaseAction {
     public function rules()
     {
         return [];

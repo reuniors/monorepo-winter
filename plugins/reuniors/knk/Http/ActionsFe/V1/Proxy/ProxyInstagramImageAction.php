@@ -3,12 +3,11 @@
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Support\Facades\Log;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\LocationVideoReview;
 
-class ProxyInstagramImageAction
+class ProxyInstagramImageAction extends BaseAction
 {
-    use AsAction;
 
     public function rules()
     {

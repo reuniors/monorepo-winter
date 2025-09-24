@@ -1,8 +1,8 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Location\Tags;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Base\Models\Tag;
 

@@ -1,14 +1,11 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Clients\Notifications;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\Notification;
 
-class LocationClientNotifications
-{
-    use asAction;
-
+class LocationClientNotifications extends BaseAction {
     public function rules()
     {
         return [

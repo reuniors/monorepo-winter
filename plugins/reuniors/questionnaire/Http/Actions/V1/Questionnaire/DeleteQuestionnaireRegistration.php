@@ -1,12 +1,10 @@
 <?php namespace reuniors\questionnaire\Http\Actions\V1\Questionnaire;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use reuniors\questionnaire\Http\Actions\V1\Questionnaire\Data\DeleteQuestionnaireData;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
-class DeleteQuestionnaireRegistration
-{
-    use asAction;
+class DeleteQuestionnaireRegistration extends BaseAction {
     public function rules()
     {
         return [

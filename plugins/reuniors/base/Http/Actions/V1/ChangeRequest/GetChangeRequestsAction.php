@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\ChangeRequest;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\ChangeRequest;
 
-class GetChangeRequestsAction
-{
-    use AsAction;
-
+class GetChangeRequestsAction extends BaseAction {
     public function rules()
     {
         return [

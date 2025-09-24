@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\User;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 use Request;
 use Exception;
@@ -10,10 +10,7 @@ use Winter\User\Models\Settings as UserSettings;
 use Winter\User\Models\User;
 use Illuminate\Validation\ValidationException;
 
-class LoginAction
-{
-    use AsAction;
-
+class LoginAction extends BaseAction {
     public function rules()
     {
         return [

@@ -1,13 +1,12 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\ProductSize;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Classes\Helpers\S;
 use Reuniors\Haljina\Models\ProductSize;
 
-class CreateProductSize
+class CreateProductSize extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

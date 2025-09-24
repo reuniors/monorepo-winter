@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Knk\Http\Actions\V1\Location\Common;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 
 class UpdateLocationAvgPriceAction extends BaseAction
 {

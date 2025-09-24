@@ -1,15 +1,14 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Location;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Classes\Helpers\S;
 use reuniors\evodic\Enums\PlaceStatus;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\Place;
 
-class CreateLocationAction
+class CreateLocationAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

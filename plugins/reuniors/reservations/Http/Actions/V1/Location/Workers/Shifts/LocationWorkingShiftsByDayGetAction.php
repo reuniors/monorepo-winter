@@ -1,13 +1,10 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts;
 
 use Carbon\Carbon;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\LocationWorkerShift;
 
-class LocationWorkingShiftsByDayGetAction
-{
-    use asAction;
-
+class LocationWorkingShiftsByDayGetAction extends BaseAction {
     public function rules()
     {
         return [

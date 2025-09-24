@@ -1,15 +1,14 @@
 <?php namespace Reuniors\Evodic\Http\Actions\V1\Tag;
 
 use Illuminate\Http\Request;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Http\Actions\V1\Tag\Group\GetTagGroupsAction;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\PlaceType;
 use Reuniors\Base\Models\Tag;
 
-class GetTagsAction
+class GetTagsAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

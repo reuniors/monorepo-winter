@@ -1,12 +1,9 @@
 <?php namespace Reuniors\Haljina\Http\Actions\V1\Product;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\Product;
 
-class GetPendingProductsAction
-{
-    use AsAction;
-
+class GetPendingProductsAction extends BaseAction {
     public function handle($filters = [])
     {
         return Product::where('status', 'pending')->paginate();

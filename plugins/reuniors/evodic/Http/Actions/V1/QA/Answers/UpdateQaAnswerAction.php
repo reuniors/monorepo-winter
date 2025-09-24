@@ -2,15 +2,14 @@
 
 use Illuminate\Http\Request;
 use InvalidArgumentException;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Http\Actions\V1\QA\Questions\CreateQaQuestionAction;
 use Reuniors\Evodic\Http\Actions\V1\QA\Questions\DeleteQaQuestionAction;
 use Reuniors\Evodic\Models\Location;
 use Reuniors\Evodic\Models\QaAnswer;
 
-class UpdateQaAnswerAction
+class UpdateQaAnswerAction extends BaseAction
 {
-    use asAction;
 
     public function rules()
     {

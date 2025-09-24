@@ -1,15 +1,13 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\LocationWorker;
 
 class LocationWorkerDeleteAction extends BaseAction
 {
-    use AsAction;
-
     public function rules()
     {
         return [

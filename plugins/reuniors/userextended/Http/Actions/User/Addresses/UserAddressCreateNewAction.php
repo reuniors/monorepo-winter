@@ -1,13 +1,12 @@
 <?php namespace Reuniors\UserExtended\Http\Actions\User\Addresses;
 
 use Auth;
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Nette\ArgumentOutOfRangeException;
 use Reuniors\UserExtended\Models\UserAddress;
 
-class UserAddressCreateNewAction
-{
-    use AsAction;
+class UserAddressCreateNewAction extends BaseAction {
+    
 
     const LIMIT = 10;
 

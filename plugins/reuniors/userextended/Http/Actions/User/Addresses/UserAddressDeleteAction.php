@@ -1,13 +1,10 @@
 <?php namespace Reuniors\UserExtended\Http\Actions\User\Addresses;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\UserExtended\Models\UserAddress;
 use Auth;
 
-class UserAddressDeleteAction
-{
-    use AsAction;
-
+class UserAddressDeleteAction extends BaseAction {
     public function rules()
     {
         return [

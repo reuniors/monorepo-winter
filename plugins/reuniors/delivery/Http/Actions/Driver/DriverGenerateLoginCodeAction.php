@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Delivery\Http\Actions\Driver;
 
 use Reuniors\Delivery\Models\Driver;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 
 class DriverGenerateLoginCodeAction extends BaseAction
 {
