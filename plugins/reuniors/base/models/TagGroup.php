@@ -35,9 +35,10 @@ class TagGroup extends Model
      */
     public $table = 'reuniors_base_tag_groups';
 
-    public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
+    public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
         'name',
+        'title',
         'description',
         ['slug', 'index' => true]
     ];
@@ -47,24 +48,34 @@ class TagGroup extends Model
      */
     protected $fillable = [
         'name',
+        'title',
         'description',
-        'type',
         'sort_order',
         'slug',
         'metadata',
-        'parent_id',
         'metadata_t',
+        'parent_id',
         'show_on_search',
         'show_in_filters',
         'combine_type',
+        'type',
+        'active',
     ];
 
     /**
      * @var array Validation rules
      */
     public $rules = [
-        'name' => 'required|string|max:255',
-        'type' => 'nullable|string|max:50',
+        'name' => 'required|string|max:191',
+        'title' => 'required|string|max:191',
+        'slug' => 'required|string|max:191|unique:reuniors_base_tag_groups',
+        'type' => 'nullable|string|max:191',
+        'parent_id' => 'nullable|exists:reuniors_base_tag_groups,id',
+        'sort_order' => 'integer',
+        'show_on_search' => 'boolean',
+        'show_in_filters' => 'boolean',
+        'combine_type' => 'boolean',
+        'active' => 'boolean',
     ];
 
     /**

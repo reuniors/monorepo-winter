@@ -17,7 +17,7 @@ class QaQuestion extends Model
      */
     public $table = 'reuniors_base_qa_questions';
 
-    public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
+    public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
         'question',
         'answer',

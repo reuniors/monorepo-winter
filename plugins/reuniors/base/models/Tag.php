@@ -23,7 +23,7 @@ class Tag extends Model
      */
     public $table = 'reuniors_base_tags';
 
-    public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
+    public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
     public $translatable = [
         'name',
         'title',

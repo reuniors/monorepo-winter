@@ -28,4 +28,16 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('reuniors.migrate-table', 'Reuniors\Base\Console\GenericTableMigrator');
         $this->registerConsoleCommand('reuniors.run-migrations', 'Reuniors\Base\Console\RunMigrations');
     }
+
+    public function boot()
+    {
+        // Register base plugin entity types for translations
+        \Reuniors\Base\Classes\TranslationEntityRegistry::registerMany([
+            'country' => 'Reuniors\Base\Models\Country',
+            'city' => 'Reuniors\Base\Models\City',
+            'tag' => 'Reuniors\Base\Models\Tag',
+            'tag_group' => 'Reuniors\Base\Models\TagGroup',
+            'qa_question' => 'Reuniors\Base\Models\QaQuestion',
+        ]);
+    }
 }

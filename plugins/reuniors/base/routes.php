@@ -43,6 +43,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [
     // Translations
     Route::get('translations', \Reuniors\Base\Http\Actions\V1\Translation\GetTranslationsAction::class);
     Route::post('translations', \Reuniors\Base\Http\Actions\V1\Translation\CreateTranslationAction::class);
+    Route::get('translations/languages', \Reuniors\Base\Http\Actions\V1\Translation\GetLanguagesAction::class);
     
     // Change Requests
     Route::get('change-requests', \Reuniors\Base\Http\Actions\V1\ChangeRequest\GetChangeRequestsAction::class);

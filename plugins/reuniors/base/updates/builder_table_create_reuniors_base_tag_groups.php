@@ -9,11 +9,24 @@ class BuilderTableCreateReuniorsBaseTagGroups extends Migration
     {
         Schema::create('reuniors_base_tag_groups', function($table)
         {
-            $table->increments('id');
-            $table->string('name');
+            $table->engine = 'InnoDB';
+            $table->increments('id')->unsigned();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
+            $table->timestamp('deleted_at')->nullable();
+            $table->string('name', 191);
+            $table->string('title', 191);
             $table->text('description')->nullable();
-            $table->string('type')->nullable();
-            $table->timestamps();
+            $table->bigInteger('sort_order')->default(0);
+            $table->string('slug', 191);
+            $table->text('metadata')->nullable();
+            $table->text('metadata_t')->nullable();
+            $table->integer('parent_id')->nullable()->unsigned();
+            $table->smallInteger('show_on_search')->unsigned()->default(0);
+            $table->smallInteger('show_in_filters')->unsigned()->default(0);
+            $table->smallInteger('combine_type')->unsigned()->default(0);
+            $table->string('type', 191)->default('standard');
+            $table->smallInteger('active')->unsigned()->default(0);
         });
     }
     

@@ -2,48 +2,71 @@
 
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Base\Models\Translation;
+use Reuniors\Base\Classes\TranslationEntityRegistry;
+use Reuniors\Base\Http\Actions\BaseAction;
 
-class CreateTranslationAction
-{
-    use AsAction;
-
+class CreateTranslationAction extends BaseAction
+{   
     public function rules()
     {
         return [
-            'entity_type' => 'required|string|max:255',
-            'entity_id' => 'required|integer',
-            'field_name' => 'required|string|max:255',
-            'language' => 'required|string|size:5',
-            'value' => 'required|string',
+            'entityType' => 'required|string|max:100',
+            'entityId' => 'required|integer',
+            'language' => 'required|string|max:10',
+            'fieldName' => 'required|string|max:100',
+            'fieldValue' => 'required|string',
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $attributes = [])
     {
-        // Check if translation already exists
-        $existingTranslation = Translation::forField(
-            $data['entity_type'],
-            $data['entity_id'],
-            $data['field_name']
-        )->where('language', $data['language'])->first();
+        try {
+            $entityType = $attributes['entityType'];
+            $entityId = $attributes['entityId'];
+            $language = $attributes['language'];
+            $fieldName = $attributes['fieldName'];
+            $fieldValue = $attributes['fieldValue'];
 
-        if ($existingTranslation) {
-            $existingTranslation->update(['value' => $data['value']]);
-            $translation = $existingTranslation;
-        } else {
-            $translation = Translation::create($data);
+            // Get the model class
+            $modelClass = TranslationEntityRegistry::getModelClass($entityType);
+            
+            // Find the entity
+            $entity = $modelClass::find($entityId);
+            if (!$entity) {
+                throw new \Exception("Entity not found: {$entityType} with ID {$entityId}");
+            }
+
+            // Check if the field is translatable
+            $translatableFields = $entity->translatable ?? [];
+            $isTranslatable = false;
+            
+            foreach ($translatableFields as $field) {
+                if (is_string($field) && $field === $fieldName) {
+                    $isTranslatable = true;
+                    break;
+                }
+            }
+
+            if (!$isTranslatable) {
+                throw new \Exception("Field '{$fieldName}' is not translatable for entity type '{$entityType}'");
+            }
+
+            // Set the translation
+            $entity->setAttributeTranslated($fieldName, $fieldValue, $language);
+            
+            // Save the entity to persist the translation
+            $entity->save();
+
+            return [
+                'entityType' => $entityType,
+                'entityId' => $entityId,
+                'language' => $language,
+                'fieldName' => $fieldName,
+                'fieldValue' => $fieldValue,
+                'message' => 'Translation saved successfully'
+            ];
+        } catch (\Exception $e) {
+            throw $e;
         }
-
-        return [
-            'success' => true,
-            'data' => $translation,
-            'message' => 'Translation saved successfully'
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

@@ -1,48 +1,100 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\Translation;
 
+use Reuniors\Base\Http\Actions\BaseAction;
 use Illuminate\Http\Request;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Base\Models\Translation;
+use Winter\Translate\Models\Locale;
+use Reuniors\Base\Classes\TranslationEntityRegistry;
 
-class GetTranslationsAction
+class GetTranslationsAction extends BaseAction
 {
     use AsAction;
 
     public function rules()
     {
         return [
-            'entity_type' => 'required|string|max:255',
-            'entity_id' => 'required|integer',
-            'field_name' => 'nullable|string|max:255',
-            'language' => 'nullable|string|size:5',
+            'entityType' => 'required|string|max:100',
+            'entityId' => 'required|integer',
+            'language' => 'nullable|string|max:10',
         ];
     }
 
     public function handle(array $attributes = [])
     {
-        $entityType = $attributes['entity_type'];
-        $entityId = $attributes['entity_id'];
-        $fieldName = $attributes['field_name'] ?? null;
-        $language = $attributes['language'] ?? null;
+        try {
+            $entityType = $attributes['entityType'];
+            $entityId = $attributes['entityId'];
+            $language = $attributes['language'] ?? null;
 
-        $translations = Translation::forEntity($entityType, $entityId);
+            // Get the model class
+            $modelClass = TranslationEntityRegistry::getModelClass($entityType);
+            
+            // Find the entity
+            $entity = $modelClass::find($entityId);
+            if (!$entity) {
+                throw new \Exception("Entity not found: {$entityType} with ID {$entityId}");
+            }
 
-        if ($fieldName) {
-            $translations->where('field_name', $fieldName);
+            // Get translatable fields
+            $translatableFields = $entity->translatable ?? [];
+            
+            if (empty($translatableFields)) {
+                return [];
+            }
+
+            $result = [];
+
+            if ($language) {
+                // Get translations for specific language
+                foreach ($translatableFields as $field) {
+                    if (is_string($field)) {
+                        $translatedValue = $entity->getAttributeTranslated($field, $language);
+                        // If the translated value is the same as the default value, it means no translation exists
+                        $defaultValue = $entity->getAttribute($field);
+                        if ($translatedValue !== $defaultValue) {
+                            $result[$field] = $translatedValue;
+                        } else {
+                            $result[$field] = null;
+                        }
+                    }
+                }
+            } else {
+                // Get all translations grouped by language
+                $availableLanguages = $this->getAvailableLanguages();
+                
+                foreach ($availableLanguages as $lang) {
+                    $langTranslations = [];
+                    foreach ($translatableFields as $field) {
+                        if (is_string($field)) {
+                            $translatedValue = $entity->getAttributeTranslated($field, $lang);
+                            // If the translated value is the same as the default value, it means no translation exists
+                            $defaultValue = $entity->getAttribute($field);
+                            if ($translatedValue !== $defaultValue) {
+                                $langTranslations[$field] = $translatedValue;
+                            } else {
+                                $langTranslations[$field] = null;
+                            }
+                        }
+                    }
+                    // Always include the language, even if all translations are null
+                    $result[$lang] = $langTranslations;
+                }
+            }
+
+            return $result;
+        } catch (\Exception $e) {
+            throw $e;
         }
-
-        if ($language) {
-            $translations->where('language', $language);
-        }
-
-        return [
-            'success' => true,
-            'data' => $translations->get()
-        ];
     }
 
-    public function asController(Request $request)
+
+    /**
+     * Get available languages from database
+     *
+     * @return array
+     */
+    private function getAvailableLanguages()
     {
-        return $this->handle($request->all());
+        return array_keys(Locale::listEnabled());
     }
 }
