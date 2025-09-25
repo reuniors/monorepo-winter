@@ -14,7 +14,7 @@ class LocationClientNotifications extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'];
         $perPage = $attributes['perPage'] ?? 30;
@@ -39,15 +39,5 @@ class LocationClientNotifications extends BaseAction {
             ->with('client_reservations')
             ->orderBy('created_at', 'desc')
             ->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

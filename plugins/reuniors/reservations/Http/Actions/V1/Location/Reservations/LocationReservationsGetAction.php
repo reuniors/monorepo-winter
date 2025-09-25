@@ -15,7 +15,7 @@ class LocationReservationsGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $location = Location::where('slug', $attributes['locationSlug'])
             ->firstOrFail();
@@ -54,15 +54,5 @@ class LocationReservationsGetAction extends BaseAction {
             ])
             ->where('status', '!=', 3)
             ->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

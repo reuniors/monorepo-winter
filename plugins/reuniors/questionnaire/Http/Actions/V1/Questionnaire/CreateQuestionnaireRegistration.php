@@ -14,17 +14,8 @@ class CreateQuestionnaireRegistration extends BaseAction {
         $questionnaire = QuestionnaireRegistration::create($attributes);
 
         return [
-            'success' => true,
-            'data' => [
-                ...$questionnaire->toArray(),
-                'redirectUrl' => url('/') . 'app/questionnaire/location/list/',
-            ],
+            ...$questionnaire->toArray(),
+            'redirectUrl' => url('/') . 'app/questionnaire/location/list/',
         ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
     }
 }

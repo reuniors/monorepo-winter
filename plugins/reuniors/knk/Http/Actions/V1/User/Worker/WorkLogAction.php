@@ -25,18 +25,8 @@ class WorkLogAction extends BaseAction {
 
         $workingTimeHistory->logWork();
 
-
         return [
-            'success' => true,
-            'data' => [
-                'duration' => $workingTimeHistory->duration_in_sec
-            ],
+            'duration' => $workingTimeHistory->duration_in_sec
         ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
     }
 }

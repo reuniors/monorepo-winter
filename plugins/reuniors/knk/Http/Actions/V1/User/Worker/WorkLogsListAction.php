@@ -39,17 +39,8 @@ class WorkLogsListAction extends BaseAction {
                 ->where('date', 'like', $month . '%');
         }
 
-        return [
-            'success' => true,
-            'data' => $workTimeHistoryQuery
-                ->by($by)
-                ->paginate(31),
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $workTimeHistoryQuery
+            ->by($by)
+            ->paginate(31);
     }
 }

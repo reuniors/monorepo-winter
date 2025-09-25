@@ -13,7 +13,7 @@ class LocationReservationGetOneAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         return ClientReservation
             ::getFeData([
@@ -21,15 +21,5 @@ class LocationReservationGetOneAction extends BaseAction {
                 'hash' => $attributes['reservationHash'],
             ])
             ->firstOrFail();
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

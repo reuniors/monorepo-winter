@@ -23,7 +23,7 @@ class LocationReservationUpdateAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = $attributes['userData'] ?? Auth::getUser();
         $status = $attributes['status'];
@@ -109,15 +109,5 @@ class LocationReservationUpdateAction extends BaseAction {
         ]);
 
         return $reservation;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

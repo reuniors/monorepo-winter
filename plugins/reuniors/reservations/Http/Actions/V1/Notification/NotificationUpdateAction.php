@@ -14,7 +14,7 @@ class NotificationUpdateAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $notificationId = $attributes['notificationId'];
@@ -30,14 +30,5 @@ class NotificationUpdateAction extends BaseAction {
         $notification->users()->syncWithoutDetaching($usersIds, ['status' => $status]);
 
         return true;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return [
-            'success' => true,
-            'data' => $this->handle($requestData)
-        ];
     }
 }

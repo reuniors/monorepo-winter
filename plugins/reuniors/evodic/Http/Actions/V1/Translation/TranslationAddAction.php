@@ -15,7 +15,7 @@ class TranslationAddAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $type = $attributes['type'];
         $language = $attributes['language'];
@@ -33,15 +33,5 @@ class TranslationAddAction extends BaseAction {
         $model->syncTranslatableAttributes();
 
         return true;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

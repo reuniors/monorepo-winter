@@ -15,7 +15,7 @@ class LocationClientUpdate extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $fullName = $attributes['full_name'];
@@ -36,15 +36,5 @@ class LocationClientUpdate extends BaseAction {
         $client->save();
 
         return $client;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

@@ -11,22 +11,12 @@ class LocationClientsGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         return Client
             ::feData([
                 'locationSlug' => $attributes['locationSlug'],
             ])
             ->get();
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

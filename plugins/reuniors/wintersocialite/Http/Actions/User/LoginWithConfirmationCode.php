@@ -2,6 +2,7 @@
 
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Classes\Device;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Winter\User\Models\User;
 use Auth;
 
@@ -15,7 +16,7 @@ class LoginWithConfirmationCode extends BaseAction {
         ];
     }
 
-    public function handle($data)
+    public function handle($data = [])
     {
         $user = User::where('email', $data['login'])
             ->where('activation_code', $data['code'])
@@ -36,7 +37,7 @@ class LoginWithConfirmationCode extends BaseAction {
         return $user;
     }
 
-    public function asController()
+    public function asController(): array
     {
         try {
             $requestData = request()->all();
@@ -51,16 +52,15 @@ class LoginWithConfirmationCode extends BaseAction {
                 $existingAccessToken->delete();
             }
         } catch (\Exception $e) {
-            return response()->json([
-                'success' => false,
-                'message' => $e->getMessage()
-            ], 400);
+            throw new NotFoundHttpException($e->getMessage());
         }
 
         return [
-            'success' => true,
-            'user' => $user->only(['name', 'email', 'groups', 'id']),
-            'token' => $user->createToken($name)->plainTextToken
+            'data' => [
+                'user' => $user->only(['name', 'email', 'groups', 'id']),
+                'token' => $user->createToken($name)->plainTextToken
+            ],
+            'success' => true
         ];
     }
 }

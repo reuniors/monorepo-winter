@@ -28,14 +28,6 @@ class DeleteQuestionnaireRegistration extends BaseAction {
             $questionnaire->delete();
         }
 
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return true;
     }
 }

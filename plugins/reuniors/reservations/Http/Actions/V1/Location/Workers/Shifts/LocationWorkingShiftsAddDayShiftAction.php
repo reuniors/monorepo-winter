@@ -23,7 +23,7 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $date = $attributes['date'];
         $locationSlug = $attributes['locationSlug'];
@@ -67,15 +67,5 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
                 'pauses' => $pauses,
             ]);
         }
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

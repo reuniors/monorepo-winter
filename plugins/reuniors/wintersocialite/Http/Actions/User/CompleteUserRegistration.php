@@ -24,15 +24,4 @@ class CompleteUserRegistration extends BaseAction {
 
         return $user;
     }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        $this->handle($requestData);
-
-        return [
-            'success' => true,
-            'data' => null
-        ];
-    }
 }

@@ -17,7 +17,7 @@ class CreateLocationFromQuestionnaire extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $code = $attributes['code'];
@@ -176,15 +176,6 @@ class CreateLocationFromQuestionnaire extends BaseAction {
             $questionnaireData->delete();
         });
 
-        return [
-            'success' => true,
-            'data' => $location,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $location;
     }
 }

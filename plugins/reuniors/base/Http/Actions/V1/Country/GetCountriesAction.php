@@ -27,14 +27,6 @@ class GetCountriesAction extends BaseAction {
             $countriesQuery->where('active', $active);
         }
 
-        return [
-            'success' => true,
-            'data' => $countriesQuery->orderBy('name')->get()
-        ];
-    }
-
-    public function asController()
-    {
-        return $this->handle(request()->all());
+        return $countriesQuery->orderBy('name')->get();
     }
 }

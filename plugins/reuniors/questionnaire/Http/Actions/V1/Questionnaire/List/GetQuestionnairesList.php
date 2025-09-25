@@ -23,15 +23,6 @@ class GetQuestionnairesList extends BaseAction {
             $questionnaireListQuery->where('type', $type);
         }
 
-        return [
-            'success' => true,
-            'data' => $questionnaireListQuery->paginate(),
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $questionnaireListQuery->paginate();
     }
 }

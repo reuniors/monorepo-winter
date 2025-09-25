@@ -16,7 +16,7 @@ class LocationClientReservationsGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'];
         $archive = $attributes['archive'] ?? false;
@@ -67,15 +67,5 @@ class LocationClientReservationsGetAction extends BaseAction {
             ->where('created_by', $user->id)
             ->orderBy('date', 'desc')
             ->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

@@ -43,14 +43,6 @@ class SendEmailQuestionnaireCode extends BaseAction {
         $this->sendEmail($code, $email);
 
 
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return true;
     }
 }

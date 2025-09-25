@@ -35,15 +35,6 @@ class UploadProductImageAction extends BaseAction {
                 );
             }
         }
-        return [
-            'success' => true,
-            'data' => $product
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $product;
     }
 }

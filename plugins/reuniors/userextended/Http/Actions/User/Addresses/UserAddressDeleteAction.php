@@ -12,7 +12,7 @@ class UserAddressDeleteAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $ids = $attributes['ids'];
@@ -23,13 +23,5 @@ class UserAddressDeleteAction extends BaseAction {
         $addresses->each->delete();
 
         return true;
-    }
-
-    public function asController()
-    {
-        return [
-            'success' => true,
-            'data' => $this->handle(request()->all()),
-        ];
     }
 }

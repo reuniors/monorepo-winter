@@ -54,15 +54,6 @@ class CreateRestaurantMenuAction extends BaseAction {
         DB::commit();
 
 
-        return [
-            'success' => true,
-            'data' => $restaurantMenu ?? null,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $restaurantMenu ?? null;
     }
 }

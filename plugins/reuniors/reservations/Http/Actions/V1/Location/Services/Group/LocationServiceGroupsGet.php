@@ -12,7 +12,7 @@ class LocationServiceGroupsGet extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'] ?? null;
         $perPage = $attributes['perPage'] ?? 50;
@@ -22,15 +22,5 @@ class LocationServiceGroupsGet extends BaseAction {
         ]);
 
         return $serviceGroups->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

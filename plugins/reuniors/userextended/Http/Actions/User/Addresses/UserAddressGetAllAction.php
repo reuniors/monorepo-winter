@@ -7,18 +7,10 @@ use Auth;
 use Reuniors\UserExtended\Models\UserAddress;
 
 class UserAddressGetAllAction extends BaseAction {
-    public function handle()
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
 
         return UserAddress::where('user_id', $user->id)->get();
-    }
-
-    public function asController()
-    {
-        return [
-            'success' => true,
-            'data' => $this->handle(),
-        ];
     }
 }

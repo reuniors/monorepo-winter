@@ -33,15 +33,6 @@ class CreateRestaurantMenuAction extends BaseAction {
 
         $location->restaurant_menu()->attach($restaurantMenu);
 
-        return [
-            'success' => true,
-            'data' => $restaurantMenu ?? null,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $restaurantMenu ?? null;
     }
 }

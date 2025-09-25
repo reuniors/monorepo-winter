@@ -19,8 +19,10 @@ class RegisterAction extends BaseAction {
         ];
     }
 
-    public function handle($attributes = [], $deviceName = 'web')
+    public function handle($attributes = [])
     {
+        $deviceName = $attributes['deviceName'] ?? 'web';
+
         $data = [
             'name' => $attributes['nickname'],
             'email' => $attributes['email'],
@@ -51,16 +53,8 @@ class RegisterAction extends BaseAction {
     protected function responseUserToken(UserModel $user, $name)
     {
         return [
-            'success' => true,
             'user' => $user->only(['name', 'email', 'groups']),
             'token' => $user->createToken($name)->plainTextToken
         ];
-    }
-
-    public function asController()
-    {
-        $request = request();
-        $deviceName = request()->get('deviceName');
-        return $this->handle($request->all(), $deviceName);
     }
 }

@@ -15,7 +15,7 @@ class LocationWorkingShiftsByDayGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'] ?? null;
         $monthOffset = $attributes['monthOffset'] ?? 0;
@@ -39,15 +39,5 @@ class LocationWorkingShiftsByDayGetAction extends BaseAction {
         ]);
 
         return $shiftsQuery->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

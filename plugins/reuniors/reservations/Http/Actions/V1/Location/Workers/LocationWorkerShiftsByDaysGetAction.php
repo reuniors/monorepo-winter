@@ -15,7 +15,7 @@ class LocationWorkerShiftsByDaysGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'];
         $workerId = $attributes['workerId'] ?? null;
@@ -39,15 +39,5 @@ class LocationWorkerShiftsByDaysGetAction extends BaseAction {
             ->where('shift', '!=', null)
             ->orderBy('date', 'asc')
             ->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

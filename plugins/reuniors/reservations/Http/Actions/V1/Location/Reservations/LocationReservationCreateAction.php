@@ -85,7 +85,7 @@ class LocationReservationCreateAction extends BaseAction {
         return $services;
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $clientId = $attributes['clientId'] ?? null;
@@ -195,15 +195,5 @@ class LocationReservationCreateAction extends BaseAction {
         }
 
         return $newReservation;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

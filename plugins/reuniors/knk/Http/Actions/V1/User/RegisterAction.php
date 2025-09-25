@@ -52,16 +52,8 @@ class RegisterAction extends BaseAction {
     protected function responseUserToken(UserModel $user, $name)
     {
         return [
-            'success' => true,
             'user' => $user->only(['id', 'name', 'email', 'groups']),
             'token' => $user->createToken($name)->plainTextToken
         ];
-    }
-
-    public function asController()
-    {
-        $request = request();
-        $deviceName = request()->get('deviceName');
-        return $this->handle($request->all(), $deviceName);
     }
 }

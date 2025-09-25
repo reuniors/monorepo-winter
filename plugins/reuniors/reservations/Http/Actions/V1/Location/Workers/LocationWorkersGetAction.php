@@ -11,7 +11,7 @@ class LocationWorkersGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $perPage = $attributes['perPage'] ?? 15;
 
@@ -21,15 +21,5 @@ class LocationWorkersGetAction extends BaseAction {
 
         return $locationWorkersQuery
             ->paginate($perPage);
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

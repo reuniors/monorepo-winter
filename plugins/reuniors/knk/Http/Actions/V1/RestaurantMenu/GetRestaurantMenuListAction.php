@@ -24,15 +24,6 @@ class GetRestaurantMenuListAction extends BaseAction {
             ->restaurant_menu()
             ->paginate();
 
-        return [
-            'success' => true,
-            'data' => $restaurantMenus ?? null,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $restaurantMenus ?? null;
     }
 }

@@ -22,17 +22,6 @@ class GetCitiesAction extends BaseAction {
             $citiesQuery->where('country_id', $countryId);
         }
 
-        return [
-            'success' => true,
-            'data' => $citiesQuery
-                ->get()
-        ];
-    }
-
-    public function asController()
-    {
-        return $this->handle(
-            request()->all()
-        );
+        return $citiesQuery->get();
     }
 }

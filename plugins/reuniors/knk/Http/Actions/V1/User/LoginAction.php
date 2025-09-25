@@ -79,10 +79,15 @@ class LoginAction extends BaseAction {
         return $user;
     }
 
-    public function handle($attributes = [], $data = null)
+    public function handle($attributes = [])
     {
+        $deviceName = $attributes['deviceName'] ?? null;
+        if ($deviceName) {
+            $attributes['name'] = $deviceName;
+        }
+        
         try {
-            $user = $this->tryToAuthenticate($data);
+            $user = $this->tryToAuthenticate($attributes);
             $name = array_get($attributes, 'name', 'web');
 
             $existingAccessToken = $user
@@ -110,17 +115,5 @@ class LoginAction extends BaseAction {
                 'message' => $ex->getMessage()
             ], 403);
         }
-    }
-
-    public function asController()
-    {
-        $deviceName = request()->get('deviceName');
-
-        $attributes = [];
-        if ($deviceName) {
-            $attributes['name'] = $deviceName;
-        }
-
-        return $this->handle($attributes, post());
     }
 }

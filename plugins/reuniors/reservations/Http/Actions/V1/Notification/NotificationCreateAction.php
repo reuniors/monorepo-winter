@@ -25,7 +25,7 @@ class NotificationCreateAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $title = $attributes['title'] ?? null;
         $description = $attributes['description'];
@@ -74,11 +74,5 @@ class NotificationCreateAction extends BaseAction {
         }
 
         return $notification->save();
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
     }
 }

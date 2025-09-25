@@ -14,7 +14,7 @@ class RemoveConnectedDeviceAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $locationSlug = $attributes['locationSlug'] ?? null;
@@ -51,15 +51,5 @@ class RemoveConnectedDeviceAction extends BaseAction {
         $connectedDevice->save();
 
         return null;
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

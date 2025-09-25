@@ -33,14 +33,6 @@ class GetCitiesAction extends BaseAction {
             $citiesQuery->where('active', $active);
         }
 
-        return [
-            'success' => true,
-            'data' => $citiesQuery->orderBy('name')->get()
-        ];
-    }
-
-    public function asController()
-    {
-        return $this->handle(request()->all());
+        return $citiesQuery->orderBy('name')->get();
     }
 }

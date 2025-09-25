@@ -14,7 +14,7 @@ class TranslationsGetAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $type = $attributes['type'];
         $language = $attributes['language'] ?? null;
@@ -38,15 +38,5 @@ class TranslationsGetAction extends BaseAction {
                 $translation->attribute_data = json_decode($translation->attribute_data);
             })
             ->pluck('attribute_data', 'locale');
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }

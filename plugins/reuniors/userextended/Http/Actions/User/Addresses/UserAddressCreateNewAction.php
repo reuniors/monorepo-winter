@@ -26,7 +26,7 @@ class UserAddressCreateNewAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
         $data = $attributes['data'];
@@ -40,13 +40,5 @@ class UserAddressCreateNewAction extends BaseAction {
             ...$data,
             'name' => $data['name'] ?? "{$data['street']} {$data['street_number']}",
         ]);
-    }
-
-    public function asController()
-    {
-        return [
-            'success' => true,
-            'data' => $this->handle(request()->all()),
-        ];
     }
 }

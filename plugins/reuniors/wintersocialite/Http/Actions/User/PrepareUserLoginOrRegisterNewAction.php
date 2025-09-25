@@ -84,23 +84,4 @@ class PrepareUserLoginOrRegisterNewAction extends BaseAction {
 
         return $user;
     }
-
-    public function asController()
-    {
-        try {
-            $user = $this->handle(post());
-
-            return [
-                'success' => true,
-                'data' => [
-                    'isExistingUser' => $user->is_activated,
-                ]
-            ];
-        } catch (Exception $ex) {
-            return response()->json([
-                'success' => false,
-                'message' => $ex->getMessage()
-            ], 403);
-        }
-    }
 }

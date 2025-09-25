@@ -14,7 +14,7 @@ class LocationPromoCodeFindOneAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'];
         $code = $attributes['code'];
@@ -31,15 +31,5 @@ class LocationPromoCodeFindOneAction extends BaseAction {
 
         return $promoCodeQuery
             ->first();
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'success' => true,
-            'data' => $this->handle($requestData),
-        ];
     }
 }

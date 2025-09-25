@@ -12,7 +12,7 @@ class LocationGetOneAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes)
+    public function handle(array $attributes = [])
     {
         $slug = $attributes['slug'] ?? null;
         $id = $attributes['id'] ?? null;
@@ -29,15 +29,5 @@ class LocationGetOneAction extends BaseAction {
         return $locationQuery
             ->with(['working_hours', 'workers', 'logo', 'cover'])
             ->firstOrFail();
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true,
-        ];
     }
 }
