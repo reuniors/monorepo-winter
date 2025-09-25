@@ -24,7 +24,6 @@ class LoginOrRegisterGoogleUser extends BaseAction
     protected function responseUserToken(UserModel $user, $name)
     {
         return [
-            'success' => true,
             'user' => $user->only(['name', 'email', 'groups', 'phone', 'id']),
             'token' => $user->createToken($name)->plainTextToken
         ];

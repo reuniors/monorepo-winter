@@ -8,10 +8,7 @@ class GetCountriesAction extends BaseAction
 
     public function handle(array $attributes = [])
     {
-        return [
-            'success' => true,
-            'data' => Country::get()
-        ];
+        return Country::get();
     }
 
 }

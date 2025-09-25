@@ -16,17 +16,13 @@ class CreateChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $data['created_by'] = auth()->id();
-        $data['status'] = 'pending';
+        $attributes['created_by'] = auth()->id();
+        $attributes['status'] = 'pending';
 
-        $changeRequest = ChangeRequest::create($data);
+        $changeRequest = ChangeRequest::create($attributes);
 
-        return [
-            'success' => true,
-            'data' => $changeRequest->load('creator'),
-            'message' => 'Change request created successfully'
-        ];
+        return $changeRequest->load('creator');
     }
 }

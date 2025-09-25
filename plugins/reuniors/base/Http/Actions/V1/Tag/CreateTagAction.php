@@ -19,14 +19,10 @@ class CreateTagAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $tag = Tag::create($data);
+        $tag = Tag::create($attributes);
 
-        return [
-            'success' => true,
-            'data' => $tag->load('tag_group'),
-            'message' => 'Tag created successfully'
-        ];
+        return $tag->load('tag_group');
     }
 }

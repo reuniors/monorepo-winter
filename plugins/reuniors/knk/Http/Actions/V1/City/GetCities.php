@@ -27,10 +27,7 @@ class GetCities extends BaseAction
             });
         }
 
-        return [
-            'data' => array_values($cities),
-            'success' => true,
-        ];
+        return array_values($cities);
     }
 
 }

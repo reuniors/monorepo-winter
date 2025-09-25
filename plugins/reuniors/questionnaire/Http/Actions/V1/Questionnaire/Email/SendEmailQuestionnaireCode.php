@@ -27,9 +27,7 @@ class SendEmailQuestionnaireCode extends BaseAction {
 
         });
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
     public function handle($attributes = [])

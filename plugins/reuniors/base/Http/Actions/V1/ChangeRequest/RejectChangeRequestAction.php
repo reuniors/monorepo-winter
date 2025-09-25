@@ -13,27 +13,20 @@ class RejectChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $changeRequest = ChangeRequest::findOrFail($data['id']);
+        $changeRequest = ChangeRequest::findOrFail($attributes['id']);
         
         if ($changeRequest->status !== 'pending') {
-            return [
-                'success' => false,
-                'message' => 'Change request is not pending'
-            ];
+            throw new \Exception('Change request is not pending');
         }
 
         $changeRequest->update([
             'status' => 'rejected',
             'rejected_by' => auth()->id(),
-            'rejection_reason' => $data['rejection_reason'] ?? null
+            'rejection_reason' => $attributes['rejection_reason'] ?? null
         ]);
 
-        return [
-            'success' => true,
-            'data' => $changeRequest->load(['creator', 'rejector']),
-            'message' => 'Change request rejected successfully'
-        ];
+        return $changeRequest->load(['creator', 'rejector']);
     }
 }

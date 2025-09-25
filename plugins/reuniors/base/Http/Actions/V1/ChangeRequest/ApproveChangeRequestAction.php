@@ -12,15 +12,12 @@ class ApproveChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $changeRequest = ChangeRequest::findOrFail($data['id']);
+        $changeRequest = ChangeRequest::findOrFail($attributes['id']);
         
         if ($changeRequest->status !== 'pending') {
-            return [
-                'success' => false,
-                'message' => 'Change request is not pending'
-            ];
+            throw new \Exception('Change request is not pending');
         }
 
         $changeRequest->update([
@@ -28,10 +25,6 @@ class ApproveChangeRequestAction extends BaseAction {
             'approved_by' => auth()->id()
         ]);
 
-        return [
-            'success' => true,
-            'data' => $changeRequest->load(['creator', 'approver']),
-            'message' => 'Change request approved successfully'
-        ];
+        return $changeRequest->load(['creator', 'approver']);
     }
 }

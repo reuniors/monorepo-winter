@@ -20,15 +20,11 @@ class UpdateTagAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $tag = Tag::findOrFail($data['id']);
-        $tag->update($data);
+        $tag = Tag::findOrFail($attributes['id']);
+        $tag->update($attributes);
 
-        return [
-            'success' => true,
-            'data' => $tag->load('tag_group'),
-            'message' => 'Tag updated successfully'
-        ];
+        return $tag->load('tag_group');
     }
 }

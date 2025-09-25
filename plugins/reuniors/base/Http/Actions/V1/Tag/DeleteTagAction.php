@@ -11,14 +11,11 @@ class DeleteTagAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data = [])
+    public function handle(array $attributes = [])
     {
-        $tag = Tag::findOrFail($data['id']);
+        $tag = Tag::findOrFail($attributes['id']);
         $tag->delete();
 
-        return [
-            'success' => true,
-            'message' => 'Tag deleted successfully'
-        ];
+        return true;
     }
 }

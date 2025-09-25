@@ -24,10 +24,7 @@ class UpdateTagAction extends BaseAction
 
         $tag->update($data);
 
-        return [
-            'success' => true,
-            'data' => $tag
-        ];
+        return $tag;
     }
 
     public function asController(Tag $tag = null): array
