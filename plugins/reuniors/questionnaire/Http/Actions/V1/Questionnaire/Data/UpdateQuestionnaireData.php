@@ -15,7 +15,7 @@ class UpdateQuestionnaireData extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, $type)
+    public function handle(array $attributes = [], $type = null)
     {
         $code = $attributes['code'];
         $data = Purify::clean($attributes['data']);
@@ -37,15 +37,11 @@ class UpdateQuestionnaireData extends BaseAction {
             'status' => QuestionnaireStatusEnum::SUBMITTED,
         ]);
 
-        return [
-            'success' => true,
-            'data' => $questionnaireData,
-        ];
+        return $questionnaireData;
     }
 
-    public function asController($type)
+    public function asController($type = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return parent::asController($type);
     }
 }

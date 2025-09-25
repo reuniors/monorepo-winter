@@ -3,7 +3,6 @@
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Evodic\Models\PlaceType;
 use Reuniors\Base\Models\TagGroup;
-use Illuminate\Http\Request;
 
 class AddTagGroupToPlaceTypeAction extends BaseAction {
     public function rules()
@@ -11,20 +10,15 @@ class AddTagGroupToPlaceTypeAction extends BaseAction {
         return [];
     }
 
-    public function handle(array $attributes, PlaceType $placeType, TagGroup $tagGroup)
+    public function handle(array $attributes = [], PlaceType $placeType = null, TagGroup $tagGroup = null)
     {
         $placeType->tagGroups()->attach($tagGroup);
 
         return $tagGroup;
     }
 
-    public function asController(Request $request, PlaceType $placeType, TagGroup $tagGroup)
+    public function asController(PlaceType $placeType = null, TagGroup $tagGroup = null): array
     {
-        $requestData = $request->all();
-
-        return [
-            'data' => $this->handle($requestData, $placeType, $tagGroup),
-            'success' => true
-        ];
+        return parent::asController($placeType, $tagGroup);
     }
 }

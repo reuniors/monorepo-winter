@@ -13,7 +13,7 @@ class RejectChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $changeRequest = ChangeRequest::findOrFail($data['id']);
         
@@ -35,10 +35,5 @@ class RejectChangeRequestAction extends BaseAction {
             'data' => $changeRequest->load(['creator', 'rejector']),
             'message' => 'Change request rejected successfully'
         ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

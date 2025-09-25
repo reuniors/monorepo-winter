@@ -16,7 +16,7 @@ class CreateChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $data['created_by'] = auth()->id();
         $data['status'] = 'pending';
@@ -28,10 +28,5 @@ class CreateChangeRequestAction extends BaseAction {
             'data' => $changeRequest->load('creator'),
             'message' => 'Change request created successfully'
         ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

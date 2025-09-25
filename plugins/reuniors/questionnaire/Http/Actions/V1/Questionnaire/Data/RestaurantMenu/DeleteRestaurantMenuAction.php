@@ -16,7 +16,7 @@ class DeleteRestaurantMenuAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, $type)
+    public function handle(array $attributes = [], $type = null)
     {
         $questionnaireDataId = $attributes['questionnaireDataId'];
         $code = $attributes['code'];
@@ -57,14 +57,11 @@ class DeleteRestaurantMenuAction extends BaseAction {
             }
         }
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController($type)
+    public function asController($type = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return parent::asController($type);
     }
 }

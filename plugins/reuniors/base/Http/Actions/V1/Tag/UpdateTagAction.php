@@ -20,7 +20,7 @@ class UpdateTagAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $tag = Tag::findOrFail($data['id']);
         $tag->update($data);
@@ -30,10 +30,5 @@ class UpdateTagAction extends BaseAction {
             'data' => $tag->load('tag_group'),
             'message' => 'Tag updated successfully'
         ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

@@ -4,7 +4,7 @@ use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Haljina\Models\Product;
 
 class GetProfileProductsAction extends BaseAction {
-    public function handle($profileNickname, $filters = [])
+    public function handle($filters = [], $profileNickname = null)
     {
         return Product
             ::with(['product_images', 'user'])
@@ -15,9 +15,8 @@ class GetProfileProductsAction extends BaseAction {
             ->paginate();
     }
 
-    public function asController($profileNickname)
+    public function asController($profileNickname = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($profileNickname, $requestData);
+        return parent::asController($profileNickname);
     }
 }

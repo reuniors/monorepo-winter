@@ -34,7 +34,7 @@ class UpdateLocationDataAction extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $data = Purify::clean($attributes['data']);
         $workingHours = $attributes['workingTime'] ?? [];
@@ -99,15 +99,11 @@ class UpdateLocationDataAction extends BaseAction {
             $location->categories()->sync($categories);
         }
 
-        return [
-            'success' => true,
-            'data' => $location,
-        ];
+        return $location;
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

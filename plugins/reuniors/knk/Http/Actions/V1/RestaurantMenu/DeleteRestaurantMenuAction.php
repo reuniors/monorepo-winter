@@ -13,20 +13,18 @@ class DeleteRestaurantMenuAction extends BaseAction {
         return [];
     }
 
-    public function handle(Location $location, $restaurantMenuId)
+    public function handle($attributes = [], Location $location = null, $restaurantMenuId = null)
     {
         $location->restaurant_menu()
             ->where('id', $restaurantMenuId)
             ->firstOrFail()
             ->runDeleteMenuAndRelations();
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Location $location, $id)
+    public function asController(Location $location = null, $id = null): array
     {
-        return $this->handle($location, $id);
+        return parent::asController($location, $id);
     }
 }

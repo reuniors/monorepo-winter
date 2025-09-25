@@ -18,7 +18,7 @@ class UploadQuestionnaireDataPhotos extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, $type)
+    public function handle(array $attributes = [], $type = null)
     {
         $code = $attributes['code'];
         $dataId = $attributes['dataId'];
@@ -53,14 +53,13 @@ class UploadQuestionnaireDataPhotos extends BaseAction {
         }
 
         return [
-            'success' => true,
-            'data' => $imageData,
+            'type' => $imageType,
+            'images' => $imageData,
         ];
     }
 
-    public function asController($type)
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+    public function asController($type = null): array
+        {
+        return parent::asController($type);
     }
 }

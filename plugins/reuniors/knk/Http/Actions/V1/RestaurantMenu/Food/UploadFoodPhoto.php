@@ -14,7 +14,7 @@ class UploadFoodPhoto extends BaseAction {
         ];
     }
 
-    public function handle(RestaurantMenu $restaurantMenu, Food $food, ?UploadedFile $file)
+    public function handle($attributes = [], RestaurantMenu $restaurantMenu = null, Food $food = null, ?UploadedFile $file = null)
     {
         $existingImage = $food->food_image()->first();
 
@@ -38,8 +38,8 @@ class UploadFoodPhoto extends BaseAction {
                 ->withFixedMenuPrices();
     }
 
-    public function asController(RestaurantMenu $restaurantMenu, Food $food)
+    public function asController(RestaurantMenu $restaurantMenu = null, Food $food = null): array
     {
-        return $this->handle($restaurantMenu, $food, Input::file('file'));
+        return parent::asController($restaurantMenu, $food);
     }
 }

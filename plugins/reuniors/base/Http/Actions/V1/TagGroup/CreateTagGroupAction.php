@@ -19,19 +19,10 @@ class CreateTagGroupAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $tagGroup = TagGroup::create($data);
 
-        return [
-            'success' => true,
-            'data' => $tagGroup->load(['parent', 'children']),
-            'message' => 'Tag group created successfully'
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
+        return $tagGroup->load(['parent', 'children']);
     }
 }

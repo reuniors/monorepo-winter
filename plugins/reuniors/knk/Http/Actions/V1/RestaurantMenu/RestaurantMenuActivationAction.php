@@ -9,7 +9,7 @@ class RestaurantMenuActivationAction extends BaseAction {
         return [];
     }
 
-    public function handle(Location $location, $restaurantMenuId)
+    public function handle($attributes = [], Location $location = null, $restaurantMenuId = null)
     {
         $existingActiveMenu = $location->restaurant_menu()
             ->where('active', 1)
@@ -30,13 +30,11 @@ class RestaurantMenuActivationAction extends BaseAction {
                 'active' => 1,
             ]);
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController(Location $location, $id)
+    public function asController(Location $location = null, $id = null): array
     {
-        return $this->handle($location, $id);
+        return parent::asController($location, $id);
     }
 }

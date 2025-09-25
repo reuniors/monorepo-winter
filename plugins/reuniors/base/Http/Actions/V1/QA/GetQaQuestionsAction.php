@@ -31,14 +31,6 @@ class GetQaQuestionsAction extends BaseAction {
             });
         }
 
-        return [
-            'success' => true,
-            'data' => $questions->orderBy($orderBy, $orderDirection)->paginate($perPage)
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
+        return $questions->orderBy($orderBy, $orderDirection)->paginate($perPage);
     }
 }

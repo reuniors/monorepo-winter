@@ -13,7 +13,7 @@ class GetQuestionnairesDataList extends BaseAction {
         ];
     }
 
-    public function handle($attributes = [], $type)
+    public function handle($attributes = [], $type = null)
     {
         $code = $attributes['code'];
 
@@ -21,19 +21,15 @@ class GetQuestionnairesDataList extends BaseAction {
             ->where('code', $code)
             ->firstOrFail();
 
-        return [
-            'success' => true,
-            'data' => $questionnaire
+        return $questionnaire
                 ->registration_data()
                 ->whereNot('status', QuestionnaireStatusEnum::DRAFT)
                 ->where('type', $type)
-                ->paginate(),
-        ];
+                ->paginate();
     }
 
-    public function asController($type)
+    public function asController($type = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return parent::asController($type);
     }
 }

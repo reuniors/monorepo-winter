@@ -35,23 +35,6 @@ class GetLocationsAction extends BaseAction {
             'perPage' => self::PER_PAGE,
         ], $filters));
 
-        return [
-            'success' => true,
-            'data' => $locationQuery->paginate($perPage),
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle(
-            request()->all()
-        );
-    }
-
-    public function jsonResponse($response)
-    {
-        return response()->json(
-            $response
-        );
+        return $locationQuery->paginate($perPage);
     }
 }

@@ -37,9 +37,4 @@ class GetChangeRequestsAction extends BaseAction {
             'data' => $changeRequests->orderBy('created_at', 'desc')->paginate($perPage)
         ];
     }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
-    }
 }

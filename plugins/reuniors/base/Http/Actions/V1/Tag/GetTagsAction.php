@@ -54,9 +54,4 @@ class GetTagsAction extends BaseAction {
             'data' => $tags->orderBy('sort_order')->paginate($perPage)
         ];
     }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
-    }
 }

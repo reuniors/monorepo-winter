@@ -12,7 +12,7 @@ class RestaurantMenuImportFromUrlAction extends BaseAction {
         ];
     }
 
-    public function handle(Location $location, array $attributes)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $url = $attributes['url'];
         $sync = new FoodMenuSyncWolt();
@@ -23,11 +23,8 @@ class RestaurantMenuImportFromUrlAction extends BaseAction {
         ]);
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        return [
-            'success' => true,
-            'data' => $this->handle($location, request()->all()),
-        ];
+        return parent::asController($location);
     }
 }

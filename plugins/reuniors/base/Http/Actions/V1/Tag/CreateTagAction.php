@@ -19,7 +19,7 @@ class CreateTagAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $tag = Tag::create($data);
 
@@ -28,10 +28,5 @@ class CreateTagAction extends BaseAction {
             'data' => $tag->load('tag_group'),
             'message' => 'Tag created successfully'
         ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

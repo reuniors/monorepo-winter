@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\User\Mail;
 
 use Carbon\Carbon;
-use Reuniors\reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Client;
 use Winter\User\Models\User;
 use Mail;

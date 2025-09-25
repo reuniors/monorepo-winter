@@ -33,15 +33,6 @@ class GetRestaurantMenuListAction extends BaseAction {
         }
 
 
-        return [
-            'success' => true,
-            'data' => $restaurantMenus ?? null,
-        ];
-    }
-
-    public function asController($type)
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return $restaurantMenus ?? null;
     }
 }

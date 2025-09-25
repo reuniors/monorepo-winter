@@ -2,6 +2,7 @@
 namespace Reuniors\Reservations\Http\Actions;
 
 use Reuniors\Reservations\Models\ChangeRequest;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 
 abstract class BaseChangeRequestAction extends BaseAction

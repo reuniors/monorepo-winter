@@ -12,7 +12,7 @@ class ApproveChangeRequestAction extends BaseAction {
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $changeRequest = ChangeRequest::findOrFail($data['id']);
         
@@ -33,10 +33,5 @@ class ApproveChangeRequestAction extends BaseAction {
             'data' => $changeRequest->load(['creator', 'approver']),
             'message' => 'Change request approved successfully'
         ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
     }
 }

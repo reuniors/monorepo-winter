@@ -16,7 +16,7 @@ class DeleteQuestionnaireDataPhoto extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, $type)
+    public function handle(array $attributes = [], $type = null)
     {
         $code = $attributes['code'];
         $dataId = $attributes['id'];
@@ -38,16 +38,12 @@ class DeleteQuestionnaireDataPhoto extends BaseAction {
         }
 
         return [
-            'success' => true,
-            'data' => [
-                'type' => $imageType,
-            ]
+            'type' => $imageType,
         ];
     }
 
-    public function asController($type)
+    public function asController($type = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return parent::asController($type);
     }
 }

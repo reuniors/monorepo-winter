@@ -11,20 +11,15 @@ class RemoveTagGroupFromPlaceTypeAction extends BaseAction {
         return [];
     }
 
-    public function handle(array $attributes, PlaceType $placeType, TagGroup $tagGroup)
+    public function handle(array $attributes = [], PlaceType $placeType = null, TagGroup $tagGroup = null)
     {
         $placeType->tagGroups()->detach($tagGroup);
 
         return null;
     }
 
-    public function asController(Request $request, PlaceType $placeType, TagGroup $tagGroup)
+    public function asController(PlaceType $placeType = null, TagGroup $tagGroup = null): array
     {
-        $requestData = $request->all();
-        $this->handle($requestData, $placeType, $tagGroup);
-
-        return [
-            'success' => true
-        ];
+        return parent::asController($placeType, $tagGroup);
     }
 }

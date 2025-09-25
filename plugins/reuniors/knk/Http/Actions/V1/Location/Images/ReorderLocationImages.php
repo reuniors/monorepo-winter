@@ -15,7 +15,7 @@ class ReorderLocationImages extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $reorderData = $attributes['reorderData'];
         $imageType = $attributes['imageType'];
@@ -25,18 +25,15 @@ class ReorderLocationImages extends BaseAction {
             $location->{$imageType}()->getQuery(),
             $reorderData
         );
+        
         return [
-            'success' => true,
-            'data' => [
-                'type' => $imageType,
-                'images' => $location->{$imageType}()->get(),
-            ]
+            'type' => $imageType,
+            'images' => $location->{$imageType}()->get(),
         ];
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

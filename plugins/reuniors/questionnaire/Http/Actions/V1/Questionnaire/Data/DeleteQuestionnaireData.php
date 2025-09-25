@@ -13,7 +13,7 @@ class DeleteQuestionnaireData extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, $type)
+    public function handle(array $attributes = [], $type = null)
     {
         $code = $attributes['code'];
         $ids = $attributes['ids'];
@@ -35,14 +35,11 @@ class DeleteQuestionnaireData extends BaseAction {
             $data->delete();
         });
 
-        return [
-            'success' => true,
-        ];
+        return true;
     }
 
-    public function asController($type)
+    public function asController($type = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $type);
+        return parent::asController($type);
     }
 }

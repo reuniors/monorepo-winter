@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\TagGroup;
 
-use Illuminate\Http\Request;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\TagGroup;
 
@@ -48,14 +47,6 @@ class GetTagGroupsAction extends BaseAction {
             $tagGroups->where('show_in_filters', $showInFilters);
         }
 
-        return [
-            'success' => true,
-            'data' => $tagGroups->orderBy('sort_order')->paginate($perPage)
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle($request->all());
+        return $tagGroups->orderBy('sort_order')->paginate($perPage);
     }
 }
