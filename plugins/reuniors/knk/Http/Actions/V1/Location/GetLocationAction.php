@@ -13,19 +13,16 @@ class GetLocationAction extends BaseAction
 
     public function handle(array $attributes = [], Location $location = null)
     {
-        return [
-            'success' => true,
-            'data' => $location->load([
-                'gallery',
-                'menu_gallery',
-                'cover_image',
-                'logo', 'working_time',
-                'delivery_working_time',
-                'categories' => function ($query) {
-                    $query->select('id');
-                }
-            ]),
-        ];
+        return $location->load([
+            'gallery',
+            'menu_gallery',
+            'cover_image',
+            'logo', 'working_time',
+            'delivery_working_time',
+            'categories' => function ($query) {
+                $query->select('id');
+            }
+        ]);
     }
 
     public function asController(Location $location = null): array

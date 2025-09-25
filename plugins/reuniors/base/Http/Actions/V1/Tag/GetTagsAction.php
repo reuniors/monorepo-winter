@@ -49,9 +49,6 @@ class GetTagsAction extends BaseAction {
             $tags->where('show_in_filters', $showInFilters);
         }
 
-        return [
-            'success' => true,
-            'data' => $tags->orderBy('sort_order')->paginate($perPage)
-        ];
+        return $tags->orderBy('sort_order')->paginate($perPage);
     }
 }

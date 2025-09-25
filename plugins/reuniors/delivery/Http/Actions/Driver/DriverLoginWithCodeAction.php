@@ -42,7 +42,6 @@ class DriverLoginWithCodeAction extends BaseAction
         return [
             'user' => $driver->user,
             'token' => $driver->user->createToken('code')->plainTextToken,
-            'success' => true,
         ];
     }
 }

@@ -25,10 +25,7 @@ class DeleteLocationImage extends BaseAction
         }
 
         return [
-            'success' => true,
-            'data' => [
-                'type' => $imageType,
-            ]
+            'type' => $imageType,
         ];
     }
 

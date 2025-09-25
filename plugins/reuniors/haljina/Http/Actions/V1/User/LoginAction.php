@@ -102,7 +102,6 @@ class LoginAction extends BaseAction {
                 $user->groups->makeHidden('pivot');
             }
             return [
-                'success' => true,
                 'user' => $user->only(['name', 'email', 'groups']),
                 'token' => $user->createToken($name)->plainTextToken
             ];

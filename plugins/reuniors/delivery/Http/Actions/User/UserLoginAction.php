@@ -30,7 +30,6 @@ class UserLoginAction extends BaseAction
         return [
             'token' => Auth::user()->createToken('auth_token')->plainTextToken,
             'user' => Auth::user(),
-            'success' => true
         ];
     }
 }

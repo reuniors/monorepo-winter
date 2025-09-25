@@ -32,9 +32,6 @@ class GetChangeRequestsAction extends BaseAction {
             $changeRequests->where('status', $status);
         }
 
-        return [
-            'success' => true,
-            'data' => $changeRequests->orderBy('created_at', 'desc')->paginate($perPage)
-        ];
+        return $changeRequests->orderBy('created_at', 'desc')->paginate($perPage);
     }
 }
