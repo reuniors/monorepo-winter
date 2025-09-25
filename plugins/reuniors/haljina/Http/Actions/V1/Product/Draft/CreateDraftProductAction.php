@@ -8,7 +8,7 @@ use Reuniors\Haljina\Models\Product;
 class CreateDraftProductAction extends BaseAction
 {
 
-    public function handle()
+    public function handle(array $attributes = [])
     {
         $user = Auth::user();
 
@@ -31,9 +31,6 @@ class CreateDraftProductAction extends BaseAction
             ]);
         }
 
-        return [
-            'success' => true,
-            'data' => $productDraft
-        ];
+        return $productDraft;
     }
 }

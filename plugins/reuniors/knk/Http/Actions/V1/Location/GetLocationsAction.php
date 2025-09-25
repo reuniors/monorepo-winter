@@ -65,15 +65,6 @@ class GetLocationsAction extends BaseAction
             });
         }
 
-        return [
-            'success' => true,
-            'data' => $locations->paginate(self::PER_PAGE),
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return $locations->paginate(self::PER_PAGE);
     }
 }

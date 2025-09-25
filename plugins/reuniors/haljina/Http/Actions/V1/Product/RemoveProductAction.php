@@ -19,14 +19,6 @@ class RemoveProductAction extends BaseAction
             'id' => $attributes['id'],
         ]);
 
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return null;
     }
 }

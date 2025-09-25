@@ -2,7 +2,7 @@
 
 use Carbon\Carbon;
 use Illuminate\Validation\Rules\File;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Story;
 use Winter\Storm\Support\Facades\Input;
 use Auth;

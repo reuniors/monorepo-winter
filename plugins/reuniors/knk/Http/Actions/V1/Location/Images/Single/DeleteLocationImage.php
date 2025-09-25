@@ -16,7 +16,7 @@ class DeleteLocationImage extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $imageType = $attributes['imageType'];
 
@@ -29,16 +29,12 @@ class DeleteLocationImage extends BaseAction
         }
 
         return [
-            'success' => true,
-            'data' => [
-                'type' => $imageType,
-            ]
+            'type' => $imageType,
         ];
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

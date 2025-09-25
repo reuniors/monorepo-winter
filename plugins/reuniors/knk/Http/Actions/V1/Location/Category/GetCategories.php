@@ -21,25 +21,17 @@ class GetCategories extends BaseAction
         return $categories;
     }
 
-    public function handle()
-    {
-        $categories = array_values(
-            $this->removeUnused(CacheData::get('categories') ?? [])
-        );
-
-        return [
-            'data' => $categories,
-            'success' => true,
-        ];
-    }
-
     public function rules()
     {
         return [];
     }
 
-    public function asController()
+    public function handle(array $attributes = [])
     {
-        return $this->handle();
+        $categories = array_values(
+            $this->removeUnused(CacheData::get('categories') ?? [])
+        );
+
+        return $categories;
     }
 }

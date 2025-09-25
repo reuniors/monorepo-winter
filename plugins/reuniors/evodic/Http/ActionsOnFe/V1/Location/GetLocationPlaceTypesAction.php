@@ -32,13 +32,4 @@ class GetLocationPlaceTypesAction extends BaseAction
         });
         return $placeTypes;
     }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true
-        ];
-    }
 }

@@ -1,7 +1,6 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Services\Group;
 
 use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\ServiceGroup;
 use Illuminate\Support\Facades\Auth;
 

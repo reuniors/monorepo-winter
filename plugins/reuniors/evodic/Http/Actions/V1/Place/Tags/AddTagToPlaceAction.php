@@ -11,20 +11,15 @@ class AddTagToPlaceAction extends BaseAction {
         return [];
     }
 
-    public function handle(array $attributes, Place $place, Tag $tag)
+    public function handle(array $attributes = [], Place $place = null, Tag $tag = null)
     {
         $place->tags()->attach($tag);
 
         return $tag;
     }
 
-    public function asController(Request $request, Place $place, Tag $tag)
+    public function asController(Place $place = null, Tag $tag = null): array
     {
-        $requestData = $request->all();
-
-        return [
-            'data' => $this->handle($requestData, $place, $tag),
-            'success' => true
-        ];
+        return parent::asController($place, $tag);
     }
 }

@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location\Tag;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
 class FeGetLocationBadgesAction extends BaseAction

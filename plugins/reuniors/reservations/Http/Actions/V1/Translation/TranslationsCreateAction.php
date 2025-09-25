@@ -2,7 +2,7 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\Translation;
 
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Illuminate\Http\Request;
 
 class TranslationsCreateAction extends BaseAction

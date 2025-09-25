@@ -24,9 +24,4 @@ class FeGetLocationVideoReviewImageAction extends BaseAction
         return response($decodedThumbnail)
             ->header('Content-Type', 'image/jpeg');
     }
-
-    public function asController()
-    {
-        return $this->handle(request()->all());
-    }
 }

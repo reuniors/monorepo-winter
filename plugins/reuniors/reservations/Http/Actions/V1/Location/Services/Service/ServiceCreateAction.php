@@ -1,7 +1,6 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location\Services\Service;
 
 use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Service;
 use Illuminate\Support\Str;
 

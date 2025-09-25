@@ -29,14 +29,6 @@ class RemoveProductImagesAction extends BaseAction
             $image->delete();
         }
 
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return null;
     }
 }

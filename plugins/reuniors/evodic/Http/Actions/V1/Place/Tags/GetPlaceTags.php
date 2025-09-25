@@ -13,20 +13,15 @@ class GetPlaceTags extends BaseAction {
         ];
     }
 
-    public function handle(array $attributes, Place $place)
+    public function handle(array $attributes = [], Place $place = null)
     {
         $perPage = $attributes['perPage'] ?? 20;
 
         return $place->tags()->paginate($perPage);
     }
 
-    public function asController(Request $request, Place $place)
+    public function asController(Place $place = null): array
     {
-        $request->all();
-
-        return [
-            'data' => $this->handle($request->all(), $place),
-            'success' => true
-        ];
+        return parent::asController($place);
     }
 }

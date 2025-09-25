@@ -2,7 +2,7 @@
 
 namespace Reuniors\Knk\Http\ActionsFe\V1\Category;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 
 class LocationCategoryGetOneAction extends BaseAction

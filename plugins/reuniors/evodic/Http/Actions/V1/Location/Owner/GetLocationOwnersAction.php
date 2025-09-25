@@ -18,23 +18,6 @@ class GetLocationOwnersAction extends BaseAction {
             'perPage' => self::PER_PAGE,
         ], $filters));
 
-        return [
-            'success' => true,
-            'data' => LocationOwner::paginate($perPage)
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        return $this->handle(
-            request()->all()
-        );
-    }
-
-    public function jsonResponse($response)
-    {
-        return response()->json(
-            $response
-        );
+        return LocationOwner::paginate($perPage);
     }
 }

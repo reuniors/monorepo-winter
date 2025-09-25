@@ -32,13 +32,4 @@ class GetOnePlaceDataAction extends BaseAction
 
         return $locationData;
     }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return [
-            'data' => $this->handle($requestData),
-            'success' => true
-        ];
-    }
 }

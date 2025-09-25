@@ -2,7 +2,7 @@
 
 namespace Reuniors\Knk\Http\ActionsFe\V1\User;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Profile;
 use Reuniors\Knk\Classes\Helpers\ProfileUsernameHelper;
 use Winter\User\Models\User;

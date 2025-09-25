@@ -2,7 +2,7 @@
 namespace Reuniors\Reservations\Http\ActionsFe;
 
 use Carbon\Carbon;
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\News;
 

@@ -6,17 +6,9 @@ use Reuniors\Haljina\Models\ProductSize;
 class GetProductSizes extends BaseAction
 {
 
-    public function handle()
+    public function handle(array $attributes = [])
     {
         return ProductSize::query()
             ->paginate(1000);
-    }
-
-    public function asController()
-    {
-        return [
-            'success' => true,
-            'data' => $this->handle()
-        ];
     }
 }

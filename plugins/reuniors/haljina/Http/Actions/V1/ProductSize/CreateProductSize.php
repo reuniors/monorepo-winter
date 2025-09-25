@@ -16,7 +16,7 @@ class CreateProductSize extends BaseAction
         ];
     }
 
-    public function handle(array $data)
+    public function handle(array $data = [])
     {
         $usedData = Auth::getUser();
         $data['user_id'] = $usedData->id;

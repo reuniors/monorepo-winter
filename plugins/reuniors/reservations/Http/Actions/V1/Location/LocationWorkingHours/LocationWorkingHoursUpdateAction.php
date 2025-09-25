@@ -2,7 +2,7 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\Location\LocationWorkingHours;
 
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\WorkingTime;
 
 class LocationWorkingHoursUpdateAction extends BaseAction

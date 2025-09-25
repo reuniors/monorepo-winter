@@ -2,7 +2,7 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\ChangeRequest;
 
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\ChangeRequest;
 
 class ChangeRequestGetEntityAction extends BaseAction

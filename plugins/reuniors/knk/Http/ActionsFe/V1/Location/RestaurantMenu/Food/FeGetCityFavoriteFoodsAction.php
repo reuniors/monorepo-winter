@@ -1,7 +1,7 @@
 <?php
 namespace Reuniors\Knk\Http\ActionsFe\V1\Location\RestaurantMenu\Food;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Food;
 use Auth;
 

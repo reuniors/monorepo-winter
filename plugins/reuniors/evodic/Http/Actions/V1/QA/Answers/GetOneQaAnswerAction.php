@@ -20,8 +20,7 @@ class GetOneQaAnswerAction extends BaseAction
             throw new InvalidArgumentException('Location and QaAnswer do not match');
         }
         return $qaAnswer
-                ->load('qaQuestion')
-        ];
+                ->load('qaQuestion');
     }
 
     public function asController(Location $location = null, QaAnswer $qaAnswer = null): array

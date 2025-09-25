@@ -3,7 +3,7 @@
 namespace Reuniors\Reservations\Http\Actions\V1\Statistics;
 
 use Carbon\Carbon;
-use Reuniors\Reservations\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\ClientReservation;
 use Reuniors\Reservations\Models\Location;

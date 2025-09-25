@@ -1,6 +1,6 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Category;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Base\Models\City;

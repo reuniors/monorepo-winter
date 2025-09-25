@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location\Comment;
 
 use Reuniors\Comments\Models\Comments;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Auth;
 
 class FeUserLikeCommentAction extends BaseAction

@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Base\Models\Tag;
 

@@ -16,7 +16,7 @@ class UpdateTagAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes = [], Tag $tag)
+    public function handle(array $attributes = [], Tag $tag = null)
     {
         $data = $attributes['data'];
 
@@ -30,9 +30,8 @@ class UpdateTagAction extends BaseAction
         ];
     }
 
-    public function asController(Request $request, Tag $tag)
+    public function asController(Tag $tag = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $tag);
+        return parent::asController($tag);
     }
 }

@@ -16,7 +16,7 @@ class UpdateTagGroupAction extends BaseAction
         ];
     }
 
-    public function handle(array $attributes = [], TagGroup $tagGroup)
+    public function handle(array $attributes = [], TagGroup $tagGroup = null)
     {
         $data = $attributes['data'];
 
@@ -24,15 +24,11 @@ class UpdateTagGroupAction extends BaseAction
 
         $tagGroup->update($data);
 
-        return [
-            'success' => true,
-            'data' => $tagGroup
-        ];
+        return $tagGroup;
     }
 
-    public function asController(Request $request, TagGroup $tagGroup)
+    public function asController(TagGroup $tagGroup = null): array
     {
-        $requestData = $request->all();
-        return $this->handle($requestData, $tagGroup);
+        return parent::asController($tagGroup);
     }
 }

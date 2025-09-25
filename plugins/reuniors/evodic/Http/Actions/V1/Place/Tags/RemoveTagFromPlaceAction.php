@@ -11,20 +11,16 @@ class RemoveTagFromPlaceAction extends BaseAction {
         return [];
     }
 
-    public function handle(array $attributes, Place $place, Tag $tag)
+    public function handle(array $attributes = [], Place $place = null, Tag $tag = null)
     {
         $place->tags()->detach($tag);
 
         return null;
     }
 
-    public function asController(Request $request, Place $place, Tag $tag)
+    public function asController(Place $place = null, Tag $tag = null): array
     {
-        $requestData = $request->all();
-        $this->handle($requestData, $place, $tag);
+        return parent::asController($place, $tag);
 
-        return [
-            'success' => true
-        ];
     }
 }

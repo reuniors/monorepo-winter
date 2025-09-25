@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location\User\Like;
 
 use Auth;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
 class FeUserLikeLocationAction extends BaseAction

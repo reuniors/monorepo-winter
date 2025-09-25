@@ -14,15 +14,6 @@ class GetTagGroupTypesAction extends BaseAction
 
     public function handle(array $attributes = [])
     {
-        return [
-            'success' => true,
-            'data' => TagGroup::TYPES
-        ];
-    }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-        return $this->handle($requestData);
+        return TagGroup::TYPES;
     }
 }

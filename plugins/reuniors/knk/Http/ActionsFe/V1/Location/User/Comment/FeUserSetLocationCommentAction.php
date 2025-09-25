@@ -4,7 +4,7 @@ namespace Reuniors\Knk\Http\ActionsFe\V1\Location\User\Comment;
 
 use Auth;
 use Reuniors\Comments\Models\Comments;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
 class FeUserSetLocationCommentAction extends BaseAction

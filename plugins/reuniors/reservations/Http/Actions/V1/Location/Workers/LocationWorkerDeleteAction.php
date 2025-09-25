@@ -2,7 +2,6 @@
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers;
 
 use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Reservations\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\LocationWorker;
 

@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\City;
 
 use Reuniors\Knk\Classes\CacheData;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 
 class FeGetCitiesAction extends BaseAction

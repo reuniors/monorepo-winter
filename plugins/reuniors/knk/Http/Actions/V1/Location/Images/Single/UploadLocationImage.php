@@ -17,7 +17,7 @@ class UploadLocationImage extends BaseAction
         ];
     }
 
-    public function handle(array $attributes, Location $location)
+    public function handle(array $attributes = [], Location $location = null)
     {
         $imageType = $attributes['imageType'];
 
@@ -31,15 +31,11 @@ class UploadLocationImage extends BaseAction
             ->{$imageType}()
             ->create(['data' => Input::file('file')]);
 
-        return [
-            'success' => true,
-            'data' => $imageData,
-        ];
+        return $imageData;
     }
 
-    public function asController(Location $location)
+    public function asController(Location $location = null): array
     {
-        $requestData = request()->all();
-        return $this->handle($requestData, $location);
+        return parent::asController($location);
     }
 }

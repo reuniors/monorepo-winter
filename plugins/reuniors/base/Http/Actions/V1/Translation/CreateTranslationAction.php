@@ -3,7 +3,6 @@
 use Illuminate\Http\Request;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Classes\TranslationEntityRegistry;
-use Reuniors\Base\Http\Actions\BaseAction;
 
 class CreateTranslationAction extends BaseAction
 {   

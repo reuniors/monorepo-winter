@@ -14,25 +14,10 @@ class RemoveDraftProductAction extends BaseAction
 
     public function handle($attributes = [])
     {
-        try {
-            Product::deleteProduct([
-                'isDraft' => true,
-            ]);
-        } catch (ModelNotFoundException $e) {
-            return [
-                'success' => true,
-                'message' => 'Draft Product not found',
-            ];
-        }
+        Product::deleteProduct([
+            'isDraft' => true,
+        ]);
 
-        return [
-            'success' => true,
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return true;
     }
 }

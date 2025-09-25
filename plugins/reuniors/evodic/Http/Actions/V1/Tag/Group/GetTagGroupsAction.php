@@ -49,14 +49,4 @@ class GetTagGroupsAction extends BaseAction
 
         return $tagGroupsQuery->paginate($perPage);
     }
-
-    public function asController(Request $request)
-    {
-        $requestData = $request->all();
-
-        return [
-            'success' => true,
-            'data' => $this->handle($requestData)
-        ];
-    }
 }

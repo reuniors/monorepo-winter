@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Location\User\Tag;
 
 use Auth;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\LocationBadgeHistory;
 use Reuniors\Knk\Models\LocationRating;

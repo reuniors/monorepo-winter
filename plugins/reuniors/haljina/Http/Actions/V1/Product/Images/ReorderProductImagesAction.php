@@ -33,15 +33,6 @@ class ReorderProductImagesAction extends BaseAction {
                 $reorderData
             );
         }
-        return [
-            'success' => true,
-            'data' => null
-        ];
-    }
-
-    public function asController()
-    {
-        $requestData = request()->all();
-        return $this->handle($requestData);
+        return null;
     }
 }

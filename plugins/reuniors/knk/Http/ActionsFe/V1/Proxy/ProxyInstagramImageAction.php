@@ -38,15 +38,10 @@ class ProxyInstagramImageAction extends BaseAction
             ]);
         } catch (RequestException $e) {
             Log::error('Failed to proxy Instagram image', [
-                'url' => $url,
+                'url' => $videoReview->thumbnail_url,
                 'error' => $e->getMessage(),
             ]);
             abort(500, 'Internal server error: Unable to fetch the image.');
         }
-    }
-
-    public function asController()
-    {
-        return $this->handle(request()->all());
     }
 }

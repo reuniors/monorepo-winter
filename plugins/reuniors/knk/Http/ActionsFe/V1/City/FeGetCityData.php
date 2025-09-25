@@ -2,7 +2,7 @@
 
 namespace Reuniors\Knk\Http\ActionsFe\V1\City;
 
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 
 class FeGetCityData extends BaseAction
 {

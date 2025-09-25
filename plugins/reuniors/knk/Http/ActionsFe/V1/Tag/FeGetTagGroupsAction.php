@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Knk\Http\ActionsFe\V1\Tag;
 
 use Illuminate\Support\Facades\Cache;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Base\Models\TagGroup;
 
 class FeGetTagGroupsAction extends BaseAction

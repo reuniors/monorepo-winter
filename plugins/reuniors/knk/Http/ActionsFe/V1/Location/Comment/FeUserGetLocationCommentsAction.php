@@ -2,7 +2,7 @@
 namespace Reuniors\Knk\Http\ActionsFe\V1\Location\Comment;
 
 use Illuminate\Support\Facades\DB;
-use Reuniors\Knk\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Knk\Models\Location;
 use Reuniors\Knk\Models\LocationRatingHistory;
 use Reuniors\Knk\Models\UserBadgeHistory;
