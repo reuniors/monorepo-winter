@@ -56,11 +56,8 @@ class LoginWithConfirmationCode extends BaseAction {
         }
 
         return [
-            'data' => [
-                'user' => $user->only(['name', 'email', 'groups', 'id']),
-                'token' => $user->createToken($name)->plainTextToken
-            ],
-            'success' => true
+            'user' => $user->only(['name', 'email', 'groups', 'id']),
+            'token' => $user->createToken($name)->plainTextToken
         ];
     }
 }

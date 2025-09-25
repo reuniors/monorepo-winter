@@ -46,9 +46,6 @@ class FeFollowProfileAction extends BaseAction
             'profile_id' => $profile->id
         ]);
 
-        return [
-            'success' => true,
-            'message' => 'Successfully followed profile'
-        ];
+        return true;
     }
 } 

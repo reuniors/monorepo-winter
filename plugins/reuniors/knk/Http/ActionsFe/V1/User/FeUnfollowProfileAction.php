@@ -39,9 +39,6 @@ class FeUnfollowProfileAction extends BaseAction
             ->where('profile_id', $profile->id)
             ->delete();
 
-        return [
-            'success' => true,
-            'message' => 'Successfully unfollowed profile'
-        ];
+        return true;
     }
 } 
