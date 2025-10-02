@@ -28,6 +28,8 @@ class ChangeRequest extends Model
         'approved_by',
         'rejected_by',
         'rejection_reason',
+        'scheduled_date',
+        'scheduled_date_utc',
     ];
 
     /**
@@ -38,6 +40,14 @@ class ChangeRequest extends Model
         'entity_id' => 'required|integer',
         'field_name' => 'required|string|max:255',
         'status' => 'required|in:pending,approved,rejected',
+    ];
+
+    /**
+     * @var array Date fields
+     */
+    protected $dates = [
+        'scheduled_date',
+        'scheduled_date_utc',
     ];
 
     /**

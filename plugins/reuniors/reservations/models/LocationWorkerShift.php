@@ -36,15 +36,21 @@ class LocationWorkerShift extends Model
         'time_to',
         'pause_time_from',
         'pause_time_to',
-        'pauses'
+        'pauses',
+        'time_from_utc',
+        'time_to_utc',
+        'date_utc',
+        'pauses_utc'
     ];
 
     protected $dates = [
-        'date'
+        'date',
+        'date_utc'
     ];
 
     protected $casts = [
-        'pauses' => 'array'
+        'pauses' => 'array',
+        'pauses_utc' => 'array'
     ];
 
     public $belongsTo = [

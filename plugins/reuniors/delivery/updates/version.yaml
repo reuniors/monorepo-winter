@@ -17,3 +17,6 @@
 1.0.7:
     - 'Production FIX: Updated table reuniors_delivery_orders'
     - builder_table_update_reuniors_delivery_orders_2.php
+1.0.8:
+    - 'Add UTC fields to delivery drivers table'
+    - builder_table_add_utc_fields_reuniors_delivery_drivers.php

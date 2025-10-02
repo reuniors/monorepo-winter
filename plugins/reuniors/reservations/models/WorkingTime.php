@@ -35,6 +35,7 @@ class WorkingTime extends Model
     protected $jsonable = [
         'days_codes',
         'pauses',
+        'pauses_utc',
     ];
 
     protected $fillable = [
@@ -46,7 +47,10 @@ class WorkingTime extends Model
         'shift',
         'pause_time_from',
         'pause_time_to',
-        'pauses'
+        'pauses',
+        'time_from_utc',
+        'time_to_utc',
+        'pauses_utc'
     ];
 
     public $belongsToMany = [

@@ -27,6 +27,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('reuniors.copy-data', 'Reuniors\Base\Console\CopyDataFromPlugins');
         $this->registerConsoleCommand('reuniors.migrate-table', 'Reuniors\Base\Console\GenericTableMigrator');
         $this->registerConsoleCommand('reuniors.run-migrations', 'Reuniors\Base\Console\RunMigrations');
+        $this->registerConsoleCommand('reuniors.convert-to-utc', 'Reuniors\Base\Console\ConvertToUtcCommand');
     }
 
     public function boot()

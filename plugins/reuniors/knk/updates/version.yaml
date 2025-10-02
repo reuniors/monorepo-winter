@@ -730,3 +730,9 @@
 1.0.252:
     - 'Created table reuniors_knk_profile_followers'
     - builder_table_create_reuniors_knk_profile_followers.php
+1.0.253:
+    - 'Add pauses field to working hours table'
+    - builder_table_add_pauses_field_reuniors_knk_working_hours.php
+1.0.254:
+    - 'Add UTC fields to working hours table'
+    - builder_table_add_utc_fields_reuniors_knk_working_hours.php

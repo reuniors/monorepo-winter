@@ -32,9 +32,11 @@ class LocationWorkerDiscount extends Model
         'discount_value',
         'in_percent',
         'location_worker_id',
+        'date_from_utc',
+        'date_to_utc',
     ];
 
-    protected $dates = ['date_from', 'date_to'];
+    protected $dates = ['date_from', 'date_to', 'date_from_utc', 'date_to_utc'];
 
     public $belongsTo = [
         'location_worker' => 'Reuniors\Reservations\Models\LocationWorker',

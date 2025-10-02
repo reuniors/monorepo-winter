@@ -1,120 +1,120 @@
 1.0.1:
-    - 'Initialize plugin.'
+    - "Initialize plugin."
 1.0.2:
-    - 'Created table reuniors_evodic_locations'
+    - "Created table reuniors_evodic_locations"
     - builder_table_create_reuniors_evodic_locations.php
 1.0.3:
-    - 'Created table reuniors_evodic_countries'
+    - "Created table reuniors_evodic_countries"
     - builder_table_create_reuniors_evodic_countries.php
 1.0.4:
-    - 'Created table reuniors_evodic_cities'
+    - "Created table reuniors_evodic_cities"
     - builder_table_create_reuniors_evodic_cities.php
 1.0.5:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations.php
 1.0.6:
-    - 'Updated table reuniors_evodic_cities'
+    - "Updated table reuniors_evodic_cities"
     - builder_table_update_reuniors_evodic_cities.php
 1.0.7:
-    - 'Updated table reuniors_evodic_countries'
+    - "Updated table reuniors_evodic_countries"
     - builder_table_update_reuniors_evodic_countries.php
 1.0.8:
-    - 'Created table reuniors_evodic_contents'
+    - "Created table reuniors_evodic_contents"
     - builder_table_create_reuniors_evodic_contents.php
 1.0.9:
-    - 'Updated table reuniors_evodic_cities'
+    - "Updated table reuniors_evodic_cities"
     - builder_table_update_reuniors_evodic_cities_2.php
 1.0.10:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_2.php
 1.0.11:
-    - 'Updated table reuniors_evodic_countries'
+    - "Updated table reuniors_evodic_countries"
     - builder_table_update_reuniors_evodic_countries_2.php
 1.0.12:
-    - 'Updated table reuniors_evodic_cities'
+    - "Updated table reuniors_evodic_cities"
     - builder_table_update_reuniors_evodic_cities_3.php
 1.0.13:
-    - 'Created table reuniors_evodic_locations_contents'
+    - "Created table reuniors_evodic_locations_contents"
     - builder_table_create_reuniors_evodic_locations_contents.php
 1.0.14:
-    - 'Updated table reuniors_evodic_contents'
+    - "Updated table reuniors_evodic_contents"
     - builder_table_update_reuniors_evodic_contents.php
 1.0.15:
-    - 'Created table reuniors_evodic_tag_groups'
+    - "Created table reuniors_evodic_tag_groups"
     - builder_table_create_reuniors_evodic_tag_groups.php
 1.0.16:
-    - 'Created table reuniors_evodic_tags'
+    - "Created table reuniors_evodic_tags"
     - builder_table_create_reuniors_evodic_tags.php
 1.0.17:
-    - 'Created table reuniors_evodic_tags_other_tag_groups'
+    - "Created table reuniors_evodic_tags_other_tag_groups"
     - builder_table_create_reuniors_evodic_tags_other_tag_groups.php
 1.0.18:
-    - 'Add foreign keys table reuniors_evodic_tags_other_tag_groups'
+    - "Add foreign keys table reuniors_evodic_tags_other_tag_groups"
     - fk_195520_add_foreign_keys_to_reuniors_evodic_tags_other_tag_groups_table.php
 1.0.19:
-    - 'Created table reuniors_evodic_lists'
+    - "Created table reuniors_evodic_lists"
     - builder_table_create_reuniors_evodic_lists.php
 1.0.20:
-    - 'Updated table reuniors_evodic_lists'
+    - "Updated table reuniors_evodic_lists"
     - builder_table_update_reuniors_evodic_lists.php
 1.0.21:
-    - 'Created table reuniors_evodic_list_data'
+    - "Created table reuniors_evodic_list_data"
     - builder_table_create_reuniors_evodic_list_data.php
 1.0.22:
-    - 'Updated table reuniors_evodic_lists'
+    - "Updated table reuniors_evodic_lists"
     - builder_table_update_reuniors_evodic_lists_2.php
 1.0.23:
-    - 'Updated table reuniors_evodic_lists'
+    - "Updated table reuniors_evodic_lists"
     - builder_table_update_reuniors_evodic_lists_3.php
 1.0.24:
-    - 'Updated table reuniors_evodic_list_data'
+    - "Updated table reuniors_evodic_list_data"
     - builder_table_update_reuniors_evodic_list_data.php
 1.0.25:
-    - 'Updated table reuniors_evodic_lists'
+    - "Updated table reuniors_evodic_lists"
     - builder_table_update_reuniors_evodic_lists_4.php
 1.0.26:
-    - 'Created table reuniors_evodic_location_owners'
+    - "Created table reuniors_evodic_location_owners"
     - builder_table_create_reuniors_evodic_location_owners.php
 1.0.27:
-    - 'Created table reuniors_evodic_locations_lists'
+    - "Created table reuniors_evodic_locations_lists"
     - builder_table_create_reuniors_evodic_locations_lists.php
 1.0.28:
-    - 'Created table reuniors_evodic_places'
+    - "Created table reuniors_evodic_places"
     - builder_table_create_reuniors_evodic_places.php
 1.0.29:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places.php
 1.0.30:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_2.php
 1.0.31:
-    - 'Created table reuniors_evodic_place_types'
+    - "Created table reuniors_evodic_place_types"
     - builder_table_create_reuniors_evodic_place_types.php
 1.0.32:
-    - 'Created table reuniors_evodic_addresses'
+    - "Created table reuniors_evodic_addresses"
     - builder_table_create_reuniors_evodic_addresses.php
 1.0.33:
-    - 'Created table reuniors_evodic_actions'
+    - "Created table reuniors_evodic_actions"
     - builder_table_create_reuniors_evodic_actions.php
 1.0.34:
-    - 'Created table reuniors_evodic_actions_history'
+    - "Created table reuniors_evodic_actions_history"
     - builder_table_create_reuniors_evodic_actions_history.php
 1.0.35:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_3.php
 1.0.36:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_4.php
 1.0.37:
-    - 'Created table reuniors_evodic_location_owners_locations'
+    - "Created table reuniors_evodic_location_owners_locations"
     - builder_table_create_reuniors_evodic_location_owners_locations.php
 1.0.38:
     - Skip
 1.0.39:
-    - 'Created table 2019_12_14_000001_create_personal_access_tokens_table.php'
+    - "Created table 2019_12_14_000001_create_personal_access_tokens_table.php"
     - 2019_12_14_000001_create_personal_access_tokens_table.php
 1.0.40:
-    - 'Seed table seed_user_groups'
+    - "Seed table seed_user_groups"
     - seeds/seed_user_groups.php
 1.0.41:
     - Skip
@@ -123,94 +123,100 @@
 1.0.43:
     - Skip
 1.0.44:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_3.php
 1.0.45:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_5.php
 1.0.46:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_6.php
 1.0.47:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_4.php
 1.0.48:
-    - 'Updated table reuniors_evodic_location_owners'
+    - "Updated table reuniors_evodic_location_owners"
     - builder_table_update_reuniors_evodic_location_owners.php
 1.0.49:
-    - 'Updated table reuniors_evodic_location_owners'
+    - "Updated table reuniors_evodic_location_owners"
     - builder_table_update_reuniors_evodic_location_owners_2.php
 1.0.50:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_7.php
 1.0.51:
     - Skip
 1.0.52:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_6.php
 1.0.53:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_7.php
 1.0.54:
-    - 'Created table reuniors_evodic_working_hours'
+    - "Created table reuniors_evodic_working_hours"
     - builder_table_create_reuniors_evodic_working_hours.php
 1.0.55:
-    - 'Created table reuniors_evodic_places_working_hours'
+    - "Created table reuniors_evodic_places_working_hours"
     - builder_table_create_reuniors_evodic_places_working_hours.php
 1.0.56:
-    - 'Updated table builder_table_create_reuniors_evodic_working_hours'
+    - "Updated table builder_table_create_reuniors_evodic_working_hours"
     - skip
 1.0.57:
-    - 'Updated table builder_table_create_reuniors_evodic_places_working_hours'
+    - "Updated table builder_table_create_reuniors_evodic_places_working_hours"
     - skip
 1.0.58:
-    - 'Updated table reuniors_evodic_place_types'
+    - "Updated table reuniors_evodic_place_types"
     - builder_table_update_reuniors_evodic_place_types.php
 1.0.59:
-    - 'Updated table reuniors_evodic_place_types'
+    - "Updated table reuniors_evodic_place_types"
     - builder_table_update_reuniors_evodic_place_types_2.php
 1.0.60:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_8.php
 1.0.61:
-    - 'Created table reuniors_evodic_locations_places'
+    - "Created table reuniors_evodic_locations_places"
     - builder_table_create_reuniors_evodic_locations_places.php
 1.0.62:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_5.php
 1.0.63:
-    - 'Updated table reuniors_evodic_place_types'
+    - "Updated table reuniors_evodic_place_types"
     - builder_table_update_reuniors_evodic_place_types_3.php
 1.0.64:
-    - 'Updated table reuniors_evodic_tags'
+    - "Updated table reuniors_evodic_tags"
     - builder_table_update_reuniors_evodic_tags.php
 1.0.65:
-    - 'Created table reuniors_evodic_qa_questions'
+    - "Created table reuniors_evodic_qa_questions"
     - builder_table_create_reuniors_evodic_qa_questions.php
 1.0.66:
-    - 'Updated table reuniors_evodic_qa_questions'
+    - "Updated table reuniors_evodic_qa_questions"
     - builder_table_update_reuniors_evodic_qa_questions.php
 1.0.67:
-    - 'Created table reuniors_evodic_qa_answers'
+    - "Created table reuniors_evodic_qa_answers"
     - builder_table_create_reuniors_evodic_qa_answers.php
 1.0.68:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_9.php
 1.0.69:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_8.php
 1.0.70:
-    - 'Updated table reuniors_evodic_qa_answers'
+    - "Updated table reuniors_evodic_qa_answers"
     - builder_table_update_reuniors_evodic_qa_answers.php
 1.0.71:
-    - 'Created table reuniors_evodic_place_types_tag_groups'
+    - "Created table reuniors_evodic_place_types_tag_groups"
     - builder_table_create_reuniors_evodic_place_types_tag_groups.php
 1.0.72:
-    - 'Created table reuniors_evodic_places_tags'
+    - "Created table reuniors_evodic_places_tags"
     - builder_table_create_reuniors_evodic_places_tags.php
 1.0.73:
-    - 'Updated table reuniors_evodic_places'
+    - "Updated table reuniors_evodic_places"
     - builder_table_update_reuniors_evodic_places_9.php
 1.0.74:
-    - 'Updated table reuniors_evodic_locations'
+    - "Updated table reuniors_evodic_locations"
     - builder_table_update_reuniors_evodic_locations_10.php
+1.0.75:
+    - "Add pauses field to working hours table"
+    - builder_table_add_pauses_field_reuniors_evodic_working_hours.php
+1.0.76:
+    - "Add UTC fields to working hours table"
+    - builder_table_add_utc_fields_reuniors_evodic_working_hours.php

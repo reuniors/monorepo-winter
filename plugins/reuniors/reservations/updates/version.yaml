@@ -180,3 +180,18 @@
 1.0.62:
     - "Add description field to services table"
     - builder_table_add_description_to_reuniors_reservations_services_table.php
+1.0.63:
+    - "Add UTC fields to working hours table"
+    - builder_table_add_utc_fields_reuniors_reservations_working_hours.php
+1.0.64:
+    - "Add UTC fields to location workers shifts table"
+    - builder_table_add_utc_fields_reuniors_reservations_location_workers_shifts.php
+1.0.65:
+    - "Add UTC fields to client reservations table"
+    - builder_table_add_utc_fields_reuniors_reservations_client_reservations.php
+1.0.66:
+    - "Add UTC fields to location worker discounts table"
+    - builder_table_add_utc_fields_reuniors_reservations_location_worker_discounts.php
+1.0.67:
+    - "Add UTC fields to news table"
+    - builder_table_add_utc_fields_reuniors_reservations_news.php

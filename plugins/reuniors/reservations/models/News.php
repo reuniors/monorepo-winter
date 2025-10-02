@@ -39,6 +39,8 @@ class News extends Model
         'location_id',
         'activated_at',
         'deactivated_at',
+        'activated_at_utc',
+        'deactivated_at_utc',
     ];
 
     protected $dates = [
@@ -46,6 +48,8 @@ class News extends Model
         'deactivated_at',
         'created_at',
         'updated_at',
+        'activated_at_utc',
+        'deactivated_at_utc',
     ];
 
     public $belongsTo = [

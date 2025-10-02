@@ -12,13 +12,14 @@ class QuestionnaireRegistration extends Model
 
     use \Winter\Storm\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at', 'deactivate_at'];
+    protected $dates = ['deleted_at', 'deactivate_at', 'deactivate_at_utc'];
 
     protected $fillable = [
         'code',
         'title',
         'metadata',
         'deactivate_at',
+        'deactivate_at_utc',
     ];
 
     protected $jsonable = ['metadata'];

@@ -31,11 +31,14 @@ class Driver extends Model
         'phone_number',
         'is_online',
         'last_seen',
-        'login_date_code'
+        'login_date_code',
+        'last_seen_utc',
+        'login_date_code_utc'
     ];
 
     protected $hidden = [
-        'login_date_code'
+        'login_date_code',
+        'login_date_code_utc'
     ];
 
     protected $casts = [
@@ -45,7 +48,9 @@ class Driver extends Model
 
     protected $dates = [
         'last_seen',
-        'login_date_code'
+        'login_date_code',
+        'last_seen_utc',
+        'login_date_code_utc'
     ];
 
     public $belongsTo = [

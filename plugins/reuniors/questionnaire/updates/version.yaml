@@ -15,3 +15,6 @@
 1.0.6:
     - 'Updated table reuniors_questionnaire_registration'
     - builder_table_update_reuniors_questionnaire_registration.php
+1.0.7:
+    - 'Add UTC fields to questionnaire registration table'
+    - builder_table_add_utc_fields_reuniors_questionnaire_registration.php

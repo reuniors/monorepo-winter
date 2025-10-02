@@ -17,7 +17,7 @@ class ClientReservation extends Model
 
     use \Winter\Storm\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at', 'date_formatted'];
+    protected $dates = ['deleted_at', 'date_formatted', 'date_utc'];
 
     const DAILY_DURATION_LIMIT = 240;
 
@@ -51,6 +51,7 @@ class ClientReservation extends Model
         'reason',
         'is_pending_status_reminder_sent',
         'promo_code_id',
+        'date_utc',
     ];
 
     protected $appends = [

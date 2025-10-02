@@ -10,3 +10,6 @@
     - builder_table_create_reuniors_base_qa_questions.php
     - builder_table_create_reuniors_base_translations.php
     - builder_table_create_reuniors_base_change_requests.php
+1.0.3:
+    - "Add UTC fields to change requests table"
+    - builder_table_add_utc_fields_reuniors_base_change_requests.php
