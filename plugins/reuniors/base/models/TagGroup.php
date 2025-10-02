@@ -108,6 +108,11 @@ class TagGroup extends Model
         return self::TYPES;
     }
 
+    public function scopeIsBadge($query)
+    {
+        return $query->where('type', 'badge');
+    }
+
     public function scopeListFrontEnd($query, $options)
     {
         /**
