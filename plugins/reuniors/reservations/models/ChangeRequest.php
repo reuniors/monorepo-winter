@@ -15,7 +15,7 @@ class ChangeRequest extends Model
         'data' => 'required|json',
         'action_data' => 'required|json',
         'change_type' => 'required|in:create,update,delete',
-        'scheduled_date' => 'required|date|after:today',
+        'scheduled_date_utc' => 'required|date|after:today',
         'status' => 'required|in:pending,approved,rejected,executed,failed',
         'created_by' => 'required|integer|exists:users,id',
     ];
@@ -30,7 +30,7 @@ class ChangeRequest extends Model
         'data',
         'action_data',
         'change_type',
-        'scheduled_date',
+        'scheduled_date_utc',
         'status',
         'created_by'
     ];
@@ -38,7 +38,7 @@ class ChangeRequest extends Model
     protected $casts = [
         'data' => 'json',
         'action_data' => 'json',
-        'scheduled_date' => 'date',
+        'scheduled_date_utc' => 'date',
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
     ];
@@ -50,10 +50,10 @@ class ChangeRequest extends Model
     // Scopes
     public function scopePending($query) { return $query->where('status', 'pending'); }
     public function scopeApproved($query) { return $query->where('status', 'approved'); }
-    public function scopeScheduledForDate($query, $date) { return $query->where('scheduled_date', $date); }
+    public function scopeScheduledForDate($query, $date) { return $query->where('scheduled_date_utc', $date); }
     public function scopeReadyForExecution($query) {
         return $query->where('status', 'approved')
-                    ->where('scheduled_date', '<=', now()->toDateString());
+                    ->where('scheduled_date_utc', '<=', now()->toDateString());
     }
     public function scopeFailed($query) { return $query->where('status', 'failed'); }
     public function scopeExecuted($query) { return $query->where('status', 'executed'); }
@@ -61,7 +61,7 @@ class ChangeRequest extends Model
     // Methods
     public function canExecute() {
         return $this->status === 'approved' &&
-               $this->scheduled_date <= now()->toDateString();
+               $this->scheduled_date_utc <= now()->toDateString();
     }
 
     public function markAsExecuted() {

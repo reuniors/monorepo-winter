@@ -17,7 +17,7 @@ class ClientReservation extends Model
 
     use \Winter\Storm\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at', 'date_formatted', 'date_utc'];
+    protected $dates = ['deleted_at', 'date_utc'];
 
     const DAILY_DURATION_LIMIT = 240;
 
@@ -35,7 +35,6 @@ class ClientReservation extends Model
     protected $fillable = [
         'location_id',
         'location_worker_id',
-        'date',
         'services_duration',
         'services_cost',
         'status',
@@ -99,7 +98,7 @@ class ClientReservation extends Model
 
     public function getDateFormattedAttribute()
     {
-        return Carbon::parse($this->date);
+        return Carbon::parse($this->date_utc);
     }
 
     public function beforeCreate()
@@ -130,7 +129,7 @@ class ClientReservation extends Model
         $start = Carbon::parse($dateAndTime);
         $end = $start->copy()->addMinutes($durationInMin);
         $reservations = ClientReservation::where('location_worker_id', $locationWorkerId)
-            ->where('date', '>=', $dateAndTime)
+            ->where('date_utc', '>=', $dateAndTime)
             ->where('status', '!=', 3)
             ->get();
         // Check if the start and end time is between the working hours
@@ -148,7 +147,7 @@ class ClientReservation extends Model
             return false;
         }
         foreach ($reservations as $reservation) {
-            $reservationStart = Carbon::parse($reservation->date . ' ' . $reservation->locationWorker->start_time);
+            $reservationStart = Carbon::parse($reservation->date_utc . ' ' . $reservation->locationWorker->start_time);
             $reservationEnd = $reservationStart->copy()->addMinutes($reservation->services_duration);
             if ($start->between($reservationStart, $reservationEnd) || $end->between($reservationStart, $reservationEnd)) {
                 return false;
@@ -164,7 +163,7 @@ class ClientReservation extends Model
             return false;
         }
         $dailyReservations = ClientReservation::where('created_by', Auth::getUser()->id)
-            ->whereDate('date', $slotDate)
+            ->whereDate('date_utc', $slotDate)
             ->whereIn('status', [ReservationStatus::CONFIRMED, ReservationStatus::PENDING, ReservationStatus::DRAFT])
             ->get();
         $dailyDuration = 0;

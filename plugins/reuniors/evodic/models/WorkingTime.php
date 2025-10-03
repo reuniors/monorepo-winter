@@ -33,17 +33,13 @@ class WorkingTime extends Model
 
     protected $jsonable = [
         'days_codes',
-        'pauses',
         'pauses_utc',
     ];
 
     protected $fillable = [
-        'time_from',
-        'time_to',
         'name',
         'days_codes',
         'active',
-        'pauses',
         'time_from_utc',
         'time_to_utc',
         'pauses_utc',

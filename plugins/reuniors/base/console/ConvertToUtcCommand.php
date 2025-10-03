@@ -351,22 +351,24 @@ class ConvertToUtcCommand extends Command
         foreach ($pauses as $pause) {
             $convertedPause = $pause; // Copy all existing fields
             
-            // Convert time_from if it exists
+            // Convert time_from to time_from_utc if it exists
             if (isset($pause['time_from'])) {
-                $convertedPause['time_from'] = $this->convertTimeInJson(
+                $convertedPause['time_from_utc'] = $this->convertTimeInJson(
                     $pause['time_from'], 
                     $belgradeTz, 
                     $utcTz
                 );
+                unset($convertedPause['time_from']); // Remove original
             }
             
-            // Convert time_to if it exists
+            // Convert time_to to time_to_utc if it exists
             if (isset($pause['time_to'])) {
-                $convertedPause['time_to'] = $this->convertTimeInJson(
+                $convertedPause['time_to_utc'] = $this->convertTimeInJson(
                     $pause['time_to'], 
                     $belgradeTz, 
                     $utcTz
                 );
+                unset($convertedPause['time_to']); // Remove original
             }
             
             $convertedPauses[] = $convertedPause;

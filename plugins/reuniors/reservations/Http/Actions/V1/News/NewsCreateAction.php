@@ -2,7 +2,6 @@
 
 namespace Reuniors\Reservations\Http\Actions\V1\News;
 
-use Carbon\Carbon;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\News;
@@ -18,8 +17,8 @@ class NewsCreateAction extends BaseAction
             'type' => ['required', 'string', 'in:news,chyron,alert'],
             'status' => ['required', 'string', 'in:draft,pending,approved'],
             'location_slug' => ['required', 'string'],
-            'activated_at' => ['nullable', 'date'],
-            'deactivated_at' => ['nullable', 'date', 'after:activated_at'],
+            'activated_at_utc' => ['nullable', 'date'],
+            'deactivated_at_utc' => ['nullable', 'date', 'after:activated_at_utc'],
         ];
     }
 
@@ -30,11 +29,6 @@ class NewsCreateAction extends BaseAction
             throw new \Exception('Location not found');
         }
 
-        $attributes['activated_at'] = Carbon::parse($attributes['activated_at'])
-            ->toDateTimeString();
-        $attributes['deactivated_at'] = Carbon::parse($attributes['deactivated_at'])
-            ->toDateTimeString();
-
         $news = new News([
             'title' => $attributes['title'],
             'description' => $attributes['description'],
@@ -42,8 +36,8 @@ class NewsCreateAction extends BaseAction
             'type' => $attributes['type'],
             'status' => $attributes['status'],
             'location_id' => $location->id,
-            'activated_at' => $attributes['activated_at'],
-            'deactivated_at' => $attributes['deactivated_at'],
+            'activated_at_utc' => $attributes['activated_at_utc'] ?? null,
+            'deactivated_at_utc' => $attributes['deactivated_at_utc'] ?? null,
         ]);
 
         $news->save();

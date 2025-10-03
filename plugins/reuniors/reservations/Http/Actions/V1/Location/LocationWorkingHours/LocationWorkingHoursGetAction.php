@@ -24,9 +24,10 @@ class LocationWorkingHoursGetAction extends BaseAction
 
         $workingHours = $location
             ->working_hours()
-            ->orderBy('time_from')
+            ->orderBy('time_from_utc') // Order by UTC field
             ->get();
 
+        // Return UTC data directly - frontend will handle timezone conversion
         return $workingHours;
     }
 }

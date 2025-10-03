@@ -15,7 +15,7 @@ class ChangeRequestScheduledExecuteAction extends BaseAction
 
         // Get change requests that are ready for execution (approved and scheduled for today or before)
         $changeRequests = ChangeRequest::where('status', 'approved')
-            ->where('scheduled_date', '<=', now()->toDateString())
+            ->where('scheduled_date_utc', '<=', now()->toDateString())
             ->orderBy('created_by') // Group by user to minimize user switching
             ->get();
 

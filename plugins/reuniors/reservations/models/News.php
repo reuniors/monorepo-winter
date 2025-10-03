@@ -37,15 +37,11 @@ class News extends Model
         'type',
         'status',
         'location_id',
-        'activated_at',
-        'deactivated_at',
         'activated_at_utc',
         'deactivated_at_utc',
     ];
 
     protected $dates = [
-        'activated_at',
-        'deactivated_at',
         'created_at',
         'updated_at',
         'activated_at_utc',
@@ -83,14 +79,14 @@ class News extends Model
             ->where(function ($query) {
                 $now = now();
                 $query
-                    ->whereNull('activated_at')
-                    ->orWhere('activated_at', '<=', $now);
+                    ->whereNull('activated_at_utc')
+                    ->orWhere('activated_at_utc', '<=', $now);
             })
             ->where(function ($query) {
                 $now = now();
                 $query
-                    ->whereNull('deactivated_at')
-                    ->orWhere('deactivated_at', '>=', $now);
+                    ->whereNull('deactivated_at_utc')
+                    ->orWhere('deactivated_at_utc', '>=', $now);
             });
     }
 

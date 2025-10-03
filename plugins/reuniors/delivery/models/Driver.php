@@ -30,14 +30,11 @@ class Driver extends Model
         'user_id',
         'phone_number',
         'is_online',
-        'last_seen',
-        'login_date_code',
         'last_seen_utc',
         'login_date_code_utc'
     ];
 
     protected $hidden = [
-        'login_date_code',
         'login_date_code_utc'
     ];
 
@@ -47,8 +44,6 @@ class Driver extends Model
     ];
 
     protected $dates = [
-        'last_seen',
-        'login_date_code',
         'last_seen_utc',
         'login_date_code_utc'
     ];
@@ -59,6 +54,6 @@ class Driver extends Model
 
     public function getLoginDateCodeFormattedAttribute()
     {
-        return date('Y-m-d H:i:s', $this->login_date_code);
+        return date('Y-m-d H:i:s', $this->login_date_code_utc);
     }
 }

@@ -28,7 +28,6 @@ class ChangeRequest extends Model
         'approved_by',
         'rejected_by',
         'rejection_reason',
-        'scheduled_date',
         'scheduled_date_utc',
     ];
 
@@ -46,7 +45,6 @@ class ChangeRequest extends Model
      * @var array Date fields
      */
     protected $dates = [
-        'scheduled_date',
         'scheduled_date_utc',
     ];
 

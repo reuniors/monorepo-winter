@@ -29,14 +29,10 @@ class LocationWorkerShift extends Model
     protected $fillable = [
         'location_worker_id',
         'location_id',
-        'date',
         'shift',
         'status',
-        'time_from',
-        'time_to',
         'pause_time_from',
         'pause_time_to',
-        'pauses',
         'time_from_utc',
         'time_to_utc',
         'date_utc',
@@ -44,12 +40,10 @@ class LocationWorkerShift extends Model
     ];
 
     protected $dates = [
-        'date',
         'date_utc'
     ];
 
     protected $casts = [
-        'pauses' => 'array',
         'pauses_utc' => 'array'
     ];
 
@@ -83,10 +77,10 @@ class LocationWorkerShift extends Model
             $query->where('location_worker_id', $workerId);
         }
         if ($startDate) {
-            $query->whereDate('date', '>=', $startDate);
+            $query->whereDate('date_utc', '>=', $startDate);
         }
         if ($endDate) {
-            $query->whereDate('date', '<=', $endDate);
+            $query->whereDate('date_utc', '<=', $endDate);
         }
 
         return $query;
@@ -95,7 +89,7 @@ class LocationWorkerShift extends Model
     public function scopeIsWorkingDay($query, $dateOnly, $locationWorkerId = null)
     {
         $query
-            ->where('date', $dateOnly)
+            ->where('date_utc', $dateOnly)
             ->whereNotNull('shift');
 
         if ($locationWorkerId) {

@@ -12,13 +12,12 @@ class QuestionnaireRegistration extends Model
 
     use \Winter\Storm\Database\Traits\SoftDelete;
 
-    protected $dates = ['deleted_at', 'deactivate_at', 'deactivate_at_utc'];
+    protected $dates = ['deleted_at', 'deactivate_at_utc'];
 
     protected $fillable = [
         'code',
         'title',
         'metadata',
-        'deactivate_at',
         'deactivate_at_utc',
     ];
 
@@ -55,14 +54,14 @@ class QuestionnaireRegistration extends Model
         if ($this->code == null) {
             $this->code = Str::uuid();
         }
-        if ($this->deactivate_at == null) {
-            $this->deactivate_at = time() + self::DEACTIVATION_TIME_DURATION;
+        if ($this->deactivate_at_utc == null) {
+            $this->deactivate_at_utc = time() + self::DEACTIVATION_TIME_DURATION;
         }
     }
 
     public function scopeNotDeactivated($query)
     {
         $now = time();
-        return $query->whereRaw("deactivate_at > $now");
+        return $query->whereRaw("deactivate_at_utc > $now");
     }
 }
