@@ -220,3 +220,6 @@
 1.0.76:
     - "Add UTC fields to working hours table"
     - builder_table_add_utc_fields_reuniors_evodic_working_hours.php
+1.0.77:
+    - "Make original date/time fields nullable in evodic tables"
+    - builder_table_make_original_fields_nullable_reuniors_evodic.php

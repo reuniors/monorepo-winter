@@ -13,3 +13,6 @@
 1.0.3:
     - "Add UTC fields to change requests table"
     - builder_table_add_utc_fields_reuniors_base_change_requests.php
+1.0.4:
+    - "Make original date/time fields nullable in base tables"
+    - builder_table_make_original_fields_nullable_reuniors_base.php

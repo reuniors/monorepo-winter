@@ -19,7 +19,7 @@ class LocationReservationCreateAction extends BaseAction {
         return [
             'locationSlug' => ['string', 'required'],
             'locationWorkerId' => ['integer', 'required'],
-            'date' => ['date', 'required'],
+            'dateUtc' => ['date', 'required'],
             //            'servicesDuration' => ['integer', 'required'], needs to calculate
             'services' => ['array', 'required'],
             'services.*.id' => ['integer', 'required'],
@@ -106,7 +106,8 @@ class LocationReservationCreateAction extends BaseAction {
             ->whereIn('id', array_column($servicesRequest, 'id'))
             ->get()
             ->keyBy('id');
-        $dateObject = Carbon::parse($attributes['date']);
+        $dateUtc = $attributes['dateUtc'];
+        $dateObject = Carbon::parse($dateUtc);
 
         $promoCode = LocationPromoCodeFindOneAction::run([
             'code' => $promoCodeName,
@@ -119,7 +120,7 @@ class LocationReservationCreateAction extends BaseAction {
         $data = [
             'location_id' => $location->id,
             'location_worker_id' => $worker->id,
-            'date' => $attributes['date'],
+            'date_utc' => $dateUtc, // Populate UTC field
             'status' => ReservationStatus::DRAFT,
             'notice' => $attributes['notice'] ?? null,
             'client_id' => $clientId,
@@ -130,7 +131,7 @@ class LocationReservationCreateAction extends BaseAction {
         $client = $clientId ? Client::find($clientId) : null;
 
         if (!ClientReservation::slotAvailable(
-            $data['date'],
+            $data['date_utc'],
             $data['location_worker_id'],
             $data['services_duration'],
         )) {

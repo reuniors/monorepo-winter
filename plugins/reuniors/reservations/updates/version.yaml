@@ -193,5 +193,8 @@
     - "Add UTC fields to location worker discounts table"
     - builder_table_add_utc_fields_reuniors_reservations_location_worker_discounts.php
 1.0.67:
+    - "Make original date/time fields nullable in reservations tables"
+    - builder_table_make_original_fields_nullable_reuniors_reservations.php
+1.0.68:
     - "Add UTC fields to news table"
     - builder_table_add_utc_fields_reuniors_reservations_news.php

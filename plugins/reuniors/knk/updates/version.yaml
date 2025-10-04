@@ -1,738 +1,741 @@
 1.0.1:
-    - 'Initialize plugin.'
+    - "Initialize plugin."
 1.0.2:
-    - 'Created table reuniors_knk_locations'
+    - "Created table reuniors_knk_locations"
     - builder_table_create_reuniors_knk_locations.php
 1.0.3:
-    - 'Created table reuniors_knk_categories'
+    - "Created table reuniors_knk_categories"
     - builder_table_create_reuniors_knk_categories.php
 1.0.4:
-    - 'Created table reuniors_knk_locations_categories'
+    - "Created table reuniors_knk_locations_categories"
     - builder_table_create_reuniors_knk_locations_categories.php
 1.0.5:
-    - 'Created table reuniors_knk_food_menu'
+    - "Created table reuniors_knk_food_menu"
     - builder_table_create_reuniors_knk_food_menu.php
 1.0.6:
-    - 'Created table reuniors_knk_locations_food_menu'
+    - "Created table reuniors_knk_locations_food_menu"
     - builder_table_create_reuniors_knk_locations_food_menu.php
 1.0.7:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu.php
 1.0.8:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations.php
 1.0.9:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_2.php
 1.0.10:
-    - 'Created table reuniors_knk_country'
+    - "Created table reuniors_knk_country"
     - builder_table_create_reuniors_knk_country.php
 1.0.11:
-    - 'Updated table reuniors_knk_country'
+    - "Updated table reuniors_knk_country"
     - builder_table_update_reuniors_knk_country.php
 1.0.12:
-    - 'Updated table reuniors_knk_country'
+    - "Updated table reuniors_knk_country"
     - builder_table_update_reuniors_knk_country_2.php
 1.0.13:
-    - 'Created table reuniors_knk_region_city'
+    - "Created table reuniors_knk_region_city"
     - builder_table_create_reuniors_knk_region_city.php
 1.0.14:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city.php
 1.0.15:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city_2.php
 1.0.16:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city_3.php
 1.0.17:
-    - 'Created table reuniors_knk_tags'
+    - "Created table reuniors_knk_tags"
     - builder_table_create_reuniors_knk_tags.php
 1.0.18:
-    - 'Created table reuniors_knk_locations_tags'
+    - "Created table reuniors_knk_locations_tags"
     - builder_table_create_reuniors_knk_locations_tags.php
 1.0.21:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_3.php
 1.0.22:
-    - 'Created table reuniors_knk_food_categories'
+    - "Created table reuniors_knk_food_categories"
     - builder_table_create_reuniors_knk_food_categories.php
 1.0.24:
-    - 'Updated table reuniors_knk_food_menu_categories'
+    - "Updated table reuniors_knk_food_menu_categories"
     - builder_table_update_reuniors_knk_food_categories.php
 1.0.25:
-    - 'Created table reuniors_knk_food_menu_food_categories'
+    - "Created table reuniors_knk_food_menu_food_categories"
     - builder_table_create_reuniors_knk_food_menu_food_categories.php
 1.0.27:
-    - 'Drop table reuniors_knk_food_menu_food_categories'
+    - "Drop table reuniors_knk_food_menu_food_categories"
     - builder_table_delete_reuniors_knk_food_menu_food_categories.php
 1.0.28:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_4.php
 1.0.29:
-    - 'Created table reuniors_knk_tag_groups'
+    - "Created table reuniors_knk_tag_groups"
     - builder_table_create_reuniors_knk_tag_groups.php
 1.0.30:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups.php
 1.0.31:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags.php
 1.0.32:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_2.php
 1.0.33:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_2.php
 1.0.34:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_3.php
 1.0.35:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_5.php
 1.0.36:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_2.php
 1.0.37:
-    - 'Updated table reuniors_knk_locations_food_menu'
+    - "Updated table reuniors_knk_locations_food_menu"
     - builder_table_update_reuniors_knk_locations_food_categories.php
 1.0.38:
-    - 'Created table reuniors_knk_banner_zone'
+    - "Created table reuniors_knk_banner_zone"
     - builder_table_create_reuniors_knk_banner_zone.php
 1.0.39:
-    - 'Created table reuniors_knk_banner'
+    - "Created table reuniors_knk_banner"
     - builder_table_create_reuniors_knk_banner.php
 1.0.40:
-    - 'Updated table reuniors_knk_banner'
+    - "Updated table reuniors_knk_banner"
     - builder_table_update_reuniors_knk_banners.php
 1.0.41:
-    - 'Updated table reuniors_knk_banner_zone'
+    - "Updated table reuniors_knk_banner_zone"
     - builder_table_update_reuniors_knk_banner_zones.php
 1.0.42:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_2.php
 1.0.43:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_6.php
 1.0.44:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_3.php
 1.0.45:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_4.php
 1.0.46:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_3.php
 1.0.47:
-    - 'Updated table reuniors_knk_banners'
+    - "Updated table reuniors_knk_banners"
     - builder_table_update_reuniors_knk_banners_2.php
 1.0.48:
-    - 'Updated table reuniors_knk_banners'
+    - "Updated table reuniors_knk_banners"
     - builder_table_update_reuniors_knk_banners_3.php
 1.0.49:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_4.php
 1.0.50:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_5.php
 1.0.51:
-    - 'Created table reuniors_knk_restaurant_menu'
+    - "Created table reuniors_knk_restaurant_menu"
     - builder_table_create_reuniors_knk_restaurant_menu.php
 1.0.52:
-    - 'Created table reuniors_knk_restaurant_menu_food_categories'
+    - "Created table reuniors_knk_restaurant_menu_food_categories"
     - builder_table_create_reuniors_knk_restaurant_menu_food_categories.php
 1.0.53:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_4.php
 1.0.54:
-    - 'Updated table reuniors_knk_locations_food_categories'
+    - "Updated table reuniors_knk_locations_food_categories"
     - builder_table_update_reuniors_knk_locations_restaurant_menu.php
 1.0.55:
-    - 'Created table reuniors_knk_rating'
+    - "Created table reuniors_knk_rating"
     - builder_table_create_reuniors_knk_rating.php
 1.0.56:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_7.php
 1.0.57:
-    - 'Created table reuniors_knk_food_menu_likes_history'
+    - "Created table reuniors_knk_food_menu_likes_history"
     - builder_table_create_reuniors_knk_food_menu_likes_history.php
 1.0.58:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_3.php
 1.0.59:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food_menu_8.php
 1.0.60:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_4.php
 1.0.61:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_6.php
 1.0.62:
-    - 'Updated table reuniors_knk_categories'
+    - "Updated table reuniors_knk_categories"
     - builder_table_update_reuniors_knk_categories.php
 1.0.63:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_7.php
 1.0.64:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_5.php
 1.0.65:
-    - 'Created table reuniors_knk_food_prices'
+    - "Created table reuniors_knk_food_prices"
     - builder_table_create_reuniors_knk_food_prices.php
 1.0.66:
-    - 'Updated table reuniors_knk_food_menu'
+    - "Updated table reuniors_knk_food_menu"
     - builder_table_update_reuniors_knk_food.php
 1.0.67:
-    - 'Updated table reuniors_knk_food_menu_likes_history'
+    - "Updated table reuniors_knk_food_menu_likes_history"
     - builder_table_update_reuniors_knk_food_likes_history.php
 1.0.68:
-    - 'Updated table reuniors_knk_food'
+    - "Updated table reuniors_knk_food"
     - builder_table_update_reuniors_knk_foods.php
 1.0.69:
-    - 'Updated table reuniors_knk_food_prices'
+    - "Updated table reuniors_knk_food_prices"
     - builder_table_update_reuniors_knk_food_prices.php
 1.0.70:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_2.php
 1.0.71:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_5.php
 1.0.72:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_6.php
 1.0.73:
-    - 'Updated table reuniors_knk_rating'
+    - "Updated table reuniors_knk_rating"
     - builder_table_update_reuniors_knk_location_rating.php
 1.0.74:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_3.php
 1.0.75:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_7.php
 1.0.76:
-    - 'Updated table reuniors_knk_location_rating'
+    - "Updated table reuniors_knk_location_rating"
     - builder_table_update_reuniors_knk_location_rating_2.php
 1.0.77:
-    - 'Updated table reuniors_knk_food_likes_history'
+    - "Updated table reuniors_knk_food_likes_history"
     - builder_table_update_reuniors_knk_food_likes_history_2.php
 1.0.78:
-    - 'Updated table reuniors_knk_location_rating'
+    - "Updated table reuniors_knk_location_rating"
     - builder_table_update_reuniors_knk_location_ratings.php
 1.0.79:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city_4.php
 1.0.80:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_8.php
 1.0.81:
-    - 'Created table reuniors_knk_location_related_locations'
+    - "Created table reuniors_knk_location_related_locations"
     - builder_table_create_reuniors_knk_location_related_locations.php
 1.0.82:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city_5.php
 1.0.83:
-    - 'Created table reuniors_knk_food_type_classes'
+    - "Created table reuniors_knk_food_type_classes"
     - builder_table_create_reuniors_knk_food_type_classes.php
 1.0.84:
-    - 'Updated table reuniors_knk_food_type_classes'
+    - "Updated table reuniors_knk_food_type_classes"
     - builder_table_update_reuniors_knk_food_classes.php
 1.0.85:
-    - 'Created table reuniors_knk_food_class_types'
+    - "Created table reuniors_knk_food_class_types"
     - builder_table_create_reuniors_knk_food_class_types.php
 1.0.86:
-    - 'Updated table reuniors_knk_food_prices'
+    - "Updated table reuniors_knk_food_prices"
     - builder_table_update_reuniors_knk_food_type_prices.php
 1.0.87:
-    - 'Updated table reuniors_knk_food_class_types'
+    - "Updated table reuniors_knk_food_class_types"
     - builder_table_update_reuniors_knk_food_class_types.php
 1.0.88:
-    - 'Updated table reuniors_knk_food_class_types'
+    - "Updated table reuniors_knk_food_class_types"
     - builder_table_update_reuniors_knk_food_class_types_2.php
 1.0.89:
-    - 'Updated table reuniors_knk_food_class_types'
+    - "Updated table reuniors_knk_food_class_types"
     - builder_table_update_reuniors_knk_food_class_types_3.php
 1.0.90:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_5.php
 1.0.91:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_6.php
 1.0.92:
-    - 'Created table reuniors_knk_food_addons'
+    - "Created table reuniors_knk_food_addons"
     - builder_table_create_reuniors_knk_food_addons.php
 1.0.93:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons.php
 1.0.94:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_2.php
 1.0.95:
-    - 'Created table reuniors_knk_food_addon_groups'
+    - "Created table reuniors_knk_food_addon_groups"
     - builder_table_create_reuniors_knk_food_addon_groups.php
 1.0.96:
-    - 'Created table reuniors_knk_foods_food_addons'
+    - "Created table reuniors_knk_foods_food_addons"
     - builder_table_create_reuniors_knk_foods_food_addons.php
 1.0.97:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups.php
 1.0.98:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_6.php
 1.0.99:
-    - 'Updated table reuniors_knk_foods_food_addons'
+    - "Updated table reuniors_knk_foods_food_addons"
     - builder_table_update_reuniors_knk_foods_food_addon_groups.php
 1.0.100:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_2.php
 1.0.101:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_3.php
 1.0.102:
-    - 'Update table users - city_id'
+    - "Update table users - city_id"
     - builder_table_update_users.php
 1.0.103:
-    - 'Updated table reuniors_knk_food_likes_history'
+    - "Updated table reuniors_knk_food_likes_history"
     - builder_table_update_reuniors_knk_food_likes_history_3.php
 1.0.104:
-    - 'Updated table reuniors_knk_location_ratings'
+    - "Updated table reuniors_knk_location_ratings"
     - builder_table_update_reuniors_knk_location_ratings_2.php
 1.0.105:
-    - 'Created table reuniors_knk_location_rating_history'
+    - "Created table reuniors_knk_location_rating_history"
     - builder_table_create_reuniors_knk_location_rating_history.php
 1.0.106:
-    - 'Updated table reuniors_knk_location_rating_history'
+    - "Updated table reuniors_knk_location_rating_history"
     - builder_table_update_reuniors_knk_location_rating_history.php
 1.0.107:
-    - 'Created table reuniors_knk_location_other_informations'
+    - "Created table reuniors_knk_location_other_informations"
     - builder_table_create_reuniors_knk_location_other_informations.php
 1.0.108:
-    - 'Updated table reuniors_knk_location_other_informations'
+    - "Updated table reuniors_knk_location_other_informations"
     - builder_table_update_reuniors_knk_location_other_informations.php
 1.0.109:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_9.php
 1.0.110:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_10.php
 1.0.111:
-    - 'Created table reuniors_knk_user_badges_history'
+    - "Created table reuniors_knk_user_badges_history"
     - builder_table_create_reuniors_knk_user_badges_history.php
 1.0.112:
-    - 'Created table reuniors_knk_location_badges_history'
+    - "Created table reuniors_knk_location_badges_history"
     - builder_table_create_reuniors_knk_location_badges_history.php
 1.0.113:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_7.php
 1.0.114:
-    - 'Updated table reuniors_knk_user_badges_history'
+    - "Updated table reuniors_knk_user_badges_history"
     - builder_table_update_reuniors_knk_user_badges_history.php
 1.0.115:
-    - 'Updated table reuniors_knk_location_badges_history'
+    - "Updated table reuniors_knk_location_badges_history"
     - builder_table_update_reuniors_knk_location_badges_history.php
 1.0.116:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_11.php
 1.0.117:
-    - 'Updated table reuniors_knk_food_likes_history'
+    - "Updated table reuniors_knk_food_likes_history"
     - builder_table_update_reuniors_knk_food_likes_history_4.php
 1.0.118:
-    - 'Updated table reuniors_knk_banner_zones'
+    - "Updated table reuniors_knk_banner_zones"
     - builder_table_update_reuniors_knk_banner_zones_2.php
 1.0.119:
-    - 'Updated table reuniors_knk_banner_zones'
+    - "Updated table reuniors_knk_banner_zones"
     - builder_table_update_reuniors_knk_banner_zones_3.php
 1.0.120:
-    - 'Created table reuniors_knk_banner_zones_locations'
+    - "Created table reuniors_knk_banner_zones_locations"
     - builder_table_create_reuniors_knk_banner_zones_locations.php
 1.0.121:
-    - 'Updated table reuniors_knk_banners'
+    - "Updated table reuniors_knk_banners"
     - builder_table_update_reuniors_knk_banners_4.php
 1.0.122:
-    - 'Updated table reuniors_knk_banner_zones'
+    - "Updated table reuniors_knk_banner_zones"
     - builder_table_update_reuniors_knk_banner_zones_4.php
 1.0.123:
-    - 'Updated table reuniors_knk_banner_zones_locations'
+    - "Updated table reuniors_knk_banner_zones_locations"
     - builder_table_update_reuniors_knk_banners_locations.php
 1.0.124:
-    - 'Updated table reuniors_knk_banner_zones'
+    - "Updated table reuniors_knk_banner_zones"
     - builder_table_update_reuniors_knk_banner_zones_5.php
 1.0.125:
-    - 'Drop table reuniors_knk_food_menu_food_categories'
+    - "Drop table reuniors_knk_food_menu_food_categories"
     - builder_table_delete_reuniors_knk_food_menu_food_categories_2.php
 1.0.126:
-    - 'Drop table reuniors_knk_locations_food_menu'
+    - "Drop table reuniors_knk_locations_food_menu"
     - builder_table_delete_reuniors_knk_locations_food_menu.php
 1.0.127:
-    - 'Updated table reuniors_knk_banners'
+    - "Updated table reuniors_knk_banners"
     - builder_table_update_reuniors_knk_banners_5.php
 1.0.128:
-    - 'Updated table reuniors_knk_banner_zones'
+    - "Updated table reuniors_knk_banner_zones"
     - builder_table_update_reuniors_knk_banner_zones_6.php
 1.0.129:
-    - 'Updated table reuniors_knk_location_ratings'
+    - "Updated table reuniors_knk_location_ratings"
     - builder_table_update_reuniors_knk_location_ratings_3.php
 1.0.130:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_3.php
 1.0.131:
-    - 'Updated table reuniors_knk_banners'
+    - "Updated table reuniors_knk_banners"
     - builder_table_update_reuniors_knk_banners_6.php
 1.0.132:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_12.php
 1.0.133:
-    - 'Updated table reuniors_knk_restaurant_menu'
+    - "Updated table reuniors_knk_restaurant_menu"
     - builder_table_update_reuniors_knk_restaurant_menu.php
 1.0.134:
-    - 'Updated table reuniors_knk_food_type_prices'
+    - "Updated table reuniors_knk_food_type_prices"
     - builder_table_update_reuniors_knk_food_type_prices_2.php
 1.0.135:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_4.php
 1.0.136:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_4.php
 1.0.137:
-    - 'Updated table reuniors_knk_location_other_informations'
+    - "Updated table reuniors_knk_location_other_informations"
     - builder_table_update_reuniors_knk_location_other_informations_2.php
 1.0.138:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_8.php
 1.0.139:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_4.php
 1.0.140:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_9.php
 1.0.141:
-    - 'Created table reuniors_knk_manufacturers'
+    - "Created table reuniors_knk_manufacturers"
     - builder_table_create_reuniors_knk_manufacturers.php
 1.0.142:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_5.php
 1.0.143:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_6.php
 1.0.144:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_7.php
 1.0.145:
-    - 'Updated table reuniors_knk_food_class_types'
+    - "Updated table reuniors_knk_food_class_types"
     - builder_table_update_reuniors_knk_food_class_types_4.php
 1.0.146:
-    - 'Updated table reuniors_knk_food_classes'
+    - "Updated table reuniors_knk_food_classes"
     - builder_table_update_reuniors_knk_food_classes_2.php
 1.0.147:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_5.php
 1.0.148:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_5.php
 1.0.149:
-    - 'Updated table reuniors_knk_restaurant_menu'
+    - "Updated table reuniors_knk_restaurant_menu"
     - builder_table_update_reuniors_knk_restaurant_menu_2.php
 1.0.150:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_8.php
 1.0.151:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_6.php
 1.0.152:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_7.php
 1.0.153:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_6.php
 1.0.154:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_7.php
 1.0.155:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_7.php
 1.0.156:
-    - 'Created table reuniors_knk_foods_food_addons'
+    - "Created table reuniors_knk_foods_food_addons"
     - builder_table_create_reuniors_knk_foods_food_addons_2.php
 1.0.157:
-    - 'Updated table reuniors_knk_foods_food_addons'
+    - "Updated table reuniors_knk_foods_food_addons"
     - builder_table_update_reuniors_knk_foods_food_addons.php
 1.0.158:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_8.php
 1.0.159:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_9.php
 1.0.160:
-    - 'Created table reuniors_knk_actions'
+    - "Created table reuniors_knk_actions"
     - builder_table_create_reuniors_knk_actions.php
 1.0.161:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions.php
 1.0.162:
-    - 'Created table reuniors_knk_actions_history'
+    - "Created table reuniors_knk_actions_history"
     - builder_table_create_reuniors_knk_actions_history.php
 1.0.163:
-    - 'Updated table reuniors_knk_actions_history'
+    - "Updated table reuniors_knk_actions_history"
     - builder_table_update_reuniors_knk_actions_history.php
 1.0.164:
-    - 'Updated table reuniors_knk_food_addons'
+    - "Updated table reuniors_knk_food_addons"
     - builder_table_update_reuniors_knk_food_addons_8.php
 1.0.165:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_10.php
 1.0.166:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_13.php
 1.0.167:
-    - 'Updated table reuniors_knk_locations_categories'
+    - "Updated table reuniors_knk_locations_categories"
     - builder_table_update_reuniors_knk_locations_categories.php
 1.0.168:
-    - 'Updated table reuniors_knk_location_related_locations'
+    - "Updated table reuniors_knk_location_related_locations"
     - builder_table_update_reuniors_knk_location_related_locations.php
 1.0.169:
-    - 'Updated tables foreign keys reuniors_knk'
+    - "Updated tables foreign keys reuniors_knk"
     - custom_table_update_reuniors_foreign_keys.php
 1.0.170:
-    - 'Updated tables foreign keys reuniors_knk v2'
+    - "Updated tables foreign keys reuniors_knk v2"
     - custom_table_update_reuniors_foreign_keys_v2.php
 1.0.171:
-    - 'Updated table reuniors_knk_restaurant_menu'
+    - "Updated table reuniors_knk_restaurant_menu"
     - builder_table_update_reuniors_knk_restaurant_menu_3.php
 1.0.172:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_14.php
 1.0.173:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_2.php
 1.0.174:
-    - 'Updated table reuniors_knk_actions_history'
+    - "Updated table reuniors_knk_actions_history"
     - builder_table_update_reuniors_knk_actions_history_2.php
 1.0.175:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_3.php
 1.0.176:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_4.php
 1.0.177:
-    - 'Updated table reuniors_knk_restaurant_menu'
+    - "Updated table reuniors_knk_restaurant_menu"
     - builder_table_update_reuniors_knk_restaurant_menu_4.php
 1.0.178:
-    - 'Updated table reuniors_knk_tag_groups'
+    - "Updated table reuniors_knk_tag_groups"
     - builder_table_update_reuniors_knk_tag_groups_8.php
 1.0.179:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_10.php
 1.0.180:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_9.php
 1.0.181:
-    - 'Updated table reuniors_knk_food_classes'
+    - "Updated table reuniors_knk_food_classes"
     - builder_table_update_reuniors_knk_food_classes_3.php
 1.0.182:
-    - 'Updated table reuniors_knk_foods'
+    - "Updated table reuniors_knk_foods"
     - builder_table_update_reuniors_knk_foods_8.php
 1.0.183:
-    - 'Updated table reuniors_knk_categories'
+    - "Updated table reuniors_knk_categories"
     - builder_table_update_reuniors_knk_categories_2.php
 1.0.184:
-    - 'Drop table reuniors_knk_food_classes'
+    - "Drop table reuniors_knk_food_classes"
     - builder_table_delete_reuniors_knk_food_classes.php
 1.0.185:
-    - 'Drop table reuniors_knk_food_class_types'
+    - "Drop table reuniors_knk_food_class_types"
     - builder_table_delete_reuniors_knk_food_class_types.php
 1.0.186:
-    - 'Drop table reuniors_knk_food_type_prices'
+    - "Drop table reuniors_knk_food_type_prices"
     - builder_table_delete_reuniors_knk_food_type_prices.php
 1.0.187:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_5.php
 1.0.188:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_6.php
 1.0.189:
-    - 'Updated table reuniors_knk_actions_history'
+    - "Updated table reuniors_knk_actions_history"
     - builder_table_update_reuniors_knk_actions_history_3.php
 1.0.190:
-    - 'Updated table reuniors_knk_actions_history'
+    - "Updated table reuniors_knk_actions_history"
     - builder_table_update_reuniors_knk_actions_history_4.php
 1.0.191:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_7.php
 1.0.192:
-    - 'Updated table reuniors_knk_foods_food_addon_groups'
+    - "Updated table reuniors_knk_foods_food_addon_groups"
     - builder_table_update_reuniors_knk_foods_food_addon_groups_2.php
 1.0.193:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_11.php
 1.0.194:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_15.php
 1.0.195:
-    - 'Updated common js'
+    - "Updated common js"
 1.0.196:
-    - 'Updated table reuniors_knk_categories'
+    - "Updated table reuniors_knk_categories"
     - builder_table_update_reuniors_knk_categories_3.php
 1.0.197:
-    - 'Updated table reuniors_knk_region_city'
+    - "Updated table reuniors_knk_region_city"
     - builder_table_update_reuniors_knk_region_city_6.php
 1.0.198:
-    - 'Updated table reuniors_knk_restaurant_menu'
+    - "Updated table reuniors_knk_restaurant_menu"
     - builder_table_update_reuniors_knk_restaurant_menu_5.php
 1.0.199:
-    - 'Created table reuniors_knk_tags_other_tag_groups'
+    - "Created table reuniors_knk_tags_other_tag_groups"
     - builder_table_create_reuniors_knk_tags_other_tag_groups.php
 1.0.200:
-    - 'Created table reuniors_knk_locations_foods'
+    - "Created table reuniors_knk_locations_foods"
     - builder_table_create_reuniors_knk_locations_foods.php
 1.0.201:
-    - 'Updated table reuniors_knk_locations_tags'
+    - "Updated table reuniors_knk_locations_tags"
     - builder_table_update_reuniors_knk_locations_tags.php
 1.0.202:
-    - 'Updated table reuniors_knk_locations_tags'
+    - "Updated table reuniors_knk_locations_tags"
     - builder_table_update_reuniors_knk_locations_tags_2.php
 1.0.203:
-    - 'Updated table reuniors_knk_locations_tags'
+    - "Updated table reuniors_knk_locations_tags"
     - builder_table_update_reuniors_knk_locations_tags_3.php
 1.0.204:
-    - 'Updated table reuniors_knk_food_categories'
+    - "Updated table reuniors_knk_food_categories"
     - builder_table_update_reuniors_knk_food_categories_10.php
 1.0.205:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_11.php
 1.0.206:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_12.php
 1.0.207:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.208:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.209:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.210:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.211:
-    - 'Seed table seed_user_groups'
+    - "Seed table seed_user_groups"
     - seeds/seed_user_groups.php
 1.0.212:
-    - 'Created table reuniors_knk_working_hours'
+    - "Created table reuniors_knk_working_hours"
     - builder_table_create_reuniors_knk_working_hours.php
 1.0.213:
-    - 'Created table reuniors_knk_locations_working_hours'
+    - "Created table reuniors_knk_locations_working_hours"
     - builder_table_create_reuniors_knk_locations_working_hours.php
 1.0.214:
-    - 'Updated table reuniors_knk_actions'
+    - "Updated table reuniors_knk_actions"
     - builder_table_update_reuniors_knk_actions_8.php
 1.0.215:
-    - 'Created table reuniors_knk_user_working_time_history'
+    - "Created table reuniors_knk_user_working_time_history"
     - builder_table_create_reuniors_knk_user_working_time_history.php
 1.0.216:
-    - 'Updated table reuniors_knk_foods_food_addons'
+    - "Updated table reuniors_knk_foods_food_addons"
     - builder_table_update_reuniors_knk_foods_food_addons_2.php
 1.0.217:
-    - 'Seed table seed_user_groups_worker'
+    - "Seed table seed_user_groups_worker"
     - seeds/seed_user_groups_worker.php
 1.0.218:
-    - 'Updated table reuniors_knk_locations_working_hours'
+    - "Updated table reuniors_knk_locations_working_hours"
     - builder_table_update_reuniors_knk_locations_working_hours.php
 1.0.219:
-    - 'Updated table reuniors_knk_working_hours'
+    - "Updated table reuniors_knk_working_hours"
     - builder_table_update_reuniors_knk_working_hours.php
 1.0.220:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.221:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.222:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.223:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.224:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.225:
-    - 'Js and CSS changes'
+    - "Js and CSS changes"
 1.0.226:
-    - 'Updated table reuniors_knk_food_addon_groups'
+    - "Updated table reuniors_knk_food_addon_groups"
     - builder_table_update_reuniors_knk_food_addon_groups_12.php
 1.0.227:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_16.php
 1.0.228:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_13.php
 1.0.229:
-    - 'Created table reuniors_knk_location_likes_history'
+    - "Created table reuniors_knk_location_likes_history"
     - builder_table_create_reuniors_knk_location_likes_history.php
 1.0.230:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_17.php
 1.0.231:
-    - 'Created table reuniors_knk_location_video_review_profiles'
+    - "Created table reuniors_knk_location_video_review_profiles"
     - builder_table_create_reuniors_knk_location_video_review_profiles.php
 1.0.232:
-    - 'Created table reuniors_knk_location_video_reviews'
+    - "Created table reuniors_knk_location_video_reviews"
     - builder_table_create_reuniors_knk_location_video_reviews.php
 1.0.233:
-    - 'Updated table reuniors_knk_location_video_reviews'
+    - "Updated table reuniors_knk_location_video_reviews"
     - builder_table_update_reuniors_knk_location_video_reviews.php
 1.0.234:
-    - 'Updated table reuniors_knk_location_video_reviews'
+    - "Updated table reuniors_knk_location_video_reviews"
     - builder_table_update_reuniors_knk_location_video_reviews_2.php
 1.0.235:
-    - 'Updated table reuniors_knk_location_video_review_profiles'
+    - "Updated table reuniors_knk_location_video_review_profiles"
     - builder_table_update_reuniors_knk_location_video_review_profiles.php
 1.0.236:
-    - 'Updated table reuniors_knk_location_video_review_profiles'
+    - "Updated table reuniors_knk_location_video_review_profiles"
     - ignore
 1.0.237:
-    - 'Updated table reuniors_knk_location_video_review_profiles'
+    - "Updated table reuniors_knk_location_video_review_profiles"
     - builder_table_update_reuniors_knk_location_video_review_profiles_2.php
 1.0.238:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_18.php
 1.0.239:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_19.php
 1.0.240:
-    - 'Updated table reuniors_knk_tags'
+    - "Updated table reuniors_knk_tags"
     - builder_table_update_reuniors_knk_tags_14.php
 1.0.241:
-    - 'Updated table reuniors_knk_user_badges_history'
+    - "Updated table reuniors_knk_user_badges_history"
     - builder_table_update_reuniors_knk_user_badges_history_2.php
 1.0.242:
-    - 'Updated table reuniors_knk_location_badges_history'
+    - "Updated table reuniors_knk_location_badges_history"
     - builder_table_update_reuniors_knk_location_badges_history_2.php
 1.0.243:
-    - 'Updated table reuniors_knk_locations'
+    - "Updated table reuniors_knk_locations"
     - builder_table_update_reuniors_knk_locations_20.php
 1.0.244:
-    - 'Created table reuniors_knk_need_updates'
+    - "Created table reuniors_knk_need_updates"
     - builder_table_create_reuniors_knk_need_updates.php
 1.0.245:
-    - 'Created table reuniors_knk_location_video_review_images'
+    - "Created table reuniors_knk_location_video_review_images"
     - builder_table_create_reuniors_knk_location_video_review_images.php
 1.0.246:
-    - 'Created table reuniors_knk_stories'
+    - "Created table reuniors_knk_stories"
     - builder_table_create_reuniors_knk_stories.php
 1.0.247:
-    - 'Created table reuniors_knk_story_history'
+    - "Created table reuniors_knk_story_history"
     - builder_table_create_reuniors_knk_story_history.php
 1.0.248:
-    - 'Updated table reuniors_knk_stories'
+    - "Updated table reuniors_knk_stories"
     - builder_table_update_reuniors_knk_stories.php
 1.0.249:
-    - 'Updated table reuniors_knk_stories'
+    - "Updated table reuniors_knk_stories"
     - builder_table_update_reuniors_knk_stories_2.php
 1.0.250:
-    - 'Updated table reuniors_knk_story_history'
+    - "Updated table reuniors_knk_story_history"
     - builder_table_update_reuniors_knk_story_history.php
 1.0.251:
-    - 'Created table reuniors_knk_profiles'
+    - "Created table reuniors_knk_profiles"
     - builder_table_create_reuniors_knk_profiles.php
 1.0.252:
-    - 'Created table reuniors_knk_profile_followers'
+    - "Created table reuniors_knk_profile_followers"
     - builder_table_create_reuniors_knk_profile_followers.php
 1.0.253:
-    - 'Add pauses field to working hours table'
+    - "Add pauses field to working hours table"
     - builder_table_add_pauses_field_reuniors_knk_working_hours.php
 1.0.254:
-    - 'Add UTC fields to working hours table'
+    - "Add UTC fields to working hours table"
     - builder_table_add_utc_fields_reuniors_knk_working_hours.php
+1.0.255:
+    - "Make original date/time fields nullable in knk tables"
+    - builder_table_make_original_fields_nullable_reuniors_knk.php

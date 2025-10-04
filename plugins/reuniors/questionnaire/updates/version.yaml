@@ -1,20 +1,23 @@
 1.0.1:
-    - 'Initialize plugin.'
+    - "Initialize plugin."
 1.0.2:
-    - 'Created table reuniors_questionnaire_registration'
+    - "Created table reuniors_questionnaire_registration"
     - builder_table_create_reuniors_questionnaire_registration.php
 1.0.3:
-    - 'Created table reuniors_questionnaire_registration_data'
+    - "Created table reuniors_questionnaire_registration_data"
     - builder_table_create_reuniors_questionnaire_registration_data.php
 1.0.4:
-    - 'Updated table reuniors_questionnaire_registration_data'
+    - "Updated table reuniors_questionnaire_registration_data"
     - builder_table_update_reuniors_questionnaire_registration_data.php
 1.0.5:
-    - 'Updated table reuniors_questionnaire_registration_data'
+    - "Updated table reuniors_questionnaire_registration_data"
     - builder_table_update_reuniors_questionnaire_registration_data_2.php
 1.0.6:
-    - 'Updated table reuniors_questionnaire_registration'
+    - "Updated table reuniors_questionnaire_registration"
     - builder_table_update_reuniors_questionnaire_registration.php
 1.0.7:
-    - 'Add UTC fields to questionnaire registration table'
+    - "Add UTC fields to questionnaire registration table"
     - builder_table_add_utc_fields_reuniors_questionnaire_registration.php
+1.0.8:
+    - "Make original date/time fields nullable in questionnaire tables"
+    - builder_table_make_original_fields_nullable_reuniors_questionnaire.php

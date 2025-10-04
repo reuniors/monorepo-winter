@@ -12,25 +12,25 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
     {
         return [
             'locationSlug' => ['string', 'required'],
-            'date' => ['date', 'required'],
+            'dateUtc' => ['date', 'required'],
             'shift' => ['integer', 'nullable'],
             'workerId' => ['integer', 'required'],
-            'timeFrom' => ['string', 'nullable'],
-            'timeTo' => ['string', 'nullable'],
+            'timeFromUtc' => ['string', 'nullable'],
+            'timeToUtc' => ['string', 'nullable'],
             'pauses' => ['array', 'nullable'],
-            'pauses.*.timeFrom' => ['string', 'required'],
-            'pauses.*.timeTo' => ['string', 'required'],
+            'pauses.*.timeFromUtc' => ['string', 'required'],
+            'pauses.*.timeToUtc' => ['string', 'required'],
         ];
     }
 
     public function handle(array $attributes = [])
     {
-        $date = $attributes['date'];
+        $dateUtc = $attributes['dateUtc'];
         $locationSlug = $attributes['locationSlug'];
         $workerId = $attributes['workerId'];
         $shift = $attributes['shift'] ?? null;
-        $timeFrom = $attributes['timeFrom'] ?? null;
-        $timeTo = $attributes['timeTo'] ?? null;
+        $timeFromUtc = $attributes['timeFromUtc'] ?? null;
+        $timeToUtc = $attributes['timeToUtc'] ?? null;
         $pauses = $attributes['pauses'] ?? null;
 
         $location = Location::where('slug', $locationSlug)
@@ -43,14 +43,14 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             ->firstOrFail();
         $existingLocationWorkerShift = LocationWorkerShift::where('location_worker_id', $locationWorker->id)
             ->where('location_id', $location->id)
-            ->whereDate('date', $date)
+            ->whereDate('date_utc', $dateUtc)
             ->first();
-        $workingTime = $locationWorker->getWorkingTimeByDateAndShift($date, $shift);
+        $workingTime = $locationWorker->getWorkingTimeByDateAndShift($dateUtc, $shift);
         if ($existingLocationWorkerShift) {
             $existingLocationWorkerShift->shift = $shift;
-            $existingLocationWorkerShift->time_from = $timeFrom ?? $workingTime['time_from'];
-            $existingLocationWorkerShift->time_to = $timeTo ?? $workingTime['time_to'];
-            $existingLocationWorkerShift->pauses = $pauses;
+            $existingLocationWorkerShift->time_from_utc = $timeFromUtc ?? $workingTime['time_from_utc'];
+            $existingLocationWorkerShift->time_to_utc = $timeToUtc ?? $workingTime['time_to_utc'];
+            $existingLocationWorkerShift->pauses_utc = $pauses;
             $existingLocationWorkerShift->save();
             return $existingLocationWorkerShift;
         } else {
@@ -60,11 +60,11 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             return LocationWorkerShift::create([
                 'location_worker_id' => $locationWorker->id,
                 'location_id' => $location->id,
-                'date' => $date,
+                'date_utc' => $dateUtc,
                 'shift' => $shift,
-                'time_from' => $timeFrom ?? $workingTime['time_from'],
-                'time_to' => $timeTo ?? $workingTime['time_to'],
-                'pauses' => $pauses,
+                'time_from_utc' => $timeFromUtc ?? $workingTime['time_from_utc'],
+                'time_to_utc' => $timeToUtc ?? $workingTime['time_to_utc'],
+                'pauses_utc' => $pauses,
             ]);
         }
     }

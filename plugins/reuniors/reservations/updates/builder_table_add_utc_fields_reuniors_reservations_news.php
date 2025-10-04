@@ -9,8 +9,12 @@ class BuilderTableAddUtcFieldsReuniorsReservationsNews extends Migration
     {
         Schema::table('reuniors_reservations_news', function($table)
         {
-            $table->timestamp('activated_at_utc')->nullable();
-            $table->timestamp('deactivated_at_utc')->nullable();
+            if (!Schema::hasColumn('reuniors_reservations_news', 'activated_at_utc')) {
+                $table->timestamp('activated_at_utc')->nullable();
+            }
+            if (!Schema::hasColumn('reuniors_reservations_news', 'deactivated_at_utc')) {
+                $table->timestamp('deactivated_at_utc')->nullable();
+            }
         });
     }
     
