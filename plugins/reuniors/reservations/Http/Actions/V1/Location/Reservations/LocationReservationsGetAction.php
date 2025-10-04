@@ -32,9 +32,9 @@ class LocationReservationsGetAction extends BaseAction {
             $reservationQuery->where('location_worker_id', $locationWorkerId);
         }
         if ($date) {
-            $reservationQuery->whereDate('date', $date);
+            $reservationQuery->whereDate('date_utc', $date);
         } elseif ($dateFrom) {
-            $reservationQuery->where('date', '>=', $dateFrom);
+            $reservationQuery->where('date_utc', '>=', $dateFrom);
         }
         if ($withClient) {
             $reservationQuery->with('client');
@@ -44,7 +44,7 @@ class LocationReservationsGetAction extends BaseAction {
             ->select([
                 'id',
                 'hash',
-                'date',
+                'date_utc',
                 'services_duration',
                 'location_id',
                 'location_worker_id',

@@ -35,3 +35,4 @@ package-lock.json
 # Ignore generated public directory from `winter:mirror public`
 public
 .history
+cursordocs/

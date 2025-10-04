@@ -3,6 +3,8 @@ namespace Reuniors\Reservations\Http\Actions\V1\Location\Reservations;
 
 use Carbon\Carbon;
 use Reuniors\Base\Http\Actions\BaseAction;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Http\Response;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCode\LocationPromoCodeFindOneAction;
 use Reuniors\reservations\Http\Actions\V1\Notification\NotificationCreateAction;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
@@ -135,11 +137,19 @@ class LocationReservationCreateAction extends BaseAction {
             $data['location_worker_id'],
             $data['services_duration'],
         )) {
-            throw new \Exception('Izabrani vremenski slot nije više dostupan');
+            throw new HttpResponseException(
+                response()->json([
+                    'message' => 'Izabrani vremenski slot nije više dostupan'
+                ], Response::HTTP_CONFLICT)
+            );
         }
 
         if (ClientReservation::isDailyReservationOverLimit($servicesDataCalc['services_duration'], $dateObject)) {
-            throw new \Exception('Dnevni limit rezervacija prekoračen');
+            throw new HttpResponseException(
+                response()->json([
+                    'message' => 'Dnevni limit rezervacija prekoračen'
+                ], Response::HTTP_TOO_MANY_REQUESTS)
+            );
         }
 
         $newReservation = ClientReservation::create($data);
