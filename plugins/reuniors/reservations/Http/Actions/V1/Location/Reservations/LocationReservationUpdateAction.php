@@ -87,7 +87,7 @@ class LocationReservationUpdateAction extends BaseAction {
         }
 
         NotificationCreateAction::run([
-            'title' => 'Rezervacija: ' . $reservation->hash,
+            'title' => 'Rezervacija: ' . ($reservation->friendlyCode ?? $reservation->hash),
             'description' => $description,
             'usersIds' => $usersIds,
             'reservationId' => $reservation->id,

@@ -175,7 +175,7 @@ class LocationReservationCreateAction extends BaseAction {
         }
 
         $notificationData = [
-            'title' => 'Rezervacija: ' . $newReservation->hash,
+            'title' => 'Rezervacija: ' . ($newReservation->friendlyCode ?? $newReservation->hash),
             'description' => $description,
             'usersIds' => $userIds,
             'reservationId' => $newReservation->id,

@@ -7,7 +7,7 @@ use Winter\Storm\Support\Facades\Flash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Lang;
 use Winter\Storm\Exception\ApplicationException;
-use Winter\Storm\Support\Facades\File;
+use System\Models\Parameter;
 
 /**
  * Theme Switcher Controller
@@ -30,20 +30,17 @@ class ThemeSwitcher extends Controller
             return Redirect::to('/');
         }
         
-        // Check if theme exists
-        if (!CmsTheme::load($themeName)) {
+        // Check if theme exists and is valid
+        if (!CmsTheme::exists($themeName)) {
             Flash::error("Theme '{$themeName}' does not exist");
             return Redirect::to('/');
         }
         
         try {
-            // Set the active theme
+            // Use the proper Winter CMS method to set the active theme
             CmsTheme::setActiveTheme($themeName);
             
-            // Update database name based on theme
-            $this->updateDatabaseName($themeName);
-            
-            Flash::success("Theme changed to '{$themeName}' and database updated");
+            Flash::success("Theme changed to '{$themeName}' and stored in database");
             
         } catch (ApplicationException $e) {
             Flash::error('Error changing theme: ' . $e->getMessage());
@@ -53,64 +50,5 @@ class ThemeSwitcher extends Controller
         
         // Redirect to home page
         return Redirect::to('/');
-    }
-    
-    /**
-     * Update database name based on theme
-     * 
-     * @param string $themeName
-     * @return void
-     */
-    private function updateDatabaseName($themeName)
-    {
-        $envFile = base_path('.env');
-        
-        if (!File::exists($envFile)) {
-            \Log::warning("No .env file found");
-            return;
-        }
-        
-        // Read current .env file
-        $envContent = File::get($envFile);
-        
-        // Determine database name based on theme
-        $dbName = $this->getDatabaseNameForTheme($themeName);
-        
-        // Update DB_DATABASE line
-        $envContent = preg_replace(
-            '/^DB_DATABASE=.*$/m',
-            "DB_DATABASE=\"{$dbName}\"",
-            $envContent
-        );
-        
-        // Write updated content back to .env file
-        File::put($envFile, $envContent);
-        
-        // Clear config cache to reload new environment variables
-        if (function_exists('opcache_reset')) {
-            opcache_reset();
-        }
-        
-        // Log the database switch
-        \Log::info("Database switched to: {$dbName} for theme: {$themeName}");
-    }
-    
-    /**
-     * Get database name for theme
-     * 
-     * @param string $themeName
-     * @return string
-     */
-    private function getDatabaseNameForTheme($themeName)
-    {
-        // Map theme names to database suffixes
-        $themeMap = [
-            'rzr' => 'rzr',
-            'kuda-na-klopu' => 'knk',
-            'demo' => 'demo',
-        ];
-        
-        $suffix = $themeMap[$themeName] ?? 'winter';
-        return "monorepo_{$suffix}";
     }
 }

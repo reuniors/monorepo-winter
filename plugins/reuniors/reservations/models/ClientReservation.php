@@ -55,6 +55,7 @@ class ClientReservation extends Model
 
     protected $appends = [
         'date_formatted',
+        'friendly_code',
     ];
 
     protected $hidden = [
@@ -124,6 +125,43 @@ class ClientReservation extends Model
         return substr(md5('rzr-' . Str::random($length)), 0, $length);
     }
 
+    /**
+     * Get a user-friendly reservation code
+     */
+    public function getFriendlyCodeAttribute()
+    {
+        // Check if required relations are loaded
+        if (!$this->relationLoaded('locationWorker') || !$this->relationLoaded('client')) {
+            return null;
+        }
+        
+        $date = $this->date_formatted->format('d-m-y');
+        $time = $this->date_formatted->format('H-i');
+        $workerName = $this->locationWorker ? $this->locationWorker->full_name : 'Unknown';
+        $clientName = $this->client ? $this->client->full_name : 'Unknown';
+        
+        // Create a short, readable code
+        $workerInitials = $this->getInitials($workerName);
+        $clientInitials = $this->getInitials($clientName);
+        
+        return "{$date}|{$time}|{$workerInitials}-{$clientInitials}";
+    }
+
+    /**
+     * Get initials from full name
+     */
+    private function getInitials($fullName)
+    {
+        $names = explode(' ', trim($fullName));
+        $initials = '';
+        foreach ($names as $name) {
+            if (!empty($name)) {
+                $initials .= strtoupper(substr($name, 0, 1));
+            }
+        }
+        return $initials;
+    }
+
     public static function slotAvailable($dateAndTime, $locationWorkerId, $durationInMin)
     {
         $dateOnly = Carbon::parse($dateAndTime)->format('Y-m-d');
@@ -131,7 +169,7 @@ class ClientReservation extends Model
         $end = $start->copy()->addMinutes($durationInMin);
         $reservations = ClientReservation::where('location_worker_id', $locationWorkerId)
             ->where('date_utc', '>=', $dateAndTime)
-            ->where('status', '!=', 3)
+            ->where('status', '!=', ReservationStatus::CANCELLED)
             ->get();
         // Check if the start and end time is between the working hours
         $workingHours = LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)->first();
