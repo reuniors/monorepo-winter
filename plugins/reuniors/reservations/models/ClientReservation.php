@@ -98,7 +98,8 @@ class ClientReservation extends Model
 
     public function getDateFormattedAttribute()
     {
-        return Carbon::parse($this->date_utc);
+        // Convert UTC to Belgrade timezone for display
+        return Carbon::parse($this->date_utc)->setTimezone('Europe/Belgrade');
     }
 
     public function beforeCreate()
