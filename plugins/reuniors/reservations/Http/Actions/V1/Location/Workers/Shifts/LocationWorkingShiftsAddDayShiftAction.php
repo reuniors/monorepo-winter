@@ -17,9 +17,9 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             'workerId' => ['integer', 'required'],
             'timeFromUtc' => ['string', 'nullable'],
             'timeToUtc' => ['string', 'nullable'],
-            'pauses' => ['array', 'nullable'],
-            'pauses.*.timeFromUtc' => ['string', 'required'],
-            'pauses.*.timeToUtc' => ['string', 'required'],
+            'pausesUtc' => ['array', 'nullable'],
+            'pausesUtc.*.timeFromUtc' => ['string', 'required'],
+            'pausesUtc.*.timeToUtc' => ['string', 'required'],
         ];
     }
 
@@ -31,7 +31,7 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
         $shift = $attributes['shift'] ?? null;
         $timeFromUtc = $attributes['timeFromUtc'] ?? null;
         $timeToUtc = $attributes['timeToUtc'] ?? null;
-        $pauses = $attributes['pauses'] ?? null;
+        $pausesUtc = $attributes['pausesUtc'] ?? null;
 
         $location = Location::where('slug', $locationSlug)
             ->firstOrFail();
@@ -50,7 +50,7 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             $existingLocationWorkerShift->shift = $shift;
             $existingLocationWorkerShift->time_from_utc = $timeFromUtc ?? $workingTime['time_from_utc'];
             $existingLocationWorkerShift->time_to_utc = $timeToUtc ?? $workingTime['time_to_utc'];
-            $existingLocationWorkerShift->pauses_utc = $pauses;
+            $existingLocationWorkerShift->pauses_utc = $pausesUtc;
             $existingLocationWorkerShift->save();
             return $existingLocationWorkerShift;
         } else {
@@ -64,7 +64,7 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
                 'shift' => $shift,
                 'time_from_utc' => $timeFromUtc ?? $workingTime['time_from_utc'],
                 'time_to_utc' => $timeToUtc ?? $workingTime['time_to_utc'],
-                'pauses_utc' => $pauses,
+                'pauses_utc' => $pausesUtc,
             ]);
         }
     }

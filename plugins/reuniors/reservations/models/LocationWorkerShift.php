@@ -31,8 +31,6 @@ class LocationWorkerShift extends Model
         'location_id',
         'shift',
         'status',
-        'pause_time_from',
-        'pause_time_to',
         'time_from_utc',
         'time_to_utc',
         'date_utc',

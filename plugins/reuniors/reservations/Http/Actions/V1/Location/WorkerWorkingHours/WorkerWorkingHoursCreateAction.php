@@ -15,15 +15,15 @@ class WorkerWorkingHoursCreateAction extends BaseAction
             'location_slug' => ['required', 'string'],
             'worker_id' => ['required', 'integer'],
             'name' => ['required', 'string'],
-            'time_from' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
-            'time_to' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
+            'time_from_utc' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
+            'time_to_utc' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
             'days_codes' => ['required', 'array'],
             'active' => ['required', 'boolean'],
             'shift' => ['sometimes', 'integer'],
-            'pauses' => ['sometimes', 'array'],
-            'pauses.*.time_from' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
-            'pauses.*.time_to' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
-            'pauses.*.days_codes' => ['required', 'array'],
+            'pauses_utc' => ['sometimes', 'array'],
+            'pauses_utc.*.time_from_utc' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
+            'pauses_utc.*.time_to_utc' => ['required', 'string', 'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$/'],
+            'pauses_utc.*.days_codes' => ['required', 'array'],
         ];
     }
 
@@ -48,8 +48,8 @@ class WorkerWorkingHoursCreateAction extends BaseAction
         $existingHours = $worker
             ->working_hours()
             ->where('name', $attributes['name'])
-            ->where('time_from', $attributes['time_from'])
-            ->where('time_to', $attributes['time_to'])
+            ->where('time_from_utc', $attributes['time_from_utc'])
+            ->where('time_to_utc', $attributes['time_to_utc'])
             ->first();
 
         if ($existingHours) {
@@ -58,14 +58,12 @@ class WorkerWorkingHoursCreateAction extends BaseAction
 
         $workingHours = new WorkingTime([
             'name' => $attributes['name'],
-            'time_from' => $attributes['time_from'],
-            'time_to' => $attributes['time_to'],
+            'time_from_utc' => $attributes['time_from_utc'],
+            'time_to_utc' => $attributes['time_to_utc'],
             'days_codes' => $attributes['days_codes'],
             'active' => $attributes['active'],
             'shift' => $attributes['shift'] ?? null,
-            'pause_time_from' => $attributes['pause_time_from'] ?? null,
-            'pause_time_to' => $attributes['pause_time_to'] ?? null,
-            'pauses' => $attributes['pauses'] ?? null,
+            'pauses_utc' => $attributes['pauses_utc'] ?? null,
         ]);
 
         $workingHours->save();

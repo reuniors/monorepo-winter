@@ -42,8 +42,6 @@ class WorkingTime extends Model
         'days_codes',
         'active',
         'shift',
-        'pause_time_from',
-        'pause_time_to',
         'time_from_utc',
         'time_to_utc',
         'pauses_utc'

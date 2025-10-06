@@ -333,18 +333,19 @@ class ConvertToUtcCommand extends Command
 
     private function convertPausesJson($pausesData, $belgradeTz, $utcTz)
     {
-        if (!$pausesData) {
-            return null;
-        }
-
         // Handle both array and JSON string inputs
         if (is_array($pausesData)) {
             $pauses = $pausesData;
         } else {
             $pauses = json_decode($pausesData, true);
-            if (!$pauses || !is_array($pauses)) {
-                return $pausesData; // Return original if not valid JSON
+            if (!is_array($pauses)) {
+                return null; // Return original if not valid JSON
             }
+        }
+
+        // If empty array, return null instead of empty array
+        if (empty($pauses)) {
+            return [];
         }
 
         $convertedPauses = [];

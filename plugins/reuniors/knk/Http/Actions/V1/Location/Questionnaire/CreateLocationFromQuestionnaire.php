@@ -53,8 +53,8 @@ class CreateLocationFromQuestionnaire extends BaseAction {
                 $returnData = [];
                 foreach ($workingHours as $workingTime) {
                     $returnData[] = [
-                        'time_from' => $workingTime['timeFrom'],
-                        'time_to' => $workingTime['timeTo'],
+                        'time_from_utc' => $workingTime['timeFrom'],
+                        'time_to_utc' => $workingTime['timeTo'],
                         'days_codes' => $workingTime['daysCodes'],
                         'name' => $workingTime['name'],
                         'active' => $workingTime['active'] ?? true,
