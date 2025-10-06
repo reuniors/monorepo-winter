@@ -167,31 +167,47 @@ class ClientReservation extends Model
         $dateOnly = Carbon::parse($dateAndTime)->format('Y-m-d');
         $start = Carbon::parse($dateAndTime);
         $end = $start->copy()->addMinutes($durationInMin);
+        
+        // Get all reservations for this worker on this date (not just future ones)
         $reservations = ClientReservation::where('location_worker_id', $locationWorkerId)
             ->where('date_utc', '>=', $dateAndTime)
             ->where('status', '!=', ReservationStatus::CANCELLED)
             ->get();
+            
         // Check if the start and end time is between the working hours
         $workingHours = LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)->first();
         if ($workingHours) {
-            if ($start->between($workingHours->start_time, $workingHours->end_time) || $end->between($workingHours->start_time, $workingHours->end_time)) {
+            if ($start->between($workingHours->start_time_utc, $workingHours->end_time_utc) || $end->between($workingHours->start_time_utc, $workingHours->end_time_utc)) {
                 return false;
             }
         }
-        // Check if the start and end time is between the reservations
-        if (
-            LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)
-                ->count() === 0
-        ) {
-            return false;
-        }
+        
+        // Check for overlapping times and pause requirements
         foreach ($reservations as $reservation) {
-            $reservationStart = Carbon::parse($reservation->date_utc . ' ' . $reservation->locationWorker->start_time);
+            $reservationStart = Carbon::parse($reservation->date_utc);
             $reservationEnd = $reservationStart->copy()->addMinutes($reservation->services_duration);
+            
+            // Check for direct overlap
             if ($start->between($reservationStart, $reservationEnd) || $end->between($reservationStart, $reservationEnd)) {
                 return false;
             }
+            
+            // Check for pause time requirement (10 minutes)
+            $pauseTime = 10; // PAUSE_BETWEEN_SLOTS_MINUTES
+            
+            // Check if new reservation starts too soon after existing reservation ends
+            $timeBetweenNewStartAndExistingEnd = $start->diffInMinutes($reservationEnd);
+            if ($timeBetweenNewStartAndExistingEnd < $pauseTime && $timeBetweenNewStartAndExistingEnd >= 0) {
+                return false;
+            }
+            
+            // Check if existing reservation starts too soon after new reservation ends
+            $timeBetweenExistingStartAndNewEnd = $reservationStart->diffInMinutes($end);
+            if ($timeBetweenExistingStartAndNewEnd < $pauseTime && $timeBetweenExistingStartAndNewEnd >= 0) {
+                return false;
+            }
         }
+        
         return true;
     }
 
