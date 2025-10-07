@@ -37,7 +37,7 @@ class LocationWorkerShiftsByDaysGetAction extends BaseAction {
 
         return $shiftsByDay
             ->where('shift', '!=', null)
-            ->orderBy('date', 'asc')
+            ->orderBy('date_utc', 'asc')
             ->paginate($perPage);
     }
 }

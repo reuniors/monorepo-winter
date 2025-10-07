@@ -81,6 +81,9 @@ class LocationWorkerShift extends Model
             $query->whereDate('date_utc', '<=', $endDate);
         }
 
+        // Sort by date_utc to ensure chronological order
+        $query->orderBy('date_utc', 'asc');
+
         return $query;
     }
 
