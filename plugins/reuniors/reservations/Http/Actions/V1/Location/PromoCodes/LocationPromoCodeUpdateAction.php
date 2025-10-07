@@ -15,8 +15,8 @@ class LocationPromoCodeUpdateAction extends BaseAction
             'name' => ['sometimes', 'string', 'max:100'],
             'discount_value' => ['sometimes', 'numeric', 'min:0'],
             'in_percent' => ['sometimes', 'boolean'],
-            'activate_at' => ['sometimes', 'date'],
-            'deactivate_at' => ['sometimes', 'date', 'after:activate_at'],
+            'activate_at_utc' => ['sometimes', 'date'],
+            'deactivate_at_utc' => ['sometimes', 'date', 'after:activate_at_utc'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }

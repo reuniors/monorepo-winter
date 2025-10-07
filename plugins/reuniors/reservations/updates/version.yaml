@@ -198,3 +198,6 @@
 1.0.68:
     - "Add UTC fields to news table"
     - builder_table_add_utc_fields_reuniors_reservations_news.php
+1.0.69:
+    - "Rename promo code columns to UTC format"
+    - builder_table_rename_promo_code_columns_to_utc.php

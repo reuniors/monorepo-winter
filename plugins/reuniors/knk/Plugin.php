@@ -10,7 +10,7 @@ use Laravel\Socialite\SocialiteServiceProvider;
 use Lorisleiva\Actions\ActionServiceProvider;
 use RainLab\User\Controllers\Users as UsersController;
 use RainLab\User\Models\User as UserModel;
-use Reuniors\Knk\Classes\CustomHandler;
+use Reuniors\Base\Classes\CustomHandler;
 use Reuniors\Knk\Classes\SitemapDefinition;
 use Reuniors\Knk\Http\Actions\V1\Image\ImagesWebpConvertAction;
 use System\Classes\ImageResizer;
@@ -188,7 +188,7 @@ class Plugin extends PluginBase
         /* was not returning the response properly presumably because of a bug. Argh... */
         $this->app->bind(
             ExceptionHandler::class,
-            CustomHandler::class
+            \Reuniors\Base\Classes\CustomHandler::class
         );
         UserModel::extend(function(UserModel $model) {
             $model->belongsTo['city'] = ['\Reuniors\Knk\Models\RegionCity'];

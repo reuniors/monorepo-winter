@@ -46,6 +46,7 @@ class LocationReservationsGetAction extends BaseAction {
                 'hash',
                 'date_utc',
                 'services_duration',
+                'services_cost',
                 'location_id',
                 'location_worker_id',
                 'status',

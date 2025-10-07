@@ -26,8 +26,8 @@ class PromoCode extends Model
         'name',
         'is_active',
         'location_id',
-        'activate_at',
-        'deactivate_at',
+        'activate_at_utc',
+        'deactivate_at_utc',
         'discount_value',
         'in_percent'
     ];
@@ -48,8 +48,8 @@ class PromoCode extends Model
         return $query->where(function ($query) {
             $now = now();
             $query->where('is_active', 1)
-                ->where('activate_at', '<=', $now)
-                ->where('deactivate_at', '>=', $now);
+                ->where('activate_at_utc', '<=', $now)
+                ->where('deactivate_at_utc', '>=', $now);
         });
     }
 

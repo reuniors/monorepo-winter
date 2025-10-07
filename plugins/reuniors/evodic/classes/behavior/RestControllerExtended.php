@@ -4,7 +4,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Request;
 use Mohsin\Rest\Behaviors\RestController;
 use Reuniors\Evodic\Classes\Handlers\CustomApiHandler;
-use Reuniors\Evodic\Classes\Handlers\CustomHandler;
+use Reuniors\Base\Classes\CustomHandler;
 use App;
 use Exception;
 

@@ -14,8 +14,8 @@ class LocationPromoCodeCreateAction extends BaseAction
             'name' => ['required', 'string', 'max:100'],
             'discount_value' => ['required', 'numeric', 'min:0'],
             'in_percent' => ['required', 'boolean'],
-            'activate_at' => ['required', 'date'],
-            'deactivate_at' => ['required', 'date', 'after:activate_at'],
+            'activate_at_utc' => ['required', 'date'],
+            'deactivate_at_utc' => ['required', 'date', 'after:activate_at_utc'],
             'is_active' => ['nullable', 'boolean'],
         ];
     }

@@ -4,7 +4,7 @@ use Illuminate\Contracts\Debug\ExceptionHandler;
 use Request;
 use Mohsin\Rest\Behaviors\RestController;
 use Reuniors\Knk\Classes\CustomApiHandler;
-use Reuniors\Knk\Classes\CustomHandler;
+use Reuniors\Base\Classes\CustomHandler;
 use App;
 use Exception;
 

@@ -1,6 +1,6 @@
 columns:
     location_id:
-        label: 'reuniors.reservations::lang.Location'
+        label: "reuniors.reservations::lang.Location"
         type: text
         select: title
         relation: location
@@ -11,11 +11,11 @@ columns:
     is_active:
         label: is_active
         type: switch
-    activate_at:
-        label: activate_at
+    activate_at_utc:
+        label: activate_at_utc
         type: datetime
-    deactivate_at:
-        label: deactivate_at
+    deactivate_at_utc:
+        label: deactivate_at_utc
         type: datetime
     discount_value:
         label: discount_value

@@ -1,40 +1,40 @@
 fields:
     name:
-        label: 'reuniors.reservations::lang.Name'
+        label: "reuniors.reservations::lang.Name"
         span: auto
         required: 1
         type: text
     location:
-        label: 'reuniors.reservations::lang.Location'
+        label: "reuniors.reservations::lang.Location"
         nameFrom: name
         descriptionFrom: description
         span: auto
         required: 1
         type: relation
     discount_value:
-        label: 'reuniors.reservations::lang.Discount'
+        label: "reuniors.reservations::lang.Discount"
         span: auto
         required: 1
         type: number
     in_percent:
-        label: 'reuniors.reservations::lang.In Percent'
+        label: "reuniors.reservations::lang.In Percent"
         span: auto
         default: 1
         type: switch
-    activate_at:
-        label: 'reuniors.reservations::lang.Activate At'
+    activate_at_utc:
+        label: "reuniors.reservations::lang.Activate At"
         mode: datetime
         span: left
         type: datepicker
-    deactivate_at:
-        label: 'reuniors.reservations::lang.Deactivate At'
+    deactivate_at_utc:
+        label: "reuniors.reservations::lang.Deactivate At"
         mode: datetime
         span: auto
         type: datepicker
 tabs:
     fields:
         is_active:
-            label: 'reuniors.reservations::lang.Active'
+            label: "reuniors.reservations::lang.Active"
             span: auto
             type: switch
-            tab: 'reuniors.reservations::lang.Settings'
+            tab: "reuniors.reservations::lang.Settings"

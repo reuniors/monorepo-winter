@@ -1,6 +1,7 @@
 <?php namespace Reuniors\Base;
 
 use System\Classes\PluginBase;
+use Illuminate\Contracts\Debug\ExceptionHandler;
 
 class Plugin extends PluginBase
 {
@@ -22,6 +23,12 @@ class Plugin extends PluginBase
         $this->app->singleton('reuniors.base.helpers.language', function () {
             return new \Reuniors\Base\Classes\Helpers\LanguageHelpers();
         });
+
+        // Register custom error handler
+        $this->app->bind(
+            ExceptionHandler::class,
+            \Reuniors\Base\Classes\CustomHandler::class
+        );
 
         // Register console commands
         $this->registerConsoleCommand('reuniors.copy-data', 'Reuniors\Base\Console\CopyDataFromPlugins');
