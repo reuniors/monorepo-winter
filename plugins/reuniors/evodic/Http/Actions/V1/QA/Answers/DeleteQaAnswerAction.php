@@ -24,7 +24,7 @@ class DeleteQaAnswerAction extends BaseAction
 
         $qaAnswer->delete();
 
-        DeleteQaQuestionAction::run($qaQuestion);
+        DeleteQaQuestionAction::run([], $qaQuestion);
 
         return true;
     }

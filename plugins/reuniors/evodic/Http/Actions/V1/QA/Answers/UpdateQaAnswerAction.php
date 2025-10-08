@@ -47,7 +47,7 @@ class UpdateQaAnswerAction extends BaseAction
             ->update($data);
 
         if ($oldQaQuestionId !== $qaQuestionId) {
-            DeleteQaQuestionAction::run($oldQaQuestion);
+            DeleteQaQuestionAction::run([], $oldQaQuestion);
         }
 
         return $qaAnswer;

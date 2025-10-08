@@ -77,7 +77,7 @@ class PrepareUserLoginOrRegisterNewAction extends BaseAction {
     {
         $user = $this->createActivationCode($data);
 
-        SendUserAuthorizationMail::run($user);
+        SendUserAuthorizationMail::run([], $user);
 
         $user->activated_at = now();
         $user->save();

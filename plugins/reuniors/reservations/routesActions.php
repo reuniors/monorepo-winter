@@ -40,7 +40,7 @@ Route::group(['prefix' => 'api/v1/rzr', 'middleware' => [
     Route::group(['middleware' => [
         'api',
         UserFromBearerToken::class,
-        'userHasGroups:owner,admin',
+        'userHasGroups:owner,admin,worker',
     ]], function () {
         // statistics routes
         Route::group(['prefix' => 'statistics'], function () {
