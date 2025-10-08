@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.botovi::lang.plugin.name'
+    description: 'reuniors.botovi::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-bold
+    homepage: 'https://botovi.rs'
