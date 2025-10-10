@@ -13,7 +13,6 @@ use Reuniors\Botovi\Http\ActionsFe\V1\Person\FePersonReportCreateAction;
 use Reuniors\Botovi\Http\ActionsFe\V1\Event\FeEventGetAction;
 use Reuniors\Botovi\Http\ActionsFe\V1\Event\FeEventCreateAction;
 use Reuniors\Botovi\Http\ActionsFe\V1\Category\FeCategoryGetAction;
-use Reuniors\Botovi\Http\ActionsFe\V1\Tag\FeTagGetAction;
 use Reuniors\Botovi\Http\Middleware\JsonMiddleware;
 
 Route::group(
@@ -32,7 +31,6 @@ Route::group(
         Route::get('people/{personId}', FePersonGetOneAction::class);
         Route::get('events', FeEventGetAction::class);
         Route::get('categories', FeCategoryGetAction::class);
-        Route::get('tags', FeTagGetAction::class);
 
         // Authenticated frontend routes
         Route::group([
