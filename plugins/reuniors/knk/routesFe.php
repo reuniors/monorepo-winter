@@ -167,10 +167,3 @@ Route::group(
         // End of authenticated routes
     }
 );
-
-Route::group(['prefix' => 'api/v1'], function () {
-    // Profile sections routes
-    Route::get('profile/{username}/likes', 'Reuniors\Knk\Http\Controllers\ProfileController@getLikedLocations');
-    Route::get('profile/{username}/reviews', 'Reuniors\Knk\Http\Controllers\ProfileController@getProfileReviews');
-    Route::get('profile/{username}/followers', 'Reuniors\Knk\Http\Controllers\ProfileController@getProfileFollowers');
-});

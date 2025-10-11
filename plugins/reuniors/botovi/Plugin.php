@@ -4,6 +4,8 @@ use System\Classes\PluginBase;
 
 class Plugin extends PluginBase
 {
+    public $require = ['Winter.User', 'Reuniors.Base'];
+    
     public function registerComponents()
     {
     }

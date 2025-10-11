@@ -333,8 +333,9 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('/get-admin-tutorial', function () {
         return File::get(storage_path() . '/app/admin-tutorial.html');
     })->middleware('RainLab\User\Classes\AuthMiddleware');
-    Route::post('/other-source-migrations', 'Reuniors\Knk\Http\Controllers\DataMigrationsController@index')
-        ->middleware('RainLab\User\Classes\AuthMiddleware');
+    // Legacy route removed - DataMigrationsController no longer exists
+    // Route::post('/other-source-migrations', 'Reuniors\Knk\Http\Controllers\DataMigrationsController@index')
+    //     ->middleware('RainLab\User\Classes\AuthMiddleware');
 });
 
 

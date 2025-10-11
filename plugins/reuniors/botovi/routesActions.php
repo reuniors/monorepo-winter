@@ -18,6 +18,12 @@ use Reuniors\Botovi\Http\Actions\V1\ChangeRequest\ChangeRequestExecuteAction;
 use Reuniors\Botovi\Http\Actions\V1\ChangeRequest\PersonChangeRequestCreateAction;
 use Reuniors\Botovi\Http\Actions\V1\ChangeRequest\PersonChangeRequestUpdateAction;
 use Reuniors\Botovi\Http\Actions\V1\ChangeRequest\PersonChangeRequestDeleteAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryCreateAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryUpdateAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryDeleteAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryGetAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryGetOneAction;
+use Reuniors\Botovi\Http\Actions\V1\Category\CategoryGetTreeAction;
 use Reuniors\Botovi\Http\Middleware\JsonMiddleware;
 
 Route::group(
@@ -37,33 +43,43 @@ Route::group(
             // Person management routes
             Route::group(['prefix' => 'admin/people'], function () {
                 Route::post('', PersonCreateAction::class);
-                Route::put('{personId}', PersonUpdateAction::class);
-                Route::delete('{personId}', PersonDeleteAction::class);
-                Route::post('{personId}/approve', PersonApproveAction::class);
-                Route::post('{personId}/reject', PersonRejectAction::class);
-                Route::post('{personId}/deactivate', PersonDeactivateAction::class);
+                Route::put('{person}', PersonUpdateAction::class);
+                Route::delete('{person}', PersonDeleteAction::class);
+                Route::post('{person}/approve', PersonApproveAction::class);
+                Route::post('{person}/reject', PersonRejectAction::class);
+                Route::post('{person}/deactivate', PersonDeactivateAction::class);
+            });
+
+            // Category management routes
+            Route::group(['prefix' => 'admin/categories'], function () {
+                Route::get('', CategoryGetAction::class);
+                Route::get('tree', CategoryGetTreeAction::class);
+                Route::get('{category}', CategoryGetOneAction::class);
+                Route::post('', CategoryCreateAction::class);
+                Route::put('{category}', CategoryUpdateAction::class);
+                Route::delete('{category}', CategoryDeleteAction::class);
             });
 
             // Comment management routes
             Route::group(['prefix' => 'admin/comments'], function () {
-                Route::post('{commentId}/approve', PersonCommentApproveAction::class);
-                Route::post('{commentId}/reject', PersonCommentRejectAction::class);
+                Route::post('{comment}/approve', PersonCommentApproveAction::class);
+                Route::post('{comment}/reject', PersonCommentRejectAction::class);
             });
 
             // Review management routes
             Route::group(['prefix' => 'admin/reviews'], function () {
-                Route::post('{reviewId}/approve', PersonReviewApproveAction::class);
-                Route::post('{reviewId}/reject', PersonReviewRejectAction::class);
+                Route::post('{review}/approve', PersonReviewApproveAction::class);
+                Route::post('{review}/reject', PersonReviewRejectAction::class);
             });
 
             // Flag management routes
             Route::group(['prefix' => 'admin/flags'], function () {
-                Route::post('{flagId}/resolve', PersonFlagResolveAction::class);
+                Route::post('{flag}/resolve', PersonFlagResolveAction::class);
             });
 
             // Report management routes
             Route::group(['prefix' => 'admin/reports'], function () {
-                Route::post('{reportId}/resolve', PersonReportResolveAction::class);
+                Route::post('{report}/resolve', PersonReportResolveAction::class);
             });
 
             // Change request routes

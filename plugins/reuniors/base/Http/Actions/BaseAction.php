@@ -1,6 +1,7 @@
 <?php namespace Reuniors\Base\Http\Actions;
 
 use Lorisleiva\Actions\Concerns\AsAction;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class BaseAction
 {
@@ -11,6 +12,14 @@ abstract class BaseAction
     public function asController(): array
     {
         $args = func_get_args();
+        
+        // Check if any argument is null (model binding failed)
+        foreach ($args as $arg) {
+            if ($arg === null) {
+                throw new NotFoundHttpException('Resource not found');
+            }
+        }
+        
         return [
             'data' => $this->handle(request()->all(), ...$args),
             'success' => true,
