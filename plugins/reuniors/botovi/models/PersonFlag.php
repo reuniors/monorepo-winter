@@ -22,9 +22,9 @@ class PersonFlag extends Model
     const FLAG_INACCURATE_DATA = 'inaccurate_data';
     const FLAG_ACCURATE_DATA = 'accurate_data';
     const FLAG_NOT_BOT = 'not_bot';
-    const FLAG_NOT_CACIJA = 'not_cacija';
+    const FLAG_NOT_CACI = 'not_caci';
     const FLAG_IS_BOT = 'is_bot';
-    const FLAG_IS_CACIJA = 'is_cacija';
+    const FLAG_IS_CACI = 'is_caci';
     const FLAG_WRONG_CATEGORY = 'wrong_category';
     const FLAG_DUPLICATE = 'duplicate';
     const FLAG_OUTDATED = 'outdated';
@@ -46,7 +46,7 @@ class PersonFlag extends Model
     public $rules = [
         'person_id' => 'required|integer|exists:reuniors_botovi_people,id',
         'flagged_by' => 'required|integer|exists:users,id',
-        'flag_type' => 'required|in:inaccurate_data,accurate_data,not_bot,not_cacija,is_bot,is_cacija,wrong_category,duplicate,outdated,misleading,inappropriate,know_person,dont_know_person,verified,unverified,sensitive,controversial,political,criminal,public_figure',
+        'flag_type' => 'required|in:inaccurate_data,accurate_data,not_bot,not_caci,is_bot,is_caci,wrong_category,duplicate,outdated,misleading,inappropriate,know_person,dont_know_person,verified,unverified,sensitive,controversial,political,criminal,public_figure',
         'status' => 'in:pending,approved,rejected',
     ];
 

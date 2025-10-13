@@ -2,6 +2,8 @@
 
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use mikp\sanctum\http\middleware\UserFromBearerToken;
+use Reuniors\Botovi\Http\Actions\V1\Person\PersonGetAction;
+use Reuniors\Botovi\Http\Actions\V1\Person\PersonGetOneAction;
 use Reuniors\Botovi\Http\Actions\V1\Person\PersonCreateAction;
 use Reuniors\Botovi\Http\Actions\V1\Person\PersonUpdateAction;
 use Reuniors\Botovi\Http\Actions\V1\Person\PersonDeleteAction;
@@ -42,6 +44,8 @@ Route::group(
         ]], function () {
             // Person management routes
             Route::group(['prefix' => 'admin/people'], function () {
+                Route::get('', PersonGetAction::class);
+                Route::get('{person}', PersonGetOneAction::class);
                 Route::post('', PersonCreateAction::class);
                 Route::put('{person}', PersonUpdateAction::class);
                 Route::delete('{person}', PersonDeleteAction::class);

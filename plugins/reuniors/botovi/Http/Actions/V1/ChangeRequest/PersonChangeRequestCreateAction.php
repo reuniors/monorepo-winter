@@ -20,7 +20,7 @@ class PersonChangeRequestCreateAction extends BaseAction
             'children_names' => ['nullable', 'string'],
             'birth_date' => ['nullable', 'date'],
             'main_category_id' => ['required', 'integer', 'exists:reuniors_botovi_categories,id'],
-            'type' => ['required', 'string', 'in:bot,cacija,neutral'],
+            'type' => ['required', 'string', 'in:bot,caci,neutral'],
             'description' => ['nullable', 'string'],
             'snippet' => ['nullable', 'string'],
             'categories' => ['nullable', 'array'],

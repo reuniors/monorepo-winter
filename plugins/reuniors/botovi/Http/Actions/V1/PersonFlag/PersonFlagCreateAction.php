@@ -11,7 +11,7 @@ class PersonFlagCreateAction extends BaseAction
     {
         return [
             'personId' => ['required', 'integer', 'exists:reuniors_botovi_people,id'],
-            'flag_type' => ['required', 'string', 'in:inaccurate_data,accurate_data,not_bot,not_cacija,is_bot,is_cacija,wrong_category,duplicate,outdated,misleading,inappropriate,know_person,dont_know_person,verified,unverified,sensitive,controversial,political,criminal,public_figure'],
+            'flag_type' => ['required', 'string', 'in:inaccurate_data,accurate_data,not_bot,not_caci,is_bot,is_caci,wrong_category,duplicate,outdated,misleading,inappropriate,know_person,dont_know_person,verified,unverified,sensitive,controversial,political,criminal,public_figure'],
             'reason' => ['nullable', 'string', 'max:500'],
             'description' => ['nullable', 'string', 'max:1000'],
         ];

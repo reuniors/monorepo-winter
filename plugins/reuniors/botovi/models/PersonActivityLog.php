@@ -12,6 +12,7 @@ class PersonActivityLog extends Model
 
     public $incrementing = false;
     protected $keyType = 'string';
+    public $timestamps = false;
 
     /**
      * @var string The database table used by the model.

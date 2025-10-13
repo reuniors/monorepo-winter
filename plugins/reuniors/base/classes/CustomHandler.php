@@ -98,6 +98,11 @@ class CustomHandler extends Handler
                     'type' => get_class(object: $throwable)
                 ], 500);
             }
+
+            return Response::json([
+                'success' => false,
+                'message' => 'Page not found',
+            ], 404);
         }
 
         /* The rest of this code is just the 'default' code from OctoberCMS' error handler. */

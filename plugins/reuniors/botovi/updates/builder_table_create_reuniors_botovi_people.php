@@ -21,7 +21,7 @@ class BuilderTableCreateReuniorsBotoviPeople extends Migration
             $table->text('children_names')->nullable();
             $table->date('birth_date')->nullable();
             $table->integer('main_category_id')->unsigned();
-            $table->enum('type', ['bot', 'cacija', 'neutral']);
+            $table->enum('type', ['bot', 'caci', 'neutral']);
             $table->enum('status', ['pending', 'approved', 'rejected', 'active', 'inactive'])->default('pending');
             $table->text('description')->nullable();
             $table->text('snippet')->nullable();

@@ -31,7 +31,7 @@ class Person extends Model
         'birth_city_id' => 'nullable|integer|exists:reuniors_base_cities,id',
         'jmbg' => 'nullable|string|size:13|unique:reuniors_botovi_people,jmbg',
         'main_category_id' => 'required|integer|exists:reuniors_botovi_categories,id',
-        'type' => 'required|in:bot,cacija,neutral',
+        'type' => 'required|in:bot,caci,neutral',
         'status' => 'in:pending,approved,rejected,active,inactive',
     ];
 
@@ -288,7 +288,7 @@ class Person extends Model
 
     public function getIsCacijaAttribute()
     {
-        return $this->type === 'cacija';
+        return $this->type === 'caci';
     }
 
     public function getIsNeutralAttribute()
@@ -303,7 +303,7 @@ class Person extends Model
 
         static::creating(function ($model) {
             if (empty($model->slug)) {
-                $model->slug = \Str::slug($model->first_name . ' ' . $model->last_name);
+                $model->slug = \Str::slug($model->first_name . ' ' . $model->last_name)  . sha1(time());
             }
         });
     }

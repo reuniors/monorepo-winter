@@ -8,27 +8,22 @@ class PersonGetOneAction extends BaseAction
 {
     public function rules()
     {
-        return [
-            'personId' => ['required', 'integer', 'exists:reuniors_botovi_people,id'],
-        ];
+        return [];
     }
 
-    public function handle(array $attributes = [])
+    public function handle(array $attributes = [], Person $person = null)
     {
-        $person = Person::with([
+        $person->load([
             'city', 'birth_city', 'main_category', 'categories', 'groups', 'tags',
             'avatar', 'cover_image', 'gallery', 'documents',
             'events', 'comments', 'reviews', 'views'
-        ])->findOrFail($attributes['personId']);
-
-        // Create view record
-        PersonView::create([
-            'person_id' => $person->id,
-            'user_id' => auth()->id(),
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
         ]);
 
         return $person;
+    }
+
+    public function asController(Person $person = null): array
+    {
+        return parent::asController($person);
     }
 }

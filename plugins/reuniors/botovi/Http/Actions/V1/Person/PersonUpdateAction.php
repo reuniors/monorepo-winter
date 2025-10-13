@@ -21,7 +21,7 @@ class PersonUpdateAction extends BaseAction
             'children_names' => ['nullable', 'string'],
             'birth_date' => ['nullable', 'date'],
             'main_category_id' => ['nullable', 'integer', 'exists:reuniors_botovi_categories,id'],
-            'type' => ['nullable', 'string', 'in:bot,cacija,neutral'],
+            'type' => ['nullable', 'string', 'in:bot,caci,neutral'],
             'description' => ['nullable', 'string'],
             'snippet' => ['nullable', 'string'],
             'categories' => ['nullable', 'array'],

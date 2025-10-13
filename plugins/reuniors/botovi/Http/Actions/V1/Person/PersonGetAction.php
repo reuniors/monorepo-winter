@@ -11,7 +11,7 @@ class PersonGetAction extends BaseAction
             'page' => ['nullable', 'integer', 'min:1'],
             'per_page' => ['nullable', 'integer', 'min:1', 'max:100'],
             'search' => ['nullable', 'string'],
-            'type' => ['nullable', 'string', 'in:bot,cacija,neutral'],
+            'type' => ['nullable', 'string', 'in:bot,caci,neutral'],
             'category_id' => ['nullable', 'integer', 'exists:reuniors_botovi_categories,id'],
             'city_id' => ['nullable', 'integer', 'exists:reuniors_base_cities,id'],
             'status' => ['nullable', 'string', 'in:pending,approved,rejected,active,inactive'],

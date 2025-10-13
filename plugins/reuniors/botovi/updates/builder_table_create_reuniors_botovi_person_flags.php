@@ -14,7 +14,7 @@ class BuilderTableCreateReuniorsBotoviPersonFlags extends Migration
             $table->integer('person_id')->unsigned();
             $table->integer('flagged_by')->unsigned();
             $table->enum('flag_type', [
-                'inaccurate_data', 'accurate_data', 'not_bot', 'not_cacija', 'is_bot', 'is_cacija',
+                'inaccurate_data', 'accurate_data', 'not_bot', 'not_caci', 'is_bot', 'is_caci',
                 'wrong_category', 'duplicate', 'outdated', 'misleading', 'inappropriate',
                 'know_person', 'dont_know_person', 'verified', 'unverified', 'sensitive',
                 'controversial', 'political', 'criminal', 'public_figure'

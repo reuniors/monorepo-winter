@@ -3,7 +3,7 @@
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Botovi\Models\Person;
 use Reuniors\Botovi\Models\PersonActivityLog;
-use Illuminate\Support\Facades\Auth;
+use Auth;
 
 class PersonCreateAction extends BaseAction
 {
@@ -20,7 +20,7 @@ class PersonCreateAction extends BaseAction
             'children_names' => ['nullable', 'string'],
             'birth_date' => ['nullable', 'date'],
             'main_category_id' => ['required', 'integer', 'exists:reuniors_botovi_categories,id'],
-            'type' => ['required', 'string', 'in:bot,cacija,neutral'],
+            'type' => ['required', 'string', 'in:bot,caci,neutral'],
             'description' => ['nullable', 'string'],
             'snippet' => ['nullable', 'string'],
             'categories' => ['nullable', 'array'],
@@ -57,6 +57,10 @@ class PersonCreateAction extends BaseAction
     public function handle(array $attributes = [])
     {
         $user = Auth::getUser();
+        
+        if (!$user) {
+            throw new \Exception('User not authenticated');
+        }
         
         // Create person
         $person = new Person([
