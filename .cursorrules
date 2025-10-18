@@ -1,0 +1,16 @@
+# Cursor Rules for Backend Development
+
+## Required Reading
+- Backend Guide: cursor_be_guide.md
+- Frontend Guide: ../monorepo-ion-apps/cursor_fe_guide.md
+
+## Documentation Guidelines
+- All MD files must be created in cursordocs/ folder
+- Follow the Winter CMS patterns outlined in the guides
+- Use the Reuniors plugin structure for all custom functionality
+
+## Development Standards
+- Use Winter CMS migrations, not raw SQL
+- Follow the established plugin architecture
+- Use proper namespacing for all classes
+- Maintain consistent database naming conventions
