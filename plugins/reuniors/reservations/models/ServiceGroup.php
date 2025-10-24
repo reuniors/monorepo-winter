@@ -92,11 +92,13 @@ class ServiceGroup extends BaseModelWithSort
          * @var $active bool
          * @var $locationSlug string
          * @var $withServices bool
+         * @var $workerId int
          */
         extract([
             'active' => true,
             'locationSlug' => null,
             'withServices' => true,
+            'workerId' => null,
             ...$options,
         ]);
 
@@ -111,7 +113,22 @@ class ServiceGroup extends BaseModelWithSort
         }
 
         if ($withServices) {
-            $query->with('services');
+            if ($workerId) {
+                // Filter services by worker and use worker-specific pricing
+                $query->with(['services' => function ($query) use ($workerId) {
+                    $query->whereHas('location_workers', function ($query) use ($workerId) {
+                        $query->where('location_worker_id', $workerId)
+                              ->where('reuniors_reservations_location_workers_services.active', true);
+                    })
+                    ->with(['location_workers' => function ($query) use ($workerId) {
+                        $query->where('location_worker_id', $workerId)
+                              ->where('reuniors_reservations_location_workers_services.active', true);
+                    }]);
+                }]);
+            } else {
+                // Load services with range data for display
+                $query->with('services');
+            }
         }
 
         return $query;

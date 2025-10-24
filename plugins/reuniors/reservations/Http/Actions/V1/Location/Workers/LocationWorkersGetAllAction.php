@@ -26,6 +26,7 @@ class LocationWorkersGetAllAction extends BaseAction
         })
         ->with('user')
         ->paginate(1000);
+        
         return $workers;
     }
 } 

@@ -38,6 +38,7 @@ class LocationWorker extends Model
         'active',
         'phone_data',
         'description',
+        'is_synced_service',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -63,6 +64,13 @@ class LocationWorker extends Model
             'key' => 'location_worker_id',
             'otherKey' => 'location_id',
         ],
+        'services' => [
+            'Reuniors\Reservations\Models\Service',
+            'table' => 'reuniors_reservations_location_workers_services',
+            'key' => 'location_worker_id',
+            'otherKey' => 'service_id',
+            'pivot' => ['price', 'duration', 'sort_order', 'active'],
+        ],
         'shifts' => [
             'Reuniors\Reservations\Models\LocationWorkerShift',
             'table' => 'reuniors_reservations_location_workers_shifts',
@@ -80,6 +88,7 @@ class LocationWorker extends Model
 
     public $hasMany = [
         'discounts' => 'Reuniors\Reservations\Models\LocationWorkerDiscount',
+        'worker_services' => 'Reuniors\Reservations\Models\LocationWorkerService',
     ];
 
     public $attachOne = [
@@ -146,6 +155,16 @@ class LocationWorker extends Model
         }
 
         return $query;
+    }
+
+    /**
+     * Get services for specific location
+     */
+    public function servicesForLocation($locationId)
+    {
+        return $this->services()
+            ->wherePivot('location_id', $locationId)
+            ->wherePivot('active', true);
     }
 
     public function getWorkingTimeByDateAndShift($date, $shift)

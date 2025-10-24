@@ -17,6 +17,13 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\LocationServic
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupDeleteAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Services\LocationWorkerServicesGet;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Services\LocationWorkerServicesStore;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Services\LocationWorkerServicesUpdate;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Services\LocationWorkerServicesDestroy;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerGetOneAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarUploadAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
@@ -102,7 +109,7 @@ Route::group(
             });
 
             Route::group([
-                'prefix' => 'workers',
+'prefix' => 'workers',
             ], function () {
                 Route::get('', LocationWorkersGetAction::class);
                 Route::get('shifts-by-days', LocationWorkerShiftsByDaysGetAction::class);
@@ -110,6 +117,30 @@ Route::group(
                 Route::post('update', LocationWorkerUpdateAction::class);
                 Route::post('delete', LocationWorkerDeleteAction::class);
                 Route::get('all', LocationWorkersGetAllAction::class);
+            });
+
+            Route::group([
+                'prefix' => 'worker/{worker}',
+            ], function () {
+                Route::get('', LocationWorkerGetOneAction::class);
+            
+                // Worker avatar routes
+                Route::group([
+                    'prefix' => 'avatar',
+                ], function () {
+                    Route::post('', LocationWorkerAvatarUploadAction::class);
+                    Route::delete('', LocationWorkerAvatarDeleteAction::class);
+                });
+                
+                // Worker-Service management routes
+                Route::group([
+                    'prefix' => 'services',
+                ], function () {
+                    Route::get('', LocationWorkerServicesGet::class);
+                    Route::post('', LocationWorkerServicesStore::class);
+                    Route::put('{service}', LocationWorkerServicesUpdate::class);
+                    Route::delete('{service}', LocationWorkerServicesDestroy::class);
+                });
             });
 
             Route::group([

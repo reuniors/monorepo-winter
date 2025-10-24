@@ -34,6 +34,10 @@ class Service extends BaseModelWithSort
         'price',
         'currency',
         'sort_order',
+        'min_price',
+        'max_price',
+        'min_duration',
+        'max_duration',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -45,6 +49,20 @@ class Service extends BaseModelWithSort
 
     public $belongsTo = [
         'service_group' => ['Reuniors\Reservations\Models\ServiceGroup', 'key' => 'group_id'],
+    ];
+
+    public $belongsToMany = [
+        'location_workers' => [
+            'Reuniors\Reservations\Models\LocationWorker',
+            'table' => 'reuniors_reservations_location_workers_services',
+            'key' => 'service_id',
+            'otherKey' => 'location_worker_id',
+            'pivot' => ['price', 'duration', 'sort_order', 'active'],
+        ],
+    ];
+
+    public $hasMany = [
+        'worker_services' => 'Reuniors\Reservations\Models\LocationWorkerService',
     ];
 
     /**
@@ -65,5 +83,77 @@ class Service extends BaseModelWithSort
             0 => 'RSD',
             1 => 'EUR',
         ];
+    }
+
+    /**
+     * Get workers for specific location
+     */
+    public function workersForLocation($locationId)
+    {
+        return $this->location_workers()
+            ->wherePivot('location_id', $locationId)
+            ->wherePivot('active', true);
+    }
+
+    /**
+     * Get price range across all workers for this service
+     */
+    public function getPriceRangeAttribute()
+    {
+        $prices = $this->worker_services()
+            ->where('active', true)
+            ->whereNotNull('price')
+            ->pluck('price')
+            ->toArray();
+
+        if (empty($prices)) {
+            return ['min' => $this->price, 'max' => $this->price];
+        }
+
+        return [
+            'min' => min($prices),
+            'max' => max($prices)
+        ];
+    }
+
+    /**
+     * Update price and duration ranges based on worker services
+     */
+    public function updateRanges()
+    {
+        $workerServices = $this->worker_services()
+            ->where('active', true)
+            ->get();
+
+        if ($workerServices->isEmpty()) {
+            // No worker services, use default values
+            $this->update([
+                'min_price' => $this->price,
+                'max_price' => $this->price,
+                'min_duration' => $this->duration,
+                'max_duration' => $this->duration,
+            ]);
+            return;
+        }
+
+        $prices = [];
+        $durations = [];
+
+        foreach ($workerServices as $workerService) {
+            // Use worker-specific price/duration or fall back to service default
+            $prices[] = $workerService->price ?? $this->price;
+            $durations[] = $workerService->duration ?? $this->duration;
+        }
+
+        // Always include the default service price/duration in the range
+        $prices[] = $this->price;
+        $durations[] = $this->duration;
+
+        $this->update([
+            'min_price' => min($prices),
+            'max_price' => max($prices),
+            'min_duration' => min($durations),
+            'max_duration' => max($durations),
+        ]);
     }
 }

@@ -201,3 +201,12 @@
 1.0.69:
     - "Rename promo code columns to UTC format"
     - builder_table_rename_promo_code_columns_to_utc.php
+1.0.70:
+    - "Created table reuniors_reservations_location_workers_services"
+    - builder_table_create_reuniors_reservations_location_workers_services.php
+1.0.71:
+    - "Add is_synced_service field to location_workers table"
+    - builder_table_add_is_synced_service_to_location_workers.php
+1.0.72:
+    - "Add price and duration ranges to services table"
+    - builder_table_add_price_duration_ranges_to_services.php
