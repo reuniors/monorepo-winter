@@ -25,7 +25,7 @@ class LocationWorkerAvatarUploadAction extends BaseAction
         $worker->avatar = request()->file('file');
         $worker->save();
         
-        return $worker->fresh(['avatar']);
+        return $worker->fresh(['avatar'])->avatar;
     }
 
     public function asController(LocationWorker $worker = null): array
