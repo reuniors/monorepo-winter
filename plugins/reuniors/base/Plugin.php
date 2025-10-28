@@ -15,6 +15,12 @@ class Plugin extends PluginBase
 
     public function register()
     {
+        // Register middleware
+        $this->app['router']->aliasMiddleware(
+            'userFromBearerTokenOptional',
+            \Reuniors\Base\Http\Middlewares\UserFromBearerTokenOptional::class
+        );
+
         // Register shared helper classes
         $this->app->singleton('reuniors.base.helpers.reorder', function () {
             return new \Reuniors\Base\Classes\Helpers\ReorderDataHelper();

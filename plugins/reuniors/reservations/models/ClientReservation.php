@@ -7,6 +7,7 @@ use Request;
 use Config;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Winter\User\Facades\Auth;
+use Reuniors\Reservations\Http\Actions\V1\ReservationsPingAction;
 
 /**
  * Model
@@ -14,12 +15,34 @@ use Winter\User\Facades\Auth;
 class ClientReservation extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
-
     use \Winter\Storm\Database\Traits\SoftDelete;
 
     protected $dates = ['deleted_at', 'date_utc'];
 
     const DAILY_DURATION_LIMIT = 240;
+
+    protected static function booted()
+    {
+        static::saved(function ($reservation) {
+            self::invalidatePingCache($reservation);
+        });
+
+        static::updated(function ($reservation) {
+            self::invalidatePingCache($reservation);
+        });
+
+        static::deleted(function ($reservation) {
+            self::invalidatePingCache($reservation);
+        });
+    }
+
+    private static function invalidatePingCache($reservation)
+    {
+        $location = $reservation->location;
+        if ($location) {
+            ReservationsPingAction::invalidateCache(['locationSlug' => $location->slug]);
+        }
+    }
 
 
     /**

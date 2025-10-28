@@ -55,6 +55,12 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        // Register event listeners
+        \Event::listen(
+            \Reuniors\Base\Events\PingCheckRequested::class,
+            \Reuniors\Reservations\Listeners\PingCheckListener::class
+        );
+        
         // Register console command for change requests
         if ($this->app->runningInConsole()) {
             $this->commands([

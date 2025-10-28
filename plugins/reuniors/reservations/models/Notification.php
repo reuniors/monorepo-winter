@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Reservations\Models;
 
 use Model;
-use Reuniors\reservations\Http\Enums\NotificationStatus;
+use Reuniors\Reservations\Http\Actions\V1\NotificationsPingAction;
 
 /**
  * Model
@@ -52,4 +52,32 @@ class Notification extends Model
             'key' => 'location_id'
         ]
     ];
+
+    protected static function booted()
+    {
+        static::saved(function ($notification) {
+            self::invalidatePingCache($notification);
+        });
+
+        static::updated(function ($notification) {
+            self::invalidatePingCache($notification);
+        });
+
+        static::deleted(function ($notification) {
+            self::invalidatePingCache($notification);
+        });
+    }
+
+    private static function invalidatePingCache($notification)
+    {
+        $location = $notification->location;
+        if ($location) {
+            foreach ($notification->users as $user) {
+                NotificationsPingAction::invalidateCache([
+                    'locationSlug' => $location->slug,
+                    'userId' => $user->id
+                ]);
+            }
+        }
+    }
 }
