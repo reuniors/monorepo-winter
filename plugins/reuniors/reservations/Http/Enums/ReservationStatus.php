@@ -8,4 +8,5 @@ class ReservationStatus
     const PENDING = 1;
     const CONFIRMED = 2;
     const CANCELLED = 3;
+    const NO_SHOW = 4;
 }

@@ -173,6 +173,9 @@ class LocationReservationCreateAction extends BaseAction {
             $newReservation->save();
             $userIds[] = $user->id;
         }
+        
+        // Reload relations to ensure friendlyCode works correctly
+        $newReservation->load(['locationWorker', 'client']);
 
         $notificationData = [
             'title' => 'Rezervacija: ' . ($newReservation->friendlyCode ?? $newReservation->hash),

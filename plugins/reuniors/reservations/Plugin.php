@@ -55,6 +55,15 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        // Register Reservations plugin entity types for translations
+        \Reuniors\Base\Classes\TranslationEntityRegistry::registerMany([
+            'service' => 'Reuniors\Reservations\Models\Service',
+            'service_group' => 'Reuniors\Reservations\Models\ServiceGroup',
+            'location' => 'Reuniors\Reservations\Models\Location',
+            'location_worker' => 'Reuniors\Reservations\Models\LocationWorker',
+            'news' => 'Reuniors\Reservations\Models\News',
+        ]);
+
         // Register event listeners
         \Event::listen(
             \Reuniors\Base\Events\PingCheckRequested::class,

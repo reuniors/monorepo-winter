@@ -58,10 +58,19 @@ class LocationReservationUpdateAction extends BaseAction {
             $reservation->client_id = $client->id;
         }
         $reservation->save();
+        
+        // Reload relations to ensure friendlyCode works correctly
+        $reservation->load(['locationWorker', 'client']);
 
-        $description = $status === ReservationStatus::CONFIRMED
-            ? 'Rezervacija potvrđena'
-            : 'Rezervacija otkazana';
+        // Determine description and notification settings based on status
+        if ($status === ReservationStatus::CONFIRMED) {
+            $description = 'Rezervacija potvrđena';
+        } elseif ($status === ReservationStatus::NO_SHOW) {
+            $description = 'Nije se pojavio';
+        } else {
+            $description = 'Rezervacija otkazana';
+        }
+
         $tableData = [
             'Datum i vreme' => $reservation->date_formatted->format('d.m.Y. H:i'),
             'Status' => $description,
@@ -74,16 +83,29 @@ class LocationReservationUpdateAction extends BaseAction {
         if ($reason) {
             $tableData['Razlog'] = $reason;
         }
+
+        // Determine users to notify
         $worker = $reservation->locationWorker;
         $usersIds = [$user->id];
-        if ($worker->user_id) {
+        
+        // For NO_SHOW, don't notify worker (only client gets notification and email)
+        // For other statuses, notify worker as well
+        if ($status !== ReservationStatus::NO_SHOW && $worker->user_id) {
             $usersIds[] = $worker->user_id;
         }
+        
         if ($client && !in_array($client->user_id, $usersIds)) {
             $usersIds[] = $client->user_id;
         }
         if ($reservation->created_by && !in_array($reservation->created_by, $usersIds)) {
             $usersIds[] = $reservation->created_by;
+        }
+
+        // For NO_SHOW, explicitly remove worker from usersIds (even if added via created_by)
+        if ($status === ReservationStatus::NO_SHOW && $worker->user_id) {
+            $usersIds = array_values(array_filter($usersIds, function($id) use ($worker) {
+                return $id !== $worker->user_id;
+            }));
         }
 
         NotificationCreateAction::run([
