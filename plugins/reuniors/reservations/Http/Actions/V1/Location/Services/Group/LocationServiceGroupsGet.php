@@ -8,20 +8,23 @@ class LocationServiceGroupsGet extends BaseAction {
     {
         return [
             'locationSlug' => ['string'],
-            'workerId' => ['integer'], // NEW: Worker filtering
-            'perPage' => ['integer'],
+            'workerId' => ['nullable', 'integer'],
+            'withWorkers' => ['nullable', 'boolean'],
+            'perPage' => ['nullable', 'integer'],
         ];
     }
 
     public function handle(array $attributes = [])
     {
         $locationSlug = $attributes['locationSlug'] ?? null;
-        $workerId = $attributes['workerId'] ?? null; // NEW: Filter by worker
+        $workerId = $attributes['workerId'] ?? null;
+        $withWorkers = $attributes['withWorkers'] ?? false;
         $perPage = $attributes['perPage'] ?? 50;
 
         $serviceGroups = ServiceGroup::feServiceGroups([
             'locationSlug' => $locationSlug,
-            'workerId' => $workerId, // NEW: Filter by worker
+            'workerId' => $workerId,
+            'withWorkers' => $withWorkers,
         ]);
 
         return $serviceGroups->paginate($perPage);

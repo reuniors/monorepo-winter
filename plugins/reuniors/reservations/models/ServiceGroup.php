@@ -99,6 +99,7 @@ class ServiceGroup extends BaseModelWithSort
             'locationSlug' => null,
             'withServices' => true,
             'workerId' => null,
+            'withWorkers' => false,
             ...$options,
         ]);
 
@@ -113,6 +114,8 @@ class ServiceGroup extends BaseModelWithSort
         }
 
         if ($withServices) {
+            $query->with('services');
+            
             if ($workerId) {
                 // Filter services by worker and use worker-specific pricing
                 $query->with(['services' => function ($query) use ($workerId) {
@@ -125,9 +128,12 @@ class ServiceGroup extends BaseModelWithSort
                               ->where('reuniors_reservations_location_workers_services.active', true);
                     }]);
                 }]);
-            } else {
-                // Load services with range data for display
-                $query->with('services');
+            } elseif ($withWorkers) {
+                // Load all services with all location_workers and their pivot data
+                $query->with(['services.location_workers' => function ($query) {
+                    $query->where('reuniors_reservations_location_workers_services.active', true)
+                          ->withPivot(['price', 'duration', 'sort_order', 'active', 'location_id']);
+                }]);
             }
         }
 
