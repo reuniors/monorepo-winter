@@ -23,9 +23,9 @@ class UserFromBearerTokenOptional extends UserFromBearerToken
     {
         // Get the authorization header
         $token = $request->bearerToken();
-        
+
         // If no token, just continue without authentication
-        if (!$token) {
+        if (!$token || $token === 'undefined') {
             return $next($request);
         }
 
