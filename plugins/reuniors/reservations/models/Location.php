@@ -32,6 +32,7 @@ class Location extends Model
         'description',
         'metadata',
         'active',
+        'is_private',
         'active_at',
         'deactivate_at',
         'main_owner_id',

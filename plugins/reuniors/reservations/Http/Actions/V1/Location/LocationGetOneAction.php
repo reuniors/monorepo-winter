@@ -2,6 +2,7 @@
 
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class LocationGetOneAction extends BaseAction {
     public function rules()
@@ -18,6 +19,10 @@ class LocationGetOneAction extends BaseAction {
         $id = $attributes['id'] ?? null;
 
         $locationQuery = Location::query();
+
+        if (empty($slug) && empty($id)) {
+            throw new BadRequestHttpException('Either slug or id is required');
+        }
 
         if ($id) {
             $locationQuery->where('id', $id);

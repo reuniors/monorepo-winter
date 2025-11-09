@@ -28,6 +28,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdat
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsAddDayShiftAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsDeleteDayShiftAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsByDayGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkersGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerShiftsByDaysGetAction;
@@ -86,6 +87,7 @@ Route::group(
                     ],
                 ], function () {
                     Route::post('set-working-day-shift', LocationWorkingShiftsAddDayShiftAction::class);
+                    Route::delete('delete-working-day-shift', LocationWorkingShiftsDeleteDayShiftAction::class);
                     Route::post('notification/send-to-devices', SendNotificationToDevicesAction::class);
                     Route::put('settings', LocationSettingsUpdateAction::class);
                     Route::put('update', LocationUpdateAction::class);
@@ -108,9 +110,8 @@ Route::group(
                 });
             });
 
-            Route::group([
-'prefix' => 'workers',
-            ], function () {
+            Route::group(['prefix' => 'workers',], 
+            function () {
                 Route::get('', LocationWorkersGetAction::class);
                 Route::get('shifts-by-days', LocationWorkerShiftsByDaysGetAction::class);
                 Route::post('create', LocationWorkerCreateAction::class);

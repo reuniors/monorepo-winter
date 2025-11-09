@@ -7,7 +7,7 @@ class LocationWorkersGetAction extends BaseAction {
     public function rules()
     {
         return [
-            'locationSlug' => 'string',
+            'locationSlug' => ['string', 'required'],
         ];
     }
 

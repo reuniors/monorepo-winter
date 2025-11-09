@@ -15,6 +15,7 @@ class LocationUpdateAction extends BaseAction
             'description' => ['nullable', 'string'],
             'snippet' => ['nullable', 'string'],
             'active' => ['nullable', 'boolean'],
+            'isPrivate' => ['nullable', 'boolean'],
             'addressData' => ['nullable', 'array'],
             'addressData.street' => ['nullable', 'string'],
             'addressData.street_number' => ['nullable', 'string'],
@@ -48,6 +49,7 @@ class LocationUpdateAction extends BaseAction
         if (!$isAdmin) {
             unset($attributes['slug']);
             unset($attributes['active']);
+            unset($attributes['is_private']);
         }
 
         // Update basic fields
@@ -61,10 +63,11 @@ class LocationUpdateAction extends BaseAction
             'address_long' => $attributes['addressLong'] ?? $location->address_long,
         ];
 
-        // Update slug and active status only for admins
+        // Update slug, active status, and isPrivate only for admins
         if ($isAdmin) {
             $updateFields['slug'] = $attributes['slug'] ?? $location->slug;
             $updateFields['active'] = $attributes['active'] ?? $location->active;
+            $updateFields['is_private'] = $attributes['is_private'] ?? $location->is_private;
         }
 
         // Update address data

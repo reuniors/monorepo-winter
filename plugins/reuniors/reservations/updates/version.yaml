@@ -210,3 +210,6 @@
 1.0.72:
     - "Add price and duration ranges to services table"
     - builder_table_add_price_duration_ranges_to_services.php
+1.0.73:
+    - "Add is_private field to locations table"
+    - builder_table_add_is_private_to_reuniors_reservations_locations.php

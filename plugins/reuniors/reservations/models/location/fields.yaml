@@ -79,6 +79,12 @@ tabs:
             span: auto
             type: switch
             tab: 'reuniors.reservations::lang.Settings'
+        is_private:
+            label: 'reuniors.reservations::lang.Is Private'
+            comment: 'When enabled, all routes are locked for worker/owner/admin only'
+            span: auto
+            type: switch
+            tab: 'reuniors.reservations::lang.Settings'
         google_map_url:
             label: 'reuniors.reservations::lang.Google Map Url'
             span: auto

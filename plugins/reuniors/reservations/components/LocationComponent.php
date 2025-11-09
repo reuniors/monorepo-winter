@@ -11,6 +11,7 @@ use Request;
 class LocationComponent extends ComponentBase
 {
     public $locationData = null;
+    public $locationSlug = null;
 
     /**
      * Gets the details for the component
@@ -61,6 +62,7 @@ class LocationComponent extends ComponentBase
         $this->page['pageImage'] = null;
 
         if ($locationSlug) {
+            $this->locationSlug = $this->page['locationSlug'] = $locationSlug;
             $this->locationData = $this->page['locationData'] = Location::getFeData([
                 'slug' => $locationSlug
             ])

@@ -48,7 +48,7 @@ Route::group(['prefix' => 'api/v1/rzr', 'middleware' => [
             Route::get('location', LocationStatsGetAction::class);
         });
 
-        Route::group(['prefix' => 'worker'], function () {
+        Route::group(['prefix' => 'workers'], function () {
             Route::get('clients', GetClientProfilesAction::class);
             Route::get('client', WorkerClientDataGetOneAction::class);
         });

@@ -7,7 +7,7 @@ class LocationServiceGroupsGet extends BaseAction {
     public function rules()
     {
         return [
-            'locationSlug' => ['string'],
+            'locationSlug' => ['string', 'required'],
             'workerId' => ['nullable', 'integer'],
             'withWorkers' => ['nullable', 'boolean'],
             'perPage' => ['nullable', 'integer'],

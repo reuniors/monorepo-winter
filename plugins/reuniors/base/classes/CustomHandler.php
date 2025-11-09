@@ -88,6 +88,11 @@ class CustomHandler extends Handler
                         'success' => false,
                         'message' => $throwable->getMessage()
                     ], $statusCode);
+                } else if ($statusCode === 500) {
+                    return Response::json([
+                        'success' => false,
+                        'message' => 'Server error: ' . $throwable->getMessage()
+                    ], 500);
                 }
             }
 

@@ -54,16 +54,13 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             $existingLocationWorkerShift->save();
             return $existingLocationWorkerShift;
         } else {
-            if (!$workingTime) {
-                throw new \Exception('Workers is not working on this day');
-            }
             return LocationWorkerShift::create([
                 'location_worker_id' => $locationWorker->id,
                 'location_id' => $location->id,
                 'date_utc' => $dateUtc,
                 'shift' => $shift,
-                'time_from_utc' => $timeFromUtc ?? $workingTime['time_from_utc'],
-                'time_to_utc' => $timeToUtc ?? $workingTime['time_to_utc'],
+                'time_from_utc' => $timeFromUtc ?? $workingTime['time_from_utc'] ?? null,
+                'time_to_utc' => $timeToUtc ?? $workingTime['time_to_utc'] ?? null,
                 'pauses_utc' => $pausesUtc,
             ]);
         }
