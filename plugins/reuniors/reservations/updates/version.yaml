@@ -213,3 +213,6 @@
 1.0.73:
     - "Add is_private field to locations table"
     - builder_table_add_is_private_to_reuniors_reservations_locations.php
+1.0.74:
+    - "Add PWA metadata to locations table"
+    - builder_table_add_pwa_metadata_to_reuniors_reservations_locations.php

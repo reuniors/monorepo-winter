@@ -85,6 +85,30 @@ tabs:
             span: auto
             type: switch
             tab: 'reuniors.reservations::lang.Settings'
+        pwa_section:
+            label: 'reuniors.reservations::lang.PWA Settings'
+            type: section
+            tab: 'reuniors.reservations::lang.PWA'
+        pwa_icon:
+            label: 'reuniors.reservations::lang.PWA Icon'
+            comment: 'Square icon (1:1 ratio) for PWA. Will be resized to different sizes automatically.'
+            mode: image
+            imageWidth: '512'
+            imageHeight: '512'
+            useCaption: true
+            thumbOptions:
+                mode: crop
+                extension: png
+            span: auto
+            type: fileupload
+            tab: 'reuniors.reservations::lang.PWA'
+        pwa_metadata:
+            label: 'reuniors.reservations::lang.PWA Metadata'
+            comment: 'PWA configuration (name, short_name, theme_color, background_color, scope). If name and short_name are not set, they will be auto-generated from location title.'
+            span: full
+            type: codeeditor
+            language: json
+            tab: 'reuniors.reservations::lang.PWA'
         google_map_url:
             label: 'reuniors.reservations::lang.Google Map Url'
             span: auto

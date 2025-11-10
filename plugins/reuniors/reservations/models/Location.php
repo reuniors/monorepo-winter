@@ -46,6 +46,7 @@ class Location extends Model
         'type',
         'google_map_url',
         'settings',
+        'pwa_metadata',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -65,6 +66,7 @@ class Location extends Model
         'address_data',
         'phone_data',
         'settings',
+        'pwa_metadata',
     ];
 
     public $belongsTo = [
@@ -117,6 +119,7 @@ class Location extends Model
     public $attachOne = [
         'logo' => [FileImageSquare::class, 'delete' => true],
         'cover' => [FileImageWide::class, 'delete' => true],
+        'pwa_icon' => ['System\Models\File', 'delete' => true],
     ];
 
     public function getTypeOptions()
@@ -130,6 +133,29 @@ class Location extends Model
     public function getStreetFullAttribute()
     {
         return $this->address_data['street'] . ' ' . $this->address_data['street_number'] . ', ' . $this->address_data['municipality'];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Auto-generate PWA metadata on create/update if not provided
+        static::saving(function ($location) {
+            $pwaMetadata = $location->pwa_metadata ?? [];
+            
+            // Auto-generate name and short_name if not provided
+            if (empty($pwaMetadata['name']) && !empty($location->title)) {
+                $pwaMetadata['name'] = $location->title . ' ' . 'RZR.rs';
+            }
+            if (empty($pwaMetadata['short_name']) && !empty($location->title)) {
+                $pwaMetadata['short_name'] = $location->title;
+            }
+            
+            // Only update if we have something to save
+            if (!empty($pwaMetadata)) {
+                $location->pwa_metadata = $pwaMetadata;
+            }
+        });
     }
 
     public function scopeGetFeData($query, array $options = [])

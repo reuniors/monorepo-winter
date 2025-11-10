@@ -46,6 +46,7 @@ use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetLanguagesAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationSettingsUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationUpdateAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\LocationGetManifestAction;
 use Reuniors\Reservations\Http\Actions\V1\Notification\NotificationUpdateAction;
 use Reuniors\reservations\Http\Actions\V1\User\Client\UserClientDataGetOneAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Device\SendNotificationToDevicesAction;
@@ -67,6 +68,7 @@ Route::group(
         Route::group([
             'prefix' => 'locations',
         ], function () {
+            Route::get('manifest', LocationGetManifestAction::class);
             Route::get('data', LocationGetOneAction::class);
             Route::get('services-groups', LocationServiceGroupsGet::class);
             Route::get('working-shifts-days', LocationWorkingShiftsByDayGetAction::class);

@@ -27,6 +27,12 @@ class LocationUpdateAction extends BaseAction
             'addressLong' => ['nullable', 'numeric'],
             'wifiPassword' => ['nullable', 'string'],
             'googleMapUrl' => ['nullable', 'url'],
+            'pwaMetadata' => ['nullable', 'array'],
+            'pwaMetadata.name' => ['nullable', 'string', 'max:255'],
+            'pwaMetadata.shortName' => ['nullable', 'string', 'max:255'],
+            'pwaMetadata.themeColor' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'pwaMetadata.backgroundColor' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
+            'pwaMetadata.scope' => ['nullable', 'string', 'max:255'],
         ];
     }
 
@@ -68,6 +74,17 @@ class LocationUpdateAction extends BaseAction
             $updateFields['slug'] = $attributes['slug'] ?? $location->slug;
             $updateFields['active'] = $attributes['active'] ?? $location->active;
             $updateFields['is_private'] = $attributes['is_private'] ?? $location->is_private;
+            if (isset($attributes['pwaMetadata'])) {
+                $pwaMetadata = $location->pwa_metadata ?? [];
+                
+                $pwaMetadata['name'] =$pwaMetadata['name'] ? $pwaMetadata['name'] : $location->title . ' ' . 'RZR.rs';
+                $pwaMetadata['short_name'] = $pwaMetadata['shortName'] ? $pwaMetadata['shortName'] : $location->title;
+                $pwaMetadata['theme_color'] = $pwaMetadata['themeColor'] ? $pwaMetadata['themeColor'] : '#000000';
+                $pwaMetadata['background_color'] = $pwaMetadata['backgroundColor'] ? $pwaMetadata['backgroundColor'] : '#000000';
+                $pwaMetadata['scope'] = $pwaMetadata['scope'] ? $pwaMetadata['scope'] : '/zakazivanje';
+
+                $updateFields['pwa_metadata'] = $pwaMetadata;
+            }
         }
 
         // Update address data
