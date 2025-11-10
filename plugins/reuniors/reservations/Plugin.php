@@ -64,6 +64,29 @@ class Plugin extends PluginBase
             'news' => 'Reuniors\Reservations\Models\News',
         ]);
 
+        // Register image action types for reservations plugin
+        \Reuniors\Base\Classes\ImageActionRegistry::registerMany([
+            'location' => [
+                'modelClass' => 'Reuniors\Reservations\Models\Location',
+                'appName' => 'rzr',
+                'attachments' => [
+                    'logo' => ['relation' => 'attachOne', 'multi' => false],
+                    'cover' => ['relation' => 'attachOne', 'multi' => false],
+                    'gallery' => ['relation' => 'attachMany', 'multi' => true],
+                    'pwa_icon' => ['relation' => 'attachOne', 'multi' => false],
+                ],
+            ],
+            'location_worker' => [
+                'modelClass' => 'Reuniors\Reservations\Models\LocationWorker',
+                'appName' => 'rzr',
+                'attachments' => [
+                    'avatar' => ['relation' => 'attachOne', 'multi' => false],
+                    'gallery' => ['relation' => 'attachMany', 'multi' => true],
+                    'certificates_photos' => ['relation' => 'attachMany', 'multi' => true],
+                ],
+            ],
+        ]);
+
         // Register event listeners
         \Event::listen(
             \Reuniors\Base\Events\PingCheckRequested::class,

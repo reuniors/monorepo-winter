@@ -52,6 +52,15 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [
             Route::post('{id}/reject', \Reuniors\Base\Http\Actions\V1\ChangeRequest\RejectChangeRequestAction::class);
         });
 
+        // Image Management (Unified routes for all image types)
+        Route::group(['prefix' => 'images'], function () {
+            Route::post('upload', \Reuniors\Base\Http\Actions\V1\Image\ImageUploadAction::class);
+            Route::delete('delete', \Reuniors\Base\Http\Actions\V1\Image\ImageDeleteAction::class);
+            Route::delete('bulk-delete', \Reuniors\Base\Http\Actions\V1\Image\ImageBulkDeleteAction::class);
+            Route::post('reorder', \Reuniors\Base\Http\Actions\V1\Image\ImageReorderAction::class);
+            Route::put('update', \Reuniors\Base\Http\Actions\V1\Image\ImageUpdateAction::class);
+        });
+
     });
 
 });

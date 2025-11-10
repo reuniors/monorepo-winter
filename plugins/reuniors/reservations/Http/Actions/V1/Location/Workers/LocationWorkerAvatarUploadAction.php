@@ -1,35 +1,67 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers;
 
-use Reuniors\Base\Http\Actions\BaseAction;
+use Reuniors\Base\Http\Actions\V1\Image\BaseImageUploadAction;
 use Reuniors\Reservations\Models\LocationWorker;
-use Illuminate\Http\Request;
+use Reuniors\Reservations\Models\Location;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class LocationWorkerAvatarUploadAction extends BaseAction
+/**
+ * Location Worker Avatar Upload Action
+ * 
+ * Extends BaseImageUploadAction to provide custom logic:
+ * - Uses model binding for LocationWorker
+ * - Validates that worker belongs to the location (if locationSlug is provided)
+ * - Handles avatar upload (single image, attachOne)
+ */
+class LocationWorkerAvatarUploadAction extends BaseImageUploadAction
 {
     public function rules()
     {
-        return [
-            'file' => ['required', 'file', 'image', 'max:2048'], // Max 2MB
-        ];
+        return array_merge(parent::rules(), [
+            'locationSlug' => ['sometimes', 'string'], // Optional: for permission validation
+        ]);
     }
 
-    public function handle(array $attributes = [], LocationWorker $worker = null)
+    protected function getEntity(array $attributes, ...$args)
     {
-        // Delete existing avatar if exists
-        if ($worker->avatar) {
-            $worker->avatar->delete();
+        // Get worker from model binding (first argument after attributes)
+        $worker = $args[0] ?? null;
+        
+        if (!$worker || !($worker instanceof LocationWorker)) {
+            throw new BadRequestHttpException('Worker not found');
         }
-        
-        // Upload new avatar
-        $worker->avatar = request()->file('file');
-        $worker->save();
-        
-        return $worker->fresh(['avatar'])->avatar;
+
+        // Optional: Validate that worker belongs to location if locationSlug is provided
+        if (isset($attributes['locationSlug'])) {
+            $location = Location::where('slug', $attributes['locationSlug'])->first();
+            if (!$location) {
+                throw new BadRequestHttpException('Location not found');
+            }
+
+            // Verify that the worker belongs to this location
+            if (!$worker->locations->contains($location->id)) {
+                throw new BadRequestHttpException('Worker does not belong to this location');
+            }
+        }
+
+        return $worker;
     }
 
-    public function asController(LocationWorker $worker = null): array
+    protected function getAttachmentName(array $attributes): string
     {
-        return parent::asController($worker);
+        return 'avatar';
+    }
+
+    protected function isMulti(array $attributes): bool
+    {
+        return false; // Avatar is single image (attachOne)
+    }
+
+    protected function validateBeforeUpload($entity, array $attributes): void
+    {
+        // Additional custom validation can be added here
+        // For example: check if user has permission to upload avatar for this worker
+        // Or check file size limits specific to avatars, etc.
     }
 }

@@ -47,6 +47,9 @@ use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetLanguagesAc
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationSettingsUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationGetManifestAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Images\LocationImageUploadAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Images\LocationImageDeleteAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Images\LocationImageReorderAction;
 use Reuniors\Reservations\Http\Actions\V1\Notification\NotificationUpdateAction;
 use Reuniors\reservations\Http\Actions\V1\User\Client\UserClientDataGetOneAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Device\SendNotificationToDevicesAction;
@@ -95,6 +98,15 @@ Route::group(
                     Route::put('update', LocationUpdateAction::class);
                     Route::put('service-groups/update', ServiceGroupUpdateAction::class);
                     Route::put('services/update', ServiceUpdateAction::class);
+                    
+                    // Location image routes
+                    Route::group([
+                        'prefix' => 'image',
+                    ], function () {
+                        Route::post('upload', LocationImageUploadAction::class);
+                        Route::delete('delete', LocationImageDeleteAction::class);
+                        Route::post('reorder', LocationImageReorderAction::class);
+                    });
                 });
 
                 Route::group([
