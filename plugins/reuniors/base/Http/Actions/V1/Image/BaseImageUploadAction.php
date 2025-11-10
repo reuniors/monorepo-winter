@@ -102,6 +102,6 @@ abstract class BaseImageUploadAction extends BaseAction
         // Handle multiple images (attachMany)
         $fileModel = $entity->{$attachmentName}()->create(['data' => $file]);
         
-        return $entity->fresh([$attachmentName])->{$attachmentName};
+        return $fileModel;
     }
 }
