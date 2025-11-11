@@ -17,10 +17,10 @@ abstract class BaseImageDeleteAction extends BaseAction
 {
     public function rules()
     {
-        // imageId is only required for attachMany (multi-image)
+        // attachmentId is only required for attachMany (multi-image)
         // For attachOne, we can get the image from the entity's attachment
         return [
-            'imageId' => ['sometimes', 'integer'],
+            'attachmentId' => ['sometimes', 'integer'],
         ];
     }
 
@@ -79,7 +79,7 @@ abstract class BaseImageDeleteAction extends BaseAction
         // Custom validation (e.g., permission checks)
         $this->validateBeforeDelete($entity, $attributes);
 
-        // Handle single image (attachOne) - no imageId needed
+        // Handle single image (attachOne) - no attachmentId needed
         if (!$isMulti) {
             if ($entity->{$attachmentName}) {
                 $entity->{$attachmentName}->delete();
@@ -90,13 +90,13 @@ abstract class BaseImageDeleteAction extends BaseAction
             return true;
         }
 
-        // Handle multiple images (attachMany) - requires imageId
-        $imageId = $attributes['imageId'] ?? null;
-        if (!$imageId) {
-            throw new BadRequestHttpException('imageId is required for multi-image attachments');
+        // Handle multiple images (attachMany) - requires attachmentId
+        $attachmentId = $attributes['attachmentId'] ?? null;
+        if (!$attachmentId) {
+            throw new BadRequestHttpException('attachmentId is required for multi-image attachments');
         }
 
-        $image = $entity->{$attachmentName}()->where('id', $imageId)->first();
+        $image = $entity->{$attachmentName}()->where('id', $attachmentId)->first();
         if (!$image) {
             throw new NotFoundHttpException("Image not found or does not belong to this entity");
         }

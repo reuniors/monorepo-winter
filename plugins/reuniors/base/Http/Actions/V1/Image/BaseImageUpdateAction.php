@@ -18,7 +18,7 @@ abstract class BaseImageUpdateAction extends BaseAction
     public function rules()
     {
         return [
-            'imageId' => ['required', 'integer'],
+            'attachmentId' => ['required', 'integer'],
             'file' => ['required', 'file', 'image', 'max:2048'], // Max 2MB
         ];
     }
@@ -64,7 +64,7 @@ abstract class BaseImageUpdateAction extends BaseAction
 
     public function handle(array $attributes = [], ...$args)
     {
-        $imageId = $attributes['imageId'];
+        $attachmentId = $attributes['attachmentId'];
 
         // Get entity using abstract method
         $entity = $this->getEntity($attributes, ...$args);
@@ -89,7 +89,7 @@ abstract class BaseImageUpdateAction extends BaseAction
         // Handle single image (attachOne)
         if (!$isMulti) {
             // Verify the image ID matches
-            if ($entity->{$attachmentName} && $entity->{$attachmentName}->id === $imageId) {
+            if ($entity->{$attachmentName} && $entity->{$attachmentName}->id === $attachmentId) {
                 // Update the existing attachment
                 $entity->{$attachmentName}->data = $file;
                 $entity->{$attachmentName}->save();
@@ -101,7 +101,7 @@ abstract class BaseImageUpdateAction extends BaseAction
         }
 
         // Handle multiple images (attachMany)
-        $image = $entity->{$attachmentName}()->where('id', $imageId)->first();
+        $image = $entity->{$attachmentName}()->where('id', $attachmentId)->first();
         if (!$image) {
             throw new NotFoundHttpException("Image not found or does not belong to this entity");
         }
