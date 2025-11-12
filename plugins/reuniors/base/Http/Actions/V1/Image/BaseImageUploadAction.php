@@ -63,6 +63,23 @@ abstract class BaseImageUploadAction extends BaseAction
         // Override in child classes for custom validation
     }
 
+    /**
+     * Generate a custom filename for the uploaded image
+     * 
+     * Override this method in child classes to customize filename generation.
+     * Default implementation returns null, which means the original filename will be used.
+     * 
+     * @param mixed $entity The entity instance
+     * @param array $attributes Request attributes
+     * @param \Illuminate\Http\UploadedFile $file The uploaded file
+     * @return string|null Custom filename or null to use original
+     */
+    protected function generateFileName($entity, array $attributes, $file): ?string
+    {
+        // Override in child classes to generate custom filenames
+        return null;
+    }
+
     public function handle(array $attributes = [], ...$args)
     {
         // Get entity using abstract method (allows for custom logic/permissions)
@@ -96,11 +113,27 @@ abstract class BaseImageUploadAction extends BaseAction
             $entity->{$attachmentName} = $file;
             $entity->save();
             
-            return $entity->fresh([$attachmentName])->{$attachmentName};
+            $attachment = $entity->fresh([$attachmentName])->{$attachmentName};
+            
+            // Generate custom filename if method is overridden
+            $customFileName = $this->generateFileName($entity, $attributes, $file);
+            if ($customFileName !== null) {
+                $attachment->file_name = $customFileName;
+                $attachment->save();
+            }
+            
+            return $attachment;
         }
 
         // Handle multiple images (attachMany)
         $fileModel = $entity->{$attachmentName}()->create(['data' => $file]);
+        
+        // Generate custom filename if method is overridden
+        $customFileName = $this->generateFileName($entity, $attributes, $file);
+        if ($customFileName !== null) {
+            $fileModel->file_name = $customFileName;
+            $fileModel->save();
+        }
         
         return $fileModel;
     }
