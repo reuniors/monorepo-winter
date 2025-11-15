@@ -17,7 +17,7 @@ class BuilderTableCreateReuniorsKnkActions extends Migration
             $table->string('attachment_type');
             $table->integer('attachment_id')->nullable();
             $table->string('action_type');
-            $table->longText('data')->nullable()->default('{}');
+            $table->longText('data')->nullable();
             $table->string('status');
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->nullable()->unsigned();

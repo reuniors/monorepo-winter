@@ -9,7 +9,7 @@ class BuilderTableUpdateReuniorsKnkActions6 extends Migration
     {
         Schema::table('reuniors_knk_actions', function($table)
         {
-            $table->text('old_data')->nullable()->default('{}');
+            $table->text('old_data')->nullable();
         });
     }
 
