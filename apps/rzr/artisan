@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Artisan CLI entry point
+ * 
+ * This file sets up application-specific paths before including the main artisan
+ */
+
+// Include bootstrap helper that auto-detects app name
+require __DIR__ . '/bootstrap-app.php';
+
+// Include the main artisan from monorepo root
+// Note: We need to ensure APP_STORAGE_PATH is available when bootstrap/app.php is loaded
+require __DIR__ . '/../../artisan';
+

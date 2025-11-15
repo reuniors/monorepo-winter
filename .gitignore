@@ -36,3 +36,6 @@ package-lock.json
 public
 .history
 cursordocs/
+
+# Marker file for php artisan serve (created by apps/{app}/artisan)
+.app-name

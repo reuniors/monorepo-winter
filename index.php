@@ -15,7 +15,9 @@
 |
 */
 
-require __DIR__.'/bootstrap/autoload.php';
+if (!defined('LARAVEL_START')) {
+    require __DIR__.'/bootstrap/autoload.php';
+}
 
 /*
 |--------------------------------------------------------------------------
