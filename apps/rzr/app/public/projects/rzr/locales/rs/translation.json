@@ -1,0 +1,40 @@
+{
+  "menu": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "explore": "Istraži",
+    "map": "Mapa",
+    "guide": "Vodič"
+  },
+  "notAuthorized": "You are not authorized to view this page.",
+  "notFound": "Page not found.",
+  "loginModalHeader": "Login Page",
+  "loginModalDescription": "Please login to continue.",
+  "standardLoginTitle": "Standard Login",
+  "months": {
+    "January": "Januar",
+    "February": "Februar",
+    "March": "Mart",
+    "April": "April",
+    "May": "Maj",
+    "June": "Jun",
+    "July": "Jul",
+    "August": "Avgust",
+    "September": "Septembar",
+    "October": "Oktobar",
+    "November": "Novembar",
+    "December": "Decembar"
+  },
+  "weeks": {
+    "Sunday": "Nedelja",
+    "Monday": "Ponedeljak",
+    "Tuesday": "Utorak",
+    "Wednesday": "Sreda",
+    "Thursday": "Četvrtak",
+    "Friday": "Petak",
+    "Saturday": "Subota"
+  },
+  "Izaberite radnika": "Izaberite radnika",
+  "Reservacija:": "Reservacija:"
+}
