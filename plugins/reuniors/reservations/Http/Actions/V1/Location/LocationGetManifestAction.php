@@ -28,24 +28,31 @@ class LocationGetManifestAction
         }
 
         // Default values
-        $defaultName = 'RZR.rs';
-        $defaultShortName = 'RZR';
         $defaultThemeColor = '#000000';
         $defaultBackgroundColor = '#000000';
         $defaultScope = '/zakazivanje';
-        $defaultIconPath = '/apps/rzr/images/default-pwa-icon.png';
+        $defaultVersion = '1.0';
 
         // Get PWA metadata from JSON field
         $pwaMetadata = $location->pwa_metadata ?? [];
         
-        // Get location-specific values or use defaults/auto-generated
-        $pwaName = $pwaMetadata['name'] ?? ($location->title . ' ' . $defaultName);
-        $pwaShortName = $pwaMetadata['short_name'] ?? ($location->title ?: $defaultShortName);
+        // Get scope from env or use default
+        $scope = env('APP_SCOPE', $pwaMetadata['scope'] ?? $defaultScope);
+        
+        // Get version from env or query parameter or use default
+        $version = env('APP_VERSION', request()->query('v', $defaultVersion));
+        
+        // Get theme colors from metadata or use defaults
         $themeColor = $pwaMetadata['theme_color'] ?? $defaultThemeColor;
         $backgroundColor = $pwaMetadata['background_color'] ?? $defaultBackgroundColor;
-        $scope = $pwaMetadata['scope'] ?? $defaultScope;
+
+        // Generate name and short_name from location title
+        $pwaName = $location->title . ' RZR.rs';
+        $pwaShortName = $location->title;
 
         // Generate icon sizes
+        // "any" purpose icons use logo
+        // "maskable" purpose icons use cover
         $iconSizes = [
             ['size' => 64, 'purpose' => 'any'],
             ['size' => 192, 'purpose' => 'any'],
@@ -58,27 +65,38 @@ class LocationGetManifestAction
 
         $icons = [];
         foreach ($iconSizes as $iconConfig) {
-            $iconUrl = $defaultIconPath;
+            $iconUrl = null;
+            $sourceImage = null;
             
-            if ($location->pwa_icon) {
+            // Use logo for "any" purpose, cover for "maskable" purpose
+            if ($iconConfig['purpose'] === 'any' && $location->logo) {
+                $sourceImage = $location->logo;
+            } elseif ($iconConfig['purpose'] === 'maskable' && $location->cover) {
+                $sourceImage = $location->cover;
+            }
+            
+            if ($sourceImage) {
                 // Use Winter CMS getThumb method to generate resized icon URLs
                 // getThumb returns a URL that uses the resizer system
-                $iconUrl = $location->pwa_icon->getThumb($iconConfig['size'], $iconConfig['size'], [
-                    'mode' => 'crop',
+                // Use 'exact' mode to ensure exact dimensions match the specified sizes
+                $iconUrl = $sourceImage->getThumb($iconConfig['size'], $iconConfig['size'], [
+                    'mode' => 'exact',
                     'extension' => 'png',
+                    'quality' => 90,
                 ]);
             }
-
-            $icons[] = [
-                'src' => $iconUrl,
-                'sizes' => $iconConfig['size'] . 'x' . $iconConfig['size'],
-                'type' => 'image/png',
-                'purpose' => $iconConfig['purpose'],
-            ];
+            
+            // Only add icon if we have a valid URL
+            if ($iconUrl) {
+                $icons[] = [
+                    'src' => $iconUrl . '?v=' . $version,
+                    'sizes' => $iconConfig['size'] . 'x' . $iconConfig['size'],
+                    'type' => 'image/png',
+                    'purpose' => $iconConfig['purpose'],
+                ];
+            }
         }
 
-        // Get version from query parameter or use default
-        $version = request()->query('v', '1.0');
         $startUrl = $scope . '?v=' . $version;
         $id = $scope . '?v=' . $version;
 

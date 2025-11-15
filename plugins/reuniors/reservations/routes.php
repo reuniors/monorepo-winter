@@ -60,6 +60,8 @@ use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestExecuteAction;
 use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestGetEntityAction;
 
+Route::get('manifest.webmanifest', LocationGetManifestAction::class);
+
 Route::group(
     ['prefix' => 'api/v1/rzr', 'middleware' => [
         'bindings',
@@ -71,7 +73,6 @@ Route::group(
         Route::group([
             'prefix' => 'locations',
         ], function () {
-            Route::get('manifest', LocationGetManifestAction::class);
             Route::get('data', LocationGetOneAction::class);
             Route::get('services-groups', LocationServiceGroupsGet::class);
             Route::get('working-shifts-days', LocationWorkingShiftsByDayGetAction::class);

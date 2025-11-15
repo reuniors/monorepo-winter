@@ -26,10 +26,10 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-C0QBvKc5.js"></script>
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-C9Fu3KeG.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-BPEc7kYp.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-BMqxWymV.js">
+<script type="module" crossorigin src="/app/assets/index-W17eQ_hQ.js"></script>
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-ibnEmoJR.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CwmcyK5O.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-Bx5nIVFZ.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-CbIbgj2R.css">
@@ -38,5 +38,7 @@ description = "FE Head"
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}
 
-<link rel="manifest" href="/app/manifest.webmanifest?v=2.00">
+{% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? 'berbernica-tanja' %}
+{% set manifestUrl = url('manifest.webmanifest?locationSlug=' ~ locationSlug) %}
+<link rel="manifest" href="{{ manifestUrl }}">
 <script id="vite-plugin-pwa:register-sw" src="/app/registerSW.js?v=2.00"></script>
