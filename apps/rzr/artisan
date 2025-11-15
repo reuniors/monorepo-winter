@@ -1,0 +1,41 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Artisan CLI entry point for rzr application
+ * 
+ * This file sets up application-specific paths before including the main artisan
+ */
+
+// Set application-specific storage path (don't change base_path!)
+define('APP_STORAGE_PATH', __DIR__ . '/storage');
+
+// Set application name
+define('APP_NAME', 'rzr');
+// Also set in environment for server.php to detect
+putenv('APP_NAME=rzr');
+$_ENV['APP_NAME'] = 'rzr';
+$_SERVER['APP_NAME'] = 'rzr';
+
+// Create a marker file in root monorepo so server.php can detect which app is running
+// This must be done before ServeCommand starts the server
+$rootPath = dirname(__DIR__, 2); // Go up from apps/rzr to monorepo root
+$markerFile = $rootPath . '/.app-name';
+file_put_contents($markerFile, 'rzr');
+
+// Load Composer autoloader first (only if not already loaded)
+if (!defined('LARAVEL_START')) {
+    require __DIR__ . '/../../bootstrap/autoload.php';
+}
+
+// Manually load .env from this application folder
+// This must be done before the main bootstrap
+if (file_exists(__DIR__ . '/.env')) {
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->safeLoad(); // safeLoad won't throw if variables are already defined
+}
+
+// Include the main artisan from monorepo root
+// Note: We need to ensure APP_STORAGE_PATH is available when bootstrap/app.php is loaded
+require __DIR__ . '/../../artisan';
+
