@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-qLNXppAS.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, useParams, jsxRuntimeExports, IonCard, IonCardContent, IonSpinner, IonCardHeader, IonCardTitle, IonList, IonItem, IonIcon, mailOutline, IonLabel, callOutline, calendarOutline, personOutline, useUser, useClipboard, useGetWorkerClientDataQuery, activeLocation, UserAvatar, ConditionalComponent, ClientStatistics, isWebPlatform;
@@ -25,13 +25,13 @@
         personOutline = module.aS;
       }, module => {
         useUser = module.b;
-        useClipboard = module.f;
-        useGetWorkerClientDataQuery = module.g;
-        activeLocation = module.h;
+        useClipboard = module.g;
+        useGetWorkerClientDataQuery = module.h;
+        activeLocation = module.j;
         UserAvatar = module.U;
         ConditionalComponent = module.C;
-        ClientStatistics = module.j;
-        isWebPlatform = module.k;
+        ClientStatistics = module.k;
+        isWebPlatform = module.l;
       }, null, null, null],
       execute: function () {
         exports("default", PublicProfilePage);

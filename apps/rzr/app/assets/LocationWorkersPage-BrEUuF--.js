@@ -1,8 +1,8 @@
 import { aC as useTranslation, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aC as IonCard, aD as IonCardHeader, aK as IonCardTitle, i as IonIcon, aY as peopleOutline, aE as IonCardContent, l as IonSpinner, E as IonList, o as IonItem, a6 as addOutline, D as IonLabel, aJ as IonAvatar, u as IonText, $ as chevronForwardOutline } from "./vendor_ionic-Bx5nIVFZ.js";
-import { v as useGetAllWorkersQuery } from "./App-DPiy04Om.js";
+import { w as useGetAllWorkersQuery } from "./App-ApQjM-oG.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-BxZPnDwj.js";
+import "./index-BaKD2imp.js";
 import "./vendor_firebase-O9nGtifs.js";
 function LocationWorkersPage({
   locationSlug,

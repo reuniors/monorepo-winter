@@ -108,10 +108,18 @@ is_hidden = 0
                     </ion-list>
                 </ion-col>
                 <ion-col size="12" size-md="6">
+                    {% if locationData.google_map_url %}
                     <a href="{{ locationData.google_map_url }}" target="_blank">
-                        <img src="{{ 'assets/img/tanja-mapa.jpeg'|theme }}"
-                             alt="Frizersko Berberski Salon Tanja 2002 Kragujevac" class="w-full h-auto"/>
+                        {% if locationData.cover and locationData.cover.path %}
+                            <img src="{{ locationData.cover.path }}"
+                                 alt="{{ locationData.title ?? locationData.snippet }}" class="w-full h-auto"/>
+                        {% else %}
+                            <div class="w-full h-64 bg-gray-300 flex items-center justify-center">
+                                <ion-icon name="map-outline" class="text-4xl text-gray-500"></ion-icon>
+                            </div>
+                        {% endif %}
                     </a>
+                    {% endif %}
                 </ion-col>
             </ion-row>
         </ion-grid>

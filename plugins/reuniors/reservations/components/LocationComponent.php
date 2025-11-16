@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Reuniors\Reservations\Models\Location;
 use Log;
 use Request;
+use Winter\User\Facades\Auth;
 
 class LocationComponent extends ComponentBase
 {
@@ -67,6 +68,12 @@ class LocationComponent extends ComponentBase
                 'slug' => $locationSlug
             ])
                 ->firstOrFail();
+            
+            // Check if location is private and user is not authenticated
+            if ($this->locationData->is_private && !Auth::check()) {
+                return Redirect::to('/zakazivanje/login');
+            }
+            
             $this->page['pageTitle'] = $this->locationData->snippet ?? $this->locationData->title;
             $this->page['pageDescription'] = Str::of($this->locationData->description)->limit(160);
             $this->page['pageImage'] = $this->locationData->cover?->getPath() ?? null;

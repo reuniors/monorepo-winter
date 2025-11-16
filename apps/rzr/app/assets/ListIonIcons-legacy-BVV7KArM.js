@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-qLNXppAS.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var reactExports, React, jsxRuntimeExports, IonGrid, IonRow, IonCol, IonButton, IonIcon, arrowBackOutline, fetchIonIconsList;
@@ -17,7 +17,7 @@
         IonIcon = module.i;
         arrowBackOutline = module.bs;
       }, module => {
-        fetchIonIconsList = module.G;
+        fetchIonIconsList = module.H;
       }, null, null, null],
       execute: function () {
         function ListIonIcons({

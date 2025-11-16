@@ -1,8 +1,8 @@
 import { e as reactExports, R as React, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { z as IonGrid, A as IonRow, B as IonCol, h as IonButton, i as IonIcon, bs as arrowBackOutline } from "./vendor_ionic-Bx5nIVFZ.js";
-import { G as fetchIonIconsList } from "./App-DPiy04Om.js";
+import { H as fetchIonIconsList } from "./App-ApQjM-oG.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-BxZPnDwj.js";
+import "./index-BaKD2imp.js";
 import "./vendor_firebase-O9nGtifs.js";
 function ListIonIcons({ onSelectIcon, searchIcon }) {
   const ionIconsList = fetchIonIconsList();

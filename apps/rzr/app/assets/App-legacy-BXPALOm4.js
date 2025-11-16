@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-qLNXppAS.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonSpinner, IonFooter, saveOutline, languageOutline, IonItem, IonInput, eye, eyeOff, logoGoogle, IonText, IonSelect, IonSelectOption, videocam, videocamOff, IonGrid, IonRow, IonCol, IonSearchbar, IonLabel, IonList, IonCheckbox, arrowUndoOutline, IonPage, createAnimation, useIonModal, useIonLoading, useIonAlert, useIonActionSheet, trashOutline, IonImg, cropOutline, optionsOutline, cloudUploadOutline, funnelOutline, listCircleSharp, IonItemSliding, IonItemOptions, IonThumbnail, IonReorder, menuOutline, chevronForwardOutline, IonItemOption, constructOutline, checkboxOutline, squareOutline, IonReorderGroup, checkmarkOutline, addOutline, isPlatform, icons, useIonToast, IonTextarea, IonDatetime, IonToggle, __vitePreload, calendarOutline, timeOutline, IonChip, IonLoading, mailOutline, keyOutline, useIonRouter, IonToast, IonListHeader, IonSkeletonText, exitOutline, logoApple, logoAndroid, IonMenuButton, chevronBackOutline, ellipsisVertical, ellipsisHorizontal, IonRefresher, IonRefresherContent, IonPopover, IonAlert, lockClosedOutline, logInOutline, chevronBack, chevronForward, IonCard, IonCardHeader, IonCardContent, megaphoneOutline, cutOutline, IonSegment, IonSegmentButton, IonAvatar, IonCardTitle, checkmarkCircleOutline, closeCircleOutline, walletOutline, refreshOutline, IonAccordionGroup, IonAccordion, callOutline, personOutline, pencilOutline, notificationsCircle, closeCircle, checkmarkCircle, notificationsOffOutline, peopleOutline, settingsOutline, IonActionSheet, createOutline, giftOutline, cashOutline, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, alarmOutline, notificationsOutline, removeOutline, IonBadge, calendarClearOutline, arrowBack, arrowForward, useIonViewDidLeave, pricetagOutline, alertCircleOutline, hourglassOutline, helpOutline, alertOutline, IonApp, IonReactRouter, IonSplitPane, setupIonicReact, jsxRuntimeExports, useForm, o, humpsExports, t, reactExports, create$3, create$6, React, Controller, yup, setLocale, useWatch, DraftExports, reactDraftWysiwygExports, draftToHtml, qr, Swiper, createSlice, l, combineReducers, configureStore, c, SwiperSlide, register, V, arrayMove, useSensors, useSensor, DndContext, closestCenter, SortableContext, verticalListSortingStrategy, TouchSensor, sortableKeyboardCoordinates, KeyboardSensor, PointerSensor, useSortable, CSS, parseISO, formatInTimeZone, toZonedTime, format, fromZonedTime, isValid, useDispatch, useSelector, useTranslation, useHistory, GoogleOAuthProvider, useGoogleLogin, ErrorBoundary, Clipboard, Route, buildExports, instance, differenceInCalendarMonths, getMonth, startOfMonth, addDays, endOfMonth, eachDayOfInterval, subMonths, addMonths, parse, addMinutes, isWithinInterval, differenceInMinutes, Redirect, useLocation, isPast, create$7, create$5, useParams, create$2, ErrorBoundary$1, sharedApi, TagType, sharedApiPrefix, UploadType, TagId, setShowCompleteProfileModal, setUser, setUiData, getImageModalData, closeImageModal, getShowLoginModal, getShowImageModal, setShowLoginModal, getDeviceData, setDeviceData, getUser, logoutAction, rzrApi, TagType$1, TagId$1, getInitialData, initializeApp, getMessagingInWindow, getAnalytics, onMessage, getToken;
@@ -255,15 +255,15 @@
         __vite_style__.textContent = ".rich-editor-wrapper .rdw-editor-main {\n  width: 100%;\n  font-family: sans-serif;\n  background-color: #fff;\n  color: #000;\n  min-height: 350px;\n}\n\n.rich-editor-wrapper {\n  min-height: 350px;\n}\n\n.rdw-image-modal, .rdw-emoji-modal, .rdw-embedded-modal, .rdw-link-modal {\n  left: -150px !important;\n  color: #000;\n}.swiper-button-next,\n.swiper-button-prev {\n  position: absolute;\n  top: 50%;\n  width: 44px;\n  height: 44px;\n  margin-top: -22px;\n  z-index: 10;\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: #007aff;\n  background: rgba(100, 0, 0, 0.1);\n  border-radius: 50%;\n}\n.swiper-button-next::after,\n.swiper-button-prev::after {\n  content: \"\";\n  position: absolute;\n  width: 0;\n  height: 0;\n  border-style: solid;\n  z-index: 2;\n}\n.swiper-button-next .swiper-navigation-icon,\n.swiper-button-prev .swiper-navigation-icon {\n  width: 11px;\n  height: 20px;\n  fill: currentColor;\n  display: block;\n  visibility: visible;\n  opacity: 1;\n  position: relative;\n  z-index: 1;\n}\n.swiper-button-next.swiper-button-disabled,\n.swiper-button-prev.swiper-button-disabled {\n  opacity: 0.35;\n  cursor: auto;\n  pointer-events: none;\n}\n\n.swiper-button-prev {\n  left: 10px;\n  right: auto;\n}\n.swiper-button-prev::after {\n  border-right: 10px solid currentColor;\n  border-top: 8px solid transparent;\n  border-bottom: 8px solid transparent;\n  margin-left: -5px;\n}\n\n.swiper-button-next {\n  right: 10px;\n  left: auto;\n}\n.swiper-button-next::after {\n  border-left: 10px solid currentColor;\n  border-top: 8px solid transparent;\n  border-bottom: 8px solid transparent;\n  margin-right: -5px;\n}\n\n* {\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n\n#app {\n  height: 100%;\n}\n\n.demo-app {\n  overflow: auto;\n  height: 100%;\n}\n\n.demo-title {\n  padding: 24px 12px 12px;\n}\n\n.demo-stories {\n  display: flex;\n  align-items: center;\n  padding: 12px;\n  overflow: auto;\n  scrollbar-width: none;\n  border-bottom: 1px solid #262626;\n}\n.demo-stories::-webkit-scrollbar {\n  display: none;\n  opacity: 0;\n}\n.demo-stories a + a {\n  margin-left: 12px;\n}\n.demo-stories a {\n  color: #fff;\n  text-decoration: none;\n  cursor: pointer;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  transition-duration: 300ms;\n  transition-property: opacity;\n}\n.demo-stories a:active {\n  opacity: 0.55;\n  transition-duration: 50ms;\n}\n.demo-stories-avatar {\n  position: relative;\n  border-radius: 50%;\n  padding: 4px;\n  background-image: linear-gradient(to right top, #ffc600 20%, #ff0040, #e600cc 80%);\n}\n.demo-stories-avatar::before {\n  content: \"\";\n  position: absolute;\n  left: 2px;\n  top: 2px;\n  right: 2px;\n  bottom: 2px;\n  background: #000;\n  border-radius: 50%;\n  z-index: 1;\n}\n.demo-stories-avatar img {\n  position: relative;\n  z-index: 2;\n  display: block;\n  width: 64px;\n  height: 64px;\n  border-radius: 50%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.demo-stories-name {\n  font-size: 13px;\n  font-weight: 500;\n  line-height: 1;\n  margin-top: 10px;\n}\n\n.demo-post-header {\n  display: flex;\n  align-items: center;\n  padding: 14px;\n  border-top: 1px solid #ccc;\n}\n.demo-post-header-actions {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  margin: 0;\n  padding: 0;\n  border: none;\n  outline: 0;\n  position: relative;\n  box-shadow: none;\n  border-radius: 0;\n  background: none;\n  margin-left: auto;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  transition-duration: 300ms;\n  transition-property: opacity;\n}\n.demo-post-header-actions:active {\n  opacity: 0.55;\n  transition-duration: 50ms;\n}\n.demo-post-header-actions span {\n  width: 3px;\n  height: 3px;\n  background: #fff;\n  border-radius: 50%;\n}\n.demo-post-header-actions span + span {\n  margin-left: 3px;\n}\n.demo-post-avatar {\n  width: 38px;\n  height: 38px;\n  border-radius: 50%;\n  margin-right: 8px;\n  padding: 2px;\n  box-sizing: border-box;\n  position: relative;\n  cursor: pointer;\n  background-image: linear-gradient(to right top, #ffc600 20%, #ff0040, #e600cc 80%);\n  transition-property: opacity;\n  transition-duration: 200ms;\n}\n.demo-post-avatar:active {\n  opacity: 0.55;\n  transition-duration: 0;\n}\n.demo-post-avatar::before {\n  content: \"\";\n  left: 1px;\n  top: 1px;\n  right: 1px;\n  bottom: 1px;\n  background: #000;\n  position: absolute;\n  border-radius: 50%;\n  z-index: 0;\n}\n.demo-post-avatar img {\n  width: 100%;\n  height: 100%;\n  border-radius: 50%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n  position: relative;\n  z-index: 1;\n}\n.demo-post-name {\n  font-size: 14px;\n  font-weight: 600;\n}\n.demo-post-image {\n  height: 320px;\n}\n.demo-post-image img {\n  width: 100%;\n  height: 100%;\n  -o-object-fit: cover;\n     object-fit: cover;\n  -o-object-position: center;\n     object-position: center;\n}\n.demo-post-footer {\n  padding: 16px;\n}\n.demo-post-footer-actions {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding-bottom: 16px;\n}\n.demo-post-footer-actions-left, .demo-post-footer-actions-right {\n  display: flex;\n  align-items: center;\n}\n.demo-post-footer-actions button {\n  -webkit-appearance: none;\n     -moz-appearance: none;\n          appearance: none;\n  border: none;\n  outline: 0;\n  position: relative;\n  box-shadow: none;\n  border-radius: 0;\n  background: none;\n  margin-left: auto;\n  display: flex;\n  align-items: center;\n  cursor: pointer;\n  transition-duration: 300ms;\n  transition-property: opacity;\n  padding: 0;\n  margin: 0;\n}\n.demo-post-footer-actions button:active {\n  opacity: 0.55;\n  transition-duration: 50ms;\n}\n.demo-post-footer-actions button img {\n  width: 22px;\n  height: 22px;\n  -o-object-fit: contain;\n     object-fit: contain;\n  -o-object-position: center;\n     object-position: center;\n}\n.demo-post-footer-actions button + button {\n  margin-left: 16px;\n}\n.demo-post-likes {\n  font-size: 14px;\n  font-weight: 600;\n}\n.demo-post-content {\n  font-size: 14px;\n  margin-top: 4px;\n  line-height: 1.25;\n}\n.demo-post-content-name {\n  font-weight: 600;\n}\n.demo-post-content-text {\n  opacity: 0.85;\n}\n.demo-post-date {\n  margin-top: 4px;\n  font-size: 12px;\n  opacity: 0.5;\n  font-weight: 500;\n}\n\n.stories-slider {\n  position: fixed;\n  left: 0;\n  top: 0;\n  width: 100%;\n  height: 100%;\n  z-index: 1000;\n  transform: scale(0);\n  transform: translate3d(0, 0, 0) scale(0.5);\n  opacity: 0;\n  background: #000;\n}\n@media (min-width: 415px), (min-height: 897px) {\n  .stories-slider {\n    background: rgb(41, 40, 49);\n  }\n}\n.stories-slider > .swiper {\n  z-index: 2;\n  max-width: 414px;\n  max-height: 896px;\n}\n.stories-slider:not(.stories-slider-in) {\n  pointer-events: none;\n}\n.stories-slider:not(.stories-slider-in) * {\n  pointer-events: none !important;\n}\n.stories-slider-in {\n  animation: stories-slider-in 400ms forwards;\n  pointer-events: auto;\n  transform: translate3d(0, 0, 0) scale(1);\n  opacity: 1;\n}\n.stories-slider-out {\n  pointer-events: none;\n  animation: stories-slider-out 400ms forwards !important;\n}\n\n@keyframes stories-slider-in {\n  0% {\n    transform: translate3d(0, 0, 0) scale(0.5);\n    opacity: 0;\n  }\n  50% {\n    transform: translate3d(0, 0, 0) scale(1.05);\n    opacity: 1;\n  }\n  100% {\n    transform: translate3d(0, 0, 0) scale(1);\n    opacity: 1;\n  }\n}\n@keyframes stories-slider-out {\n  0% {\n    transform: translate3d(0, 0, 0) scale(1);\n    opacity: 1;\n  }\n  50% {\n    transform: translate3d(0, 0, 0) scale(0.5);\n    opacity: 0;\n  }\n  100% {\n    transform: translate3d(0, 0, 0) scale(0.5);\n    opacity: 0;\n  }\n}.photo-gallery-img::part(image) {\n  max-height: 400px;\n}\n\n.photo-gallery-swiper {\n  min-height: 45px;\n}#root {\n  max-width: 1280px;\n  margin: 0 auto;\n  padding: 2rem;\n  text-align: center;\n}\n\n.logo {\n  height: 6em;\n  padding: 1.5em;\n  will-change: filter;\n  transition: filter 300ms;\n}\n.logo:hover {\n  filter: drop-shadow(0 0 2em #646cffaa);\n}\n.logo.react:hover {\n  filter: drop-shadow(0 0 2em #61dafbaa);\n}\n\n@keyframes logo-spin {\n  from {\n    transform: rotate(0deg);\n  }\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n@media (prefers-reduced-motion: no-preference) {\n  a:nth-of-type(2) .logo {\n    animation: logo-spin infinite 20s linear;\n  }\n}\n\n.card {\n  padding: 2em;\n}\n\n.read-the-docs {\n  color: #888;\n}\n/*$vite$:1*/";
         document.head.appendChild(__vite_style__);
         exports({
-          A: ServiceGroupEditForm,
-          B: ServiceEditForm,
+          B: ServiceGroupEditForm,
           D: DynamicForm,
+          E: ServiceEditForm,
           M: ModalActionButtons,
           b: useUser,
-          f: useClipboard,
-          j: ClientStatistics,
-          n: useDefaultProps,
-          p: useFormWithSchema
+          g: useClipboard,
+          k: ClientStatistics,
+          o: useDefaultProps,
+          q: useFormWithSchema
         });
         const ConditionalComponent = exports("C", ({
           condition,
@@ -737,7 +737,7 @@
           }
           return photos.every(photo => photo?.id !== void 0 && photo?.id !== null);
         };
-        const photosArrayWithIdYup = exports("q", errorMsg => yup.array().nullable().defined().test("all-photos-have-id", "", function (value) {
+        const photosArrayWithIdYup = exports("r", errorMsg => yup.array().nullable().defined().test("all-photos-have-id", "", function (value) {
           return validatePhotosHaveId(value);
         }));
         function CommonIonicSlug(props) {
@@ -3282,7 +3282,7 @@
           const utcDate = parseISO(`${currentDate}T${utcTimeString}Z`);
           return formatInTimeZone(utcDate, timezone, "HH:mm:ss");
         };
-        const fromUtcHM = exports("l", (utcTimeString, tz) => {
+        const fromUtcHM = exports("m", (utcTimeString, tz) => {
           const timezone = getAppTimezone();
           const timeWithSeconds = utcTimeString.split(":").length === 2 ? `${utcTimeString}:00` : utcTimeString;
           const currentDateUtc = getCurrentDateString(timezone);
@@ -3415,8 +3415,8 @@
           }
           return dateTime;
         };
-        const isWebPlatform = exports("k", isPlatform("desktop"));
-        const isIos = exports("d", isPlatform("ios"));
+        const isWebPlatform = exports("l", isPlatform("desktop"));
+        const isIos = exports("e", isPlatform("ios"));
         const isPwa = exports("i", isPlatform("pwa"));
         isPlatform("capacitor");
         const getIsWebview = userAgent => {
@@ -3426,7 +3426,7 @@
         const isWebView = window?.navigator && window?.navigator?.userAgent ? getIsWebview(window.navigator.userAgent) : true;
         const ionIconList = [];
         const ionIcons = {};
-        const fetchIonIconsList = exports("G", () => {
+        const fetchIonIconsList = exports("H", () => {
           if (!ionIconList.length) {
             ionIconList.push(...Object.keys(icons).map((name, index) => {
               ionIcons[name] = {
@@ -3555,7 +3555,7 @@
           useDeleteFileMutation,
           useReorderFileMutation
         } = commonSharedApi;
-        const useShowNotification = exports("o", options => {
+        const useShowNotification = exports("p", options => {
           const [presentToast, dismiss] = useIonToast();
           const memoOptions = reactExports.useMemo(() => options, []);
           const showNotification = reactExports.useCallback(overrideOptions => {
@@ -4890,7 +4890,7 @@
             })]
           });
         }
-        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-D9KKvJ3t.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-BVV7KArM.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ListIonIconsModal({
           isOpen,
           setIsOpen,
@@ -6420,7 +6420,32 @@
             }
           };
         }
-        function CommonNotificationWrapper() {
+        const notificationServices = sharedApi.injectEndpoints({
+          endpoints: builder => ({
+            addConnectedDevice: builder.mutation({
+              query: body => ({
+                url: `users/connected-devices`,
+                method: "POST",
+                body
+              })
+            }),
+            removeConnectedDevice: builder.mutation({
+              query: body => ({
+                url: `users/connected-devices`,
+                method: "DELETE",
+                body
+              })
+            })
+          })
+        });
+        const {
+          useAddConnectedDeviceMutation,
+          useRemoveConnectedDeviceMutation
+        } = notificationServices;
+        exports("d", useRemoveConnectedDeviceMutation);
+        function CommonNotificationWrapper({
+          activeLocation
+        } = {}) {
           const [addConnectedDevice] = useAddConnectedDeviceMutation();
           const {
             isOwner
@@ -6430,7 +6455,6 @@
             push
           } = useIonRouter();
           const deviceData = useAppSelector$1(getDeviceData);
-          const activeLocation = "test";
           const deviceNotification = useDeviceNotification({
             handleMessage: payload => {
               const notification = payload?.data?.notification;
@@ -6450,10 +6474,12 @@
               });
             },
             onConnected: token => {
-              addConnectedDevice({
-                token,
-                locationSlug: activeLocation
-              });
+              if (activeLocation) {
+                addConnectedDevice({
+                  token,
+                  locationSlug: activeLocation
+                });
+              }
             },
             connectDeviceInit: !!isOwner
           });
@@ -6463,9 +6489,6 @@
             }
           }, [deviceData]);
           return null;
-        }
-        function useAddConnectedDeviceMutation() {
-          throw new Error("Function not implemented.");
         }
         const NotificationToast = ({
           message,
@@ -6514,7 +6537,7 @@
             ...otherProps
           });
         }
-        const ShowLoading$1 = exports("y", reactExports.memo(ShowLoading));
+        const ShowLoading$1 = exports("z", reactExports.memo(ShowLoading));
         function SkeletonLoader() {
           return /* @__PURE__ */jsxRuntimeExports.jsxs(IonList, {
             children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonListHeader, {
@@ -7601,7 +7624,7 @@
         const {
           useGetFeLocationQuery
         } = locationApi;
-        exports("r", useGetFeLocationQuery);
+        exports("s", useGetFeLocationQuery);
         const locationWorkerApi = rzrApi.injectEndpoints({
           endpoints: builder => ({
             getFeWorkers: builder.query({
@@ -7791,9 +7814,9 @@
           useDeleteWorkerServiceMutation
         } = locationWorkerApi;
         exports({
-          m: useGetFeWorkersQuery,
-          E: useCreateWorkerMutation,
-          v: useGetAllWorkersQuery
+          n: useGetFeWorkersQuery,
+          G: useCreateWorkerMutation,
+          w: useGetAllWorkersQuery
         });
         function getReservationUrlWithParams(params) {
           const searchParams = new URLSearchParams(params);
@@ -8969,7 +8992,7 @@
           useGetClientProfilesQuery,
           useGetWorkerClientDataQuery
         } = clientProfileApi;
-        exports("g", useGetWorkerClientDataQuery);
+        exports("h", useGetWorkerClientDataQuery);
         const ITEMS_PER_PAGE$1 = 10;
         function ClientProfilesList() {
           const {
@@ -11672,7 +11695,7 @@
         const {
           useGetFeServiceGroupsQuery
         } = serviceGroupApi;
-        exports("w", useGetFeServiceGroupsQuery);
+        exports("x", useGetFeServiceGroupsQuery);
         const getCreateAppointmentFormFields = t => [{
           keyName: "note",
           name: "note",
@@ -13235,7 +13258,7 @@
             })]
           });
         }
-        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-Cn-BhlAB.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-pVjHf2JB.js'), false              ? __VITE_PRELOAD__ : void 0));
         function PublicProfilePageWrapper() {
           const {
             t
@@ -13733,7 +13756,7 @@
             })
           });
         }
-        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-CAvT6gJU.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-UKrfVP8V.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkingTimePageWrapper() {
           const {
             t
@@ -13765,7 +13788,7 @@
             })
           });
         }
-        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-CkNMDEvj.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-D14e7knz.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationEditDataPageWrapper() {
           const {
             t
@@ -13784,7 +13807,7 @@
             })
           });
         }
-        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-CeDAi2q5.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-C8NZtdkr.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkersPageWrapper() {
           const {
             t
@@ -13804,7 +13827,7 @@
             })
           });
         }
-        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-_xszL8sA.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-CErrUxvs.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationSettingsPageWrapper() {
           const {
             t
@@ -13823,7 +13846,7 @@
             })
           });
         }
-        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-D8R6-Vg9.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-Bhe6NTdM.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServicesPageWrapper() {
           const {
             t
@@ -13838,7 +13861,7 @@
             children: /* @__PURE__ */jsxRuntimeExports.jsx(ServicesPage, {})
           });
         }
-        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-D8eQicXE.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-B1KLefDw.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceGroupEditPageWrapper() {
           const {
             t
@@ -13858,7 +13881,7 @@
             })
           });
         }
-        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-BTfEs349.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-CIu08PVQ.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceEditPageWrapper() {
           const {
             t
@@ -13962,7 +13985,7 @@
           useCreateServiceGroupMutation,
           useDeleteServiceGroupMutation
         } = serviceGroupEditApi;
-        exports("x", useUpdateServiceGroupMutation);
+        exports("y", useUpdateServiceGroupMutation);
         const serviceGroupEditFormSchema = create$3().shape({
           title: create$6().required(t("Naslov je obavezan")),
           slug: create$6().required(t("Slug je obavezan")),
@@ -14232,7 +14255,7 @@
           useCreateServiceMutation,
           useDeleteServiceMutation
         } = serviceEditApi;
-        exports("z", useUpdateServiceMutation);
+        exports("A", useUpdateServiceMutation);
         const serviceEditFormSchema = create$3().shape({
           groupId: create$5().required("Grupa je obavezna"),
           title: create$6().required("Naslov je obavezan"),
@@ -14499,7 +14522,7 @@
             })
           });
         }
-        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-Ca8xfzC1.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-D09AjybL.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkerCreatePageWrapper() {
           const {
             t
@@ -15747,16 +15770,16 @@
             })
           });
         }
-        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-BNuIh9Pe.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-BS8MJroD.js'), false              ? __VITE_PRELOAD__ : void 0));
         setupIonicReact({
           swipeBackEnabled: isPwa && !isIos,
           animated: !isIos
         });
-        const urlPrefix = exports("e", getInitialData("appSlug") ?? "/zakazivanje" ?? "/zakazivanje");
+        const urlPrefix = exports("f", getInitialData("appSlug") ?? "/zakazivanje" ?? "/zakazivanje");
         const envActiveLocation = "berbernica-tanja";
         const envIsPrivate = parseInt("1");
-        const preloadedLocationData = exports("s", getInitialData("locationData", true));
-        const activeLocation = exports("h", preloadedLocationData?.slug ?? envActiveLocation);
+        const preloadedLocationData = exports("v", getInitialData("locationData", true, true));
+        const activeLocation = exports("j", preloadedLocationData?.slug ?? envActiveLocation);
         const isPrivate = preloadedLocationData?.isPrivate ?? envIsPrivate;
         const reservationTimeInterval = preloadedLocationData?.timeSlotInterval ?? 30;
         const roundedSlotInterval = preloadedLocationData?.roundedSlotInterval ?? 10;
@@ -15799,7 +15822,9 @@
             children: [/* @__PURE__ */jsxRuntimeExports.jsx("swiper-container", {
               hidden: true
             }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonReactRouter, {
-              children: [/* @__PURE__ */jsxRuntimeExports.jsx(Ping$1, {}), /* @__PURE__ */jsxRuntimeExports.jsx(CommonModalWrappers$1, {}), !isWebView && isPwa && /* @__PURE__ */jsxRuntimeExports.jsx(CommonNotificationWrapper, {}), /* @__PURE__ */jsxRuntimeExports.jsxs(IonSplitPane, {
+              children: [/* @__PURE__ */jsxRuntimeExports.jsx(Ping$1, {}), /* @__PURE__ */jsxRuntimeExports.jsx(CommonModalWrappers$1, {}), !isWebView && isPwa && /* @__PURE__ */jsxRuntimeExports.jsx(CommonNotificationWrapper, {
+                activeLocation
+              }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonSplitPane, {
                 contentId: "main",
                 children: [/* @__PURE__ */jsxRuntimeExports.jsx(Menu, {}), /* @__PURE__ */jsxRuntimeExports.jsx(Routes, {})]
               })]
@@ -15818,7 +15843,7 @@
         }, Symbol.toStringTag, {
           value: 'Module'
         }));
-        exports("H", App$1);
+        exports("J", App$1);
       }
     };
   });

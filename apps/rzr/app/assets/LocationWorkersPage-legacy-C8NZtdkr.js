@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-qLNXppAS.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, jsxRuntimeExports, IonCard, IonCardHeader, IonCardTitle, IonIcon, peopleOutline, IonCardContent, IonSpinner, IonList, IonItem, addOutline, IonLabel, IonAvatar, IonText, chevronForwardOutline, useGetAllWorkersQuery;
@@ -24,7 +24,7 @@
         IonText = module.u;
         chevronForwardOutline = module.$;
       }, module => {
-        useGetAllWorkersQuery = module.v;
+        useGetAllWorkersQuery = module.w;
       }, null, null, null],
       execute: function () {
         exports("default", LocationWorkersPage);

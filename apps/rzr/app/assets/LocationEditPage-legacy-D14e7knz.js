@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './index-legacy-qLNXppAS.js', './location-settings.data-legacy-CDe8QAPJ.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './index-legacy-gc8LmLQA.js', './location-settings.data-legacy-BtUjq28f.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var O, w, useMap, reactExports, React, jsxRuntimeExports, MapContainer, TileLayer, t, Controller, SwiperSlide, useTranslation, useWatch, create$3, create$7, create$6, create$5, create$2, IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonItem, IonFooter, IonText, IonLabel, IonInput, IonLoading, exitOutline, arrowBackOutline, saveOutline, cloudUploadOutline, arrowForwardOutline, informationCircleOutline, imagesOutline, locationOutline, settingsOutline, useIonRouter, IonSpinner, useDefaultProps, SwiperWrapper, useUser, FieldType, transformStandardResponseToCamelCase, useShowNotification, useFormWithSchema, DynamicForm, photosArrayWithIdYup, useGetFeLocationQuery, activeLocation, preloadedLocationData, rzrApi, TagType, getLocationEditSettingsFormFields, L;
@@ -52,18 +52,18 @@
         useIonRouter = module.aj;
         IonSpinner = module.l;
       }, module => {
-        useDefaultProps = module.n;
+        useDefaultProps = module.o;
         SwiperWrapper = module.S;
         useUser = module.b;
         FieldType = module.F;
         transformStandardResponseToCamelCase = module.t;
-        useShowNotification = module.o;
-        useFormWithSchema = module.p;
+        useShowNotification = module.p;
+        useFormWithSchema = module.q;
         DynamicForm = module.D;
-        photosArrayWithIdYup = module.q;
-        useGetFeLocationQuery = module.r;
-        activeLocation = module.h;
-        preloadedLocationData = module.s;
+        photosArrayWithIdYup = module.r;
+        useGetFeLocationQuery = module.s;
+        activeLocation = module.j;
+        preloadedLocationData = module.v;
       }, module => {
         rzrApi = module.r;
         TagType = module.o;

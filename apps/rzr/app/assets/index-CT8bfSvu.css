@@ -1732,8 +1732,8 @@ a:hover {
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
-  display: block;
+  /* min-height: 100vh;
+  display: block; */
 }
 
 /* Removed h1 custom styling - use Tailwind classes instead (text-3xl, text-4xl, etc.) */

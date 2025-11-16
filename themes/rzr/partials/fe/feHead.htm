@@ -2,7 +2,26 @@ description = "FE Head"
 
 [viewBag]
 ==
-<link rel="shortcut icon" type="image/png" href="/apps/rzr/public/projects/rzr/images/berbernica-tanja/favicon.ico?v=1" />
+{% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? null %}
+{% set locationTitle = locationComponent.locationData.title ?? locationComponent.title ?? null %}
+{% set locationSnippet = locationComponent.locationData.snippet ?? locationComponent.locationData.title ?? locationComponent.title ?? null %}
+{% set logoPath = locationComponent.locationData.logo.path ?? locationComponent.logo.path ?? null %}
+{% set faviconUrl = logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null %}
+{% set appleIconUrl = logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null %}
+{% set maskIconUrl = logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null %}
+
+{% if locationSnippet or locationTitle %}
+<title>{{ locationSnippet ?? locationTitle }}</title>
+{% endif %}
+
+{% set locationDescription = locationComponent.locationData.description ?? locationComponent.locationData.snippet ?? locationComponent.locationData.title ?? null %}
+{% if locationDescription %}
+<meta name="description" content="{{ locationDescription }}" />
+{% endif %}
+
+{% if faviconUrl %}
+<link rel="shortcut icon" type="image/png" href="{{ faviconUrl }}?v=1" />
+{% endif %}
 
 <meta name="color-scheme" content="light dark" />
 <meta
@@ -14,10 +33,16 @@ description = "FE Head"
 
 <!-- add to homescreen for ios -->
 <meta name="apple-mobile-web-app-capable" content="yes" />
-<meta name="apple-mobile-web-app-title" content="Berbernica Tanja" />
+{% if locationTitle %}
+<meta name="apple-mobile-web-app-title" content="{{ locationTitle }}" />
+{% endif %}
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<link rel="apple-touch-icon" href="/app/public/projects/rzr/images/berbernica-tanja/apple-180x180.png?v=1">
-<link rel="mask-icon" href="/app/public/projects/rzr/images/berbernica-tanja/mask/maskable_icon_x192.png?v=2" color="#000000">
+{% if appleIconUrl %}
+<link rel="apple-touch-icon" href="{{ appleIconUrl }}?v=1">
+{% endif %}
+{% if maskIconUrl %}
+<link rel="mask-icon" href="{{ maskIconUrl }}?v=2" color="#000000">
+{% endif %}
 <!-- 
 <link rel="preload" href="/apps/rzr/assets/logo-16x9-d16121a9.webp" as="image">
 <link rel="preload" href="/apps/rzr/assets/logo-square-bae215db.webp" as="image"> -->
@@ -26,19 +51,23 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-BxZPnDwj.js"></script>
+<script type="module" crossorigin src="/app/assets/index-BaKD2imp.js"></script>
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-ibnEmoJR.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CwmcyK5O.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-Bx5nIVFZ.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-CbIbgj2R.css">
-    <link rel="stylesheet" crossorigin href="/app/assets/index-DpIKjTf5.css">
+    <link rel="stylesheet" crossorigin href="/app/assets/index-CT8bfSvu.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}
 
-{% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? 'berbernica-tanja' %}
-{% set manifestUrl = url('manifest.webmanifest?locationSlug=' ~ locationSlug) %}
-<link rel="manifest" href="{{ manifestUrl }}">
+{% if not locationSlug %}
+    {% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? null %}
+{% endif %}
+{% if locationSlug %}
+    {% set manifestUrl = url('manifest.webmanifest?locationSlug=' ~ locationSlug) %}
+    <link rel="manifest" href="{{ manifestUrl }}">
+{% endif %}
 <script id="vite-plugin-pwa:register-sw" src="/app/registerSW.js?v=2.00"></script>

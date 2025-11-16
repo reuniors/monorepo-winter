@@ -71,8 +71,8 @@ class LocationGetManifestAction
             // Use logo for "any" purpose, cover for "maskable" purpose
             if ($iconConfig['purpose'] === 'any' && $location->logo) {
                 $sourceImage = $location->logo;
-            } elseif ($iconConfig['purpose'] === 'maskable' && $location->cover) {
-                $sourceImage = $location->cover;
+            } elseif ($iconConfig['purpose'] === 'maskable' && $location->logo) {
+                $sourceImage = $location->logo;
             }
             
             if ($sourceImage) {

@@ -1,8 +1,8 @@
 import { aC as useTranslation, e as reactExports, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aj as useIonRouter, l as IonSpinner, u as IonText, aC as IonCard, aD as IonCardHeader, aK as IonCardTitle, i as IonIcon, aZ as settingsOutline, aE as IonCardContent, E as IonList, o as IonItem, a6 as addOutline, D as IonLabel, a4 as IonReorderGroup, Y as IonReorder } from "./vendor_ionic-Bx5nIVFZ.js";
-import { w as useGetFeServiceGroupsQuery, h as activeLocation, x as useUpdateServiceGroupMutation, y as ShowLoading, e as urlPrefix } from "./App-DPiy04Om.js";
+import { x as useGetFeServiceGroupsQuery, j as activeLocation, y as useUpdateServiceGroupMutation, z as ShowLoading, f as urlPrefix } from "./App-ApQjM-oG.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-BxZPnDwj.js";
+import "./index-BaKD2imp.js";
 import "./vendor_firebase-O9nGtifs.js";
 function ServicesPage() {
   const { t } = useTranslation();

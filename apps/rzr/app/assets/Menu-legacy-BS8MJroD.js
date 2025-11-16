@@ -1,9 +1,9 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './index-legacy-qLNXppAS.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './index-legacy-gc8LmLQA.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
-    var useTranslation, instance, jsxRuntimeExports, withRouter, useLocation, reactExports, IonIcon, globe, IonSelect, IonSelectOption, IonMenu, IonContent, IonList, IonListHeader, IonMenuToggle, IonItem, logInOutline, powerOutline, IonFooter, IonLabel, home, alarmOutline, personOutline, notificationsOutline, useAppDispatch, useAppDispatch$1, useUser, useAppSelector, isPwa, isIos, urlPrefix, sharedApi, TagType, rzrApi, getDeviceData, TagType$1, setShowLoginModal;
+    var useTranslation, instance, jsxRuntimeExports, withRouter, useLocation, reactExports, IonIcon, globe, IonSelect, IonSelectOption, IonMenu, IonContent, IonList, IonListHeader, IonMenuToggle, IonItem, logInOutline, powerOutline, IonFooter, IonLabel, home, alarmOutline, personOutline, notificationsOutline, useAppDispatch, useAppDispatch$1, useUser, useAppSelector, useRemoveConnectedDeviceMutation, isPwa, isIos, urlPrefix, sharedApi, TagType, getDeviceData, rzrApi, TagType$1, setShowLoginModal;
     return {
       setters: [module => {
         useTranslation = module.aC;
@@ -36,14 +36,15 @@
         useAppDispatch$1 = module.a;
         useUser = module.b;
         useAppSelector = module.c;
+        useRemoveConnectedDeviceMutation = module.d;
         isPwa = module.i;
-        isIos = module.d;
-        urlPrefix = module.e;
+        isIos = module.e;
+        urlPrefix = module.f;
       }, module => {
         sharedApi = module.s;
         TagType = module.T;
-        rzrApi = module.r;
         getDeviceData = module.k;
+        rzrApi = module.r;
         TagType$1 = module.o;
         setShowLoginModal = module.j;
       }, null, null],
@@ -168,27 +169,6 @@
             className: `bg-blue-100 ${className}`
           });
         }
-        const notificationServices = rzrApi.injectEndpoints({
-          endpoints: builder => ({
-            addConnectedDevice: builder.mutation({
-              query: body => ({
-                url: `users/connected-devices`,
-                method: "POST",
-                body
-              })
-            }),
-            removeConnectedDevice: builder.mutation({
-              query: body => ({
-                url: `users/connected-devices`,
-                method: "DELETE",
-                body
-              })
-            })
-          })
-        });
-        const {
-          useRemoveConnectedDeviceMutation
-        } = notificationServices;
         const routes = {
           appPages: [{
             title: "Salon",

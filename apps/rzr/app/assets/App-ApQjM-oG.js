@@ -1,8 +1,8 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/ListIonIcons-BRSabdsa.js","assets/vendor_react-CwmcyK5O.js","assets/vendor_ionic-Bx5nIVFZ.js","assets/vendor_ionic-CbIbgj2R.css","assets/vendor_leaflet-ibnEmoJR.js","assets/vendor_leaflet-Bvr-Ab8i.css","assets/vendor_react-Z09ODb1v.css","assets/index-BxZPnDwj.js","assets/index-DpIKjTf5.css","assets/vendor_firebase-O9nGtifs.js","assets/PublicProfilePage-DLV_RgW7.js","assets/LocationWorkingTimePage-D1crYCyc.js","assets/LocationEditPage-kyW3-z1A.js","assets/location-settings.data-CXFAjLNy.js","assets/LocationWorkersPage-CerVBENK.js","assets/LocationSettingsPage-BV10anKw.js","assets/ServicesPage-HPUT1SBv.js","assets/ServiceGroupEditPage-BeKQwXDD.js","assets/ServiceEditPage-TCDu8W-A.js","assets/LocationWorkerCreatePage-C3aZXGcz.js","assets/Menu-YoQGLn8Q.js","assets/Menu-BF-_LQ0F.css"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/ListIonIcons-DjNKNRBi.js","assets/vendor_react-CwmcyK5O.js","assets/vendor_ionic-Bx5nIVFZ.js","assets/vendor_ionic-CbIbgj2R.css","assets/vendor_leaflet-ibnEmoJR.js","assets/vendor_leaflet-Bvr-Ab8i.css","assets/vendor_react-Z09ODb1v.css","assets/index-BaKD2imp.js","assets/index-CT8bfSvu.css","assets/vendor_firebase-O9nGtifs.js","assets/PublicProfilePage-Cob08A35.js","assets/LocationWorkingTimePage-BrFB86K6.js","assets/LocationEditPage-KCwA-rA6.js","assets/location-settings.data-b9tnb8SN.js","assets/LocationWorkersPage-BrEUuF--.js","assets/LocationSettingsPage-y3MzEdAM.js","assets/ServicesPage-DTp4ci61.js","assets/ServiceGroupEditPage-Dv_4ZbWe.js","assets/ServiceEditPage-BRYOq7rL.js","assets/LocationWorkerCreatePage-DbWxhQHn.js","assets/Menu-49e28K4g.js","assets/Menu-BF-_LQ0F.css"])))=>i.map(i=>d[i]);
 var _a, _b, _c, _d, _e, _f, _g, _h, _i;
 import { I as IonModal, b as IonHeader, c as IonToolbar, e as IonTitle, f as IonButtons, h as IonButton, i as IonIcon, j as closeOutline, k as IonContent, l as IonSpinner, m as IonFooter, s as saveOutline, n as languageOutline, o as IonItem, p as IonInput, q as eye, r as eyeOff, t as logoGoogle, u as IonText, v as IonSelect, w as IonSelectOption, x as videocam, y as videocamOff, z as IonGrid, A as IonRow, B as IonCol, C as IonSearchbar, D as IonLabel, E as IonList, F as IonCheckbox, G as arrowUndoOutline, H as IonPage, J as createAnimation, K as useIonModal, L as useIonLoading, M as useIonAlert, N as useIonActionSheet, O as trashOutline, P as IonImg, Q as cropOutline, R as optionsOutline, S as cloudUploadOutline, T as funnelOutline, U as listCircleSharp, V as IonItemSliding, W as IonItemOptions, X as IonThumbnail, Y as IonReorder, Z as menuOutline, $ as chevronForwardOutline, a0 as IonItemOption, a1 as constructOutline, a2 as checkboxOutline, a3 as squareOutline, a4 as IonReorderGroup, a5 as checkmarkOutline, a6 as addOutline, a7 as isPlatform, a8 as icons, a9 as useIonToast, aa as IonTextarea, ab as IonDatetime, ac as IonToggle, _ as __vitePreload, ad as calendarOutline, ae as timeOutline, af as IonChip, ag as IonLoading, ah as mailOutline, ai as keyOutline, aj as useIonRouter, ak as IonToast, al as IonListHeader, am as IonSkeletonText, an as exitOutline, ao as logoApple, ap as logoAndroid, aq as IonMenuButton, ar as chevronBackOutline, as as ellipsisVertical, at as ellipsisHorizontal, au as IonRefresher, av as IonRefresherContent, aw as IonPopover, ax as IonAlert, ay as lockClosedOutline, az as logInOutline, aA as chevronBack, aB as chevronForward, aC as IonCard, aD as IonCardHeader, aE as IonCardContent, aF as megaphoneOutline, aG as cutOutline, aH as IonSegment, aI as IonSegmentButton, aJ as IonAvatar, aK as IonCardTitle, aL as checkmarkCircleOutline, aM as closeCircleOutline, aN as walletOutline, aO as refreshOutline, aP as IonAccordionGroup, aQ as IonAccordion, aR as callOutline, aS as personOutline, aT as pencilOutline, aU as notificationsCircle, aV as closeCircle, aW as checkmarkCircle, aX as notificationsOffOutline, aY as peopleOutline, aZ as settingsOutline, a_ as IonActionSheet, a$ as createOutline, b0 as giftOutline, b1 as cashOutline, b2 as IonTabs, b3 as IonRouterOutlet, b4 as IonTabBar, b5 as IonTabButton, b6 as alarmOutline, b7 as notificationsOutline, b8 as removeOutline, b9 as IonBadge, ba as calendarClearOutline, bb as arrowBack, bc as arrowForward, bd as useIonViewDidLeave, be as pricetagOutline, bf as alertCircleOutline, bg as hourglassOutline, bh as helpOutline, bi as alertOutline, bj as IonApp, bk as IonReactRouter, bl as IonSplitPane, bm as setupIonicReact } from "./vendor_ionic-Bx5nIVFZ.js";
 import { j as jsxRuntimeExports, Z as useForm, $ as o, E as humpsExports, a0 as t, e as reactExports, a1 as create$3, a2 as create$6, R as React, a3 as Controller, a4 as yup, a5 as setLocale, a6 as useWatch, a7 as DraftExports, a8 as reactDraftWysiwygExports, a9 as draftToHtml, aa as qr, ab as Swiper, G as createSlice, ac as l, J as combineReducers, K as configureStore, ad as c, ae as SwiperSlide, af as register, ag as V, ah as arrayMove, ai as useSensors, aj as useSensor, ak as DndContext, al as closestCenter, am as SortableContext, an as verticalListSortingStrategy, ao as TouchSensor, ap as sortableKeyboardCoordinates, aq as KeyboardSensor, ar as PointerSensor, as as useSortable, at as CSS, au as parseISO, av as formatInTimeZone, aw as toZonedTime, ax as format, ay as fromZonedTime, az as isValid, aA as useDispatch, aB as useSelector, aC as useTranslation, aD as useHistory, aE as GoogleOAuthProvider, aF as useGoogleLogin, aG as ErrorBoundary, aH as Clipboard, q as Route, aI as buildExports, v as instance, aJ as differenceInCalendarMonths, aK as getMonth, aL as startOfMonth, aM as addDays, aN as endOfMonth, aO as eachDayOfInterval, aP as subMonths, aQ as addMonths, aR as parse, aS as addMinutes, aT as isWithinInterval, aU as differenceInMinutes, aV as Redirect, aW as useLocation, aX as isPast, aY as create$7, aZ as create$5, a_ as useParams, a$ as create$2, Y as ErrorBoundary$1 } from "./vendor_react-CwmcyK5O.js";
-import { s as sharedApi, T as TagType, a as sharedApiPrefix, U as UploadType, b as TagId, c as setShowCompleteProfileModal, d as setUser, e as setUiData, g as getImageModalData, f as closeImageModal, h as getShowLoginModal, i as getShowImageModal, j as setShowLoginModal, k as getDeviceData, l as setDeviceData, m as getUser, n as logoutAction, r as rzrApi, o as TagType$1, p as TagId$1, q as getInitialData } from "./index-BxZPnDwj.js";
+import { s as sharedApi, T as TagType, a as sharedApiPrefix, U as UploadType, b as TagId, c as setShowCompleteProfileModal, d as setUser, e as setUiData, g as getImageModalData, f as closeImageModal, h as getShowLoginModal, i as getShowImageModal, j as setShowLoginModal, k as getDeviceData, l as setDeviceData, m as getUser, n as logoutAction, r as rzrApi, o as TagType$1, p as TagId$1, q as getInitialData } from "./index-BaKD2imp.js";
 import { i as initializeApp, g as getMessagingInWindow, a as getAnalytics, o as onMessage, b as getToken } from "./vendor_firebase-O9nGtifs.js";
 const ConditionalComponent = ({
   condition,
@@ -4470,7 +4470,7 @@ function CommonIonicSwitch(props) {
     error && /* @__PURE__ */ jsxRuntimeExports.jsx(IonText, { color: "danger", className: "ion-padding-start", children: /* @__PURE__ */ jsxRuntimeExports.jsx("small", { children: error.message }) })
   ] });
 }
-const ListIonIcons = reactExports.lazy(() => __vitePreload(() => import("./ListIonIcons-BRSabdsa.js"), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8,9]) : void 0));
+const ListIonIcons = reactExports.lazy(() => __vitePreload(() => import("./ListIonIcons-DjNKNRBi.js"), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8,9]) : void 0));
 function ListIonIconsModal({
   isOpen,
   setIsOpen,
@@ -5962,13 +5962,36 @@ function useUser(props) {
     skipNoUser: { skip: !user }
   };
 }
-function CommonNotificationWrapper() {
+const notificationServices = sharedApi.injectEndpoints({
+  endpoints: (builder) => ({
+    addConnectedDevice: builder.mutation({
+      query: (body) => ({
+        url: "users/connected-devices",
+        method: "POST",
+        body
+      })
+    }),
+    removeConnectedDevice: builder.mutation({
+      query: (body) => ({
+        url: "users/connected-devices",
+        method: "DELETE",
+        body
+      })
+    })
+  })
+});
+const {
+  useAddConnectedDeviceMutation,
+  useRemoveConnectedDeviceMutation
+} = notificationServices;
+function CommonNotificationWrapper({
+  activeLocation: activeLocation2
+} = {}) {
   const [addConnectedDevice] = useAddConnectedDeviceMutation();
   const { isOwner } = useUser();
   const [presentToast] = useIonToast();
   const { push } = useIonRouter();
   const deviceData = useAppSelector$1(getDeviceData);
-  const activeLocation2 = "test";
   const deviceNotification = useDeviceNotification({
     handleMessage: (payload) => {
       var _a2, _b2, _c2;
@@ -5991,7 +6014,9 @@ function CommonNotificationWrapper() {
       });
     },
     onConnected: (token) => {
-      addConnectedDevice({ token, locationSlug: activeLocation2 });
+      if (activeLocation2) {
+        addConnectedDevice({ token, locationSlug: activeLocation2 });
+      }
     },
     connectDeviceInit: !!isOwner
   });
@@ -6001,9 +6026,6 @@ function CommonNotificationWrapper() {
     }
   }, [deviceData]);
   return null;
-}
-function useAddConnectedDeviceMutation() {
-  throw new Error("Function not implemented.");
 }
 const NotificationToast = ({
   message,
@@ -12552,7 +12574,7 @@ function ConfirmReservationPage({
     }
   );
 }
-const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => import("./PublicProfilePage-DLV_RgW7.js"), true ? __vite__mapDeps([10,1,2,3,4,5,6,7,8,9]) : void 0));
+const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => import("./PublicProfilePage-Cob08A35.js"), true ? __vite__mapDeps([10,1,2,3,4,5,6,7,8,9]) : void 0));
 function PublicProfilePageWrapper() {
   const { t: t2 } = useTranslation();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -12991,7 +13013,7 @@ function NewsEditPage() {
     }
   ) });
 }
-const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => import("./LocationWorkingTimePage-D1crYCyc.js"), true ? __vite__mapDeps([11,1,2,3,4,5,6,7,8,9]) : void 0));
+const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => import("./LocationWorkingTimePage-BrFB86K6.js"), true ? __vite__mapDeps([11,1,2,3,4,5,6,7,8,9]) : void 0));
 function LocationWorkingTimePageWrapper() {
   const { t: t2 } = useTranslation();
   const [isModalOpen, setIsModalOpen] = reactExports.useState(false);
@@ -13023,7 +13045,7 @@ function LocationWorkingTimePageWrapper() {
     }
   );
 }
-const LocationEditPage = reactExports.lazy(() => __vitePreload(() => import("./LocationEditPage-kyW3-z1A.js"), true ? __vite__mapDeps([12,1,2,3,4,5,6,7,8,13,9]) : void 0));
+const LocationEditPage = reactExports.lazy(() => __vitePreload(() => import("./LocationEditPage-KCwA-rA6.js"), true ? __vite__mapDeps([12,1,2,3,4,5,6,7,8,13,9]) : void 0));
 function LocationEditDataPageWrapper() {
   const { t: t2 } = useTranslation();
   const [isModalOpen, setIsModalOpen] = reactExports.useState(false);
@@ -13043,7 +13065,7 @@ function LocationEditDataPageWrapper() {
     }
   );
 }
-const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => import("./LocationWorkersPage-CerVBENK.js"), true ? __vite__mapDeps([14,1,2,3,4,5,6,7,8,9]) : void 0));
+const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => import("./LocationWorkersPage-BrEUuF--.js"), true ? __vite__mapDeps([14,1,2,3,4,5,6,7,8,9]) : void 0));
 function LocationWorkersPageWrapper() {
   const { t: t2 } = useTranslation();
   const history = useHistory();
@@ -13064,7 +13086,7 @@ function LocationWorkersPageWrapper() {
     }
   );
 }
-const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => import("./LocationSettingsPage-BV10anKw.js"), true ? __vite__mapDeps([15,1,2,3,4,5,6,13,7,8,9]) : void 0));
+const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => import("./LocationSettingsPage-y3MzEdAM.js"), true ? __vite__mapDeps([15,1,2,3,4,5,6,13,7,8,9]) : void 0));
 function LocationSettingsPageWrapper() {
   const { t: t2 } = useTranslation();
   const [isModalOpen, setIsModalOpen] = reactExports.useState(false);
@@ -13084,7 +13106,7 @@ function LocationSettingsPageWrapper() {
     }
   );
 }
-const ServicesPage = reactExports.lazy(() => __vitePreload(() => import("./ServicesPage-HPUT1SBv.js"), true ? __vite__mapDeps([16,1,2,3,4,5,6,7,8,9]) : void 0));
+const ServicesPage = reactExports.lazy(() => __vitePreload(() => import("./ServicesPage-DTp4ci61.js"), true ? __vite__mapDeps([16,1,2,3,4,5,6,7,8,9]) : void 0));
 function ServicesPageWrapper() {
   const { t: t2 } = useTranslation();
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -13097,7 +13119,7 @@ function ServicesPageWrapper() {
     }
   );
 }
-const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => import("./ServiceGroupEditPage-BeKQwXDD.js"), true ? __vite__mapDeps([17,1,2,3,4,5,6,7,8,9]) : void 0));
+const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => import("./ServiceGroupEditPage-Dv_4ZbWe.js"), true ? __vite__mapDeps([17,1,2,3,4,5,6,7,8,9]) : void 0));
 function ServiceGroupEditPageWrapper() {
   const { t: t2 } = useTranslation();
   const { serviceGroupId } = useParams();
@@ -13111,7 +13133,7 @@ function ServiceGroupEditPageWrapper() {
     }
   );
 }
-const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => import("./ServiceEditPage-TCDu8W-A.js"), true ? __vite__mapDeps([18,1,2,3,4,5,6,7,8,9]) : void 0));
+const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => import("./ServiceEditPage-BRYOq7rL.js"), true ? __vite__mapDeps([18,1,2,3,4,5,6,7,8,9]) : void 0));
 function ServiceEditPageWrapper() {
   const { t: t2 } = useTranslation();
   const { serviceId } = useParams();
@@ -13710,7 +13732,7 @@ function ServiceCreatePageWrapper() {
   );
 }
 const LocationWorkerCreatePage = reactExports.lazy(
-  () => __vitePreload(() => import("./LocationWorkerCreatePage-C3aZXGcz.js"), true ? __vite__mapDeps([19,1,2,3,4,5,6,7,8,9]) : void 0)
+  () => __vitePreload(() => import("./LocationWorkerCreatePage-DbWxhQHn.js"), true ? __vite__mapDeps([19,1,2,3,4,5,6,7,8,9]) : void 0)
 );
 function LocationWorkerCreatePageWrapper() {
   const { t: t2 } = useTranslation();
@@ -14933,7 +14955,7 @@ function UserLoginPageWrapper() {
     }
   ) }) }) });
 }
-const Menu = reactExports.lazy(() => __vitePreload(() => import("./Menu-YoQGLn8Q.js"), true ? __vite__mapDeps([20,1,2,3,4,5,6,7,8,9,21]) : void 0));
+const Menu = reactExports.lazy(() => __vitePreload(() => import("./Menu-49e28K4g.js"), true ? __vite__mapDeps([20,1,2,3,4,5,6,7,8,9,21]) : void 0));
 setupIonicReact({
   swipeBackEnabled: isPwa && !isIos,
   animated: !isIos
@@ -14943,6 +14965,7 @@ const envActiveLocation = "berbernica-tanja";
 const envIsPrivate = parseInt("1");
 const preloadedLocationData = getInitialData(
   "locationData",
+  true,
   true
 );
 const activeLocation = (_d = preloadedLocationData == null ? void 0 : preloadedLocationData.slug) != null ? _d : envActiveLocation;
@@ -14987,7 +15010,7 @@ function App() {
         /* @__PURE__ */ jsxRuntimeExports.jsxs(IonReactRouter, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Ping$1, {}),
           /* @__PURE__ */ jsxRuntimeExports.jsx(CommonModalWrappers$1, {}),
-          !isWebView && isPwa && /* @__PURE__ */ jsxRuntimeExports.jsx(CommonNotificationWrapper, {}),
+          !isWebView && isPwa && /* @__PURE__ */ jsxRuntimeExports.jsx(CommonNotificationWrapper, { activeLocation }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(IonSplitPane, { contentId: "main", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, {}),
             /* @__PURE__ */ jsxRuntimeExports.jsx(Routes, {})
@@ -15009,15 +15032,16 @@ const App$1 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.definePropert
   urlPrefix
 }, Symbol.toStringTag, { value: "Module" }));
 export {
-  ServiceGroupEditForm as A,
-  ServiceEditForm as B,
+  useUpdateServiceMutation as A,
+  ServiceGroupEditForm as B,
   ConditionalComponent as C,
   DynamicForm as D,
-  useCreateWorkerMutation as E,
+  ServiceEditForm as E,
   FieldType as F,
-  fetchIonIconsList as G,
-  App$1 as H,
+  useCreateWorkerMutation as G,
+  fetchIonIconsList as H,
   IonModalExtended$1 as I,
+  App$1 as J,
   ModalActionButtons as M,
   SwiperWrapper$1 as S,
   UserAvatar as U,
@@ -15025,27 +15049,27 @@ export {
   useAppDispatch as a,
   useUser as b,
   useAppSelector as c,
-  isIos as d,
-  urlPrefix as e,
-  useClipboard as f,
-  useGetWorkerClientDataQuery as g,
-  activeLocation as h,
+  useRemoveConnectedDeviceMutation as d,
+  isIos as e,
+  urlPrefix as f,
+  useClipboard as g,
+  useGetWorkerClientDataQuery as h,
   isPwa as i,
-  ClientStatistics as j,
-  isWebPlatform as k,
-  fromUtcHM as l,
-  useGetFeWorkersQuery as m,
-  useDefaultProps as n,
-  useShowNotification as o,
-  useFormWithSchema as p,
-  photosArrayWithIdYup as q,
-  useGetFeLocationQuery as r,
-  preloadedLocationData as s,
+  activeLocation as j,
+  ClientStatistics as k,
+  isWebPlatform as l,
+  fromUtcHM as m,
+  useGetFeWorkersQuery as n,
+  useDefaultProps as o,
+  useShowNotification as p,
+  useFormWithSchema as q,
+  photosArrayWithIdYup as r,
+  useGetFeLocationQuery as s,
   transformStandardResponseToCamelCase as t,
   useAppDispatch$1 as u,
-  useGetAllWorkersQuery as v,
-  useGetFeServiceGroupsQuery as w,
-  useUpdateServiceGroupMutation as x,
-  ShowLoading$1 as y,
-  useUpdateServiceMutation as z
+  preloadedLocationData as v,
+  useGetAllWorkersQuery as w,
+  useGetFeServiceGroupsQuery as x,
+  useUpdateServiceGroupMutation as y,
+  ShowLoading$1 as z
 };

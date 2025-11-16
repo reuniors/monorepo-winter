@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-D0nPvb_a.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-qLNXppAS.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BXPALOm4.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, reactExports, jsxRuntimeExports, useIonRouter, IonSpinner, IonText, IonCard, IonCardHeader, IonCardTitle, IonIcon, settingsOutline, IonCardContent, IonList, IonItem, addOutline, IonLabel, IonReorderGroup, IonReorder, useGetFeServiceGroupsQuery, activeLocation, useUpdateServiceGroupMutation, ShowLoading, urlPrefix;
@@ -26,11 +26,11 @@
         IonReorderGroup = module.a4;
         IonReorder = module.Y;
       }, module => {
-        useGetFeServiceGroupsQuery = module.w;
-        activeLocation = module.h;
-        useUpdateServiceGroupMutation = module.x;
-        ShowLoading = module.y;
-        urlPrefix = module.e;
+        useGetFeServiceGroupsQuery = module.x;
+        activeLocation = module.j;
+        useUpdateServiceGroupMutation = module.y;
+        ShowLoading = module.z;
+        urlPrefix = module.f;
       }, null, null, null],
       execute: function () {
         exports("default", ServicesPage);

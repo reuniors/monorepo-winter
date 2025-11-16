@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './location-settings.data-legacy-CDe8QAPJ.js', './index-legacy-qLNXppAS.js', './App-legacy-D0nPvb_a.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './location-settings.data-legacy-BtUjq28f.js', './index-legacy-gc8LmLQA.js', './App-legacy-BXPALOm4.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var create$3, create$5, create$7, create$6, t, useTranslation, reactExports, jsxRuntimeExports, useIonRouter, IonCard, IonCardHeader, IonCardTitle, IonIcon, settingsOutline, IonCardContent, IonButton, saveOutline, IonSpinner, IonText, getLocationSettingsFormFields, rzrApi, TagType, transformStandardResponseToCamelCase, useGetFeLocationQuery, activeLocation, preloadedLocationData, useFormWithSchema, useShowNotification, DynamicForm;
@@ -33,11 +33,11 @@
         TagType = module.o;
       }, module => {
         transformStandardResponseToCamelCase = module.t;
-        useGetFeLocationQuery = module.r;
-        activeLocation = module.h;
-        preloadedLocationData = module.s;
-        useFormWithSchema = module.p;
-        useShowNotification = module.o;
+        useGetFeLocationQuery = module.s;
+        activeLocation = module.j;
+        preloadedLocationData = module.v;
+        useFormWithSchema = module.q;
+        useShowNotification = module.p;
         DynamicForm = module.D;
       }, null, null],
       execute: function () {
