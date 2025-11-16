@@ -78,8 +78,12 @@ class LocationUpdateAction extends BaseAction
         // Update slug, active status, and isPrivate only for admins
         if ($isAdmin) {
             $updateFields['slug'] = $attributes['slug'] ?? $location->slug;
-            $updateFields['active'] = $attributes['active'] ?? $location->active;
-            $updateFields['is_private'] = $attributes['is_private'] ?? $location->is_private;
+            if (isset($attributes['active'])) {
+                $updateFields['active'] = $attributes['active'];
+            }
+            if (isset($attributes['is_private'])) {
+                $updateFields['is_private'] = $attributes['is_private'];
+            }
             if (isset($attributes['pwaMetadata'])) {
                 $pwaMetadata = $location->pwa_metadata ?? [];
                 
