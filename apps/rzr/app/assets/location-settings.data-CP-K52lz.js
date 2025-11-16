@@ -1,5 +1,5 @@
 import { a0 as t } from "./vendor_react-CwmcyK5O.js";
-import { F as FieldType } from "./App-Dkq1aFrn.js";
+import { F as FieldType } from "./App-CcrodkXG.js";
 const getLocationSettingsFormFields = () => [
   {
     keyName: "timezone",

@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/App-Dkq1aFrn.js","assets/vendor_ionic-Bx5nIVFZ.js","assets/vendor_react-CwmcyK5O.js","assets/vendor_leaflet-ibnEmoJR.js","assets/vendor_leaflet-Bvr-Ab8i.css","assets/vendor_react-Z09ODb1v.css","assets/vendor_ionic-CbIbgj2R.css","assets/vendor_firebase-O9nGtifs.js","assets/App--SOcKfRT.css"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/App-CcrodkXG.js","assets/vendor_ionic-Bx5nIVFZ.js","assets/vendor_react-CwmcyK5O.js","assets/vendor_leaflet-ibnEmoJR.js","assets/vendor_leaflet-Bvr-Ab8i.css","assets/vendor_react-Z09ODb1v.css","assets/vendor_ionic-CbIbgj2R.css","assets/vendor_firebase-O9nGtifs.js","assets/App--SOcKfRT.css"])))=>i.map(i=>d[i]);
 var _a;
 function __vite_legacy_guard() {
   import.meta.url;
@@ -535,7 +535,7 @@ const store = configureStore({
   ])
 });
 const persistedStore = persistStore(store);
-const App = reactExports.lazy(() => __vitePreload(() => import("./App-Dkq1aFrn.js").then((n) => n.J), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8]) : void 0));
+const App = reactExports.lazy(() => __vitePreload(() => import("./App-CcrodkXG.js").then((n) => n.J), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8]) : void 0));
 clientExports.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   /* @__PURE__ */ jsxRuntimeExports.jsx(Provider, { store, children: /* @__PURE__ */ jsxRuntimeExports.jsx(PersistGate, { loading: null, persistor: persistedStore, children: /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ErrorBoundary, { fallbackRender, children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) }) }) })

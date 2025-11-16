@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-COcpOSCK.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-1z7kQfDY.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-C9XlRMPy.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-QX_VGgvL.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, reactExports, jsxRuntimeExports, useIonRouter, IonCard, IonCardHeader, IonCardTitle, IonIcon, createOutline, IonCardContent, useUpdateServiceMutation, useShowNotification, ServiceEditForm;

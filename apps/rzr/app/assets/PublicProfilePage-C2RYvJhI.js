@@ -1,8 +1,8 @@
 import { aC as useTranslation, a_ as useParams, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aC as IonCard, aE as IonCardContent, l as IonSpinner, aD as IonCardHeader, aK as IonCardTitle, E as IonList, o as IonItem, i as IonIcon, ah as mailOutline, D as IonLabel, aR as callOutline, ad as calendarOutline, aS as personOutline } from "./vendor_ionic-Bx5nIVFZ.js";
-import { b as useUser, g as useClipboard, h as useGetWorkerClientDataQuery, j as activeLocation, U as UserAvatar, C as ConditionalComponent, k as ClientStatistics, l as isWebPlatform } from "./App-Dkq1aFrn.js";
+import { b as useUser, g as useClipboard, h as useGetWorkerClientDataQuery, j as activeLocation, U as UserAvatar, C as ConditionalComponent, k as ClientStatistics, l as isWebPlatform } from "./App-CcrodkXG.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-D5IJpHZG.js";
+import "./index-C8kJSdQX.js";
 import "./vendor_firebase-O9nGtifs.js";
 function PublicProfilePage() {
   var _a, _b;

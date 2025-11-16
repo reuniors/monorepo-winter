@@ -110,7 +110,7 @@ class ConvertToUtcCommand extends Command
                 'types' => [
                     'time_from' => 'time',
                     'time_to' => 'time',
-                    'date' => 'date',
+                    'date' => 'date_simple',
                     'pauses' => 'json_pauses'
                 ]
             ],
@@ -267,6 +267,8 @@ class ConvertToUtcCommand extends Command
                 return $this->convertDateTimeField($value);
             case 'date':
                 return $this->convertDateField($value);
+            case 'date_simple':
+                return $this->convertDateFieldSimple($value);
             case 'timestamp':
                 return $this->convertTimestampField($value);
             case 'json_pauses':
@@ -325,6 +327,16 @@ class ConvertToUtcCommand extends Command
         return $dateTime->setTimezone($this->utcTz)->format('Y-m-d');
     }
 
+    private function convertDateFieldSimple($dateString)
+    {
+        // Simply copy the date without timezone conversion
+        // Extract just the date part (Y-m-d) if it contains time
+        if (strpos($dateString, ' ') !== false) {
+            return explode(' ', $dateString)[0];
+        }
+        return $dateString;
+    }
+
     private function convertTimestampField($timestampString)
     {
         $dateTime = Carbon::parse($timestampString, $this->belgradeTz);
@@ -350,26 +362,36 @@ class ConvertToUtcCommand extends Command
 
         $convertedPauses = [];
         foreach ($pauses as $pause) {
-            $convertedPause = $pause; // Copy all existing fields
+            $convertedPause = []; // Start fresh to avoid keeping old fields
             
-            // Convert time_from to time_from_utc if it exists
-            if (isset($pause['time_from'])) {
-                $convertedPause['time_from_utc'] = $this->convertTimeInJson(
-                    $pause['time_from'], 
+            // Handle timeFrom/timeTo (camelCase) or time_from/time_to (snake_case)
+            $timeFrom = $pause['timeFrom'] ?? $pause['time_from'] ?? null;
+            $timeTo = $pause['timeTo'] ?? $pause['time_to'] ?? null;
+            
+            // Convert timeFrom to timeFromUtc if it exists
+            if ($timeFrom) {
+                $convertedPause['timeFromUtc'] = $this->convertTimeInJson(
+                    $timeFrom, 
                     $belgradeTz, 
                     $utcTz
                 );
-                unset($convertedPause['time_from']); // Remove original
             }
             
-            // Convert time_to to time_to_utc if it exists
-            if (isset($pause['time_to'])) {
-                $convertedPause['time_to_utc'] = $this->convertTimeInJson(
-                    $pause['time_to'], 
+            // Convert timeTo to timeToUtc if it exists
+            if ($timeTo) {
+                $convertedPause['timeToUtc'] = $this->convertTimeInJson(
+                    $timeTo, 
                     $belgradeTz, 
                     $utcTz
                 );
-                unset($convertedPause['time_to']); // Remove original
+            }
+            
+            // Copy other fields if they exist (e.g., daysCodes, etc.)
+            foreach ($pause as $key => $value) {
+                // Skip original time fields
+                if (!in_array($key, ['timeFrom', 'timeTo', 'time_from', 'time_to'])) {
+                    $convertedPause[$key] = $value;
+                }
             }
             
             $convertedPauses[] = $convertedPause;

@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-1z7kQfDY.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-QX_VGgvL.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonSpinner, IonFooter, saveOutline, languageOutline, IonItem, IonInput, eye, eyeOff, logoGoogle, IonText, IonSelect, IonSelectOption, videocam, videocamOff, IonGrid, IonRow, IonCol, IonSearchbar, IonLabel, IonList, IonCheckbox, arrowUndoOutline, IonPage, createAnimation, useIonModal, useIonLoading, useIonAlert, useIonActionSheet, trashOutline, IonImg, cropOutline, optionsOutline, cloudUploadOutline, funnelOutline, listCircleSharp, IonItemSliding, IonItemOptions, IonThumbnail, IonReorder, menuOutline, chevronForwardOutline, IonItemOption, constructOutline, checkboxOutline, squareOutline, IonReorderGroup, checkmarkOutline, addOutline, isPlatform, icons, useIonToast, IonTextarea, IonDatetime, IonToggle, __vitePreload, calendarOutline, timeOutline, IonChip, IonLoading, mailOutline, keyOutline, useIonRouter, IonToast, IonListHeader, IonSkeletonText, exitOutline, logoApple, logoAndroid, IonMenuButton, chevronBackOutline, ellipsisVertical, ellipsisHorizontal, IonRefresher, IonRefresherContent, IonPopover, IonAlert, lockClosedOutline, logInOutline, chevronBack, chevronForward, IonCard, IonCardHeader, IonCardContent, megaphoneOutline, cutOutline, IonSegment, IonSegmentButton, IonAvatar, IonCardTitle, checkmarkCircleOutline, closeCircleOutline, walletOutline, refreshOutline, IonAccordionGroup, IonAccordion, callOutline, personOutline, pencilOutline, notificationsCircle, closeCircle, checkmarkCircle, notificationsOffOutline, peopleOutline, settingsOutline, IonActionSheet, createOutline, giftOutline, cashOutline, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, alarmOutline, notificationsOutline, removeOutline, IonBadge, calendarClearOutline, arrowBack, arrowForward, useIonViewDidLeave, pricetagOutline, alertCircleOutline, hourglassOutline, helpOutline, alertOutline, IonApp, IonReactRouter, IonSplitPane, setupIonicReact, jsxRuntimeExports, useForm, o, humpsExports, t, reactExports, create$3, create$6, React, Controller, yup, setLocale, useWatch, DraftExports, reactDraftWysiwygExports, draftToHtml, qr, Swiper, createSlice, l, combineReducers, configureStore, c, SwiperSlide, register, V, arrayMove, useSensors, useSensor, DndContext, closestCenter, SortableContext, verticalListSortingStrategy, TouchSensor, sortableKeyboardCoordinates, KeyboardSensor, PointerSensor, useSortable, CSS, parseISO, formatInTimeZone, toZonedTime, format, fromZonedTime, isValid, useDispatch, useSelector, useTranslation, useHistory, GoogleOAuthProvider, useGoogleLogin, ErrorBoundary, Clipboard, Route, buildExports, instance, differenceInCalendarMonths, getMonth, startOfMonth, addDays, endOfMonth, eachDayOfInterval, subMonths, addMonths, parse, addMinutes, isWithinInterval, differenceInMinutes, Redirect, useLocation, isPast, create$7, create$5, useParams, create$2, ErrorBoundary$1, sharedApi, TagType, sharedApiPrefix, UploadType, TagId, setShowCompleteProfileModal, setUser, setUiData, getImageModalData, closeImageModal, getShowLoginModal, getShowImageModal, setShowLoginModal, getDeviceData, setDeviceData, getUser, logoutAction, rzrApi, TagType$1, TagId$1, getInitialData, initializeApp, getMessagingInWindow, getAnalytics, onMessage, getToken;
@@ -4890,7 +4890,7 @@
             })]
           });
         }
-        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-yAVMwZ9c.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-Bi4G3ACH.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ListIonIconsModal({
           isOpen,
           setIsOpen,
@@ -9235,7 +9235,7 @@
               color: reservationStatus === AppointmentStatus.CONFIRMED ? "success" : reservationStatus === AppointmentStatus.CANCELLED ? "danger" : reservationStatus === AppointmentStatus.PENDING ? "warning" : "medium"
             }), /* @__PURE__ */jsxRuntimeExports.jsx(IonLabel, {
               children: t(`${notification.description}`)
-            }), reservation && /* @__PURE__ */jsxRuntimeExports.jsx("span", {
+            }), reservation && reservation.dateUtc && /* @__PURE__ */jsxRuntimeExports.jsx("span", {
               children: format(parseISO(reservation.dateUtc), "dd.MM.yyyy HH:mm")
             })]
           });
@@ -12392,11 +12392,16 @@
             if (step === 2 && groupsSelectedServices.length === 0) return false;
             return true;
           };
-          const handleSetStep = step => {
+          const handleSetStep = (step, replace = false) => {
             if (!canGoToStep(step)) return;
             const params = new URLSearchParams(location.search);
+            const currentStepFromUrl = parseInt(params.get("step") ?? "0", 10);
             params.set("step", step.toString());
-            if (activeStep && activeStep > step) {
+            if (replace || currentStepFromUrl === step && activeStep === void 0) {
+              history.replace({
+                search: params.toString()
+              });
+            } else if (activeStep && activeStep > step) {
               history.goBack();
             } else if (activeStep === 2 && step === 1) {
               history.replace({
@@ -12477,7 +12482,9 @@
             if (activeWorkers.length === 1 && !selectedWorker && activeStep === 0) {
               const singleWorker = activeWorkers[0];
               setSelectedWorker(singleWorker);
-              handleSetStep(1);
+              const params = new URLSearchParams(location.search);
+              const stepFromUrl = parseInt(params.get("step") ?? "0", 10);
+              handleSetStep(1, stepFromUrl === 0);
             }
           }, [activeWorkers, selectedWorker, activeStep]);
           reactExports.useEffect(() => {
@@ -13258,7 +13265,7 @@
             })]
           });
         }
-        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-COeWWmJ4.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-Bsu76AJY.js'), false              ? __VITE_PRELOAD__ : void 0));
         function PublicProfilePageWrapper() {
           const {
             t
@@ -13756,7 +13763,7 @@
             })
           });
         }
-        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-BFj8SiQK.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-BXdYNOe8.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkingTimePageWrapper() {
           const {
             t
@@ -13788,7 +13795,7 @@
             })
           });
         }
-        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-BHu7mPHz.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-DGV60fgG.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationEditDataPageWrapper() {
           const {
             t
@@ -13807,7 +13814,7 @@
             })
           });
         }
-        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-CO2cWwzh.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-BL-ns0wJ.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkersPageWrapper() {
           const {
             t
@@ -13827,7 +13834,7 @@
             })
           });
         }
-        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-Bxyb7X7D.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-u1zA1mPU.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationSettingsPageWrapper() {
           const {
             t
@@ -13846,7 +13853,7 @@
             })
           });
         }
-        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-CUEu2Du_.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-CjCkIHkC.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServicesPageWrapper() {
           const {
             t
@@ -13861,7 +13868,7 @@
             children: /* @__PURE__ */jsxRuntimeExports.jsx(ServicesPage, {})
           });
         }
-        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-59M5RGxA.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-Dl0EWsiu.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceGroupEditPageWrapper() {
           const {
             t
@@ -13881,7 +13888,7 @@
             })
           });
         }
-        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-DUiOHLoe.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-DFeJoxtr.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceEditPageWrapper() {
           const {
             t
@@ -14522,7 +14529,7 @@
             })
           });
         }
-        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-BNDgF3xi.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-LhT0KXD4.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkerCreatePageWrapper() {
           const {
             t
@@ -15772,7 +15779,7 @@
             })
           });
         }
-        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-pe1whqaR.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-DcRdkeLA.js'), false              ? __VITE_PRELOAD__ : void 0));
         setupIonicReact({
           swipeBackEnabled: isPwa && !isIos,
           animated: !isIos

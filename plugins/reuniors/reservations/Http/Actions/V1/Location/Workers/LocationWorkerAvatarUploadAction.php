@@ -64,4 +64,9 @@ class LocationWorkerAvatarUploadAction extends BaseImageUploadAction
         // For example: check if user has permission to upload avatar for this worker
         // Or check file size limits specific to avatars, etc.
     }
+
+    public function asController(LocationWorker $worker = null): array
+    {
+        return parent::asController($worker);
+    }
 }
