@@ -72,7 +72,7 @@ class LocationComponent extends ComponentBase
             // Check if location is private and user is not authenticated
             if ($this->locationData->is_private) {
                 // redirect if not /zakazivanje/login
-                if (!str_starts_with(Request::path(), '/zakazivanje')) {
+                if (!str_contains(Request::path(), 'zakazivanje')) {
                     return Redirect::to('/zakazivanje');
                 }
             }
