@@ -68,7 +68,15 @@ class LocationComponent extends ComponentBase
                 'slug' => $locationSlug
             ])
                 ->firstOrFail();
-                        
+            
+            // Check if location is private and user is not authenticated
+            if ($this->locationData->is_private) {
+                // redirect if not /zakazivanje/login
+                if (!str_starts_with(Request::path(), '/zakazivanje')) {
+                    return Redirect::to('/zakazivanje');
+                }
+            }
+            
             $this->page['pageTitle'] = $this->locationData->snippet ?? $this->locationData->title;
             $this->page['pageDescription'] = Str::of($this->locationData->description)->limit(160);
             $this->page['pageImage'] = $this->locationData->cover?->getPath() ?? null;
