@@ -51,6 +51,12 @@ class LocationUpdateAction extends BaseAction
         $user = Auth::getUser();
         $isAdmin = $user && in_array($user->group->code, ['admin']);
         
+        // Map camelCase to snake_case for database fields
+        if (isset($attributes['isPrivate'])) {
+            $attributes['is_private'] = $attributes['isPrivate'];
+            unset($attributes['isPrivate']);
+        }
+        
         // Remove fields that non-admin users can't update
         if (!$isAdmin) {
             unset($attributes['slug']);

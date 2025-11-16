@@ -1,8 +1,8 @@
 import { a1 as create$3, aZ as create$5, aY as create$7, a2 as create$6, a0 as t, aC as useTranslation, e as reactExports, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aj as useIonRouter, aC as IonCard, aD as IonCardHeader, aK as IonCardTitle, i as IonIcon, aZ as settingsOutline, aE as IonCardContent, h as IonButton, s as saveOutline, l as IonSpinner, u as IonText } from "./vendor_ionic-Bx5nIVFZ.js";
-import { a as getLocationSettingsFormFields } from "./location-settings.data-b9tnb8SN.js";
-import { r as rzrApi, o as TagType } from "./index-BaKD2imp.js";
-import { t as transformStandardResponseToCamelCase, s as useGetFeLocationQuery, j as activeLocation, v as preloadedLocationData, q as useFormWithSchema, p as useShowNotification, D as DynamicForm } from "./App-ApQjM-oG.js";
+import { a as getLocationSettingsFormFields } from "./location-settings.data-xkgHg6yq.js";
+import { r as rzrApi, o as TagType } from "./index-D5IJpHZG.js";
+import { t as transformStandardResponseToCamelCase, s as useGetFeLocationQuery, j as activeLocation, v as preloadedLocationData, q as useFormWithSchema, p as useShowNotification, D as DynamicForm } from "./App-Dkq1aFrn.js";
 import "./vendor_leaflet-ibnEmoJR.js";
 import "./vendor_firebase-O9nGtifs.js";
 const locationSettingsPageFormSchema = create$3().shape({

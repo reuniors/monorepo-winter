@@ -74,19 +74,19 @@ class News extends Model
      */
     public function scopeActive($query)
     {
+        $nowUtc = now()->utc();
+        
         return $query
             ->where('status', 'approved')
-            ->where(function ($query) {
-                $now = now();
+            ->where(function ($query) use ($nowUtc) {
                 $query
                     ->whereNull('activated_at_utc')
-                    ->orWhere('activated_at_utc', '<=', $now);
+                    ->orWhere('activated_at_utc', '<=', $nowUtc);
             })
-            ->where(function ($query) {
-                $now = now();
+            ->where(function ($query) use ($nowUtc) {
                 $query
                     ->whereNull('deactivated_at_utc')
-                    ->orWhere('deactivated_at_utc', '>=', $now);
+                    ->orWhere('deactivated_at_utc', '>=', $nowUtc);
             });
     }
 

@@ -176,7 +176,9 @@ class Location extends Model
         $query->with('gallery');
         $query->with('logo');
         $query->with('cover');
-        $query->with('news');
+        $query->with(['news' => function ($query) {
+            $query->active();
+        }]);
 
         if ($slug) {
             $query->where('slug', $slug);

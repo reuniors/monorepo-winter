@@ -1,8 +1,8 @@
 import { aC as useTranslation, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aC as IonCard, aD as IonCardHeader, aK as IonCardTitle, i as IonIcon, aY as peopleOutline, aE as IonCardContent, l as IonSpinner, E as IonList, o as IonItem, a6 as addOutline, D as IonLabel, aJ as IonAvatar, u as IonText, $ as chevronForwardOutline } from "./vendor_ionic-Bx5nIVFZ.js";
-import { w as useGetAllWorkersQuery } from "./App-ApQjM-oG.js";
+import { w as useGetAllWorkersQuery } from "./App-Dkq1aFrn.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-BaKD2imp.js";
+import "./index-D5IJpHZG.js";
 import "./vendor_firebase-O9nGtifs.js";
 function LocationWorkersPage({
   locationSlug,
@@ -21,12 +21,12 @@ function LocationWorkersPage({
       /* @__PURE__ */ jsxRuntimeExports.jsx(IonIcon, { icon: peopleOutline }),
       t("Radnici")
     ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(IonCardContent, { className: "ion-no-padding", children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center p-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(IonSpinner, {}) }) : isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center p-8 text-red-500", children: t("Greška pri učitavanju radnika.") }) : !((_a = workers == null ? void 0 : workers.data) == null ? void 0 : _a.length) ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center p-8 text-gray-500", children: t("Nema radnika za ovu lokaciju.") }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(IonList, { children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx(IonCardContent, { className: "ion-no-padding", children: isLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex justify-center p-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(IonSpinner, {}) }) : isError ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center p-8 text-red-500", children: t("Greška pri učitavanju radnika.") }) : /* @__PURE__ */ jsxRuntimeExports.jsxs(IonList, { children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(IonItem, { button: true, onClick: onCreate, color: "primary", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(IonIcon, { icon: addOutline, slot: "start" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(IonLabel, { children: t("Dodaj radnika") })
       ] }),
-      workers.data.map((worker) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+      !((_a = workers == null ? void 0 : workers.data) == null ? void 0 : _a.length) ? /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "text-center p-8 text-gray-500", children: t("Nema radnika za ovu lokaciju.") }) : /* @__PURE__ */ jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, { children: workers.data.map((worker) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
         IonItem,
         {
           button: true,
@@ -64,7 +64,7 @@ function LocationWorkersPage({
           ]
         },
         worker.id
-      ))
+      )) })
     ] }) })
   ] }) });
 }

@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-gc8LmLQA.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-1z7kQfDY.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonSpinner, IonFooter, saveOutline, languageOutline, IonItem, IonInput, eye, eyeOff, logoGoogle, IonText, IonSelect, IonSelectOption, videocam, videocamOff, IonGrid, IonRow, IonCol, IonSearchbar, IonLabel, IonList, IonCheckbox, arrowUndoOutline, IonPage, createAnimation, useIonModal, useIonLoading, useIonAlert, useIonActionSheet, trashOutline, IonImg, cropOutline, optionsOutline, cloudUploadOutline, funnelOutline, listCircleSharp, IonItemSliding, IonItemOptions, IonThumbnail, IonReorder, menuOutline, chevronForwardOutline, IonItemOption, constructOutline, checkboxOutline, squareOutline, IonReorderGroup, checkmarkOutline, addOutline, isPlatform, icons, useIonToast, IonTextarea, IonDatetime, IonToggle, __vitePreload, calendarOutline, timeOutline, IonChip, IonLoading, mailOutline, keyOutline, useIonRouter, IonToast, IonListHeader, IonSkeletonText, exitOutline, logoApple, logoAndroid, IonMenuButton, chevronBackOutline, ellipsisVertical, ellipsisHorizontal, IonRefresher, IonRefresherContent, IonPopover, IonAlert, lockClosedOutline, logInOutline, chevronBack, chevronForward, IonCard, IonCardHeader, IonCardContent, megaphoneOutline, cutOutline, IonSegment, IonSegmentButton, IonAvatar, IonCardTitle, checkmarkCircleOutline, closeCircleOutline, walletOutline, refreshOutline, IonAccordionGroup, IonAccordion, callOutline, personOutline, pencilOutline, notificationsCircle, closeCircle, checkmarkCircle, notificationsOffOutline, peopleOutline, settingsOutline, IonActionSheet, createOutline, giftOutline, cashOutline, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, alarmOutline, notificationsOutline, removeOutline, IonBadge, calendarClearOutline, arrowBack, arrowForward, useIonViewDidLeave, pricetagOutline, alertCircleOutline, hourglassOutline, helpOutline, alertOutline, IonApp, IonReactRouter, IonSplitPane, setupIonicReact, jsxRuntimeExports, useForm, o, humpsExports, t, reactExports, create$3, create$6, React, Controller, yup, setLocale, useWatch, DraftExports, reactDraftWysiwygExports, draftToHtml, qr, Swiper, createSlice, l, combineReducers, configureStore, c, SwiperSlide, register, V, arrayMove, useSensors, useSensor, DndContext, closestCenter, SortableContext, verticalListSortingStrategy, TouchSensor, sortableKeyboardCoordinates, KeyboardSensor, PointerSensor, useSortable, CSS, parseISO, formatInTimeZone, toZonedTime, format, fromZonedTime, isValid, useDispatch, useSelector, useTranslation, useHistory, GoogleOAuthProvider, useGoogleLogin, ErrorBoundary, Clipboard, Route, buildExports, instance, differenceInCalendarMonths, getMonth, startOfMonth, addDays, endOfMonth, eachDayOfInterval, subMonths, addMonths, parse, addMinutes, isWithinInterval, differenceInMinutes, Redirect, useLocation, isPast, create$7, create$5, useParams, create$2, ErrorBoundary$1, sharedApi, TagType, sharedApiPrefix, UploadType, TagId, setShowCompleteProfileModal, setUser, setUiData, getImageModalData, closeImageModal, getShowLoginModal, getShowImageModal, setShowLoginModal, getDeviceData, setDeviceData, getUser, logoutAction, rzrApi, TagType$1, TagId$1, getInitialData, initializeApp, getMessagingInWindow, getAnalytics, onMessage, getToken;
@@ -4890,7 +4890,7 @@
             })]
           });
         }
-        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-BVV7KArM.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-yAVMwZ9c.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ListIonIconsModal({
           isOpen,
           setIsOpen,
@@ -13258,7 +13258,7 @@
             })]
           });
         }
-        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-pVjHf2JB.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-COeWWmJ4.js'), false              ? __VITE_PRELOAD__ : void 0));
         function PublicProfilePageWrapper() {
           const {
             t
@@ -13756,7 +13756,7 @@
             })
           });
         }
-        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-UKrfVP8V.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-BFj8SiQK.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkingTimePageWrapper() {
           const {
             t
@@ -13788,7 +13788,7 @@
             })
           });
         }
-        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-D14e7knz.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-BHu7mPHz.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationEditDataPageWrapper() {
           const {
             t
@@ -13807,7 +13807,7 @@
             })
           });
         }
-        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-C8NZtdkr.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-CO2cWwzh.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkersPageWrapper() {
           const {
             t
@@ -13827,7 +13827,7 @@
             })
           });
         }
-        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-CErrUxvs.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-Bxyb7X7D.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationSettingsPageWrapper() {
           const {
             t
@@ -13846,7 +13846,7 @@
             })
           });
         }
-        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-Bhe6NTdM.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-CUEu2Du_.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServicesPageWrapper() {
           const {
             t
@@ -13861,7 +13861,7 @@
             children: /* @__PURE__ */jsxRuntimeExports.jsx(ServicesPage, {})
           });
         }
-        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-B1KLefDw.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-59M5RGxA.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceGroupEditPageWrapper() {
           const {
             t
@@ -13881,7 +13881,7 @@
             })
           });
         }
-        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-CIu08PVQ.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-DUiOHLoe.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceEditPageWrapper() {
           const {
             t
@@ -14522,7 +14522,7 @@
             })
           });
         }
-        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-D09AjybL.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-BNDgF3xi.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkerCreatePageWrapper() {
           const {
             t
@@ -15304,30 +15304,32 @@
                 }) : isError ? /* @__PURE__ */jsxRuntimeExports.jsx("div", {
                   className: "text-center p-8 text-red-500",
                   children: t("Greška pri učitavanju promo kodova.")
-                }) : !data?.data?.length ? /* @__PURE__ */jsxRuntimeExports.jsx("div", {
-                  className: "text-center p-8 text-gray-500",
-                  children: t("Nema promo kodova za ovu lokaciju.")
                 }) : /* @__PURE__ */jsxRuntimeExports.jsx(IonList, {
-                  children: data.data.map(promoCode => /* @__PURE__ */jsxRuntimeExports.jsx(IonItem, {
-                    button: true,
-                    onClick: () => onEdit?.(promoCode),
-                    children: /* @__PURE__ */jsxRuntimeExports.jsxs(IonLabel, {
-                      className: "flex flex-col ion-no-padding",
-                      children: [/* @__PURE__ */jsxRuntimeExports.jsxs("div", {
-                        className: "flex items-center justify-between",
-                        children: [/* @__PURE__ */jsxRuntimeExports.jsx("span", {
-                          className: "font-semibold",
-                          children: promoCode.name
-                        }), getStatusBadge(promoCode)]
-                      }), /* @__PURE__ */jsxRuntimeExports.jsxs("span", {
-                        className: "text-sm text-gray-600",
-                        children: [promoCode.discountValue, promoCode.inPercent ? "%" : " RSD", " popusta", " - "]
-                      }), /* @__PURE__ */jsxRuntimeExports.jsxs("span", {
-                        className: "text-xs text-gray-500",
-                        children: [t("Aktivno od"), ":", " ", format(promoCode.activateAtUtc, "dd.MM.yyyy"), " -", " ", format(promoCode.deactivateAtUtc, "dd.MM.yyyy")]
-                      })]
-                    })
-                  }, promoCode.id))
+                  children: !data?.data?.length ? /* @__PURE__ */jsxRuntimeExports.jsx("div", {
+                    className: "text-center p-8 text-gray-500",
+                    children: t("Nema promo kodova za ovu lokaciju.")
+                  }) : /* @__PURE__ */jsxRuntimeExports.jsx(jsxRuntimeExports.Fragment, {
+                    children: data.data.map(promoCode => /* @__PURE__ */jsxRuntimeExports.jsx(IonItem, {
+                      button: true,
+                      onClick: () => onEdit?.(promoCode),
+                      children: /* @__PURE__ */jsxRuntimeExports.jsxs(IonLabel, {
+                        className: "flex flex-col ion-no-padding",
+                        children: [/* @__PURE__ */jsxRuntimeExports.jsxs("div", {
+                          className: "flex items-center justify-between",
+                          children: [/* @__PURE__ */jsxRuntimeExports.jsx("span", {
+                            className: "font-semibold",
+                            children: promoCode.name
+                          }), getStatusBadge(promoCode)]
+                        }), /* @__PURE__ */jsxRuntimeExports.jsxs("span", {
+                          className: "text-sm text-gray-600",
+                          children: [promoCode.discountValue, promoCode.inPercent ? "%" : " RSD", " popusta", " - "]
+                        }), /* @__PURE__ */jsxRuntimeExports.jsxs("span", {
+                          className: "text-xs text-gray-500",
+                          children: [t("Aktivno od"), ":", " ", format(promoCode.activateAtUtc, "dd.MM.yyyy"), " -", " ", format(promoCode.deactivateAtUtc, "dd.MM.yyyy")]
+                        })]
+                      })
+                    }, promoCode.id))
+                  })
                 })
               })]
             })
@@ -15770,7 +15772,7 @@
             })
           });
         }
-        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-BS8MJroD.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-pe1whqaR.js'), false              ? __VITE_PRELOAD__ : void 0));
         setupIonicReact({
           swipeBackEnabled: isPwa && !isIos,
           animated: !isIos

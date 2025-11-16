@@ -39,13 +39,13 @@ is_hidden = 0
                                         {{ news.title }}:
                                     </p>
                                     <p class="mt-0 mb-0 text-left">
-                                        {{ news.description }}
+                                        {{ news.description|raw }}
                                     </p>
                                 {% endfor %}
                             </div>
                             {% endif %}
                             <p class="mt-0 mb-0 text-gray-600">
-                                {{ locationData.description }}
+                                {{ locationData.description|raw }}
                             </p>
                         </div>
                     </div>
