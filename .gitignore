@@ -39,3 +39,4 @@ cursordocs/
 
 # Marker file for php artisan serve (created by apps/{app}/artisan)
 .app-name
+firebase_credentials.json
