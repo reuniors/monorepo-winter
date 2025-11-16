@@ -59,9 +59,9 @@ class LocationUpdateAction extends BaseAction
         
         // Remove fields that non-admin users can't update
         if (!$isAdmin) {
-            unset($attributes['slug']);
-            unset($attributes['active']);
-            unset($attributes['is_private']);
+            // unset($attributes['slug']);
+            // unset($attributes['active']);
+            // unset($attributes['is_private']);
         }
 
         // Update basic fields
