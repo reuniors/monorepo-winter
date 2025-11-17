@@ -1,8 +1,8 @@
 import { aC as useTranslation, aD as useHistory, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
-import { G as useCreateWorkerMutation, W as WorkerForm } from "./App-DWFFjjw2.js";
+import { G as useCreateWorkerMutation, W as WorkerForm } from "./App-CqwiZh2J.js";
 import "./vendor_ionic-Bx5nIVFZ.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-Md_pA9jc.js";
+import "./index-DJI0-CdA.js";
 import "./vendor_firebase-O9nGtifs.js";
 const LocationWorkerCreatePage = ({
   locationSlug

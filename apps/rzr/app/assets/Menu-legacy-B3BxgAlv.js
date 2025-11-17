@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-DaMGkUa_.js', './index-legacy-BsCYJ2SO.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './vendor_ionic-legacy-E6_G7KHN.js', './App-legacy-BH4UVrBq.js', './index-legacy-BMAV-P-5.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, instance, jsxRuntimeExports, withRouter, useLocation, reactExports, IonIcon, globe, IonSelect, IonSelectOption, IonMenu, IonContent, IonList, IonListHeader, IonMenuToggle, IonItem, logInOutline, powerOutline, IonFooter, IonLabel, home, alarmOutline, personOutline, notificationsOutline, useAppDispatch, useAppDispatch$1, useUser, useAppSelector, useRemoveConnectedDeviceMutation, isPwa, isIos, urlPrefix, sharedApi, TagType, getDeviceData, rzrApi, TagType$1, setShowLoginModal;

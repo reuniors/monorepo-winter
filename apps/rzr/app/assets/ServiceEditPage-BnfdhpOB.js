@@ -1,8 +1,8 @@
 import { aC as useTranslation, e as reactExports, j as jsxRuntimeExports } from "./vendor_react-CwmcyK5O.js";
 import { aj as useIonRouter, aC as IonCard, aD as IonCardHeader, aK as IonCardTitle, i as IonIcon, a$ as createOutline, aE as IonCardContent } from "./vendor_ionic-Bx5nIVFZ.js";
-import { A as useUpdateServiceMutation, p as useShowNotification, E as ServiceEditForm } from "./App-DWFFjjw2.js";
+import { A as useUpdateServiceMutation, p as useShowNotification, E as ServiceEditForm } from "./App-CqwiZh2J.js";
 import "./vendor_leaflet-ibnEmoJR.js";
-import "./index-Md_pA9jc.js";
+import "./index-DJI0-CdA.js";
 import "./vendor_firebase-O9nGtifs.js";
 function ServiceEditPage({ service }) {
   const { t } = useTranslation();

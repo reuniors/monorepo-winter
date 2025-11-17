@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-BsCYJ2SO.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-BMAV-P-5.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonSpinner, IonFooter, saveOutline, languageOutline, IonItem, IonInput, eye, eyeOff, logoGoogle, IonText, IonSelect, IonSelectOption, videocam, videocamOff, IonGrid, IonRow, IonCol, IonSearchbar, IonLabel, IonList, IonCheckbox, arrowUndoOutline, IonPage, createAnimation, useIonModal, useIonLoading, useIonAlert, useIonActionSheet, trashOutline, IonImg, cropOutline, optionsOutline, cloudUploadOutline, funnelOutline, listCircleSharp, IonItemSliding, IonItemOptions, IonThumbnail, IonReorder, menuOutline, chevronForwardOutline, IonItemOption, constructOutline, checkboxOutline, squareOutline, IonReorderGroup, checkmarkOutline, addOutline, isPlatform, icons, useIonToast, IonTextarea, IonDatetime, IonToggle, __vitePreload, calendarOutline, timeOutline, IonChip, IonLoading, mailOutline, keyOutline, useIonRouter, IonToast, IonListHeader, IonSkeletonText, exitOutline, logoApple, logoAndroid, IonMenuButton, chevronBackOutline, ellipsisVertical, ellipsisHorizontal, IonRefresher, IonRefresherContent, IonPopover, IonAlert, lockClosedOutline, logInOutline, chevronBack, chevronForward, IonCard, IonCardHeader, IonCardContent, megaphoneOutline, cutOutline, IonSegment, IonSegmentButton, IonAvatar, IonCardTitle, checkmarkCircleOutline, closeCircleOutline, walletOutline, refreshOutline, IonAccordionGroup, IonAccordion, callOutline, personOutline, pencilOutline, notificationsCircle, closeCircle, checkmarkCircle, notificationsOffOutline, peopleOutline, settingsOutline, IonActionSheet, createOutline, giftOutline, cashOutline, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, alarmOutline, notificationsOutline, removeOutline, IonBadge, calendarClearOutline, arrowBack, arrowForward, useIonViewDidLeave, pricetagOutline, alertCircleOutline, hourglassOutline, helpOutline, alertOutline, IonApp, IonReactRouter, IonSplitPane, setupIonicReact, jsxRuntimeExports, useForm, o, humpsExports, t, reactExports, create$3, create$6, React, Controller, yup, setLocale, useWatch, DraftExports, reactDraftWysiwygExports, draftToHtml, qr, Swiper, createSlice, l, combineReducers, configureStore, c, SwiperSlide, register, V, arrayMove, useSensors, useSensor, DndContext, closestCenter, SortableContext, verticalListSortingStrategy, TouchSensor, sortableKeyboardCoordinates, KeyboardSensor, PointerSensor, useSortable, CSS, parseISO, formatInTimeZone, toZonedTime, format, fromZonedTime, isValid, useDispatch, useSelector, useTranslation, useHistory, GoogleOAuthProvider, useGoogleLogin, ErrorBoundary, Clipboard, Route, buildExports, instance, differenceInCalendarMonths, getMonth, startOfMonth, addDays, endOfMonth, eachDayOfInterval, subMonths, addMonths, parse, addMinutes, isWithinInterval, differenceInMinutes, Redirect, useLocation, isPast, create$7, create$5, useParams, create$2, ErrorBoundary$1, sharedApi, TagType, sharedApiPrefix, UploadType, TagId, setShowCompleteProfileModal, setUser, setUiData, getImageModalData, closeImageModal, getShowLoginModal, getShowImageModal, setShowLoginModal, getDeviceData, setDeviceData, getUser, logoutAction, rzrApi, TagType$1, TagId$1, getInitialData, initializeApp, getMessagingInWindow, getAnalytics, onMessage, getToken;
@@ -4890,7 +4890,7 @@
             })]
           });
         }
-        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-BzP3-F9m.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-mittYhXL.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ListIonIconsModal({
           isOpen,
           setIsOpen,
@@ -6309,24 +6309,35 @@
           const deviceData = useAppSelector$1(getDeviceData);
           const dispatch = useAppDispatch$1();
           const [swNotReady, setSwNotReady] = reactExports.useState(false);
-          if (!messaging) {
-            return null;
-          }
-          if (handleMessage) {
-            onMessage(messaging, payload => {
-              handleMessage(payload);
-            });
-          }
-          const handleConnectDevice = async enabled => {
+          const onConnectedRef = reactExports.useRef(onConnected);
+          const handleMessageRef = reactExports.useRef(handleMessage);
+          reactExports.useEffect(() => {
+            onConnectedRef.current = onConnected;
+          }, [onConnected]);
+          reactExports.useEffect(() => {
+            handleMessageRef.current = handleMessage;
+          }, [handleMessage]);
+          reactExports.useEffect(() => {
             if (!messaging) {
-              return null;
+              return;
+            }
+            onMessage(messaging, payload => {
+              if (handleMessageRef.current) {
+                handleMessageRef.current(payload);
+              }
+            });
+            return () => {};
+          }, []);
+          const handleConnectDevice = reactExports.useCallback(async enabled => {
+            if (!messaging) {
+              return;
             }
             if (!enabled && !deviceData.notificationsEnabled) {
               return;
             }
             const registration = await navigator?.serviceWorker?.getRegistration("/");
             if (!registration) {
-              !swNotReady && setSwNotReady(true);
+              setSwNotReady(true);
               return;
             }
             const permission = await Notification.requestPermission();
@@ -6336,29 +6347,30 @@
                 vapidKey: VITE_RZR_VAPID_KEY
               });
               if (deviceData.notificationsToken !== token) {
-                onConnected(token);
+                onConnectedRef.current(token);
                 dispatch(setDeviceData({
                   notificationsToken: token
                 }));
               }
             }
-          };
+          }, [deviceData.notificationsEnabled, deviceData.notificationsToken, dispatch]);
           reactExports.useEffect(() => {
-            if (connectDeviceInit) {
+            if (connectDeviceInit && messaging) {
               handleConnectDevice(true);
             }
-          }, [connectDeviceInit]);
+          }, [connectDeviceInit, handleConnectDevice]);
           reactExports.useEffect(() => {
-            if (swNotReady) {
+            if (swNotReady && messaging) {
               navigator?.serviceWorker?.ready.then(() => {
+                console.log("service worker ready");
                 setSwNotReady(false);
                 handleConnectDevice(true);
               });
             }
-          }, []);
-          return {
+          }, [swNotReady, handleConnectDevice]);
+          return messaging ? {
             connectDevice: handleConnectDevice
-          };
+          } : null;
         }
         function useUser(props) {
           const user = useAppSelector$1(getUser);
@@ -13281,7 +13293,7 @@
             })]
           });
         }
-        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-CL58vKkk.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-BEuV2ylr.js'), false              ? __VITE_PRELOAD__ : void 0));
         function PublicProfilePageWrapper() {
           const {
             t
@@ -13779,7 +13791,7 @@
             })
           });
         }
-        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-B2gptUgj.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-CoCQz35d.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkingTimePageWrapper() {
           const {
             t
@@ -13811,7 +13823,7 @@
             })
           });
         }
-        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-DVpyOTKO.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-DB9Slxt5.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationEditDataPageWrapper() {
           const {
             t
@@ -13830,7 +13842,7 @@
             })
           });
         }
-        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-CbCvhT0e.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-DIIvGMa_.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkersPageWrapper() {
           const {
             t
@@ -13850,7 +13862,7 @@
             })
           });
         }
-        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-BOn3-qav.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-DI1kmc8J.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationSettingsPageWrapper() {
           const {
             t
@@ -13869,7 +13881,7 @@
             })
           });
         }
-        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-DW0CtVI2.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-DB7mlocs.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServicesPageWrapper() {
           const {
             t
@@ -13884,7 +13896,7 @@
             children: /* @__PURE__ */jsxRuntimeExports.jsx(ServicesPage, {})
           });
         }
-        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-CAUILJ02.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-Do_hkAPm.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceGroupEditPageWrapper() {
           const {
             t
@@ -13904,7 +13916,7 @@
             })
           });
         }
-        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-BcptWTth.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-S00AyNL5.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceEditPageWrapper() {
           const {
             t
@@ -14545,7 +14557,7 @@
             })
           });
         }
-        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-D7KW0Rn5.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-DYT58cvo.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkerCreatePageWrapper() {
           const {
             t
@@ -15795,7 +15807,7 @@
             })
           });
         }
-        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-CJVrSqSJ.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-B3BxgAlv.js'), false              ? __VITE_PRELOAD__ : void 0));
         setupIonicReact({
           swipeBackEnabled: isPwa && !isIos,
           animated: !isIos

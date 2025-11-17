@@ -581,7 +581,7 @@
           }).concat([rzrApi.middleware, sharedApi.middleware, unauthorizedMiddleware])
         });
         const persistedStore = persistStore(store);
-        const App = reactExports.lazy(() => __vitePreload(() => module.import('./App-legacy-DaMGkUa_.js').then(n => n.J), false              ? __VITE_PRELOAD__ : void 0));
+        const App = reactExports.lazy(() => __vitePreload(() => module.import('./App-legacy-BH4UVrBq.js').then(n => n.J), false              ? __VITE_PRELOAD__ : void 0));
         clientExports.createRoot(document.getElementById("root")).render(
         // <React.StrictMode>
         /* @__PURE__ */

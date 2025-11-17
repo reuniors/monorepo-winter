@@ -1,7 +1,7 @@
 import { aC as useTranslation, v as instance, j as jsxRuntimeExports, n as withRouter, aW as useLocation, e as reactExports } from "./vendor_react-CwmcyK5O.js";
 import { i as IonIcon, bn as globe, v as IonSelect, w as IonSelectOption, bo as IonMenu, k as IonContent, E as IonList, al as IonListHeader, bp as IonMenuToggle, o as IonItem, az as logInOutline, bq as powerOutline, m as IonFooter, D as IonLabel, br as home, b6 as alarmOutline, aS as personOutline, b7 as notificationsOutline } from "./vendor_ionic-Bx5nIVFZ.js";
-import { u as useAppDispatch, a as useAppDispatch$1, b as useUser, c as useAppSelector, d as useRemoveConnectedDeviceMutation, i as isPwa, e as isIos, f as urlPrefix } from "./App-DWFFjjw2.js";
-import { s as sharedApi, T as TagType, k as getDeviceData, r as rzrApi, o as TagType$1, j as setShowLoginModal } from "./index-Md_pA9jc.js";
+import { u as useAppDispatch, a as useAppDispatch$1, b as useUser, c as useAppSelector, d as useRemoveConnectedDeviceMutation, i as isPwa, e as isIos, f as urlPrefix } from "./App-CqwiZh2J.js";
+import { s as sharedApi, T as TagType, k as getDeviceData, r as rzrApi, o as TagType$1, j as setShowLoginModal } from "./index-DJI0-CdA.js";
 import "./vendor_leaflet-ibnEmoJR.js";
 import "./vendor_firebase-O9nGtifs.js";
 const languageNames = {
