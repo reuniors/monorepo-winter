@@ -64,11 +64,12 @@ class NotificationCreateAction extends BaseAction {
             }
         }
 
-        if ($sendPush && !empty($notificationData)) {
+        if ($sendPush && !empty($notificationData) && $locationId) {
             SendNotificationToDevicesAction::run([
                 'title' => $notificationData['title'] ?? $title,
                 'body' => $description,
                 'usersIds' => $usersIds,
+                'locationId' => $locationId,
                 'data' => $notificationData
             ]);
         }

@@ -15,6 +15,7 @@ class SendNotificationToDevicesAction extends BaseAction {
             'icon' => ['string'],
             'data' => ['array'],
             'usersIds' => ['required', 'array'],
+            'locationId' => ['required', 'integer'],
         ];
     }
 
@@ -59,7 +60,11 @@ class SendNotificationToDevicesAction extends BaseAction {
         $icon = $attributes['icon'] ?? null;
         $data = $attributes['data'] ?? [];
         $usersIds = $attributes['usersIds'];
+        $locationId = $attributes['locationId'];
+        
+        // Filter by location_id to ensure notifications are sent only to devices connected to this specific location
         $connectedDevices = ConnectedDevice::whereIn('user_id', $usersIds)
+            ->where('location_id', $locationId)
             ->get();
 
         foreach ($connectedDevices as $connectedDevice) {

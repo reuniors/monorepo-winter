@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_react-legacy-DV1SlEeb.js', './App-legacy-C9XlRMPy.js', './vendor_ionic-legacy-E6_G7KHN.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-QX_VGgvL.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_react-legacy-DV1SlEeb.js', './App-legacy-DaMGkUa_.js', './vendor_ionic-legacy-E6_G7KHN.js', './vendor_leaflet-legacy-DEZLfQ5q.js', './index-legacy-BsCYJ2SO.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var useTranslation, useHistory, jsxRuntimeExports, useCreateWorkerMutation, WorkerForm;

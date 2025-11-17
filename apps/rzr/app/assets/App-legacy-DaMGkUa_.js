@@ -1,6 +1,6 @@
 ;
 (function () {
-  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-QX_VGgvL.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
+  System.register(['./vendor_ionic-legacy-E6_G7KHN.js', './vendor_react-legacy-DV1SlEeb.js', './index-legacy-BsCYJ2SO.js', './vendor_firebase-legacy-auYnrKck.js'], function (exports, module) {
     'use strict';
 
     var IonModal, IonHeader, IonToolbar, IonTitle, IonButtons, IonButton, IonIcon, closeOutline, IonContent, IonSpinner, IonFooter, saveOutline, languageOutline, IonItem, IonInput, eye, eyeOff, logoGoogle, IonText, IonSelect, IonSelectOption, videocam, videocamOff, IonGrid, IonRow, IonCol, IonSearchbar, IonLabel, IonList, IonCheckbox, arrowUndoOutline, IonPage, createAnimation, useIonModal, useIonLoading, useIonAlert, useIonActionSheet, trashOutline, IonImg, cropOutline, optionsOutline, cloudUploadOutline, funnelOutline, listCircleSharp, IonItemSliding, IonItemOptions, IonThumbnail, IonReorder, menuOutline, chevronForwardOutline, IonItemOption, constructOutline, checkboxOutline, squareOutline, IonReorderGroup, checkmarkOutline, addOutline, isPlatform, icons, useIonToast, IonTextarea, IonDatetime, IonToggle, __vitePreload, calendarOutline, timeOutline, IonChip, IonLoading, mailOutline, keyOutline, useIonRouter, IonToast, IonListHeader, IonSkeletonText, exitOutline, logoApple, logoAndroid, IonMenuButton, chevronBackOutline, ellipsisVertical, ellipsisHorizontal, IonRefresher, IonRefresherContent, IonPopover, IonAlert, lockClosedOutline, logInOutline, chevronBack, chevronForward, IonCard, IonCardHeader, IonCardContent, megaphoneOutline, cutOutline, IonSegment, IonSegmentButton, IonAvatar, IonCardTitle, checkmarkCircleOutline, closeCircleOutline, walletOutline, refreshOutline, IonAccordionGroup, IonAccordion, callOutline, personOutline, pencilOutline, notificationsCircle, closeCircle, checkmarkCircle, notificationsOffOutline, peopleOutline, settingsOutline, IonActionSheet, createOutline, giftOutline, cashOutline, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, alarmOutline, notificationsOutline, removeOutline, IonBadge, calendarClearOutline, arrowBack, arrowForward, useIonViewDidLeave, pricetagOutline, alertCircleOutline, hourglassOutline, helpOutline, alertOutline, IonApp, IonReactRouter, IonSplitPane, setupIonicReact, jsxRuntimeExports, useForm, o, humpsExports, t, reactExports, create$3, create$6, React, Controller, yup, setLocale, useWatch, DraftExports, reactDraftWysiwygExports, draftToHtml, qr, Swiper, createSlice, l, combineReducers, configureStore, c, SwiperSlide, register, V, arrayMove, useSensors, useSensor, DndContext, closestCenter, SortableContext, verticalListSortingStrategy, TouchSensor, sortableKeyboardCoordinates, KeyboardSensor, PointerSensor, useSortable, CSS, parseISO, formatInTimeZone, toZonedTime, format, fromZonedTime, isValid, useDispatch, useSelector, useTranslation, useHistory, GoogleOAuthProvider, useGoogleLogin, ErrorBoundary, Clipboard, Route, buildExports, instance, differenceInCalendarMonths, getMonth, startOfMonth, addDays, endOfMonth, eachDayOfInterval, subMonths, addMonths, parse, addMinutes, isWithinInterval, differenceInMinutes, Redirect, useLocation, isPast, create$7, create$5, useParams, create$2, ErrorBoundary$1, sharedApi, TagType, sharedApiPrefix, UploadType, TagId, setShowCompleteProfileModal, setUser, setUiData, getImageModalData, closeImageModal, getShowLoginModal, getShowImageModal, setShowLoginModal, getDeviceData, setDeviceData, getUser, logoutAction, rzrApi, TagType$1, TagId$1, getInitialData, initializeApp, getMessagingInWindow, getAnalytics, onMessage, getToken;
@@ -4890,7 +4890,7 @@
             })]
           });
         }
-        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-Bi4G3ACH.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ListIonIcons = reactExports.lazy(() => __vitePreload(() => module.import('./ListIonIcons-legacy-BzP3-F9m.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ListIonIconsModal({
           isOpen,
           setIsOpen,
@@ -6448,7 +6448,7 @@
         } = {}) {
           const [addConnectedDevice] = useAddConnectedDeviceMutation();
           const {
-            isOwner
+            isOwnerOrWorker
           } = useUser();
           const [presentToast] = useIonToast();
           const {
@@ -6481,10 +6481,10 @@
                 });
               }
             },
-            connectDeviceInit: !!isOwner
+            connectDeviceInit: !!isOwnerOrWorker
           });
           reactExports.useEffect(() => {
-            if (!!deviceNotification && !isOwner && deviceData.notificationsEnabled) {
+            if (!!deviceNotification && !isOwnerOrWorker && deviceData.notificationsEnabled) {
               deviceNotification?.connectDevice(true);
             }
           }, [deviceData]);
@@ -11636,6 +11636,9 @@
             if (!selectedWorker) {
               return serviceGroups;
             }
+            if (selectedWorker.isSyncedService) {
+              return serviceGroups;
+            }
             return serviceGroups.map(group => ({
               ...group,
               services: group.services.filter(service => {
@@ -12036,11 +12039,21 @@
           reactExports.useImperativeHandle(ref, () => ({
             swiper: swiperRef.current?.swiper
           }));
+          reactExports.useEffect(() => {
+            if (swiperRef.current?.swiper) {
+              setTimeout(() => {
+                swiperRef.current?.swiper?.update();
+              }, 50);
+            }
+          }, [slots.length]);
           return /* @__PURE__ */jsxRuntimeExports.jsx(SwiperWrapper$1, {
             ref: swiperRef,
             spaceBetween: 10,
             slidesPerView: "auto",
             freeMode: true,
+            observer: true,
+            observeParents: true,
+            observeSlideChildren: true,
             autoplay: autoplay ? {
               delay: 2e3,
               disableOnInteraction: true,
@@ -12107,9 +12120,12 @@
                 setIsBeginning(isBeginningValue);
                 setIsEnd(isEndValue);
               };
+              updateControls();
               swiper.on("slideChange", updateControls);
+              swiper.on("update", updateControls);
               return () => {
-                swiper.off("slideChange");
+                swiper.off("slideChange", updateControls);
+                swiper.off("update", updateControls);
               };
             }
           }, [slots.length]);
@@ -13265,7 +13281,7 @@
             })]
           });
         }
-        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-Bsu76AJY.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const PublicProfilePage = reactExports.lazy(() => __vitePreload(() => module.import('./PublicProfilePage-legacy-CL58vKkk.js'), false              ? __VITE_PRELOAD__ : void 0));
         function PublicProfilePageWrapper() {
           const {
             t
@@ -13763,7 +13779,7 @@
             })
           });
         }
-        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-BXdYNOe8.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkingTimePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkingTimePage-legacy-B2gptUgj.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkingTimePageWrapper() {
           const {
             t
@@ -13795,7 +13811,7 @@
             })
           });
         }
-        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-DGV60fgG.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationEditPage-legacy-DVpyOTKO.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationEditDataPageWrapper() {
           const {
             t
@@ -13814,7 +13830,7 @@
             })
           });
         }
-        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-BL-ns0wJ.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkersPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkersPage-legacy-CbCvhT0e.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkersPageWrapper() {
           const {
             t
@@ -13834,7 +13850,7 @@
             })
           });
         }
-        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-u1zA1mPU.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationSettingsPage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationSettingsPage-legacy-BOn3-qav.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationSettingsPageWrapper() {
           const {
             t
@@ -13853,7 +13869,7 @@
             })
           });
         }
-        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-CjCkIHkC.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServicesPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServicesPage-legacy-DW0CtVI2.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServicesPageWrapper() {
           const {
             t
@@ -13868,7 +13884,7 @@
             children: /* @__PURE__ */jsxRuntimeExports.jsx(ServicesPage, {})
           });
         }
-        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-Dl0EWsiu.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceGroupEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceGroupEditPage-legacy-CAUILJ02.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceGroupEditPageWrapper() {
           const {
             t
@@ -13888,7 +13904,7 @@
             })
           });
         }
-        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-DFeJoxtr.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const ServiceEditPage = reactExports.lazy(() => __vitePreload(() => module.import('./ServiceEditPage-legacy-BcptWTth.js'), false              ? __VITE_PRELOAD__ : void 0));
         function ServiceEditPageWrapper() {
           const {
             t
@@ -14529,7 +14545,7 @@
             })
           });
         }
-        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-LhT0KXD4.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const LocationWorkerCreatePage = reactExports.lazy(() => __vitePreload(() => module.import('./LocationWorkerCreatePage-legacy-D7KW0Rn5.js'), false              ? __VITE_PRELOAD__ : void 0));
         function LocationWorkerCreatePageWrapper() {
           const {
             t
@@ -15779,7 +15795,7 @@
             })
           });
         }
-        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-DcRdkeLA.js'), false              ? __VITE_PRELOAD__ : void 0));
+        const Menu = reactExports.lazy(() => __vitePreload(() => module.import('./Menu-legacy-CJVrSqSJ.js'), false              ? __VITE_PRELOAD__ : void 0));
         setupIonicReact({
           swipeBackEnabled: isPwa && !isIos,
           animated: !isIos
@@ -15796,7 +15812,6 @@
         setAppTimezone(locationTimezone);
         function App() {
           const {
-            userData,
             isAdmin,
             isOwnerOrWorker
           } = useUser();
@@ -15831,14 +15846,16 @@
             children: [/* @__PURE__ */jsxRuntimeExports.jsx("swiper-container", {
               hidden: true
             }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonReactRouter, {
-              children: [/* @__PURE__ */jsxRuntimeExports.jsx(Ping$1, {}), /* @__PURE__ */jsxRuntimeExports.jsx(CommonModalWrappers$1, {}), !isWebView && isPwa && /* @__PURE__ */jsxRuntimeExports.jsx(CommonNotificationWrapper, {
+              children: [/* @__PURE__ */jsxRuntimeExports.jsxs(reactExports.Suspense, {
+                children: [/* @__PURE__ */jsxRuntimeExports.jsx(Ping$1, {}), /* @__PURE__ */jsxRuntimeExports.jsx(CommonModalWrappers$1, {})]
+              }), !isWebView && isPwa && /* @__PURE__ */jsxRuntimeExports.jsx(CommonNotificationWrapper, {
                 activeLocation
               }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonSplitPane, {
                 contentId: "main",
                 children: [/* @__PURE__ */jsxRuntimeExports.jsx(Menu, {}), /* @__PURE__ */jsxRuntimeExports.jsx(Routes, {})]
               })]
             })]
-          }, userData?.email);
+          });
         }
         const App$1 = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
           __proto__: null,
