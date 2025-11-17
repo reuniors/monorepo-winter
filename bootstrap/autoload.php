@@ -24,6 +24,32 @@ require $helperPath;
 
 /*
 |--------------------------------------------------------------------------
+| Load SensitiveParameter Polyfill (for PHP < 8.2)
+|--------------------------------------------------------------------------
+|
+| Firebase 7.21+ uses SensitiveParameter attribute (PHP 8.2+) via valinor.
+| This polyfill allows it to work on PHP 8.0 and 8.1.
+|
+*/
+
+if (!class_exists('SensitiveParameter', false)) {
+    if (PHP_VERSION_ID >= 80000 && class_exists('Attribute', false)) {
+        // PHP 8.0+ with Attribute support
+        #[Attribute(Attribute::TARGET_PARAMETER)]
+        final class SensitiveParameter
+        {
+        }
+    } else {
+        // PHP < 8.0 or if Attribute class doesn't exist
+        // Define without attribute (won't work perfectly but prevents fatal error)
+        final class SensitiveParameter
+        {
+        }
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
 | Register The Composer Auto Loader
 |--------------------------------------------------------------------------
 |
