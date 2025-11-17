@@ -37,9 +37,9 @@ class LocationWorkerShift extends Model
         'pauses_utc'
     ];
 
-    // protected $dates = [
-    //     'date_utc'
-    // ];
+    protected $dates = [
+        'date_utc'
+    ];
 
     protected $casts = [
         'pauses_utc' => 'array'
