@@ -24,6 +24,8 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Services\LocationWork
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerGetOneAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarUploadAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarDeleteAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceGroups\ServiceGroupImageUploadAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceGroups\ServiceGroupImageDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
@@ -82,6 +84,10 @@ Route::group(
             Route::post('services/create', ServiceCreateAction::class);
             Route::delete('services/delete/{service}', ServiceDeleteAction::class);
             Route::delete('service-groups/delete/{serviceGroup}', ServiceGroupDeleteAction::class);
+            
+            // Service Group Image routes
+            Route::post('service-groups/{serviceGroup}/avatar/upload', ServiceGroupImageUploadAction::class);
+            Route::delete('service-groups/{serviceGroup}/avatar/delete', ServiceGroupImageDeleteAction::class);
 
             Route::group(['middleware' => [
                 'api',

@@ -59,6 +59,10 @@ class ServiceGroup extends BaseModelWithSort
         ],
     ];
 
+    public $attachOne = [
+        'avatar' => ['Reuniors\Reservations\Models\FileImage\FileImageSquare', 'delete' => true],
+    ];
+
     /**
      * Apply conditions for sort order queries
      * Service groups are sorted globally, so no additional conditions needed
