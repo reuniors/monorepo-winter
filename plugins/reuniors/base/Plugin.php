@@ -43,6 +43,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('reuniors.convert-to-utc', 'Reuniors\Base\Console\ConvertToUtcCommand');
         $this->registerConsoleCommand('reuniors:create-application', 'Reuniors\Base\Console\CreateApplicationCommand');
         $this->registerConsoleCommand('reuniors:clear-storage', 'Reuniors\Base\Console\ClearStorageCommand');
+        $this->registerConsoleCommand('reuniors:migrate-connected-devices', 'Reuniors\Base\Console\MigrateConnectedDevicesCommand');
     }
 
     public function boot()

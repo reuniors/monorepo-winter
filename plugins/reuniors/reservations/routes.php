@@ -55,8 +55,9 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Images\LocationImageReorderAc
 use Reuniors\Reservations\Http\Actions\V1\Notification\NotificationUpdateAction;
 use Reuniors\reservations\Http\Actions\V1\User\Client\UserClientDataGetOneAction;
 use Reuniors\Reservations\Http\Actions\V1\User\Device\SendNotificationToDevicesAction;
-use Reuniors\Reservations\Http\Actions\V1\User\AddConnectedDeviceAction;
-use Reuniors\Reservations\Http\Actions\V1\User\RemoveConnectedDeviceAction;
+// Connected devices moved to base plugin
+// use Reuniors\Reservations\Http\Actions\V1\User\AddConnectedDeviceAction;
+// use Reuniors\Reservations\Http\Actions\V1\User\RemoveConnectedDeviceAction;
 use Reuniors\Reservations\Http\Actions\V1\User\UserListAction;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestExecuteAction;
@@ -216,12 +217,13 @@ Route::group(
                 Route::get('notifications', LocationClientNotifications::class);
                 Route::get('list', UserListAction::class);
 
-                Route::group([
-                    'prefix' => 'connected-devices',
-                ], function () {
-                    Route::post('', AddConnectedDeviceAction::class);
-                    Route::delete('', RemoveConnectedDeviceAction::class);
-                });
+                // Connected devices moved to base plugin (api/v1/users/connected-devices)
+                // Route::group([
+                //     'prefix' => 'connected-devices',
+                // ], function () {
+                //     Route::post('', AddConnectedDeviceAction::class);
+                //     Route::delete('', RemoveConnectedDeviceAction::class);
+                // });
             });
         });
     }

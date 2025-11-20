@@ -16,3 +16,6 @@
 1.0.4:
     - "Make original date/time fields nullable in base tables"
     - builder_table_make_original_fields_nullable_reuniors_base.php
+1.0.5:
+    - "Create connected_devices table in base plugin"
+    - builder_table_create_reuniors_base_connected_devices.php

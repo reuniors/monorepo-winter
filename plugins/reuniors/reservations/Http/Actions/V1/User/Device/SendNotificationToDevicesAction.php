@@ -4,7 +4,8 @@ use Reuniors\Base\Http\Actions\BaseAction;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
 use Kreait\Firebase\Messaging\MessageTarget;
-use Reuniors\Reservations\Models\ConnectedDevice;
+use Reuniors\Base\Models\ConnectedDevice;
+use Reuniors\Reservations\Models\Location;
 
 class SendNotificationToDevicesAction extends BaseAction {
     public function rules()
@@ -62,9 +63,13 @@ class SendNotificationToDevicesAction extends BaseAction {
         $usersIds = $attributes['usersIds'];
         $locationId = $attributes['locationId'];
         
-        // Filter by location_id to ensure notifications are sent only to devices connected to this specific location
+        // Convert location_id to location_slug
+        $location = Location::findOrFail($locationId);
+        $locationSlug = $location->slug;
+        
+        // Filter by location_slug to ensure notifications are sent only to devices connected to this specific location
         $connectedDevices = ConnectedDevice::whereIn('user_id', $usersIds)
-            ->where('location_id', $locationId)
+            ->where('location_slug', $locationSlug)
             ->get();
 
         foreach ($connectedDevices as $connectedDevice) {

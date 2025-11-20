@@ -54,4 +54,21 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [
     Route::get('change-requests', \Reuniors\Base\Http\Actions\V1\ChangeRequest\GetChangeRequestsAction::class);
     Route::post('change-requests', \Reuniors\Base\Http\Actions\V1\ChangeRequest\CreateChangeRequestAction::class);
     
+    // Connected Devices (requires auth)
+    Route::group(['middleware' => [
+        'api',
+        'userFromBearerToken',
+    ]], function () {
+        Route::group([
+            'prefix' => 'users',
+        ], function () {
+            Route::group([
+                'prefix' => 'connected-devices',
+            ], function () {
+                Route::post('', \Reuniors\Base\Http\Actions\V1\User\AddConnectedDeviceAction::class);
+                Route::delete('', \Reuniors\Base\Http\Actions\V1\User\RemoveConnectedDeviceAction::class);
+            });
+        });
+    });
+    
 });
