@@ -47,6 +47,7 @@ class Location extends Model
         'google_map_url',
         'settings',
         'pwa_metadata',
+        'has_multiple_activities',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -110,6 +111,10 @@ class Location extends Model
             News::class,
             'key' => 'location_id',
         ],
+        'serviceCategories' => [
+            'Reuniors\Reservations\Models\ServiceCategory',
+            'key' => 'location_id',
+        ],
     ];
 
     public $attachMany = [
@@ -156,6 +161,18 @@ class Location extends Model
                 $location->pwa_metadata = $pwaMetadata;
             }
         });
+    }
+
+    // Accessor for camelCase conversion
+    public function getIsPrivateAttribute($value)
+    {
+        return $this->attributes['is_private'] ?? null;
+    }
+
+    // Accessor for camelCase conversion
+    public function getHasMultipleActivitiesAttribute($value)
+    {
+        return $this->attributes['has_multiple_activities'] ?? null;
     }
 
     public function scopeGetFeData($query, array $options = [])

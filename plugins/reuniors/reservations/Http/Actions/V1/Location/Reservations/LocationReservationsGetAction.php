@@ -9,6 +9,7 @@ class LocationReservationsGetAction extends BaseAction {
         return [
             'locationSlug' => ['string', 'required'],
             'locationWorkerId' => ['integer'],
+            'categoryId' => ['integer'],
             'date' => ['date'],
             'perPage' => ['integer'],
             'withClient' => 'boolean',
@@ -30,6 +31,11 @@ class LocationReservationsGetAction extends BaseAction {
 
         if ($locationWorkerId) {
             $reservationQuery->where('location_worker_id', $locationWorkerId);
+        }
+        if (isset($attributes['categoryId'])) {
+            $reservationQuery->whereHas('services.serviceGroups.serviceCategories', function ($q) use ($attributes) {
+                $q->where('reuniors_reservations_service_categories.id', $attributes['categoryId']);
+            });
         }
         if ($date) {
             $reservationQuery->whereDate('date_utc', $date);

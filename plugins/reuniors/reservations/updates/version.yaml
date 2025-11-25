@@ -216,3 +216,9 @@
 1.0.74:
     - "Add PWA metadata to locations table"
     - builder_table_add_pwa_metadata_to_reuniors_reservations_locations.php
+1.0.75:
+    - "Created table reuniors_reservations_service_categories"
+    - builder_table_create_reuniors_reservations_service_categories.php
+1.0.76:
+    - "Add has_multiple_activities field to locations table"
+    - builder_table_add_has_multiple_activities_to_reuniors_reservations_locations.php

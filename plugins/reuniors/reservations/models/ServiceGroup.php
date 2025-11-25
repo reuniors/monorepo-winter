@@ -57,6 +57,12 @@ class ServiceGroup extends BaseModelWithSort
             'key' => 'services_group_id',
             'otherKey' => 'location_id',
         ],
+        'serviceCategories' => [
+            'Reuniors\Reservations\Models\ServiceCategory',
+            'table' => 'reuniors_reservations_service_category_group',
+            'key' => 'service_group_id',
+            'otherKey' => 'service_category_id',
+        ],
     ];
 
     public $attachOne = [

@@ -14,6 +14,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservat
 use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservationsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservationUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\LocationServiceGroupsGet;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\LocationServiceCategoriesGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupDeleteAction;
@@ -29,6 +30,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\ServiceGroups\ServiceGroupIma
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationWeekSlotsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsAddDayShiftAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsDeleteDayShiftAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsByDayGetAction;
@@ -78,9 +80,11 @@ Route::group(
         ], function () {
             Route::get('data', LocationGetOneAction::class);
             Route::get('services-groups', LocationServiceGroupsGet::class);
+            Route::get('service-categories', LocationServiceCategoriesGetAction::class);
             Route::get('working-shifts-days', LocationWorkingShiftsByDayGetAction::class);
             Route::get('clients', LocationClientsGetAction::class);
             Route::get('reservations', LocationReservationsGetAction::class);
+            Route::post('{locationSlug}/slots/week', LocationWeekSlotsGetAction::class);
             Route::post('service-groups/create', ServiceGroupCreateAction::class);
             Route::post('services/create', ServiceCreateAction::class);
             Route::delete('services/delete/{service}', ServiceDeleteAction::class);

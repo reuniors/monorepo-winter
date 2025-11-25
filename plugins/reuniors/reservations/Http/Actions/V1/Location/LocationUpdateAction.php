@@ -16,6 +16,7 @@ class LocationUpdateAction extends BaseAction
             'snippet' => ['nullable', 'string'],
             'active' => ['nullable', 'boolean'],
             'isPrivate' => ['nullable', 'boolean'],
+            'hasMultipleActivities' => ['nullable', 'boolean'],
             'addressData' => ['nullable', 'array'],
             'addressData.street' => ['nullable', 'string'],
             'addressData.street_number' => ['nullable', 'string'],
@@ -57,11 +58,17 @@ class LocationUpdateAction extends BaseAction
             unset($attributes['isPrivate']);
         }
         
+        if (isset($attributes['hasMultipleActivities'])) {
+            $attributes['has_multiple_activities'] = $attributes['hasMultipleActivities'];
+            unset($attributes['hasMultipleActivities']);
+        }
+        
         // Remove fields that non-admin users can't update
         if (!$isAdmin) {
             unset($attributes['slug']);
             unset($attributes['active']);
             unset($attributes['is_private']);
+            unset($attributes['has_multiple_activities']);
         }
 
         // Update basic fields
@@ -83,6 +90,9 @@ class LocationUpdateAction extends BaseAction
             }
             if (isset($attributes['is_private'])) {
                 $updateFields['is_private'] = $attributes['is_private'];
+            }
+            if (isset($attributes['has_multiple_activities'])) {
+                $updateFields['has_multiple_activities'] = $attributes['has_multiple_activities'];
             }
             if (isset($attributes['pwaMetadata'])) {
                 $pwaMetadata = $location->pwa_metadata ?? [];

@@ -32,7 +32,7 @@ class LocationGetOneAction extends BaseAction {
         }
 
         return $locationQuery
-            ->with(['working_hours', 'workers', 'logo', 'cover', 'pwa_icon', 'gallery'])
+            ->with(['working_hours', 'workers', 'logo', 'cover', 'pwa_icon', 'gallery', 'serviceCategories'])
             ->firstOrFail();
     }
 }
