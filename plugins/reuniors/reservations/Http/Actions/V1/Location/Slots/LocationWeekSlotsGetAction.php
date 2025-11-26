@@ -17,7 +17,8 @@ class LocationWeekSlotsGetAction extends BaseAction
             'locationSlug' => ['string', 'required'],
             'startDate' => ['date', 'required'],
             'endDate' => ['date', 'required'],
-            'workerId' => ['integer', 'required'],
+            'workerIds' => ['array', 'nullable'], // Opciono - niz ID-jeva radnika
+            'workerIds.*' => ['integer'],
             'serviceIds' => ['array', 'required'],
             'serviceIds.*' => ['integer'],
             'categoryId' => ['integer'],
@@ -27,15 +28,6 @@ class LocationWeekSlotsGetAction extends BaseAction
     public function handle(array $attributes = [])
     {
         $location = Location::where('slug', $attributes['locationSlug'])
-            ->firstOrFail();
-
-        /** @var LocationWorker $worker */
-        $worker = LocationWorker::query()
-            ->where('id', $attributes['workerId'])
-            ->whereHas('locations', function ($query) use ($location) {
-                $query->where('location_id', $location->id);
-            })
-            ->with('avatar')
             ->firstOrFail();
 
         $startDate = Carbon::parse($attributes['startDate'])->startOfDay();
@@ -49,49 +41,88 @@ class LocationWeekSlotsGetAction extends BaseAction
             );
         }
 
-        // Učitaj shifts za nedelju (za generisanje slotova na FE)
-        $shifts = LocationWorkerShift::query()
-            ->where('location_worker_id', $worker->id)
-            ->whereBetween('date_utc', [$startDate->toDateString(), $endDate->toDateString()])
-            ->whereNotNull('shift')
-            ->get()
-            ->map(function ($shift) {
-                return [
-                    'dateUtc' => Carbon::parse($shift->date_utc)->format('Y-m-d'),
-                    'timeFromUtc' => $shift->time_from_utc,
-                    'timeToUtc' => $shift->time_to_utc,
-                    'pausesUtc' => $shift->pauses_utc ?? [],
-                ];
-            });
+        // Učitaj radnike - ako su prosleđeni workerIds, učitaj samo njih, inače sve aktivne
+        $workerIds = $attributes['workerIds'] ?? null;
+        
+        $workersQuery = LocationWorker::query()
+            ->whereHas('locations', function ($query) use ($location) {
+                $query->where('location_id', $location->id);
+            })
+            ->where('active', true)
+            ->with('avatar');
 
-        // Učitaj rezervacije za nedelju
-        $reservations = ClientReservation::query()
-            ->where('location_id', $location->id)
-            ->where('location_worker_id', $worker->id)
-            ->whereBetween('date_utc', [
-                $startDate->toDateTimeString(),
-                $endDate->toDateTimeString(),
-            ])
-            ->where('status', '!=', ReservationStatus::CANCELLED)
-            ->get()
-            ->map(function ($reservation) {
-                return [
-                    'dateUtc' => $reservation->date_utc,
-                    'servicesDuration' => $reservation->services_duration,
-                ];
-            });
+        // Ako je prosleđen prazan niz [] ili null, učitaj sve aktivne radnike
+        // Ako je prosleđen niz sa ID-jevima, učitaj samo te radnike
+        if ($workerIds !== null && is_array($workerIds) && count($workerIds) > 0) {
+            // Učitaj samo prosleđene radnike
+            $workersQuery->whereIn('id', $workerIds);
+        }
+        // Ako je $workerIds === null ili prazan niz [], učitaj sve aktivne radnike
 
-        return [
-            'shifts' => $shifts->values()->all(),
-            'reservations' => $reservations->values()->all(),
-            'worker' => [
+        $workers = $workersQuery->get();
+
+        if ($workers->isEmpty()) {
+            return [
+                'shifts' => [],
+                'reservations' => [],
+                'workers' => [],
+            ];
+        }
+
+        $allShifts = [];
+        $allReservations = [];
+        $workersData = [];
+
+        foreach ($workers as $worker) {
+            $shifts = LocationWorkerShift::query()
+                ->where('location_worker_id', $worker->id)
+                ->whereBetween('date_utc', [$startDate->toDateString(), $endDate->toDateString()])
+                ->whereNotNull('shift')
+                ->get()
+                ->map(function ($shift) use ($worker) {
+                    return [
+                        'dateUtc' => Carbon::parse($shift->date_utc)->format('Y-m-d'),
+                        'timeFromUtc' => $shift->time_from_utc,
+                        'timeToUtc' => $shift->time_to_utc,
+                        'pausesUtc' => $shift->pauses_utc ?? [],
+                        'locationWorkerId' => $worker->id,
+                    ];
+                });
+
+            $reservations = ClientReservation::query()
+                ->where('location_id', $location->id)
+                ->where('location_worker_id', $worker->id)
+                ->whereBetween('date_utc', [
+                    $startDate->toDateTimeString(),
+                    $endDate->toDateTimeString(),
+                ])
+                ->where('status', '!=', ReservationStatus::CANCELLED)
+                ->get()
+                ->map(function ($reservation) use ($worker) {
+                    return [
+                        'dateUtc' => $reservation->date_utc,
+                        'servicesDuration' => $reservation->services_duration,
+                        'locationWorkerId' => $worker->id,
+                    ];
+                });
+
+            $allShifts = array_merge($allShifts, $shifts->toArray());
+            $allReservations = array_merge($allReservations, $reservations->toArray());
+            
+            $workersData[$worker->id] = [
                 'id' => $worker->id,
                 'fullName' => $worker->full_name,
                 'avatar' => $worker->avatar ? [
                     'id' => $worker->avatar->id,
                     'path' => $worker->avatar->path,
                 ] : null,
-            ],
+            ];
+        }
+
+        return [
+            'shifts' => $allShifts,
+            'reservations' => $allReservations,
+            'workers' => $workersData,
         ];
     }
 }
