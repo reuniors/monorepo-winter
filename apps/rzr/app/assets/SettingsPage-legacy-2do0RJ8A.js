@@ -1,0 +1,119 @@
+;
+(function () {
+  System.register(['./vendor_react-legacy-8eT2sGuL.js', './vendor_ionic-legacy-Das9dW4a.js', './App-legacy-CaR2AK6H.js', './index-legacy-9UCQqk05.js', './vendor_leaflet-legacy-eQNkinhv.js', './vendor_firebase-legacy-BARrkZ1D.js'], function (exports, module) {
+    'use strict';
+
+    var useTranslation, jsxRuntimeExports, IonList, IonItem, IonIcon, IonLabel, IonCard, IonCardHeader, IonCardTitle, settingsOutline, IonCardContent, colorPaletteOutline, IonSelect, IonSelectOption, useAppDispatch, useAppSelector, getSettingsOptions, urlPrefix, getUiData, setThemeMode;
+    return {
+      setters: [module => {
+        useTranslation = module.aD;
+        jsxRuntimeExports = module.j;
+      }, module => {
+        IonList = module.F;
+        IonItem = module.q;
+        IonIcon = module.l;
+        IonLabel = module.E;
+        IonCard = module.aS;
+        IonCardHeader = module.aU;
+        IonCardTitle = module.aV;
+        settingsOutline = module.aE;
+        IonCardContent = module.aW;
+        colorPaletteOutline = module.br;
+        IonSelect = module.w;
+        IonSelectOption = module.x;
+      }, module => {
+        useAppDispatch = module.u;
+        useAppSelector = module.X;
+        getSettingsOptions = module.Y;
+        urlPrefix = module.f;
+      }, module => {
+        getUiData = module.t;
+        setThemeMode = module.u;
+      }, null, null],
+      execute: function () {
+        exports("default", SettingsPage);
+        function SettingsListComponent({
+          options,
+          onItemClick
+        }) {
+          const {
+            t
+          } = useTranslation();
+          const handleClick = path => {
+            if (onItemClick) {
+              onItemClick(path);
+            }
+          };
+          return /* @__PURE__ */jsxRuntimeExports.jsx(IonList, {
+            children: options.map(option => /* @__PURE__ */jsxRuntimeExports.jsxs(IonItem, {
+              button: true,
+              detail: true,
+              routerLink: option.path,
+              onClick: () => handleClick(option.path),
+              color: option.color,
+              children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonIcon, {
+                icon: option.icon,
+                slot: "start"
+              }), /* @__PURE__ */jsxRuntimeExports.jsx(IonLabel, {
+                children: t(option.title)
+              })]
+            }, option.path))
+          });
+        }
+        function SettingsPage() {
+          const {
+            t
+          } = useTranslation();
+          const dispatch = useAppDispatch();
+          const {
+            themeMode
+          } = useAppSelector(getUiData);
+          const settingsOptions = getSettingsOptions(urlPrefix);
+          const handleThemeChange = e => {
+            const value = e.detail.value;
+            const newTheme = value === "system" ? null : value;
+            dispatch(setThemeMode(newTheme));
+          };
+          return /* @__PURE__ */jsxRuntimeExports.jsx("div", {
+            className: "ion-padding",
+            children: /* @__PURE__ */jsxRuntimeExports.jsxs(IonCard, {
+              children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonCardHeader, {
+                children: /* @__PURE__ */jsxRuntimeExports.jsxs(IonCardTitle, {
+                  className: "flex items-center gap-2",
+                  children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonIcon, {
+                    icon: settingsOutline
+                  }), t("Podešavanja")]
+                })
+              }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonCardContent, {
+                className: "ion-no-padding",
+                children: [/* @__PURE__ */jsxRuntimeExports.jsxs(IonItem, {
+                  children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonIcon, {
+                    icon: colorPaletteOutline,
+                    slot: "start"
+                  }), /* @__PURE__ */jsxRuntimeExports.jsx(IonLabel, {
+                    children: t("Tema")
+                  }), /* @__PURE__ */jsxRuntimeExports.jsxs(IonSelect, {
+                    value: themeMode === null ? "system" : themeMode,
+                    onIonChange: handleThemeChange,
+                    children: [/* @__PURE__ */jsxRuntimeExports.jsx(IonSelectOption, {
+                      value: "light",
+                      children: t("Svetla")
+                    }), /* @__PURE__ */jsxRuntimeExports.jsx(IonSelectOption, {
+                      value: "dark",
+                      children: t("Tamna")
+                    }), /* @__PURE__ */jsxRuntimeExports.jsx(IonSelectOption, {
+                      value: "system",
+                      children: t("Sistem")
+                    })]
+                  })]
+                }), /* @__PURE__ */jsxRuntimeExports.jsx(SettingsListComponent, {
+                  options: settingsOptions
+                })]
+              })]
+            })
+          });
+        }
+      }
+    };
+  });
+})();
