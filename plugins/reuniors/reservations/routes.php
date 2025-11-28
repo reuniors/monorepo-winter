@@ -49,6 +49,15 @@ use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetLanguagesAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationSettingsUpdateAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarSettingsGetAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarSettingsUpdateAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarSyncAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarConnectAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarAuthUrlAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarCallbackAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarWebhookAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarRegisterWebhookAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarEventsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationGetManifestAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Images\LocationImageUploadAction;
@@ -75,6 +84,12 @@ Route::group(
         EnsureFrontendRequestsAreStateful::class
     ]],
     function () {
+        // Public Google Calendar OAuth callback (needed for BE redirect flow)
+        Route::get('locations/google-calendar/callback', GoogleCalendarCallbackAction::class);
+
+        // Public Google Calendar Webhook (receives push notifications from Google)
+        Route::post('locations/google-calendar/webhook', GoogleCalendarWebhookAction::class);
+
         Route::group([
             'prefix' => 'locations',
         ], function () {
@@ -89,7 +104,7 @@ Route::group(
             Route::post('services/create', ServiceCreateAction::class);
             Route::delete('services/delete/{service}', ServiceDeleteAction::class);
             Route::delete('service-groups/delete/{serviceGroup}', ServiceGroupDeleteAction::class);
-            
+
             // Service Group Image routes
             Route::post('service-groups/{serviceGroup}/avatar/upload', ServiceGroupImageUploadAction::class);
             Route::delete('service-groups/{serviceGroup}/avatar/delete', ServiceGroupImageDeleteAction::class);
@@ -110,7 +125,26 @@ Route::group(
                     Route::put('update', LocationUpdateAction::class);
                     Route::put('service-groups/update', ServiceGroupUpdateAction::class);
                     Route::put('services/update', ServiceUpdateAction::class);
-                    
+
+                    // Google Calendar routes (support both FE popup and BE redirect flows)
+                    Route::group([
+                        'prefix' => 'google-calendar',
+                    ], function () {
+                        // Settings
+                        Route::get('settings', GoogleCalendarSettingsGetAction::class);
+                        Route::put('settings', GoogleCalendarSettingsUpdateAction::class);
+                        // FE popup flow: connect via access token
+                        Route::post('connect', GoogleCalendarConnectAction::class);
+                        // Sync
+                        Route::post('sync', GoogleCalendarSyncAction::class);
+                        // Register webhook for real-time sync
+                        Route::post('register-webhook', GoogleCalendarRegisterWebhookAction::class);
+                        // Events list (recent)
+                        Route::get('events', GoogleCalendarEventsGetAction::class);
+                        // BE redirect flow: generate auth URL
+                        Route::get('auth-url', GoogleCalendarAuthUrlAction::class);
+                    });
+
                     // Location image routes
                     Route::group([
                         'prefix' => 'image',
@@ -136,7 +170,7 @@ Route::group(
                 });
             });
 
-            Route::group(['prefix' => 'workers',], 
+            Route::group(['prefix' => 'workers',],
             function () {
                 Route::get('', LocationWorkersGetAction::class);
                 Route::get('shifts-by-days', LocationWorkerShiftsByDaysGetAction::class);
@@ -150,7 +184,7 @@ Route::group(
                 'prefix' => 'worker/{worker}',
             ], function () {
                 Route::get('', LocationWorkerGetOneAction::class);
-            
+
                 // Worker avatar routes
                 Route::group([
                     'prefix' => 'avatar',
@@ -158,7 +192,7 @@ Route::group(
                     Route::post('', LocationWorkerAvatarUploadAction::class);
                     Route::delete('', LocationWorkerAvatarDeleteAction::class);
                 });
-                
+
                 // Worker-Service management routes
                 Route::group([
                     'prefix' => 'services',

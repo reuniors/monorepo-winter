@@ -43,7 +43,8 @@
         "laravel/socialite": "^5.9",
         "stevebauman/purify": "^6.0",
         "mikp/wn-sanctum-tokens-plugin": "^0.1.0",
-        "kreait/firebase-php": "^7.10"
+        "kreait/firebase-php": "^7.10",
+        "spatie/laravel-google-calendar": "^3.8"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5.8",

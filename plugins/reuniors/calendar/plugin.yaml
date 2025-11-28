@@ -1,0 +1,6 @@
+plugin:
+    name: 'reuniors.calendar::lang.plugin.name'
+    description: 'reuniors.calendar::lang.plugin.description'
+    author: Reuniors
+    icon: oc-icon-adjust
+    homepage: ''

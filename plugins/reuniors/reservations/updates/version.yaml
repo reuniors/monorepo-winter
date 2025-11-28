@@ -222,3 +222,9 @@
 1.0.76:
     - "Add has_multiple_activities field to locations table"
     - builder_table_add_has_multiple_activities_to_reuniors_reservations_locations.php
+1.0.77:
+    - "Created table reuniors_reservations_calendar_connections (pivot to calendar plugin)"
+    - builder_table_create_reuniors_reservations_calendar_connections.php
+1.0.78:
+    - "Created table reuniors_reservations_calendar_events (pivot to calendar plugin)"
+    - builder_table_create_reuniors_reservations_calendar_events.php

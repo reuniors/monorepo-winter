@@ -45,7 +45,7 @@ class Plugin extends PluginBase
             ->job(SendGoogleReviewEmailAction::class)
             ->yearlyOn(3, 20, '17:00')
             ->timezone('Europe/Belgrade');
-        
+
         // Daily change request execution at 2:00 AM
         $schedule
             ->job(\Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestScheduledExecuteAction::class)
@@ -92,7 +92,10 @@ class Plugin extends PluginBase
             \Reuniors\Base\Events\PingCheckRequested::class,
             \Reuniors\Reservations\Listeners\PingCheckListener::class
         );
-        
+
+        // Register Google Calendar sync listener (automatic sync to Google Calendar)
+        \Event::subscribe(\Reuniors\Reservations\Classes\Listeners\GoogleCalendarSyncListener::class);
+
         // Register console command for change requests
         if ($this->app->runningInConsole()) {
             $this->commands([

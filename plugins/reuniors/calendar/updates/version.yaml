@@ -1,0 +1,11 @@
+1.0.1:
+    - Initialize plugin.
+1.0.2:
+    - "Created table reuniors_calendar_connections"
+    - builder_table_create_reuniors_calendar_connections.php
+1.0.3:
+    - "Created table reuniors_calendar_events"
+    - builder_table_create_reuniors_calendar_events.php
+1.0.4:
+    - "Created table reuniors_calendar_overlap_requests"
+    - builder_table_create_reuniors_calendar_overlap_requests.php

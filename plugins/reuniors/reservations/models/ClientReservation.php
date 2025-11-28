@@ -8,6 +8,7 @@ use Config;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Winter\User\Facades\Auth;
 use Reuniors\Reservations\Http\Actions\V1\ReservationsPingAction;
+use Reuniors\Reservations\Models\LocationWorkerShift;
 
 /**
  * Model
@@ -33,6 +34,46 @@ class ClientReservation extends Model
 
         static::deleted(function ($reservation) {
             self::invalidatePingCache($reservation);
+        });
+
+        // Calendar sync hooks (generic, works with any provider)
+        static::created(function ($reservation) {
+            \Reuniors\Calendar\Classes\CalendarSyncService::syncToProvider(
+                $reservation,
+                'Reuniors\Reservations\Models\ClientReservation',
+                function($entity) {
+                    return self::getCalendarConnectionForReservation($entity);
+                },
+                function($entity) {
+                    return self::buildCalendarEventData($entity);
+                }
+            );
+        });
+
+        static::updated(function ($reservation) {
+            // Only sync if relevant fields changed
+            if ($reservation->isDirty(['date_utc', 'services_duration', 'status'])) {
+                \Reuniors\Calendar\Classes\CalendarSyncService::syncToProvider(
+                    $reservation,
+                    'Reuniors\Reservations\Models\ClientReservation',
+                    function($entity) {
+                        return self::getCalendarConnectionForReservation($entity);
+                    },
+                    function($entity) {
+                        return self::buildCalendarEventData($entity);
+                    }
+                );
+            }
+        });
+
+        static::deleted(function ($reservation) {
+            \Reuniors\Calendar\Classes\CalendarSyncService::deleteFromProvider(
+                $reservation,
+                'Reuniors\Reservations\Models\ClientReservation',
+                function($entity) {
+                    return self::getCalendarConnectionForReservation($entity);
+                }
+            );
         });
     }
 
@@ -231,6 +272,24 @@ class ClientReservation extends Model
             }
         }
         
+        // Check Calendar events (any provider)
+        $calendarEvents = \Reuniors\Calendar\Models\CalendarEvent::whereHas('calendarConnection', function ($query) use ($locationWorkerId) {
+            $query->whereHas('reservationsConnections', function($q) use ($locationWorkerId) {
+                $q->where('location_worker_id', $locationWorkerId);
+            })
+            ->where('is_active', true)
+            ->where('block_overlapping_slots', true);
+        })
+        ->active()
+        ->external()
+        ->blockingSlots()
+        ->inTimeRange($start->toDateTimeString(), $end->toDateTimeString())
+        ->get();
+        
+        if ($calendarEvents->count() > 0) {
+            return false; // Slot is blocked by calendar event
+        }
+        
         return true;
     }
 
@@ -309,5 +368,77 @@ class ClientReservation extends Model
         return $query->whereDoesntHave('createdByUser.groups', function ($query) use ($groups) {
             $query->whereIn('code', $groups);
         });
+    }
+
+    /**
+     * Get calendar connection for reservation
+     */
+    protected static function getCalendarConnectionForReservation($reservation)
+    {
+        $pivot = \Reuniors\Reservations\Models\ReservationCalendarConnection::where('location_id', $reservation->location_id)
+            ->where('location_worker_id', $reservation->location_worker_id)
+            ->whereHas('calendarConnection', function($q) {
+                $q->where('is_active', true)
+                  ->where('sync_to_provider', true);
+            })
+            ->first();
+
+        return $pivot ? $pivot->calendarConnection : null;
+    }
+
+    /**
+     * Build calendar event data from reservation
+     */
+    protected static function buildCalendarEventData($reservation)
+    {
+        $client = $reservation->client;
+        $services = $reservation->services;
+        $location = $reservation->location;
+        $worker = $reservation->locationWorker;
+
+        $serviceNames = $services->pluck('name')->join(', ');
+        $summary = $client ? "{$client->full_name} - {$serviceNames}" : "Rezervacija - {$serviceNames}";
+
+        $description = "Rezervacija ID: {$reservation->id}\n";
+        $description .= "Hash: {$reservation->hash}\n\n";
+        
+        if ($client) {
+            $description .= "Klijent: {$client->full_name}\n";
+            if ($client->email) {
+                $description .= "Email: {$client->email}\n";
+            }
+            if ($client->phone_number) {
+                $description .= "Telefon: {$client->phone_number}\n";
+            }
+        }
+        
+        $description .= "\nUsluge: {$serviceNames}\n";
+        $description .= "Trajanje: {$reservation->services_duration} minuta\n";
+        $description .= "Cena: {$reservation->services_cost} RSD\n";
+        
+        if ($worker) {
+            $description .= "Radnik: {$worker->full_name}\n";
+        }
+        
+        if ($location) {
+            $description .= "Lokacija: {$location->name}\n";
+            if (isset($location->address_data['address'])) {
+                $description .= "Adresa: {$location->address_data['address']}\n";
+            }
+        }
+        
+        if ($reservation->notice) {
+            $description .= "\nNapomena: {$reservation->notice}\n";
+        }
+
+        return [
+            'summary' => $summary,
+            'description' => $description,
+            'start_time_utc' => $reservation->date_utc,
+            'end_time_utc' => Carbon::parse($reservation->date_utc)->addMinutes($reservation->services_duration)->toDateTimeString(),
+            'location' => $location && isset($location->address_data['address']) 
+                ? $location->address_data['address'] 
+                : null,
+        ];
     }
 }
