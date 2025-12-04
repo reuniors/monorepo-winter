@@ -24,7 +24,7 @@ class GoogleCalendarCallbackAction extends BaseAction
         }
 
         $userId = $state['user_id'];
-        $workerId = $state['worker_id'];
+        $locationWorkerId = $state['worker_id'];
         $locationId = $state['location_id'] ?? null;
 
         // TODO: Exchange code for access token using Google API Client
@@ -73,7 +73,10 @@ class GoogleCalendarCallbackAction extends BaseAction
         curl_close($ch);
 
         $userInfo = json_decode($userInfoResponse, true);
-        $email = $userInfo['email'] ?? 'unknown@gmail.com';
+        if (!isset($userInfo['email']) || empty($userInfo['email'])) {
+            throw new \Exception('Google account email not provided – aborting connection creation');
+        }
+        $email = $userInfo['email'];
 
         // Create CalendarConnection
         $connection = CalendarConnection::create([
@@ -96,7 +99,7 @@ class GoogleCalendarCallbackAction extends BaseAction
         ReservationCalendarConnection::create([
             'calendar_connection_id' => $connection->id,
             'location_id' => $locationId,
-            'location_worker_id' => $workerId,
+            'location_worker_id' => $locationWorkerId,
         ]);
 
         // Redirect back to frontend settings page
@@ -104,4 +107,3 @@ class GoogleCalendarCallbackAction extends BaseAction
         return redirect($frontendUrl . '/zakazivanje/podesavanja/google-calendar?connected=true');
     }
 }
-

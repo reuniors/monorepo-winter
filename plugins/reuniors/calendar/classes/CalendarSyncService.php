@@ -8,14 +8,14 @@ use Exception;
 
 /**
  * CalendarSyncService
- * 
+ *
  * Generic calendar synchronization service that works with any provider
  */
 class CalendarSyncService
 {
     /**
      * Sync entity to calendar provider
-     * 
+     *
      * @param mixed $entity Entity to sync (e.g., ClientReservation)
      * @param string $entityType Entity type (e.g., 'Reuniors\Reservations\Models\ClientReservation')
      * @param callable $getConnectionCallback Callback to get connection for entity
@@ -25,7 +25,7 @@ class CalendarSyncService
     {
         try {
             $connection = call_user_func($getConnectionCallback, $entity);
-            
+
             if (!$connection || !$connection->sync_to_provider || !$connection->is_active) {
                 return;
             }
@@ -50,7 +50,7 @@ class CalendarSyncService
             } else {
                 // Create new event
                 $providerEvent = $providerService->createEvent($eventData, $connection);
-                
+
                 // Save calendar event
                 $calendarEvent = CalendarEvent::create([
                     'calendar_connection_id' => $connection->id,
@@ -91,7 +91,7 @@ class CalendarSyncService
                     $q->where('calendar_connection_id', $connection->id);
                 })
                 ->first();
-            
+
             return $pivot ? $pivot->calendarEvent : null;
         }
         return null;
@@ -105,14 +105,14 @@ class CalendarSyncService
         try {
             // Find calendar event via pivot
             $pivot = self::getEntityPivot($entity, $entityType);
-            
+
             if (!$pivot) {
                 return;
             }
 
             $calendarEvent = $pivot->calendarEvent;
             $connection = $calendarEvent->calendarConnection;
-            
+
             if (!$connection || !$connection->is_active) {
                 return;
             }
@@ -124,7 +124,7 @@ class CalendarSyncService
 
             // Get provider-specific sync service
             $providerService = self::getProviderService($connection->provider);
-            
+
             // Delete from provider
             $providerService->deleteEvent($calendarEvent, $connection);
 
@@ -138,23 +138,6 @@ class CalendarSyncService
                 'exception' => $e,
             ]);
         }
-    }
-
-    /**
-     * Find existing calendar event for entity
-     */
-    protected static function findExistingEvent($entity, $entityType, $connection)
-    {
-        if ($entityType === 'Reuniors\Reservations\Models\ClientReservation') {
-            $pivot = \Reuniors\Reservations\Models\ReservationCalendarEvent::where('client_reservation_id', $entity->id)
-                ->whereHas('calendarEvent', function($q) use ($connection) {
-                    $q->where('calendar_connection_id', $connection->id);
-                })
-                ->first();
-            
-            return $pivot ? $pivot->calendarEvent : null;
-        }
-        return null;
     }
 
     /**

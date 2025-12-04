@@ -82,6 +82,14 @@ class ClientReservation extends Model
         $location = $reservation->location;
         if ($location) {
             ReservationsPingAction::invalidateCache(['locationSlug' => $location->slug]);
+            // Also invalidate gaps cache
+            \Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationTimeGapsGetAction::invalidateCache($location->slug);
+            
+            \Log::info('ClientReservation: Invalidated gaps cache', [
+                'reservationId' => $reservation->id,
+                'locationSlug' => $location->slug,
+                'dateUtc' => $reservation->date_utc,
+            ]);
         }
     }
 

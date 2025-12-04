@@ -1,5 +1,6 @@
 <?php namespace Reuniors\Reservations\Models;
 
+use Illuminate\Support\Facades\Log;
 use Model;
 
 /**
@@ -14,6 +15,48 @@ class LocationWorkerShift extends Model
      * Remove this line if timestamps are defined in the database table.
      */
     public $timestamps = false;
+
+    protected static function booted()
+    {
+        static::saved(function ($shift) {
+            self::invalidateGapsCache($shift);
+        });
+
+        static::updated(function ($shift) {
+            self::invalidateGapsCache($shift);
+        });
+
+        static::deleted(function ($shift) {
+            self::invalidateGapsCache($shift);
+        });
+    }
+
+    private static function invalidateGapsCache($shift)
+    {
+        // Try to get location from relationship first
+        $location = $shift->location;
+        
+        // If relationship not loaded, try to get it by location_id
+        if (!$location && $shift->location_id) {
+            $location = \Reuniors\Reservations\Models\Location::find($shift->location_id);
+        }
+        
+        if ($location) {
+            \Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationTimeGapsGetAction::invalidateCache($location->slug);
+            
+            Log::info('LocationWorkerShift: Invalidated gaps cache', [
+                'shiftId' => $shift->id,
+                'locationSlug' => $location->slug,
+                'locationId' => $shift->location_id,
+                'dateUtc' => $shift->date_utc,
+            ]);
+        } else {
+            Log::warning('LocationWorkerShift: Could not invalidate gaps cache - location not found', [
+                'shiftId' => $shift->id,
+                'locationId' => $shift->location_id ?? 'null',
+            ]);
+        }
+    }
 
 
     /**

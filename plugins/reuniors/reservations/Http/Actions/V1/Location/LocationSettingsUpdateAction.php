@@ -34,7 +34,7 @@ class LocationSettingsUpdateAction extends BaseAction
         $updatedSettings = array_merge($currentSettings, [
             'timezone' => $attributes['timezone'] ?? $currentSettings['timezone'] ?? 'Europe/Belgrade',
             'autoConfirmReservations' => $attributes['autoConfirmReservations'] ?? $currentSettings['autoConfirmReservations'] ?? false,
-            'pauseBetweenReservations' => $attributes['pauseBetweenReservations'] ?? $currentSettings['pauseBetweenReservations'] ?? 0,
+            'pauseBetweenReservations' => $attributes['pauseBetweenReservations'] ?? $currentSettings['pauseBetweenReservations'] ?? 10, // Default: 10 minutes (same as frontend)
         ]);
 
         // Save the updated settings

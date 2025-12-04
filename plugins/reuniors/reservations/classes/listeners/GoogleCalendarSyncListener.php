@@ -145,15 +145,15 @@ class GoogleCalendarSyncListener
      */
     protected function findActiveConnection(ClientReservation $reservation): ?CalendarConnection
     {
-        // Get worker ID from reservation
-        $workerId = $reservation->worker_id ?? $reservation->location_worker_id;
+        // Get worker ID from reservation (legacy field names: worker_id or location_worker_id)
+        $locationWorkerId = $reservation->worker_id ?? $reservation->location_worker_id;
 
-        if (!$workerId) {
+        if (!$locationWorkerId) {
             return null;
         }
 
-        // Find connection via pivot
-        $pivot = ReservationCalendarConnection::where('location_worker_id', $workerId)
+        // Find connection via pivot for this location worker
+        $pivot = ReservationCalendarConnection::where('location_worker_id', $locationWorkerId)
             ->whereHas('calendarConnection', function($q) {
                 $q->where('provider', 'google')
                   ->where('is_active', true);
@@ -361,4 +361,3 @@ class GoogleCalendarSyncListener
         );
     }
 }
-

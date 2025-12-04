@@ -31,6 +31,8 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdat
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationWeekSlotsGetAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationTimeGapsGetAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\ReservationsListGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsAddDayShiftAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsDeleteDayShiftAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts\LocationWorkingShiftsByDayGetAction;
@@ -48,6 +50,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\LocationGetOneAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetLanguagesAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\LocationSettingsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationSettingsUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarSettingsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\GoogleCalendar\GoogleCalendarSettingsUpdateAction;
@@ -100,6 +103,8 @@ Route::group(
             Route::get('clients', LocationClientsGetAction::class);
             Route::get('reservations', LocationReservationsGetAction::class);
             Route::post('{locationSlug}/slots/week', LocationWeekSlotsGetAction::class);
+            Route::post('{locationSlug}/slots/gaps', LocationTimeGapsGetAction::class);
+            Route::get('{locationSlug}/reservations/list', ReservationsListGetAction::class);
             Route::post('service-groups/create', ServiceGroupCreateAction::class);
             Route::post('services/create', ServiceCreateAction::class);
             Route::delete('services/delete/{service}', ServiceDeleteAction::class);
@@ -121,6 +126,7 @@ Route::group(
                     Route::post('set-working-day-shift', LocationWorkingShiftsAddDayShiftAction::class);
                     Route::delete('delete-working-day-shift', LocationWorkingShiftsDeleteDayShiftAction::class);
                     Route::post('notification/send-to-devices', SendNotificationToDevicesAction::class);
+                    Route::get('settings', LocationSettingsGetAction::class);
                     Route::put('settings', LocationSettingsUpdateAction::class);
                     Route::put('update', LocationUpdateAction::class);
                     Route::put('service-groups/update', ServiceGroupUpdateAction::class);
