@@ -3,7 +3,6 @@ namespace Reuniors\Reservations\Http\Actions\V1\Location\Slots;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\ClientReservation;
@@ -22,6 +21,7 @@ class LocationTimeGapsGetAction extends BaseAction
             'workerIds' => ['array', 'nullable'], // Optional - array of worker IDs
             'workerIds.*' => ['integer'],
             'includeReservations' => ['boolean', 'nullable'], // Optional: include minimal reservation data
+            'onlyLongestGap' => ['boolean', 'nullable'], // Optional: return only longest gap per day per worker (for month view optimization)
         ];
     }
 
@@ -40,15 +40,18 @@ class LocationTimeGapsGetAction extends BaseAction
         // Get worker IDs
         $workerIds = $attributes['workerIds'] ?? null;
         $includeReservations = $attributes['includeReservations'] ?? false;
+        $onlyLongestGap = $attributes['onlyLongestGap'] ?? false;
 
-        // Build cache key
+        // Build cache key (include onlyLongestGap to avoid cache conflicts)
         $workerIdsHash = $workerIds ? md5(implode(',', $workerIds)) : 'all';
+        $onlyLongestGapFlag = $onlyLongestGap ? '1' : '0';
         $cacheKey = sprintf(
-            'location_slots_gaps:%s:%s:%s:%s',
+            'location_slots_gaps:%s:%s:%s:%s:%s',
             $attributes['locationSlug'],
             $startDate->format('Y-m-d'),
             $endDate->format('Y-m-d'),
-            $workerIdsHash
+            $workerIdsHash,
+            $onlyLongestGapFlag
         );
 
         // Try to get from cache (5 minutes default)
@@ -61,26 +64,15 @@ class LocationTimeGapsGetAction extends BaseAction
         if (Cache::getStore() instanceof \Illuminate\Cache\TaggedCache || method_exists(Cache::getStore(), 'tags')) {
             $cached = Cache::tags($cacheTags)->get($cacheKey);
             if ($cached !== null) {
-                Log::info('LocationTimeGapsGetAction: Returning from cache', [
-                    'cacheKey' => $cacheKey,
-                ]);
                 return $cached;
             }
         } else {
             // Fallback for cache stores that don't support tags
             $cached = Cache::get($cacheKey);
             if ($cached !== null) {
-                Log::info('LocationTimeGapsGetAction: Returning from cache', [
-                    'cacheKey' => $cacheKey,
-                ]);
                 return $cached;
             }
         }
-        
-        Log::info('LocationTimeGapsGetAction: Cache miss, calculating gaps', [
-            'cacheKey' => $cacheKey,
-            'locationSlug' => $attributes['locationSlug'],
-        ]);
 
         // Load workers - if workerIds provided, load only those, otherwise all active
         $workersQuery = LocationWorker::query()
@@ -116,36 +108,17 @@ class LocationTimeGapsGetAction extends BaseAction
         // Get current time in UTC to filter out past dates
         $nowUtc = Carbon::now('UTC')->startOfDay();
 
-        Log::info('LocationTimeGapsGetAction: Processing date range', [
-            'startDate' => $startDate->toIso8601String(),
-            'endDate' => $endDate->toIso8601String(),
-            'startDateUTC' => $currentDate->toIso8601String(),
-            'endDateUTC' => $endDateDay->toIso8601String(),
-            'nowUtc' => $nowUtc->toIso8601String(),
-            'locationTimezone' => $locationTimezone,
-            'workersCount' => $workers->count(),
-        ]);
-
         while ($currentDate->lte($endDateDay)) {
             $dateUtc = $currentDate->copy();
             
             // Skip past dates (only process today and future dates)
             if ($dateUtc->lt($nowUtc)) {
                 $daysSkipped++;
-                Log::info('LocationTimeGapsGetAction: Skipping past date', [
-                    'dateUtc' => $dateUtc->format('Y-m-d'),
-                    'nowUtc' => $nowUtc->format('Y-m-d'),
-                ]);
                 $currentDate->addDay();
                 continue;
             }
             
             $daysProcessed++;
-
-            Log::info('LocationTimeGapsGetAction: Processing day', [
-                'dateUtc' => $dateUtc->format('Y-m-d'),
-                'dateUtcIso' => $dateUtc->toIso8601String(),
-            ]);
 
             // For each worker, calculate gaps for this day
             $dayHasShifts = false;
@@ -161,24 +134,22 @@ class LocationTimeGapsGetAction extends BaseAction
                     $dayHasShifts = true;
                 }
 
-                Log::info('LocationTimeGapsGetAction: Worker gaps', [
-                    'workerId' => $worker->id,
-                    'workerName' => $worker->full_name,
-                    'gapsCount' => count($workerGaps),
-                    'gaps' => $workerGaps,
-                ]);
+                // If onlyLongestGap is true, keep only the longest gap for this worker
+                if ($onlyLongestGap && count($workerGaps) > 0) {
+                    $longestGap = $workerGaps[0];
+                    foreach ($workerGaps as $gap) {
+                        if ($gap['duration'] > $longestGap['duration']) {
+                            $longestGap = $gap;
+                        }
+                    }
+                    $workerGaps = [$longestGap];
+                }
 
                 // Group gaps by local date (not UTC date)
                 foreach ($workerGaps as $gap) {
                     // Convert gap start time from UTC to local timezone to get local date
                     $gapStartLocal = Carbon::parse($gap['time'])->setTimezone($locationTimezone);
                     $localDateKey = $gapStartLocal->format('Y-m-d');
-
-                    Log::info('LocationTimeGapsGetAction: Gap date conversion', [
-                        'gapTimeUtc' => $gap['time'],
-                        'gapStartLocal' => $gapStartLocal->toIso8601String(),
-                        'localDateKey' => $localDateKey,
-                    ]);
 
                     if (!isset($gapsByDate[$localDateKey])) {
                         $gapsByDate[$localDateKey] = [];
@@ -217,14 +188,6 @@ class LocationTimeGapsGetAction extends BaseAction
             $currentDate->addDay();
         }
 
-        Log::info('LocationTimeGapsGetAction: Final gaps by date', [
-            'daysProcessed' => $daysProcessed,
-            'daysWithShifts' => $daysWithShifts,
-            'daysSkipped' => $daysSkipped,
-            'gapsByDateKeys' => array_keys($gapsByDate),
-            'gapsByDate' => $gapsByDate,
-        ]);
-
         $response = [
             'gaps' => $gapsByDate,
         ];
@@ -254,16 +217,8 @@ class LocationTimeGapsGetAction extends BaseAction
     {
         $cacheTag = sprintf('location_slots_gaps:%s', $locationSlug);
 
-        Log::info('LocationTimeGapsGetAction: Invalidating cache', [
-            'locationSlug' => $locationSlug,
-            'cacheTag' => $cacheTag,
-        ]);
-
         if (Cache::getStore() instanceof \Illuminate\Cache\TaggedCache || method_exists(Cache::getStore(), 'tags')) {
             Cache::tags([$cacheTag])->flush();
-            Log::info('LocationTimeGapsGetAction: Cache invalidated using tags', [
-                'locationSlug' => $locationSlug,
-            ]);
         } else {
             // Fallback: try to clear by pattern (Redis supports this)
             $pattern = sprintf('location_slots_gaps:%s:*', $locationSlug);
@@ -272,22 +227,7 @@ class LocationTimeGapsGetAction extends BaseAction
                 $keys = $redis->keys($pattern);
                 if (!empty($keys)) {
                     $redis->del($keys);
-                    Log::info('LocationTimeGapsGetAction: Cache invalidated using Redis pattern', [
-                        'locationSlug' => $locationSlug,
-                        'keysDeleted' => count($keys),
-                    ]);
-                } else {
-                    Log::info('LocationTimeGapsGetAction: No cache keys found to invalidate', [
-                        'locationSlug' => $locationSlug,
-                        'pattern' => $pattern,
-                    ]);
                 }
-            } else {
-                // If no Redis, try to forget by key pattern (less efficient)
-                // This is a fallback that may not work for all cache drivers
-                Log::warning('LocationTimeGapsGetAction: Cache invalidation may not work properly - no tagged cache or Redis available', [
-                    'locationSlug' => $locationSlug,
-                ]);
             }
         }
     }
@@ -320,18 +260,6 @@ class LocationTimeGapsGetAction extends BaseAction
             ->whereNotNull('time_to_utc')
             ->first();
 
-        Log::info('LocationTimeGapsGetAction: Shift lookup', [
-            'workerId' => $worker->id,
-            'dateUtc' => $dateUtc->format('Y-m-d'),
-            'hasShift' => $shift !== null,
-            'shift' => $shift ? [
-                'id' => $shift->id,
-                'date_utc' => $shift->date_utc,
-                'time_from_utc' => $shift->time_from_utc,
-                'time_to_utc' => $shift->time_to_utc,
-            ] : null,
-        ]);
-
         if (!$shift) {
             // No shift for this day, no gaps
             return $gaps;
@@ -355,14 +283,20 @@ class LocationTimeGapsGetAction extends BaseAction
         
         // Get all reservations for this worker and filter in PHP to check overlaps
         // This is more reliable than complex SQL queries with timezone issues
+        // Use whereBetween with datetime to include previous and next day for cross-day reservations
+        $queryStart = $dayStart->copy()->subDay();
+        $queryEnd = $dayEnd->copy()->addDay();
+        
         $allReservations = ClientReservation::query()
             ->where('location_id', $location->id)
             ->where('location_worker_id', $worker->id)
             ->where('status', '!=', ReservationStatus::CANCELLED)
             ->whereNotNull('date_utc')
             ->whereNotNull('services_duration')
-            ->whereDate('date_utc', '>=', $dayStart->copy()->subDay()->format('Y-m-d')) // Include previous day for cross-day reservations
-            ->whereDate('date_utc', '<=', $dayEnd->copy()->addDay()->format('Y-m-d')) // Include next day for cross-day reservations
+            ->whereBetween('date_utc', [
+                $queryStart->toDateTimeString(),
+                $queryEnd->toDateTimeString()
+            ])
             ->orderBy('date_utc', 'asc')
             ->get();
         
@@ -378,19 +312,6 @@ class LocationTimeGapsGetAction extends BaseAction
 
         // Build list of occupied time periods
         $occupiedPeriods = [];
-        Log::info('LocationTimeGapsGetAction: Reservations found', [
-            'workerId' => $worker->id,
-            'dateUtc' => $dateUtc->format('Y-m-d'),
-            'reservationsCount' => $reservations->count(),
-            'reservations' => $reservations->map(function($r) {
-                return [
-                    'id' => $r->id,
-                    'date_utc' => $r->date_utc,
-                    'services_duration' => $r->services_duration,
-                    'status' => $r->status,
-                ];
-            })->toArray(),
-        ]);
         
         foreach ($reservations as $reservation) {
             $reservationStart = Carbon::parse($reservation->date_utc);
@@ -403,26 +324,9 @@ class LocationTimeGapsGetAction extends BaseAction
                 'end' => $reservationEnd,
             ];
         }
-        
-        Log::info('LocationTimeGapsGetAction: Occupied periods', [
-            'workerId' => $worker->id,
-            'occupiedPeriodsCount' => count($occupiedPeriods),
-            'occupiedPeriods' => array_map(function($p) {
-                return [
-                    'start' => $p['start']->toIso8601String(),
-                    'end' => $p['end']->toIso8601String(),
-                ];
-            }, $occupiedPeriods),
-        ]);
 
         // Handle pauses from shift
         $pauses = $shift->pauses_utc ?? [];
-        Log::info('LocationTimeGapsGetAction: Processing pauses', [
-            'workerId' => $worker->id,
-            'dateUtc' => $dateUtc->format('Y-m-d'),
-            'pausesCount' => count($pauses),
-            'pauses' => $pauses,
-        ]);
         
         foreach ($pauses as $pause) {
             // Pauses can be stored with different field names:
@@ -465,24 +369,6 @@ class LocationTimeGapsGetAction extends BaseAction
                         'start' => $clampedStart,
                         'end' => $clampedEnd,
                     ];
-                    
-                    Log::info('LocationTimeGapsGetAction: Added pause to occupied periods', [
-                        'workerId' => $worker->id,
-                        'pauseFrom' => $pauseFrom,
-                        'pauseTo' => $pauseTo,
-                        'pauseStart' => $pauseStart->toIso8601String(),
-                        'pauseEnd' => $pauseEnd->toIso8601String(),
-                        'clampedStart' => $clampedStart->toIso8601String(),
-                        'clampedEnd' => $clampedEnd->toIso8601String(),
-                    ]);
-                } else {
-                    Log::info('LocationTimeGapsGetAction: Pause outside shift, skipping', [
-                        'workerId' => $worker->id,
-                        'pauseStart' => $pauseStart->toIso8601String(),
-                        'pauseEnd' => $pauseEnd->toIso8601String(),
-                        'shiftStart' => $shiftStart->toIso8601String(),
-                        'shiftEnd' => $shiftEnd->toIso8601String(),
-                    ]);
                 }
             }
         }
@@ -491,22 +377,6 @@ class LocationTimeGapsGetAction extends BaseAction
         usort($occupiedPeriods, function ($a, $b) {
             return $a['start']->lt($b['start']) ? -1 : 1;
         });
-        
-        Log::info('LocationTimeGapsGetAction: Sorted occupied periods', [
-            'workerId' => $worker->id,
-            'dateUtc' => $dateUtc->format('Y-m-d'),
-            'shiftStart' => $shiftStart->toIso8601String(),
-            'shiftEnd' => $shiftEnd->toIso8601String(),
-            'pauseBetweenReservations' => $pauseBetweenReservations,
-            'occupiedPeriodsCount' => count($occupiedPeriods),
-            'occupiedPeriods' => array_map(function($p) {
-                return [
-                    'start' => $p['start']->toIso8601String(),
-                    'end' => $p['end']->toIso8601String(),
-                    'duration' => $p['start']->diffInMinutes($p['end']),
-                ];
-            }, $occupiedPeriods),
-        ]);
 
         // Calculate gaps between occupied periods
         $currentTime = $shiftStart->copy();
@@ -527,18 +397,6 @@ class LocationTimeGapsGetAction extends BaseAction
             // Move current time to end of occupied period
             $currentTime = $occupied['end']->copy();
         }
-        
-        Log::info('LocationTimeGapsGetAction: Generated gaps', [
-            'workerId' => $worker->id,
-            'dateUtc' => $dateUtc->format('Y-m-d'),
-            'gapsCount' => count($gaps),
-            'gaps' => array_map(function($g) {
-                return [
-                    'time' => $g['time'],
-                    'duration' => $g['duration'],
-                ];
-            }, $gaps),
-        ]);
 
         // Check for gap after last occupied period until shift end
         if ($currentTime->lt($shiftEnd)) {
