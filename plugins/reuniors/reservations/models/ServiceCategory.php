@@ -58,5 +58,9 @@ class ServiceCategory extends Model
             'otherKey' => 'service_group_id',
         ],
     ];
+
+    public $attachOne = [
+        'image' => ['Reuniors\Reservations\Models\FileImage\FileImageSquare', 'delete' => true],
+    ];
 }
 

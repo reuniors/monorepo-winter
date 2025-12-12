@@ -15,6 +15,9 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservat
 use Reuniors\Reservations\Http\Actions\V1\Location\Reservations\LocationReservationUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\LocationServiceGroupsGet;
 use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\LocationServiceCategoriesGetAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\ServiceCategoryCreateAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\ServiceCategoryUpdateAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\ServiceCategoryDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Group\ServiceGroupDeleteAction;
@@ -27,6 +30,8 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarU
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerAvatarDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\ServiceGroups\ServiceGroupImageUploadAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\ServiceGroups\ServiceGroupImageDeleteAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\ServiceCategoryImageUploadAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\ServiceCategories\ServiceCategoryImageDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Services\Service\ServiceDeleteAction;
@@ -114,6 +119,10 @@ Route::group(
             Route::post('service-groups/{serviceGroup}/avatar/upload', ServiceGroupImageUploadAction::class);
             Route::delete('service-groups/{serviceGroup}/avatar/delete', ServiceGroupImageDeleteAction::class);
 
+            // Service Category Image routes
+            Route::post('service-categories/{serviceCategory}/image/upload', ServiceCategoryImageUploadAction::class);
+            Route::delete('service-categories/{serviceCategory}/image/delete', ServiceCategoryImageDeleteAction::class);
+
             Route::group(['middleware' => [
                 'api',
                 UserFromBearerToken::class,
@@ -131,6 +140,9 @@ Route::group(
                     Route::put('update', LocationUpdateAction::class);
                     Route::put('service-groups/update', ServiceGroupUpdateAction::class);
                     Route::put('services/update', ServiceUpdateAction::class);
+                    Route::post('service-categories/create', ServiceCategoryCreateAction::class);
+                    Route::put('service-categories/update', ServiceCategoryUpdateAction::class);
+                    Route::delete('service-categories/delete/{serviceCategory}', ServiceCategoryDeleteAction::class);
 
                     // Google Calendar routes (support both FE popup and BE redirect flows)
                     Route::group([

@@ -26,6 +26,7 @@ class LocationServiceCategoriesGetAction extends BaseAction
         }
 
         return $query
+            ->with('serviceGroups')
             ->orderBy('sort_order')
             ->orderBy('title')
             ->get();
