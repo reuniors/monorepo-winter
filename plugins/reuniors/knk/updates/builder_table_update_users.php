@@ -9,7 +9,7 @@ class BuilderTableUpdateUsers extends Migration
     {
         Schema::table('users', function($table)
         {
-            $table->integer('city_id')->unsigned();
+            $table->integer('city_id')->unsigned()->nullable();
         });
     }
 

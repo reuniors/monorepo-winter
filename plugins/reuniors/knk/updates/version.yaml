@@ -739,3 +739,6 @@
 1.0.255:
     - "Make original date/time fields nullable in knk tables"
     - builder_table_make_original_fields_nullable_reuniors_knk.php
+1.0.256:
+    - "Make city_id nullable in users table"
+    - builder_table_update_users_2.php
