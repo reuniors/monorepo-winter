@@ -19,6 +19,13 @@ class LocationWorkerUpdateAction extends BaseAction
             'status' => ['nullable', 'integer'],
             'user_id' => ['nullable', 'integer'],
             'phone_data' => ['nullable', 'array'],
+            'is_synced_service' => ['nullable', 'boolean'],
+            'is_synced_category' => ['nullable', 'boolean'],
+            'service_category_ids' => ['nullable', 'array'],
+            'service_category_ids.*' => ['integer'],
+            // Also accept camelCase for backward compatibility
+            'serviceCategoryIds' => ['nullable', 'array'],
+            'serviceCategoryIds.*' => ['integer'],
             // Add other fields as needed
         ];
     }
@@ -35,14 +42,25 @@ class LocationWorkerUpdateAction extends BaseAction
             throw new \Exception('Worker not found');
         }
 
+        // Handle service categories separately
+        // Accept both snake_case and camelCase
+        $serviceCategoryIds = $attributes['service_category_ids'] ?? $attributes['serviceCategoryIds'] ?? null;
+        unset($attributes['serviceCategoryIds'], $attributes['service_category_ids']);
+
         $worker->fill($attributes);
         $worker->save();
+
+        // Sync service categories if provided
+        if ($serviceCategoryIds !== null) {
+            $worker->serviceCategories()->sync($serviceCategoryIds);
+        }
 
         // Ensure attached to location
         if (!$location->workers()->where('location_worker_id', $worker->id)->exists()) {
             $location->workers()->attach($worker->id);
         }
 
-        return $worker->fresh();
+        // Load serviceCategories relation before returning
+        return $worker->fresh()->load('serviceCategories:id,title,slug,active');
     }
 } 

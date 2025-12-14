@@ -39,6 +39,7 @@ class LocationWorker extends Model
         'phone_data',
         'description',
         'is_synced_service',
+        'is_synced_category',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -83,6 +84,12 @@ class LocationWorker extends Model
             'table' => 'reuniors_reservations_location_workers_working_hours',
             'key' => 'location_worker_id',
             'otherKey' => 'working_hours_id',
+        ],
+        'serviceCategories' => [
+            'Reuniors\Reservations\Models\ServiceCategory',
+            'table' => 'reuniors_reservations_service_category_location_worker',
+            'key' => 'location_worker_id',
+            'otherKey' => 'service_category_id',
         ],
     ];
 
@@ -153,6 +160,9 @@ class LocationWorker extends Model
                 $query->where('slug', $locationSlug);
             });
         }
+
+        // Always load serviceCategories relation for frontend
+        $query->with('serviceCategories:id,title,slug,active');
 
         return $query;
     }

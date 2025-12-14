@@ -57,6 +57,12 @@ class ServiceCategory extends Model
             'key' => 'service_category_id',
             'otherKey' => 'service_group_id',
         ],
+        'workers' => [
+            'Reuniors\Reservations\Models\LocationWorker',
+            'table' => 'reuniors_reservations_service_category_location_worker',
+            'key' => 'service_category_id',
+            'otherKey' => 'location_worker_id',
+        ],
     ];
 
     public $attachOne = [

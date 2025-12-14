@@ -123,6 +123,9 @@ class ServiceGroup extends BaseModelWithSort
             });
         }
 
+        // Always load serviceCategories relation for frontend
+        $query->with('serviceCategories:id,title,slug,active');
+
         if ($withServices) {
             $query->with('services');
             

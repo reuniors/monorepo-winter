@@ -228,3 +228,9 @@
 1.0.78:
     - "Created table reuniors_reservations_calendar_events (pivot to calendar plugin)"
     - builder_table_create_reuniors_reservations_calendar_events.php
+1.0.79:
+    - "Created pivot table reuniors_reservations_service_category_location_worker"
+    - builder_table_create_reuniors_reservations_service_category_location_worker.php
+1.0.80:
+    - "Added is_synced_category field to location_workers table"
+    - builder_table_add_is_synced_category_to_location_workers.php
