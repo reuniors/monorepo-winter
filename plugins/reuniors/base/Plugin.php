@@ -20,6 +20,10 @@ class Plugin extends PluginBase
             'userFromBearerTokenOptional',
             \Reuniors\Base\Http\Middlewares\UserFromBearerTokenOptional::class
         );
+        $this->app['router']->aliasMiddleware(
+            'userFromBearerToken',
+            \mikp\sanctum\Http\Middleware\UserFromBearerToken::class
+        );
 
         // Register shared helper classes
         $this->app->singleton('reuniors.base.helpers.reorder', function () {
