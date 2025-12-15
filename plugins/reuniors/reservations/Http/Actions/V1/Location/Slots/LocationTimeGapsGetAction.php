@@ -55,22 +55,26 @@ class LocationTimeGapsGetAction extends BaseAction
         );
 
         // Try to get from cache (5 minutes default)
+        // TEMPORARILY DISABLED FOR DEBUGGING - uncomment when cache invalidation is fixed
         $cacheDuration = 5; // minutes
         $cacheTags = [
             sprintf('location_slots_gaps:%s', $attributes['locationSlug']),
         ];
+        $useCache = false; // Set to true to enable caching
 
         // Check cache if supported
-        if (Cache::getStore() instanceof \Illuminate\Cache\TaggedCache || method_exists(Cache::getStore(), 'tags')) {
-            $cached = Cache::tags($cacheTags)->get($cacheKey);
-            if ($cached !== null) {
-                return $cached;
-            }
-        } else {
-            // Fallback for cache stores that don't support tags
-            $cached = Cache::get($cacheKey);
-            if ($cached !== null) {
-                return $cached;
+        if ($useCache) {
+            if (Cache::getStore() instanceof \Illuminate\Cache\TaggedCache || method_exists(Cache::getStore(), 'tags')) {
+                $cached = Cache::tags($cacheTags)->get($cacheKey);
+                if ($cached !== null) {
+                    return $cached;
+                }
+            } else {
+                // Fallback for cache stores that don't support tags
+                $cached = Cache::get($cacheKey);
+                if ($cached !== null) {
+                    return $cached;
+                }
             }
         }
 

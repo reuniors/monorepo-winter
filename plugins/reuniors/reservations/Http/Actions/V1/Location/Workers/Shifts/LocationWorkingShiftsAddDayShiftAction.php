@@ -2,6 +2,7 @@
 namespace Reuniors\Reservations\Http\Actions\V1\Location\Workers\Shifts;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cache;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\LocationWorker;
@@ -46,6 +47,9 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
             ->whereDate('date_utc', $dateUtc)
             ->first();
         $workingTime = $locationWorker->getWorkingTimeByDateAndShift($dateUtc, $shift);
+        // Clear gaps cache for this location
+        $this->clearGapsCache($locationSlug);
+
         if ($existingLocationWorkerShift) {
             $existingLocationWorkerShift->shift = $shift;
             $existingLocationWorkerShift->time_from_utc = $timeFromUtc ?? $workingTime['time_from_utc'];
@@ -63,6 +67,25 @@ class LocationWorkingShiftsAddDayShiftAction extends BaseAction {
                 'time_to_utc' => $timeToUtc ?? $workingTime['time_to_utc'] ?? null,
                 'pauses_utc' => $pausesUtc,
             ]);
+        }
+    }
+
+    /**
+     * Clear gaps cache for a location
+     */
+    private function clearGapsCache(string $locationSlug): void
+    {
+        $cacheTag = sprintf('location_slots_gaps:%s', $locationSlug);
+        
+        try {
+            // Try to clear with tags if supported
+            if (Cache::getStore() instanceof \Illuminate\Cache\TaggedCache || method_exists(Cache::getStore(), 'tags')) {
+                Cache::tags([$cacheTag])->flush();
+            }
+        } catch (\Exception $e) {
+            // Fallback: try to clear without tags (won't work for all cache stores)
+            // Log the error but don't fail the request
+            \Log::warning('Failed to clear gaps cache: ' . $e->getMessage());
         }
     }
 }
