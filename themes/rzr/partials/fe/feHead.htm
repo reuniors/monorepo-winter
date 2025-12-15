@@ -9,6 +9,7 @@ description = "FE Head"
 {% set faviconUrl = logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null %}
 {% set appleIconUrl = logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null %}
 {% set maskIconUrl = logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null %}
+{% partial "fe/feVersion" %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -51,7 +52,7 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-CkdE7eRY.js"></script>
+<script type="module" crossorigin src="/app/assets/index-yaxBA1B3.js"></script>
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-C9fBH8Uj.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CDpfJxnK.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-ZVUk9kYn.js">
@@ -67,7 +68,7 @@ description = "FE Head"
     {% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? null %}
 {% endif %}
 {% if locationSlug %}
-    {% set manifestUrl = url('manifest.webmanifest?locationSlug=' ~ locationSlug) %}
+    {% set manifestUrl = url('manifest.webmanifest?locationSlug=' ~ locationSlug ~ '&v=' ~ appVersion) %}
     <link rel="manifest" href="{{ manifestUrl }}">
 {% endif %}
-<script id="vite-plugin-pwa:register-sw" src="/app/registerSW.js?v=2.00"></script>
+<script id="vite-plugin-pwa:register-sw" src="/app/registerSW.js?v={{ appVersion }}"></script>
