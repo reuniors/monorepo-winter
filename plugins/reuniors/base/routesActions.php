@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
 use mikp\sanctum\http\middleware\UserFromBearerToken;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
+use Reuniors\Base\Http\Actions\V1\User\UserListGetAction;
+use Reuniors\Base\Http\Actions\V1\User\UserConnectedDevicesGetAction;
+use Reuniors\Base\Http\Actions\V1\Notification\SendTestNotificationAction;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +31,13 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [
         UserFromBearerToken::class,
         'userHasGroups:owner,admin,manager',
     ]], function () {
+
+        // Admin only routes - Test Notifications
+        Route::group(['prefix' => 'admin', 'middleware' => ['userHasGroups:admin']], function () {
+            Route::get('users', [UserListGetAction::class, 'handle']);
+            Route::get('users/{userId}/connected-devices', [UserConnectedDevicesGetAction::class, 'handle']);
+            Route::post('notifications/test', [SendTestNotificationAction::class, 'handle']);
+        });
 
         // Tags Management (Admin/Manager only)
         Route::group(['prefix' => 'tags'], function () {
