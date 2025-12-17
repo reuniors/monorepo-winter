@@ -40,23 +40,39 @@ class UserConnectedDevicesGetAction
 
         // Transform devices data from tokens JSON structure
         $devicesData = [];
+        $deviceIndex = 0;
+        $oneDayAgo = now()->subDay();
+        
         if ($devices->isNotEmpty()) {
             foreach ($devices as $connectedDevice) {
                 $tokens = $connectedDevice->tokens ?? [];
                 foreach ($tokens as $token => $tokenData) {
+                    $deviceIndex++;
+                    $lastUsedAt = isset($tokenData['last_used_at']) 
+                        ? date('c', strtotime($tokenData['last_used_at'])) 
+                        : null;
+                    
+                    // Device is active if used within last 24 hours
+                    $isActive = $lastUsedAt && strtotime($lastUsedAt) >= $oneDayAgo->timestamp;
+                    
                     $devicesData[] = [
-                        'id' => $connectedDevice->id,
+                        'id' => $deviceIndex, // Unique ID for each token
                         'deviceId' => $token,
                         'deviceName' => $tokenData['device'] ?? 'Unknown Device',
                         'platform' => $this->detectPlatform($tokenData['device'] ?? ''),
-                        'isActive' => true,
-                        'lastUsedAt' => isset($tokenData['last_used_at']) 
-                            ? date('c', strtotime($tokenData['last_used_at'])) 
-                            : null,
+                        'isActive' => $isActive,
+                        'lastUsedAt' => $lastUsedAt,
                     ];
                 }
             }
         }
+        
+        // Sort by last used date descending
+        usort($devicesData, function($a, $b) {
+            if (!$a['lastUsedAt']) return 1;
+            if (!$b['lastUsedAt']) return -1;
+            return strtotime($b['lastUsedAt']) - strtotime($a['lastUsedAt']);
+        });
 
         return response()->json([
             'success' => true,
