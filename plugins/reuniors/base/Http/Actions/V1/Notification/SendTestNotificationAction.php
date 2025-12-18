@@ -89,15 +89,28 @@ class SendTestNotificationAction
                 'click_action' => $clickActionUrl,
             ], $data);
 
-            // Build data-only payload (notification + data) for SW handling
-            // This avoids browser auto-showing a second notification.
+            // FCM data payload must be a flat map of string => string.
+            // Convert all metadata values to strings, JSON-encoding complex values.
+            foreach ($notificationMeta as $key => $value) {
+                if (is_array($value) || is_object($value)) {
+                    $notificationMeta[$key] = json_encode($value);
+                } elseif (!is_null($value)) {
+                    $notificationMeta[$key] = (string) $value;
+                } else {
+                    $notificationMeta[$key] = '';
+                }
+            }
+
+            // Build data-only payload for SW handling.
+            // We JSON-encode the "notification" and "data" structures so that
+            // the service worker can parse them back into objects.
             $payloadData = [
-                'notification' => [
+                'notification' => json_encode([
                     'title' => $title,
                     'body' => $body,
                     'image' => null,
-                ],
-                'data' => $notificationMeta,
+                ]),
+                'data' => json_encode($notificationMeta),
             ];
 
             // Create message with web push config for PWA (data-only)

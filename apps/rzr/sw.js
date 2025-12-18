@@ -1520,11 +1520,31 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const messaging = firebase.messaging();
 messaging.onBackgroundMessage(async (payload) => {
-  const notificationTitle = payload.data.notification.title;
+  let notificationPayload = {
+    title: "",
+    body: "",
+    image: null
+  };
+  let dataPayload = {};
+  try {
+    if (payload.data && payload.data.notification) {
+      notificationPayload = JSON.parse(payload.data.notification);
+    }
+  } catch (e) {
+    console.error("Failed to parse notification payload", e);
+  }
+  try {
+    if (payload.data && payload.data.data) {
+      dataPayload = JSON.parse(payload.data.data);
+    }
+  } catch (e) {
+    console.error("Failed to parse data payload", e);
+  }
+  const notificationTitle = notificationPayload.title || "Notification";
   const notificationOptions = {
-    body: payload.data.notification.body,
-    icon: payload.data.notification.image,
-    data: payload.data.data
+    body: notificationPayload.body || "",
+    icon: notificationPayload.image || null,
+    data: dataPayload
   };
   return self.registration.showNotification(
     notificationTitle,
