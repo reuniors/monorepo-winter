@@ -81,21 +81,28 @@ class SendTestNotificationAction
             // Determine the click action URL (custom or default home page)
             $clickActionUrl = $clickAction ?: ('https://' . $locationSlug . '.rzr.rs/');
 
-            // Prepare notification data
-            $notificationData = array_merge([
+            // Prepare notification metadata
+            $notificationMeta = array_merge([
                 'type' => $type,
                 'level' => $level,
                 'timestamp' => now()->toIso8601String(),
                 'click_action' => $clickActionUrl,
             ], $data);
 
-            // Create notification
-            $notification = Notification::create($title, $body);
+            // Build data-only payload (notification + data) for SW handling
+            // This avoids browser auto-showing a second notification.
+            $payloadData = [
+                'notification' => [
+                    'title' => $title,
+                    'body' => $body,
+                    'image' => null,
+                ],
+                'data' => $notificationMeta,
+            ];
 
-            // Create message with web push config for PWA
+            // Create message with web push config for PWA (data-only)
             $message = CloudMessage::withTarget('token', $fcmToken)
-                ->withNotification($notification)
-                ->withData($notificationData)
+                ->withData($payloadData)
                 ->withWebPushConfig([
                     'fcm_options' => [
                         'link' => $clickActionUrl,
