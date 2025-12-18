@@ -19,6 +19,7 @@ class SendTestNotificationAction
             'body' => 'required|string',
             'type' => 'nullable|string|in:info,success,warning,error',
             'level' => 'nullable|integer|min:1|max:5',
+            'clickAction' => 'nullable|string|url',
             'data' => 'nullable|array',
         ]);
 
@@ -29,6 +30,7 @@ class SendTestNotificationAction
         $body = $request->input('body');
         $type = $request->input('type', 'info');
         $level = $request->input('level', 1);
+        $clickAction = $request->input('clickAction');
         $data = $request->input('data', []);
 
         // Find the connected device for this user and location
@@ -76,20 +78,29 @@ class SendTestNotificationAction
             $factory = (new Factory)->withServiceAccount($credentialsPath);
             $messaging = $factory->createMessaging();
 
+            // Determine the click action URL (custom or default home page)
+            $clickActionUrl = $clickAction ?: ('https://' . $locationSlug . '.rzr.rs/');
+
             // Prepare notification data
             $notificationData = array_merge([
                 'type' => $type,
                 'level' => $level,
                 'timestamp' => now()->toIso8601String(),
+                'click_action' => $clickActionUrl,
             ], $data);
 
             // Create notification
             $notification = Notification::create($title, $body);
 
-            // Create message
+            // Create message with web push config for PWA
             $message = CloudMessage::withTarget('token', $fcmToken)
                 ->withNotification($notification)
-                ->withData($notificationData);
+                ->withData($notificationData)
+                ->withWebPushConfig([
+                    'fcm_options' => [
+                        'link' => $clickActionUrl,
+                    ],
+                ]);
 
             // Send notification
             $result = $messaging->send($message);
@@ -114,8 +125,42 @@ class SendTestNotificationAction
         } catch (\Exception $e) {
             Log::error('Failed to send test notification', [
                 'device_id' => $deviceId,
+                'user_id' => $userId,
                 'error' => $e->getMessage(),
             ]);
+
+            // If token is invalid (not found), remove it from database
+            if (strpos($e->getMessage(), 'not found') !== false || 
+                strpos($e->getMessage(), 'Requested entity was not found') !== false) {
+                
+                // Find and remove the invalid token
+                foreach ($connectedDevices as $device) {
+                    $tokens = $device->tokens ?? [];
+                    if (isset($tokens[$deviceId])) {
+                        unset($tokens[$deviceId]);
+                        
+                        if (empty($tokens)) {
+                            // If no tokens left, delete the device record
+                            $device->delete();
+                        } else {
+                            // Otherwise just update with remaining tokens
+                            $device->tokens = $tokens;
+                            $device->save();
+                        }
+                        
+                        Log::info('Removed invalid FCM token', [
+                            'user_id' => $userId,
+                            'device_id' => $deviceId,
+                        ]);
+                        break;
+                    }
+                }
+                
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Token no longer valid and has been removed. Please refresh the page.',
+                ], 410); // 410 Gone
+            }
 
             return response()->json([
                 'success' => false,
