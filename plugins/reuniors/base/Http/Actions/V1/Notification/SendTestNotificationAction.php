@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Base\Http\Actions\V1\Notification;
 
 use Illuminate\Http\Request;
-use Reuniors\Base\Models\UserConnectedDevice;
+use Reuniors\Base\Models\ConnectedDevice;
 use Illuminate\Support\Facades\Log;
 use Kreait\Firebase\Messaging\CloudMessage;
 use Kreait\Firebase\Messaging\Notification;
@@ -29,22 +29,27 @@ class SendTestNotificationAction
         $level = $request->input('level', 1);
         $data = $request->input('data', []);
 
-        // Find device
-        $device = UserConnectedDevice::where('device_id', $deviceId)->first();
+        // Find the connected device for this location
+        $connectedDevice = ConnectedDevice::where('location_slug', $locationSlug)->first();
 
-        if (!$device) {
+        if (!$connectedDevice) {
             return response()->json([
                 'success' => false,
-                'message' => 'Device not found',
+                'message' => 'No connected devices found for this location',
             ], 404);
         }
 
-        if (!$device->fcm_token) {
+        // Check if the deviceId (token) exists in tokens JSON
+        $tokens = $connectedDevice->tokens ?? [];
+        if (!isset($tokens[$deviceId])) {
             return response()->json([
                 'success' => false,
-                'message' => 'Device does not have FCM token',
-            ], 400);
+                'message' => 'Device token not found',
+            ], 404);
         }
+
+        // The deviceId is actually the FCM token
+        $fcmToken = $deviceId;
 
         try {
             // Get Firebase credentials path from env
@@ -69,7 +74,7 @@ class SendTestNotificationAction
             $notification = Notification::create($title, $body);
 
             // Create message
-            $message = CloudMessage::withTarget('token', $device->fcm_token)
+            $message = CloudMessage::withTarget('token', $fcmToken)
                 ->withNotification($notification)
                 ->withData($notificationData);
 
@@ -79,7 +84,8 @@ class SendTestNotificationAction
             // Log the test notification
             Log::info('Test notification sent', [
                 'device_id' => $deviceId,
-                'user_id' => $device->user_id,
+                'user_id' => $connectedDevice->user_id,
+                'location_slug' => $locationSlug,
                 'title' => $title,
                 'result' => $result,
             ]);
