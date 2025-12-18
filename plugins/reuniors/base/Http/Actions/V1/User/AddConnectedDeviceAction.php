@@ -32,24 +32,35 @@ class AddConnectedDeviceAction extends BaseAction {
 
         $connectedDevice->location_slug = $locationSlug;
         $connectedDevice->user_id = $user->id;
-        $tokensData = $connectedDevice->tokens;
-        $tokens = $connectedDevice->tokens
-            ? array_keys($connectedDevice->tokens)
-            : [];
-        if (in_array($token, $tokens)) {
+        $tokensData = $connectedDevice->tokens ?? [];
+        
+        // Check if token already exists - if yes, just update last_used_at
+        if (isset($tokensData[$token])) {
+            $tokensData[$token]['last_used_at'] = now();
+            $connectedDevice->tokens = $tokensData;
+            $connectedDevice->save();
             return null;
-        } elseif (count($tokens) >= 5) {
-            array_shift($tokens);
         }
+        
+        // If we have 5 or more tokens, remove the oldest one
+        if (count($tokensData) >= 5) {
+            // Sort by last_used_at to find the oldest
+            uasort($tokensData, function ($a, $b) {
+                return strtotime($a['last_used_at']) <=> strtotime($b['last_used_at']);
+            });
+            
+            // Remove the oldest (first) token
+            $oldestToken = array_key_first($tokensData);
+            unset($tokensData[$oldestToken]);
+        }
+        
+        // Add new token
         $deviceAgent = new Agent();
         $tokensData[$token] = [
             'last_used_at' => now(),
             'device' => $deviceAgent->device() . ' ' . $deviceAgent->platform() . ' ' . $deviceAgent->browser(),
         ];
-        uasort($tokensData, function ($a, $b) {
-            return $a['last_used_at'] <=> $b['last_used_at'];
-        });
-
+        
         $connectedDevice->tokens = $tokensData;
 
         $connectedDevice->save();

@@ -19,3 +19,6 @@
 1.0.5:
     - "Create connected_devices table in base plugin"
     - builder_table_create_reuniors_base_connected_devices.php
+1.0.6:
+    - "Add unique constraint to connected_devices table (user_id + location_slug)"
+    - add_unique_constraint_to_connected_devices.php

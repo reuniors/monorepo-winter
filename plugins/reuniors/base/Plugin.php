@@ -48,6 +48,7 @@ class Plugin extends PluginBase
         $this->registerConsoleCommand('reuniors:create-application', 'Reuniors\Base\Console\CreateApplicationCommand');
         $this->registerConsoleCommand('reuniors:clear-storage', 'Reuniors\Base\Console\ClearStorageCommand');
         $this->registerConsoleCommand('reuniors:migrate-connected-devices', 'Reuniors\Base\Console\MigrateConnectedDevicesCommand');
+        $this->registerConsoleCommand('reuniors:consolidate-connected-devices', 'Reuniors\Base\Console\ConsolidateConnectedDevicesCommand');
     }
 
     public function boot()

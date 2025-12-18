@@ -12,6 +12,7 @@ class SendTestNotificationAction
     public function handle(Request $request)
     {
         $request->validate([
+            'userId' => 'required|integer|exists:users,id',
             'locationSlug' => 'required|string',
             'deviceId' => 'required|string',
             'title' => 'required|string|max:255',
@@ -21,6 +22,7 @@ class SendTestNotificationAction
             'data' => 'nullable|array',
         ]);
 
+        $userId = $request->input('userId');
         $locationSlug = $request->input('locationSlug');
         $deviceId = $request->input('deviceId');
         $title = $request->input('title');
@@ -29,19 +31,30 @@ class SendTestNotificationAction
         $level = $request->input('level', 1);
         $data = $request->input('data', []);
 
-        // Find the connected device for this location
-        $connectedDevice = ConnectedDevice::where('location_slug', $locationSlug)->first();
+        // Find the connected device for this user and location
+        // Search through all user's devices to find the token
+        $connectedDevices = ConnectedDevice::where('user_id', $userId)
+            ->where('location_slug', $locationSlug)
+            ->get();
 
-        if (!$connectedDevice) {
+        if ($connectedDevices->isEmpty()) {
             return response()->json([
                 'success' => false,
-                'message' => 'No connected devices found for this location',
+                'message' => 'No connected devices found for this user and location',
             ], 404);
         }
 
-        // Check if the deviceId (token) exists in tokens JSON
-        $tokens = $connectedDevice->tokens ?? [];
-        if (!isset($tokens[$deviceId])) {
+        // Search for the token across all user's device records
+        $fcmToken = null;
+        foreach ($connectedDevices as $device) {
+            $tokens = $device->tokens ?? [];
+            if (isset($tokens[$deviceId])) {
+                $fcmToken = $deviceId;
+                break;
+            }
+        }
+
+        if (!$fcmToken) {
             return response()->json([
                 'success' => false,
                 'message' => 'Device token not found',
@@ -84,7 +97,7 @@ class SendTestNotificationAction
             // Log the test notification
             Log::info('Test notification sent', [
                 'device_id' => $deviceId,
-                'user_id' => $connectedDevice->user_id,
+                'user_id' => $userId,
                 'location_slug' => $locationSlug,
                 'title' => $title,
                 'result' => $result,
