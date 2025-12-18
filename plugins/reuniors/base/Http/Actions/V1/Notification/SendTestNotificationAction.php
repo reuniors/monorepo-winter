@@ -129,9 +129,14 @@ class SendTestNotificationAction
                 'error' => $e->getMessage(),
             ]);
 
-            // If token is invalid (not found), remove it from database
-            if (strpos($e->getMessage(), 'not found') !== false || 
-                strpos($e->getMessage(), 'Requested entity was not found') !== false) {
+            $message = $e->getMessage();
+
+            // If token is invalid (not found / NotRegistered), remove it from database
+            if (
+                stripos($message, 'not found') !== false ||
+                stripos($message, 'Requested entity was not found') !== false ||
+                stripos($message, 'NotRegistered') !== false
+            ) {
                 
                 // Find and remove the invalid token
                 foreach ($connectedDevices as $device) {
