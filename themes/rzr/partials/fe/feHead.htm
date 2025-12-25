@@ -9,7 +9,7 @@ description = "FE Head"
 {% set faviconUrl = logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null %}
 {% set appleIconUrl = logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null %}
 {% set maskIconUrl = logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null %}
-{% set appVersion = '2.043' %}
+{% set appVersion = '2.047' %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -52,14 +52,14 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-C9pdRbuJ.js"></script>
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-Dg6qYX7z.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-B_GNTQkY.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-BgkSNDC1.js">
+<script type="module" crossorigin src="/app/assets/index-C-L2pUlb.js"></script>
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-Dv5yPm6v.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CCLq7r1n.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-CVwFN5FQ.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-D7N1wSx9.css">
-    <link rel="stylesheet" crossorigin href="/app/assets/index-wjx8u8fk.css">
+    <link rel="stylesheet" crossorigin href="/app/assets/index-BgLA4rZw.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}
