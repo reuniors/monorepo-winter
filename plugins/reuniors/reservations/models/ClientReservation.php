@@ -449,4 +449,22 @@ class ClientReservation extends Model
                 : null,
         ];
     }
+
+    /**
+     * Format services request array for sync operation
+     * 
+     * @param array $servicesRequest Array of service requests with 'id' and 'quantity'
+     * @return array Formatted array for sync operation
+     */
+    public static function formatServicesForSync(array $servicesRequest)
+    {
+        $services = [];
+        foreach ($servicesRequest as $serviceRequest) {
+            $services[$serviceRequest['id']] = [
+                'quantity' => $serviceRequest['quantity'] ?? 1,
+            ];
+        }
+
+        return $services;
+    }
 }

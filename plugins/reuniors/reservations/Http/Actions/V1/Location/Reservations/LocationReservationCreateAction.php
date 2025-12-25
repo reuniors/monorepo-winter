@@ -11,7 +11,6 @@ use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Reuniors\Reservations\Models\Client;
 use Reuniors\Reservations\Models\ClientReservation;
 use Reuniors\Reservations\Models\Location;
-use Reuniors\Reservations\Models\PromoCode;
 use Reuniors\Reservations\Models\Service;
 use Winter\User\Facades\Auth;
 
@@ -36,56 +35,6 @@ class LocationReservationCreateAction extends BaseAction {
         ];
     }
 
-    protected function calcServicesData($servicesRequest, $servicesCollection)
-    {
-        $servicesDuration = 0;
-        $servicesCost = 0;
-        foreach ($servicesRequest as $serviceRequest) {
-            $service = $servicesCollection[$serviceRequest['id']] ?? null;
-            if (!$service) {
-                throw new \Exception('Service not found');
-            }
-            $servicesDuration += $service->duration * $serviceRequest['quantity'];
-            $servicesCost += $service->price * $serviceRequest['quantity'];
-        }
-
-        return [
-            'services_duration' => $servicesDuration,
-            'services_cost' => $servicesCost,
-        ];
-    }
-
-    protected function calcDiscountData(?PromoCode $promoCode, $servicesCost)
-    {
-        if (!$promoCode) {
-            return [];
-        }
-
-        $discount = $promoCode->in_percent
-            ? $servicesCost * $promoCode->discount_value / 100
-            : $promoCode->discount_value;
-
-        $discount = round($discount / 50) * 50;
-
-        return [
-            'original_cost' => $servicesCost,
-            'discount' => $discount,
-            'services_cost' => $servicesCost - $discount,
-            'promo_code_id' => $promoCode->id,
-        ];
-    }
-
-    protected function getServicesWithQuantity($servicesRequest)
-    {
-        $services = [];
-        foreach ($servicesRequest as $serviceRequest) {
-            $services[$serviceRequest['id']] = [
-                'quantity' => $serviceRequest['quantity'],
-            ];
-        }
-
-        return $services;
-    }
 
     public function handle(array $attributes = [])
     {
@@ -108,6 +57,17 @@ class LocationReservationCreateAction extends BaseAction {
             ->whereIn('id', array_column($servicesRequest, 'id'))
             ->get()
             ->keyBy('id');
+
+        // Load worker services with pivot data (price, duration) for worker-specific pricing
+        $worker->load(['services' => function ($query) use ($servicesCollection) {
+            $query->whereIn('reuniors_reservations_services.id', $servicesCollection->pluck('id'))
+                  ->wherePivot('active', true)
+                  ->withPivot(['price', 'duration', 'active']);
+        }]);
+
+        // Validate that all services belong to the selected worker
+        $worker->validateServices($servicesCollection, $servicesRequest);
+
         $dateUtc = $attributes['dateUtc'];
         $dateObject = Carbon::parse($dateUtc);
 
@@ -116,8 +76,9 @@ class LocationReservationCreateAction extends BaseAction {
             'locationSlug' => $location->slug,
         ]);
 
-        $servicesDataCalc = $this->calcServicesData($servicesRequest, $servicesCollection);
-        $discountDataCalc = $this->calcDiscountData($promoCode, $servicesDataCalc['services_cost']);
+        // Calculate services data using worker-specific prices
+        $servicesDataCalc = $worker->calculateServicesData($servicesRequest, $servicesCollection);
+        $discountDataCalc = $promoCode ? $promoCode->calculateDiscount($servicesDataCalc['services_cost']) : [];
 
         $data = [
             'location_id' => $location->id,
@@ -153,7 +114,7 @@ class LocationReservationCreateAction extends BaseAction {
         }
 
         $newReservation = ClientReservation::create($data);
-        $newReservation->services()->sync($this->getServicesWithQuantity($servicesRequest));
+        $newReservation->services()->sync(ClientReservation::formatServicesForSync($servicesRequest));
         if ($worker->user_id) {
             $userIds[] = $worker->user_id;
         }

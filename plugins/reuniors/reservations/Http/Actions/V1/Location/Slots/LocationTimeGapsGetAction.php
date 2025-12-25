@@ -383,18 +383,41 @@ class LocationTimeGapsGetAction extends BaseAction
         });
 
         // Calculate gaps between occupied periods
+        // Round shift start down to nearest 5-minute interval
         $currentTime = $shiftStart->copy();
+        $shiftStartMinutes = $currentTime->minute;
+        $roundedShiftStartMinutes = floor($shiftStartMinutes / 5) * 5;
+        $currentTime->minute($roundedShiftStartMinutes)->second(0);
 
         foreach ($occupiedPeriods as $occupied) {
             // If there's a gap before this occupied period
             if ($currentTime->lt($occupied['start'])) {
-                $gapDuration = $currentTime->diffInMinutes($occupied['start']);
-                if ($gapDuration > 0) {
-                    $gaps[] = [
-                        'time' => $currentTime->toIso8601String(),
-                        'duration' => $gapDuration,
-                        'workerId' => $worker->id,
-                    ];
+                // Round gap start down to nearest 5-minute interval
+                $gapStart = $currentTime->copy();
+                $gapStartMinutes = $gapStart->minute;
+                $roundedStartMinutes = floor($gapStartMinutes / 5) * 5;
+                $gapStart->minute($roundedStartMinutes)->second(0);
+                
+                // Round gap end up to nearest 5-minute interval
+                $gapEnd = $occupied['start']->copy();
+                $gapEndMinutes = $gapEnd->minute;
+                $roundedEndMinutes = ceil($gapEndMinutes / 5) * 5;
+                if ($roundedEndMinutes >= 60) {
+                    $gapEnd->addHour()->minute(0)->second(0);
+                } else {
+                    $gapEnd->minute($roundedEndMinutes)->second(0);
+                }
+                
+                // Only add gap if rounded start is before rounded end
+                if ($gapStart->lt($gapEnd)) {
+                    $gapDuration = $gapStart->diffInMinutes($gapEnd);
+                    if ($gapDuration > 0) {
+                        $gaps[] = [
+                            'time' => $gapStart->toIso8601String(),
+                            'duration' => $gapDuration,
+                            'workerId' => $worker->id,
+                        ];
+                    }
                 }
             }
 
@@ -404,13 +427,28 @@ class LocationTimeGapsGetAction extends BaseAction
 
         // Check for gap after last occupied period until shift end
         if ($currentTime->lt($shiftEnd)) {
-            $gapDuration = $currentTime->diffInMinutes($shiftEnd);
-            if ($gapDuration > 0) {
-                $gaps[] = [
-                    'time' => $currentTime->toIso8601String(),
-                    'duration' => $gapDuration,
-                    'workerId' => $worker->id,
-                ];
+            // Round gap start down to nearest 5-minute interval
+            $gapStart = $currentTime->copy();
+            $gapStartMinutes = $gapStart->minute;
+            $roundedStartMinutes = floor($gapStartMinutes / 5) * 5;
+            $gapStart->minute($roundedStartMinutes)->second(0);
+            
+            // Round gap end down to nearest 5-minute interval (don't extend beyond shift end)
+            $gapEnd = $shiftEnd->copy();
+            $gapEndMinutes = $gapEnd->minute;
+            $roundedEndMinutes = floor($gapEndMinutes / 5) * 5;
+            $gapEnd->minute($roundedEndMinutes)->second(0);
+            
+            // Only add gap if rounded start is before rounded end
+            if ($gapStart->lt($gapEnd)) {
+                $gapDuration = $gapStart->diffInMinutes($gapEnd);
+                if ($gapDuration > 0) {
+                    $gaps[] = [
+                        'time' => $gapStart->toIso8601String(),
+                        'duration' => $gapDuration,
+                        'workerId' => $worker->id,
+                    ];
+                }
             }
         }
 

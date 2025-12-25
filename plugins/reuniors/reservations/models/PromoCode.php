@@ -74,4 +74,26 @@ class PromoCode extends Model
                 ]);
         });
     }
+
+    /**
+     * Calculate discount data for a given services cost
+     * 
+     * @param float $servicesCost The total cost of services before discount
+     * @return array Array with 'original_cost', 'discount', 'services_cost', and 'promo_code_id'
+     */
+    public function calculateDiscount(float $servicesCost)
+    {
+        $discount = $this->in_percent
+            ? $servicesCost * $this->discount_value / 100
+            : $this->discount_value;
+
+        $discount = round($discount / 50) * 50;
+
+        return [
+            'original_cost' => $servicesCost,
+            'discount' => $discount,
+            'services_cost' => $servicesCost - $discount,
+            'promo_code_id' => $this->id,
+        ];
+    }
 }

@@ -196,6 +196,96 @@ class LocationWorker extends Model
         return null;
     }
 
+    /**
+     * Validate that all selected services belong to this worker
+     * 
+     * @param \Illuminate\Support\Collection $servicesCollection Collection of services keyed by ID
+     * @param array $servicesRequest Array of service requests from the input
+     * @throws \Illuminate\Http\Exceptions\HttpResponseException If validation fails
+     */
+    public function validateServices(\Illuminate\Support\Collection $servicesCollection, array $servicesRequest)
+    {
+        // If worker is synced, they can perform any service
+        if ($this->is_synced_service) {
+            return;
+        }
+
+        // Ensure worker services are loaded
+        if (!$this->relationLoaded('services')) {
+            $this->load('services');
+        }
+
+        // Get worker service IDs from pivot table
+        $workerServiceIds = $this->services->pluck('id')->toArray();
+        $invalidServiceTitles = [];
+
+        foreach ($servicesRequest as $serviceRequest) {
+            $serviceId = $serviceRequest['id'];
+            $service = $servicesCollection->get($serviceId);
+
+            if (!$service) {
+                // This case should ideally be caught earlier by $servicesCollection, but as a safeguard
+                throw new \Exception("Service with ID {$serviceId} not found.");
+            }
+
+            // Check if the worker explicitly offers this service
+            if (!in_array($serviceId, $workerServiceIds)) {
+                $invalidServiceTitles[] = $service->title;
+            }
+        }
+
+        if (!empty($invalidServiceTitles)) {
+            throw new \Illuminate\Http\Exceptions\HttpResponseException(
+                \Illuminate\Support\Facades\Response::json([
+                    'message' => 'Izabrani radnik ne nudi sledeće usluge: ' . implode(', ', $invalidServiceTitles)
+                ], \Illuminate\Http\Response::HTTP_CONFLICT)
+            );
+        }
+    }
+
+    /**
+     * Calculate services duration and cost using worker-specific prices when available
+     * 
+     * @param array $servicesRequest Array of service requests from the input
+     * @param \Illuminate\Support\Collection $servicesCollection Collection of services keyed by ID
+     * @return array Array with 'services_duration' and 'services_cost'
+     */
+    public function calculateServicesData(array $servicesRequest, \Illuminate\Support\Collection $servicesCollection)
+    {
+        $servicesDuration = 0;
+        $servicesCost = 0;
+        
+        foreach ($servicesRequest as $serviceRequest) {
+            $service = $servicesCollection[$serviceRequest['id']] ?? null;
+            if (!$service) {
+                throw new \Exception('Service not found');
+            }
+            
+            // Get worker-specific price and duration from pivot table
+            $workerService = $this->services->firstWhere('id', $service->id);
+            
+            // Use pivot price if available, otherwise fallback to service price
+            $price = $workerService && $workerService->pivot->price !== null
+                ? $workerService->pivot->price
+                : $service->price;
+            
+            // Use pivot duration if available, otherwise fallback to service duration
+            $duration = $workerService && $workerService->pivot->duration !== null
+                ? $workerService->pivot->duration
+                : $service->duration;
+            
+            $quantity = $serviceRequest['quantity'] ?? 1;
+            
+            $servicesDuration += $duration * $quantity;
+            $servicesCost += $price * $quantity;
+        }
+
+        return [
+            'services_duration' => $servicesDuration,
+            'services_cost' => $servicesCost,
+        ];
+    }
+
     public static function boot()
     {
         parent::boot();
