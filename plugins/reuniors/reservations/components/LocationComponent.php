@@ -51,6 +51,12 @@ class LocationComponent extends ComponentBase
         // Extract the subdomain from the host
         $subdomain = str_replace('.' . $domain, '', $host);
 
+        // Normalize slug by removing -v2 suffix if present
+        // This allows v2 slugs (e.g., berbernica-tanja-v2) to work with base slugs (e.g., berbernica-tanja)
+        if ($subdomain && str_ends_with($subdomain, '-v2')) {
+            $subdomain = substr($subdomain, 0, -3);
+        }
+
         return $domain === $host ? null : $subdomain;
     }
 
