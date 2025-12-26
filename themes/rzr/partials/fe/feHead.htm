@@ -9,7 +9,7 @@ description = "FE Head"
 {% set faviconUrl = logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null %}
 {% set appleIconUrl = logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null %}
 {% set maskIconUrl = logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null %}
-{% set appVersion = '2.047' %}
+{% set appVersion = '2.048' %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -18,6 +18,24 @@ description = "FE Head"
 {% set locationDescription = locationComponent.locationData.description ?? locationComponent.locationData.snippet ?? locationComponent.locationData.title ?? null %}
 {% if locationDescription %}
 <meta name="description" content="{{ locationDescription|striptags|trim }}" />
+{% endif %}
+
+{% set ogTitle = locationSnippet ?? locationTitle %}
+{% set ogDescription = locationDescription %}
+{% set ogImage = (locationComponent.locationData.cover and locationComponent.locationData.cover.path) ? locationComponent.locationData.cover.path : null %}
+
+{% if ogTitle %}
+<meta property="og:title" content="{{ ogTitle }}" />
+{% endif %}
+{% if ogDescription %}
+<meta property="og:description" content="{{ ogDescription|striptags|trim }}" />
+{% endif %}
+<meta property="og:type" content="website" />
+{% if ogImage %}
+<meta property="og:image" content="{{ ogImage }}" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="217" />
+<meta property="og:image:height" content="221" />
 {% endif %}
 
 {% if faviconUrl %}
@@ -52,14 +70,14 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-C-L2pUlb.js"></script>
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-Dv5yPm6v.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CCLq7r1n.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-CVwFN5FQ.js">
+<script type="module" crossorigin src="/app/assets/index-DhtA5eBI.js"></script>
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-CMAV6dQB.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-Dl-vfqHg.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-DT63KrXZ.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-D7N1wSx9.css">
-    <link rel="stylesheet" crossorigin href="/app/assets/index-BgLA4rZw.css">
+    <link rel="stylesheet" crossorigin href="/app/assets/index-CwT8UOLN.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}
