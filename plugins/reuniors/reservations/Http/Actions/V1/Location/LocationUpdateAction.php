@@ -95,13 +95,24 @@ class LocationUpdateAction extends BaseAction
                 $updateFields['has_multiple_activities'] = $attributes['has_multiple_activities'];
             }
             if (isset($attributes['pwaMetadata'])) {
-                $pwaMetadata = $location->pwa_metadata ?? [];
+                $existingPwaMetadata = $location->pwa_metadata ?? [];
+                $attributesPwaMetadata = $attributes['pwaMetadata'] ?? [];
                 
-                $pwaMetadata['name'] =$pwaMetadata['name'] ? $pwaMetadata['name'] : $location->title . ' ' . 'RZR.rs';
-                $pwaMetadata['short_name'] = $pwaMetadata['shortName'] ? $pwaMetadata['shortName'] : $location->title;
-                $pwaMetadata['theme_color'] = $pwaMetadata['themeColor'] ? $pwaMetadata['themeColor'] : '#000000';
-                $pwaMetadata['background_color'] = $pwaMetadata['backgroundColor'] ? $pwaMetadata['backgroundColor'] : '#000000';
-                $pwaMetadata['scope'] = $pwaMetadata['scope'] ? $pwaMetadata['scope'] : '/zakazivanje';
+                // Use values from attributes first, then fall back to existing, then defaults
+                $pwaMetadata = [];
+                $pwaMetadata['name'] = $attributesPwaMetadata['name'] ?? $existingPwaMetadata['name'] ?? ($location->title . ' ' . 'RZR.rs');
+                $pwaMetadata['short_name'] = ($attributesPwaMetadata['shortName'] ?? null) !== null 
+                    ? $attributesPwaMetadata['shortName'] 
+                    : ($existingPwaMetadata['short_name'] ?? $location->title);
+                $pwaMetadata['theme_color'] = ($attributesPwaMetadata['themeColor'] ?? null) !== null 
+                    ? $attributesPwaMetadata['themeColor'] 
+                    : ($existingPwaMetadata['theme_color'] ?? '#000000');
+                $pwaMetadata['background_color'] = ($attributesPwaMetadata['backgroundColor'] ?? null) !== null 
+                    ? $attributesPwaMetadata['backgroundColor'] 
+                    : ($existingPwaMetadata['background_color'] ?? '#000000');
+                $pwaMetadata['scope'] = ($attributesPwaMetadata['scope'] ?? null) !== null 
+                    ? $attributesPwaMetadata['scope'] 
+                    : ($existingPwaMetadata['scope'] ?? '/zakazivanje');
 
                 $updateFields['pwa_metadata'] = $pwaMetadata;
             }

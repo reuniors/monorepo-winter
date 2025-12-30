@@ -86,29 +86,45 @@ class LocationReservationUpdateAction extends BaseAction {
 
         // Determine users to notify
         $worker = $reservation->locationWorker;
-        $usersIds = [$user->id];
+        $usersIds = [];
+        
+        // Add current user if exists
+        if ($user && $user->id) {
+            $usersIds[] = $user->id;
+        }
         
         // For NO_SHOW, don't notify worker (only client gets notification and email)
         // For other statuses, notify worker as well
-        if ($status !== ReservationStatus::NO_SHOW && $worker->user_id) {
+        if ($status !== ReservationStatus::NO_SHOW && $worker && $worker->user_id) {
             $usersIds[] = $worker->user_id;
         }
         
-        if ($client && !in_array($client->user_id, $usersIds)) {
+        // Add client user_id only if it exists
+        if ($client && $client->user_id && !in_array($client->user_id, $usersIds)) {
             $usersIds[] = $client->user_id;
         }
+        
+        // Add created_by only if it exists
         if ($reservation->created_by && !in_array($reservation->created_by, $usersIds)) {
             $usersIds[] = $reservation->created_by;
         }
+        
+        // Remove any null values (just in case)
+        $usersIds = array_filter($usersIds, function($id) {
+            return $id !== null && $id !== '';
+        });
+        $usersIds = array_values(array_unique($usersIds));
 
         // For NO_SHOW, explicitly remove worker from usersIds (even if added via created_by)
-        if ($status === ReservationStatus::NO_SHOW && $worker->user_id) {
+        if ($status === ReservationStatus::NO_SHOW && $worker && $worker->user_id) {
             $usersIds = array_values(array_filter($usersIds, function($id) use ($worker) {
                 return $id !== $worker->user_id;
             }));
         }
 
-        NotificationCreateAction::run([
+        // Only create notification if there are users to notify
+        if (!empty($usersIds)) {
+            NotificationCreateAction::run([
             'title' => 'Rezervacija: ' . ($reservation->friendlyCode ?? $reservation->hash),
             'description' => $description,
             'usersIds' => $usersIds,
@@ -128,7 +144,8 @@ class LocationReservationUpdateAction extends BaseAction {
                 'title' => "{$reservation->location->title} (#$reservation->hash)",
                 'url' => '/zakazivanje/r/' . $reservation->hash,
             ],
-        ]);
+            ]);
+        }
 
         return $reservation;
     }
