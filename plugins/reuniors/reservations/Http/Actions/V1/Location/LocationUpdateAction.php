@@ -1,5 +1,6 @@
 <?php namespace Reuniors\Reservations\Http\Actions\V1\Location;
 
+use Google\Service\CloudSearch\Emoji;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Illuminate\Support\Facades\Auth;
@@ -99,20 +100,32 @@ class LocationUpdateAction extends BaseAction
                 $attributesPwaMetadata = $attributes['pwaMetadata'] ?? [];
                 
                 // Use values from attributes first, then fall back to existing, then defaults
-                $pwaMetadata = [];
-                $pwaMetadata['name'] = $attributesPwaMetadata['name'] ?? $existingPwaMetadata['name'] ?? ($location->title . ' ' . 'RZR.rs');
-                $pwaMetadata['short_name'] = ($attributesPwaMetadata['shortName'] ?? null) !== null 
-                    ? $attributesPwaMetadata['shortName'] 
-                    : ($existingPwaMetadata['short_name'] ?? $location->title);
-                $pwaMetadata['theme_color'] = ($attributesPwaMetadata['themeColor'] ?? null) !== null 
-                    ? $attributesPwaMetadata['themeColor'] 
-                    : ($existingPwaMetadata['theme_color'] ?? '#000000');
-                $pwaMetadata['background_color'] = ($attributesPwaMetadata['backgroundColor'] ?? null) !== null 
-                    ? $attributesPwaMetadata['backgroundColor'] 
-                    : ($existingPwaMetadata['background_color'] ?? '#000000');
-                $pwaMetadata['scope'] = ($attributesPwaMetadata['scope'] ?? null) !== null 
-                    ? $attributesPwaMetadata['scope'] 
-                    : ($existingPwaMetadata['scope'] ?? '/zakazivanje');
+                $pwaMetadata = $existingPwaMetadata ?? [];
+                if ($attributesPwaMetadata['name']) {
+                    $pwaMetadata['name'] = $attributesPwaMetadata['name'];
+                } else {
+                    $pwaMetadata['name'] = $pwaMetadata['name'] ?? ($location->title . ' ' . 'RZR.rs');
+                }
+                if ($attributesPwaMetadata['shortName']) {
+                    $pwaMetadata['short_name'] = $attributesPwaMetadata['shortName'];
+                } else {
+                    $pwaMetadata['short_name'] = $pwaMetadata['short_name'] ?? $location->title;
+                }
+                if ($attributesPwaMetadata['themeColor']) {
+                    $pwaMetadata['theme_color'] = $attributesPwaMetadata['themeColor'];
+                } else {
+                    $pwaMetadata['theme_color'] = $pwaMetadata['theme_color'] ?? '#000000';
+                }
+                if ($attributesPwaMetadata['backgroundColor']) {
+                    $pwaMetadata['background_color'] = $attributesPwaMetadata['backgroundColor'];
+                } else {
+                    $pwaMetadata['background_color'] = $pwaMetadata['background_color'] ?? '#000000';
+                }
+                if ($attributesPwaMetadata['scope']) {
+                    $pwaMetadata['scope'] = $attributesPwaMetadata['scope'];
+                } else {
+                    $pwaMetadata['scope'] = $pwaMetadata['scope'] ?? '/zakazivanje';
+                }
 
                 $updateFields['pwa_metadata'] = $pwaMetadata;
             }
