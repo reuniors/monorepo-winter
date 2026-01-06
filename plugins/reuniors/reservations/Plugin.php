@@ -102,5 +102,18 @@ class Plugin extends PluginBase
                 \Reuniors\Reservations\Console\ExecuteChangeRequests::class
             ]);
         }
+        
+        // Listen to event to filter user groups by location
+        \Event::listen('winter.user.groups.before.send', function ($user) {
+            // Filter groups by location
+            $filteredGroups = \Reuniors\Reservations\Classes\FilterUserGroupsByLocation::filter(
+                $user,
+                $user->groups,
+                null // locationSlug will be determined from request
+            );
+            
+            // Update user groups collection
+            $user->setRelation('groups', $filteredGroups);
+        });
     }
 }

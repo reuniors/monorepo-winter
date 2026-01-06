@@ -3,6 +3,9 @@
 use Google\Service\CloudSearch\Emoji;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
+use Reuniors\Reservations\Models\LocationWorker;
+use Winter\User\Models\UserGroup;
+use RainLab\User\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LocationUpdateAction extends BaseAction
@@ -35,6 +38,7 @@ class LocationUpdateAction extends BaseAction
             'pwaMetadata.themeColor' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'pwaMetadata.backgroundColor' => ['nullable', 'string', 'regex:/^#[0-9A-Fa-f]{6}$/'],
             'pwaMetadata.scope' => ['nullable', 'string', 'max:255'],
+            'mainOwnerId' => ['nullable', 'integer'],
         ];
     }
 
@@ -141,6 +145,35 @@ class LocationUpdateAction extends BaseAction
         if (isset($attributes['phoneData'])) {
             $currentPhoneData = $location->phone_data ?? [];
             $updateFields['phone_data'] = array_merge($currentPhoneData, $attributes['phoneData']);
+        }
+
+        // Update mainOwnerId only for admins
+        if ($isAdmin && isset($attributes['mainOwnerId'])) {
+            $updateFields['main_owner_id'] = $attributes['mainOwnerId'];
+            
+            // If mainOwnerId is set, ensure the user has owner group
+            if ($attributes['mainOwnerId']) {
+                $ownerUserId = $attributes['mainOwnerId'];
+                $ownerUser = User::find($ownerUserId);
+                
+                if ($ownerUser) {
+                    // Find owner group
+                    $ownerGroup = UserGroup::where('code', 'owner')->first();
+                    
+                    if ($ownerGroup) {
+                        // Check if user already has owner group
+                        $userGroups = $ownerUser->groups;
+                        $hasOwnerGroup = $userGroups->contains(function ($group) {
+                            return $group->code === 'owner';
+                        });
+                        
+                        // If user doesn't have owner group, add it
+                        if (!$hasOwnerGroup) {
+                            $ownerUser->groups()->add($ownerGroup);
+                        }
+                    }
+                }
+            }
         }
 
         // Update the location

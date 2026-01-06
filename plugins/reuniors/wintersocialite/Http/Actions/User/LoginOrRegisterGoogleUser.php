@@ -23,6 +23,21 @@ class LoginOrRegisterGoogleUser extends BaseAction
 
     protected function responseUserToken(UserModel $user, $name)
     {
+        // Load groups if not already loaded
+        if (!$user->relationLoaded('groups')) {
+            $user->load(['groups' => function ($query) {
+                $query->select('name', 'code');
+            }]);
+        }
+        
+        // Fire event to allow other plugins to filter groups (e.g., by location)
+        // Event listeners can modify $user->groups collection
+        Event::fire('winter.user.groups.before.send', [$user]);
+        
+        if ($user->groups && method_exists($user->groups, 'makeHidden')) {
+            $user->groups->makeHidden('pivot');
+        }
+        
         return [
             'user' => $user->only(['name', 'email', 'groups', 'phone', 'id']),
             'token' => $user->createToken($name)->plainTextToken

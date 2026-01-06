@@ -1,5 +1,6 @@
 <?php namespace reuniors\wintersocialite\Http\Actions\User;
 
+use Event;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Classes\Device;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -50,6 +51,21 @@ class LoginWithConfirmationCode extends BaseAction {
 
             if ($existingAccessToken) {
                 $existingAccessToken->delete();
+            }
+            
+            // Load groups if not already loaded
+            if (!$user->relationLoaded('groups')) {
+                $user->load(['groups' => function ($query) {
+                    $query->select('name', 'code');
+                }]);
+            }
+            
+            // Fire event to allow other plugins to filter groups (e.g., by location)
+            // Event listeners can modify $user->groups collection
+            Event::fire('winter.user.groups.before.send', [$user]);
+            
+            if ($user->groups && method_exists($user->groups, 'makeHidden')) {
+                $user->groups->makeHidden('pivot');
             }
         } catch (\Exception $e) {
             throw new NotFoundHttpException($e->getMessage());

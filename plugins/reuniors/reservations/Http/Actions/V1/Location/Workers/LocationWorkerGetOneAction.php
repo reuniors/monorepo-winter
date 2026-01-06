@@ -25,7 +25,7 @@ class LocationWorkerGetOneAction extends BaseAction
             throw new \Exception('Worker not found for this location');
         }
 
-        return $worker->load(['avatar', 'user', 'services', 'serviceCategories:id,title,slug,active']);
+        return $worker->load(['avatar', 'user.groups', 'services', 'serviceCategories:id,title,slug,active']);
     }
 
     public function asController(LocationWorker $worker = null): array
