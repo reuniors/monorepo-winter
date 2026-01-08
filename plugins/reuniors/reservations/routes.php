@@ -47,6 +47,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerCreateA
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkerDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\Workers\LocationWorkersGetAllAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\Workers\GetWorkerNextSlotsAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodesGetAllAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodeCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodeUpdateAction;
@@ -196,6 +197,7 @@ Route::group(
                 Route::post('update', LocationWorkerUpdateAction::class);
                 Route::post('delete', LocationWorkerDeleteAction::class);
                 Route::get('all', LocationWorkersGetAllAction::class);
+                Route::get('{worker}/next-slots', GetWorkerNextSlotsAction::class);
             });
 
             Route::group([

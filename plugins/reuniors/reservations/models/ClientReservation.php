@@ -7,7 +7,7 @@ use Request;
 use Config;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Winter\User\Facades\Auth;
-use Reuniors\Reservations\Http\Actions\V1\ReservationsPingAction;
+use Reuniors\Reservations\Http\Actions\V1\Ping\ReservationsPingAction;
 use Reuniors\Reservations\Models\LocationWorkerShift;
 
 /**
@@ -84,6 +84,8 @@ class ClientReservation extends Model
             ReservationsPingAction::invalidateCache(['locationSlug' => $location->slug]);
             // Also invalidate gaps cache
             \Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationTimeGapsGetAction::invalidateCache($location->slug);
+            // Invalidate worker next slots cache
+            \Reuniors\Reservations\Http\Actions\V1\Location\Workers\GetWorkerNextSlotsAction::invalidateCache(['locationSlug' => $location->slug]);
             
             \Log::info('ClientReservation: Invalidated gaps cache', [
                 'reservationId' => $reservation->id,

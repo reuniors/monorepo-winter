@@ -31,19 +31,26 @@ class LocationClientReservationsGetAction extends BaseAction {
 
         $reservationQuery = $location->reservations();
 
+        // Filter by user: either created_by OR client.user_id
+        $reservationQuery->where(function ($query) use ($user) {
+            $query->where('created_by', $user->id)
+                ->orWhereHas('client', function ($q) use ($user) {
+                    $q->where('user_id', $user->id);
+                });
+        });
+
         if ($dateTo) {
             if ($statusNot !== null) {
-                $reservationQuery->whereDate('date', '<=', $dateTo);
+                $reservationQuery->whereDate('date_utc', '<=', $dateTo);
             } else {
                 $reservationQuery->where(function ($query) use ($dateTo) {
-                    $query->where('date', '<=', $dateTo)
+                    $query->whereDate('date_utc', '<=', $dateTo)
                         ->orWhere('status', ReservationStatus::CANCELLED);
                 });
             }
-            $reservationQuery->whereDate('date', '<=', $dateTo);
         }
         if ($dateFrom) {
-            $reservationQuery->where('date', '>=', $dateFrom);
+            $reservationQuery->whereDate('date_utc', '>=', $dateFrom);
         }
         if ($withClient) {
             $reservationQuery->with('client');
@@ -56,7 +63,7 @@ class LocationClientReservationsGetAction extends BaseAction {
             ->select([
                 'id',
                 'hash',
-                'date',
+                'date_utc',
                 'services_duration',
                 'location_id',
                 'location_worker_id',
@@ -64,8 +71,7 @@ class LocationClientReservationsGetAction extends BaseAction {
                 'client_id',
                 'created_by'
             ])
-            ->where('created_by', $user->id)
-            ->orderBy('date', 'desc')
+            ->orderBy('date_utc', 'desc')
             ->paginate($perPage);
     }
 }

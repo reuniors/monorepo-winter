@@ -43,6 +43,8 @@ class LocationWorkerShift extends Model
         
         if ($location) {
             \Reuniors\Reservations\Http\Actions\V1\Location\Slots\LocationTimeGapsGetAction::invalidateCache($location->slug);
+            // Invalidate worker next slots cache
+            \Reuniors\Reservations\Http\Actions\V1\Location\Workers\GetWorkerNextSlotsAction::invalidateCache(['locationSlug' => $location->slug]);
             
             Log::info('LocationWorkerShift: Invalidated gaps cache', [
                 'shiftId' => $shift->id,

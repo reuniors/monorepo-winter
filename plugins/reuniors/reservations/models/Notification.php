@@ -1,7 +1,7 @@
 <?php namespace Reuniors\Reservations\Models;
 
 use Model;
-use Reuniors\Reservations\Http\Actions\V1\NotificationsPingAction;
+use Reuniors\Reservations\Http\Actions\V1\Ping\NotificationsPingAction;
 
 /**
  * Model

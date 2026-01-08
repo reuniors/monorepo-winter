@@ -40,6 +40,7 @@ class LocationWorker extends Model
         'description',
         'is_synced_service',
         'is_synced_category',
+        'level',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -299,6 +300,14 @@ class LocationWorker extends Model
                         $user->groups()->add($workerGroup);
                     }
                 }
+            }
+            
+            // Invalidate worker next slots cache when worker is saved (e.g., active status changed)
+            $locations = $worker->locations;
+            foreach ($locations as $location) {
+                \Reuniors\Reservations\Http\Actions\V1\Location\Workers\GetWorkerNextSlotsAction::invalidateCache([
+                    'locationSlug' => $location->slug
+                ]);
             }
         });
 
