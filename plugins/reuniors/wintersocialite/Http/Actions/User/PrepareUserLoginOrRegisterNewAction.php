@@ -13,13 +13,22 @@ class PrepareUserLoginOrRegisterNewAction extends BaseAction {
     public function rules()
     {
         return [
-            'login' => ['required', 'between:2,255'],
+            'login' => ['required', 'email', 'between:2,255'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'login.required' => 'Email je obavezan',
+            'login.email' => 'Email nije validan',
+            'login.between' => 'Email mora biti između :min i :max karaktera',
         ];
     }
 
     public function rememberLoginMode()
     {
-        return UserSettings::get('remember_login', UserSettings::REMEMBER_ALWAYS);
+        return UserSettings::get('remember_login') ?? UserSettings::REMEMBER_ALWAYS;
     }
 
     protected function createActivationCode($data): User
