@@ -1,6 +1,6 @@
 <?php
 
-namespace Reuniors\Reservations\Http\Actions\V1;
+namespace Reuniors\Reservations\Http\Actions\V1\Ping;
 
 use Reuniors\Base\Http\Actions\V1\BasePingAction;
 use Reuniors\Reservations\Models\ClientReservation;
@@ -39,3 +39,4 @@ class ReservationsPingAction extends BasePingAction
         });
     }
 }
+

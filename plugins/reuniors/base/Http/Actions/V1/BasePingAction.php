@@ -103,12 +103,30 @@ abstract class BasePingAction extends BaseAction
      */
     protected function checkForChanges(array $cachedData, $lastCheck): bool
     {
-        if ($lastCheck) {
-            $lastCheckInSeconds = Carbon::parse($lastCheck)->timestamp;
-            return $cachedData['lastUpdated'] !== $lastCheckInSeconds;
+        if (!$lastCheck) {
+            return false; // Prva provera - nema promena
         }
-        
-        return false; // Prva provera - nema promena
+
+        // If lastCheck is an array with hash, compare hash first (more reliable)
+        if (is_array($lastCheck) && isset($lastCheck['hash'])) {
+            return ($cachedData['hash'] ?? null) !== ($lastCheck['hash'] ?? null);
+        }
+
+        // Fallback to timestamp comparison
+        // Handle both numeric timestamp and string datetime
+        if (is_numeric($lastCheck)) {
+            $lastCheckInSeconds = (int) $lastCheck;
+        } elseif (is_array($lastCheck) && isset($lastCheck['lastUpdated'])) {
+            // If array has lastUpdated, use it
+            $lastCheckInSeconds = is_numeric($lastCheck['lastUpdated']) 
+                ? (int) $lastCheck['lastUpdated'] 
+                : Carbon::parse($lastCheck['lastUpdated'])->timestamp;
+        } else {
+            // Try to parse as string datetime
+            $lastCheckInSeconds = Carbon::parse($lastCheck)->timestamp;
+        }
+
+        return ($cachedData['lastUpdated'] ?? null) !== $lastCheckInSeconds;
     }
 
     /**

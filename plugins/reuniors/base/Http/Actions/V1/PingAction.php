@@ -20,13 +20,28 @@ class PingAction extends BaseAction
     public function handle(array $attributes = [])
     {
         $lastChecks = $attributes['lastChecks'] ?? [];
+        $hashes = $attributes['hashes'] ?? [];
         $checkTypes = $attributes['types'] ?? ['reservations'];
 
         $changes = [];
         $newHashes = [];
 
         foreach ($checkTypes as $type) {
-            $lastCheck = $lastChecks[$type] ?? null;
+            // Build lastCheck object with both timestamp and hash if available
+            $lastCheckTimestamp = $lastChecks[$type] ?? null;
+            $lastCheckHash = $hashes[$type] ?? null;
+            
+            // If we have hash, pass it as array with hash and lastUpdated
+            // Otherwise pass just timestamp (for backward compatibility)
+            if ($lastCheckHash) {
+                $lastCheck = [
+                    'hash' => $lastCheckHash,
+                    'lastUpdated' => $lastCheckTimestamp,
+                ];
+            } else {
+                $lastCheck = $lastCheckTimestamp;
+            }
+            
             $result = $this->checkTypeChanges($type, $lastCheck, $attributes);
             $changes[$type] = $result;
             $newHashes[$type] = $result['hash'] ?? null;
