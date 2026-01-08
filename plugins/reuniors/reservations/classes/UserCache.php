@@ -143,10 +143,6 @@ class UserCache
         // Create groups hash
         $groupsHash = md5($filteredGroups->pluck('code')->sort()->implode(','));
 
-        \Log::info('UserCache::generateCacheData - Groups hash ', [
-            'groups_hash' => $groupsHash,
-        ]);
-
         // Get last updated timestamp from user or related models
         $lastUpdated = self::getLastUpdated($user, $locationSlug, $isOwner, $isWorker);
         
