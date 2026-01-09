@@ -59,5 +59,18 @@ class LocationImageDeleteAction extends BaseImageDeleteAction
     {
         // Additional validation can be added here
     }
+
+    public function handle(array $attributes = [], ...$args)
+    {
+        $result = parent::handle($attributes, ...$args);
+        
+        // Invalidate location data cache after image delete
+        $locationSlug = $attributes['locationSlug'] ?? null;
+        if ($locationSlug) {
+            \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($locationSlug);
+        }
+        
+        return $result;
+    }
 }
 

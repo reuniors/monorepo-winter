@@ -5,10 +5,11 @@ description = "FE Head"
 {% set locationSlug = locationComponent.locationData.slug ?? locationComponent.slug ?? null %}
 {% set locationTitle = locationComponent.locationData.title ?? locationComponent.title ?? null %}
 {% set locationSnippet = locationComponent.locationData.snippet ?? locationComponent.locationData.title ?? locationComponent.title ?? null %}
+{% set pwaIconPath = locationComponent.locationData.pwaIcon.path ?? locationComponent.pwaIcon.path ?? null %}
 {% set logoPath = locationComponent.locationData.logo.path ?? locationComponent.logo.path ?? null %}
-{% set faviconUrl = logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null %}
-{% set appleIconUrl = logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null %}
-{% set maskIconUrl = logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null %}
+{% set faviconUrl = pwaIconPath ? pwaIconPath|resize(42, 42, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null) %}
+{% set appleIconUrl = pwaIconPath ? pwaIconPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null) %}
+{% set maskIconUrl = pwaIconPath ? pwaIconPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null) %}
 {% set appVersion = '2.059' %}
 
 {% if locationSnippet or locationTitle %}

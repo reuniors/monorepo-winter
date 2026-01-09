@@ -2,6 +2,7 @@
 
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
+use Reuniors\Reservations\Http\Actions\V1\Location\Cache\GetStandardLocationDataCache;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -19,11 +20,10 @@ class LocationGetManifestAction
 
     public function handle(array $attributes = [])
     {
-        $location = Location::where('slug', $attributes['locationSlug'])
-            ->where('active', 1)
-            ->first();
-
-        if (!$location) {
+        // Get cached location (returns Location model with all relations loaded)
+        $location = (new GetStandardLocationDataCache())->handle($attributes);
+        
+        if (!$location || !$location->active) {
             throw new NotFoundHttpException('Location not found');
         }
 
@@ -51,9 +51,11 @@ class LocationGetManifestAction
         $pwaShortName = $location->title;
 
         // Generate icon sizes
-        // "any" purpose icons use logo
-        // "maskable" purpose icons use cover
+        // Use pwa_icon if available, otherwise fallback to logo
+        // "any" purpose icons use pwa_icon (or logo as fallback)
+        // "maskable" purpose icons use pwa_icon (or logo as fallback)
         $iconSizes = [
+            ['size' => 42, 'purpose' => 'any'], // Favicon size
             ['size' => 64, 'purpose' => 'any'],
             ['size' => 192, 'purpose' => 'any'],
             ['size' => 512, 'purpose' => 'any'],
@@ -63,17 +65,12 @@ class LocationGetManifestAction
             ['size' => 512, 'purpose' => 'maskable'],
         ];
 
+        // Prefer pwa_icon, fallback to logo
+        $sourceImage = $location->pwa_icon ?? $location->logo;
+
         $icons = [];
         foreach ($iconSizes as $iconConfig) {
             $iconUrl = null;
-            $sourceImage = null;
-            
-            // Use logo for "any" purpose, cover for "maskable" purpose
-            if ($iconConfig['purpose'] === 'any' && $location->logo) {
-                $sourceImage = $location->logo;
-            } elseif ($iconConfig['purpose'] === 'maskable' && $location->logo) {
-                $sourceImage = $location->logo;
-            }
             
             if ($sourceImage) {
                 // Use Winter CMS getThumb method to generate resized icon URLs

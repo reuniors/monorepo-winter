@@ -34,6 +34,12 @@ class LocationWorkingHoursUpdateAction extends BaseAction
         $workingHours->fill($attributes);
         $workingHours->save();
 
+        // Invalidate location data cache for all locations using this working hours
+        $locations = $workingHours->locations;
+        foreach ($locations as $location) {
+            \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+        }
+
         return $workingHours;
     }
 }

@@ -180,6 +180,9 @@ class LocationUpdateAction extends BaseAction
         $location->fill($updateFields);
         $location->save();
 
+        // Invalidate location data cache
+        \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+
         return $location;
     }
 } 

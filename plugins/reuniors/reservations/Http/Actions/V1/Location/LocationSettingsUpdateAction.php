@@ -41,6 +41,9 @@ class LocationSettingsUpdateAction extends BaseAction
         $location->settings = $updatedSettings;
         $location->save();
 
+        // Invalidate location data cache
+        \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+
         return $updatedSettings;
     }
 } 

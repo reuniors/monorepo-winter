@@ -63,6 +63,9 @@ class LocationWorkingHoursCreateAction extends BaseAction
         // Attach to location
         $location->working_hours()->attach($workingHours->id);
 
+        // Invalidate location data cache
+        \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+
         return $workingHours;
     }
 }

@@ -4,6 +4,7 @@ namespace Reuniors\Reservations\Models;
 use Reuniors\Reservations\Models\FileImage\FileImageSquare;
 use Reuniors\Reservations\Models\FileImage\FileImageWide;
 use Model;
+use System\Models\File;
 
 /**
  * Model
@@ -124,7 +125,7 @@ class Location extends Model
     public $attachOne = [
         'logo' => [FileImageSquare::class, 'delete' => true],
         'cover' => [FileImageWide::class, 'delete' => true],
-        'pwa_icon' => ['System\Models\File', 'delete' => true],
+        'pwa_icon' => [File::class, 'delete' => true],
     ];
 
     public function getTypeOptions()
@@ -161,6 +162,20 @@ class Location extends Model
                 $location->pwa_metadata = $pwaMetadata;
             }
         });
+
+        // Invalidate location data cache when location is saved/updated
+        static::saved(function ($location) {
+            if ($location->slug) {
+                \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+            }
+        });
+
+        // Invalidate location data cache when location is deleted
+        static::deleted(function ($location) {
+            if ($location->slug) {
+                \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+            }
+        });
     }
 
     // Accessor for camelCase conversion
@@ -193,6 +208,7 @@ class Location extends Model
         $query->with('gallery');
         $query->with('logo');
         $query->with('cover');
+        $query->with('pwa_icon');
         $query->with(['news' => function ($query) {
             $query->active();
         }]);

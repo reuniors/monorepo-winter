@@ -31,6 +31,9 @@ class LocationWorkingHoursDeleteAction extends BaseAction
         // Detach from location
         $location->working_hours()->detach($workingHours->id);
 
+        // Invalidate location data cache
+        \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($location->slug);
+
         // Delete the working hours if not used by other locations
         if ($workingHours->locations()->count() === 0) {
             $workingHours->delete();

@@ -61,6 +61,19 @@ class LocationImageUploadAction extends BaseImageUploadAction
         // For example: check if user has permission to upload images for this location
     }
 
+    public function handle(array $attributes = [], ...$args)
+    {
+        $result = parent::handle($attributes, ...$args);
+        
+        // Invalidate location data cache after image upload
+        $locationSlug = $attributes['locationSlug'] ?? null;
+        if ($locationSlug) {
+            \Reuniors\Reservations\Http\Actions\V1\Location\Cache\ClearLocationDataCache::invalidateCache($locationSlug);
+        }
+        
+        return $result;
+    }
+
     /**
      * Generate filename based on location slug and timestamp
      * Format: {locationSlug}-{YYYY-MM-DD-HH-mm}.{extension}

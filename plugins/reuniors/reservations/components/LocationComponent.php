@@ -70,10 +70,12 @@ class LocationComponent extends ComponentBase
 
         if ($locationSlug) {
             $this->locationSlug = $this->page['locationSlug'] = $locationSlug;
-            $this->locationData = $this->page['locationData'] = Location::getFeData([
-                'slug' => $locationSlug
-            ])
-                ->firstOrFail();
+            
+            // Use cached location data
+            $cacheAction = new \Reuniors\Reservations\Http\Actions\V1\Location\Cache\GetStandardLocationDataCache();
+            $this->locationData = $this->page['locationData'] = $cacheAction->handle([
+                'locationSlug' => $locationSlug
+            ]);
             
             // Check if location is private and user is not authenticated
             if ($this->locationData->is_private) {
