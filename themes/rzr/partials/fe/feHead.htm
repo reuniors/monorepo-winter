@@ -10,7 +10,7 @@ description = "FE Head"
 {% set faviconUrl = pwaIconPath ? pwaIconPath|resize(42, 42, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null) %}
 {% set appleIconUrl = pwaIconPath ? pwaIconPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null) %}
 {% set maskIconUrl = pwaIconPath ? pwaIconPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null) %}
-{% set appVersion = '2.062' %}
+{% set appVersion = '2.064' %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -71,14 +71,14 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-BRkPMoDf.js"></script>
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-0lyiJUDC.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-CMjr4Gvv.js">
-    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-7y52xm55.js">
+<script type="module" crossorigin src="/app/assets/index-DHkbSrdz.js"></script>
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-qZKAsj11.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-qB5C-kEe.js">
+    <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-Dg_6JWqB.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-D7N1wSx9.css">
-    <link rel="stylesheet" crossorigin href="/app/assets/index-B8NRCr0T.css">
+    <link rel="stylesheet" crossorigin href="/app/assets/index-C-uBe1F9.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}

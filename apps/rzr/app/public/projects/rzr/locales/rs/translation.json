@@ -33,7 +33,14 @@
     "Wednesday": "Sreda",
     "Thursday": "Četvrtak",
     "Friday": "Petak",
-    "Saturday": "Subota"
+    "Saturday": "Subota",
+    "Sun": "Ned",
+    "Mon": "Pon",
+    "Tue": "Uto",
+    "Wed": "Sre",
+    "Thu": "Čet",
+    "Fri": "Pet",
+    "Sat": "Sub"
   },
   "Izaberite radnika": "Izaberite radnika",
   "Reservacija:": "Reservacija:"
