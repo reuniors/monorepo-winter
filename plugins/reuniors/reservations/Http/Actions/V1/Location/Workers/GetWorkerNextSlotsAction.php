@@ -14,6 +14,7 @@ class GetWorkerNextSlotsAction extends BaseAction
         return [
             'locationSlug' => ['string', 'required'],
             'limit' => ['integer', 'nullable', 'min:1', 'max:50'], // Default 15, max 50
+            'currentTime' => ['string', 'nullable'], // ISO 8601 format from frontend (optional)
         ];
     }
 
@@ -61,8 +62,14 @@ class GetWorkerNextSlotsAction extends BaseAction
     ): array {
         // Get slot interval from location (default: 30 minutes)
         $slotInterval = $location->time_slot_interval ?? 30;
+        // Assume 30 minutes service duration (since we don't have selected services yet)
+        $serviceDuration = 30;
+        // Pause between reservations (default: 10 minutes)
+        $pauseBetweenReservations = 10;
         $slots = [];
+        // Use server UTC time (not client time) - this ensures consistency
         $nowUtc = Carbon::now('UTC');
+        $nowLocal = $nowUtc->copy()->setTimezone($locationTimezone);
         
         // Look ahead up to 60 days to find slots
         $maxDays = 60;
@@ -96,51 +103,86 @@ class GetWorkerNextSlotsAction extends BaseAction
             return strcmp($a['time'], $b['time']);
         });
         
-        // Generate slots from gaps
+        // Default delay: 180 minutes (3 hours) for regular users
+        // Note: For admin/owner/worker, delay should be 0 or 60 minutes (1 hour),
+        // but we don't have user info here, so we use the safer default of 180 minutes
+        $delayMinutes = 180; // 3 hours for regular users
+        $minStartTimeLocal = $nowLocal->copy()->addMinutes($delayMinutes);
+        
+        // Generate slots from gaps - simplified: only rounded slots (00 and 30 minutes)
+        $allSlots = [];
         foreach ($allGaps as $gap) {
-            if (count($slots) >= $limit) {
+            if (count($allSlots) >= $limit) {
                 break;
             }
             
-            $gapStart = Carbon::parse($gap['time'])->setTimezone('UTC');
+            $gapStartUtc = Carbon::parse($gap['time'])->setTimezone('UTC');
             $gapDuration = $gap['duration'] ?? 0;
-            $gapEnd = $gapStart->copy()->addMinutes($gapDuration);
+            $gapEndUtc = $gapStartUtc->copy()->addMinutes($gapDuration);
             
-            // Only consider gaps that start in the future
-            if ($gapStart->lt($nowUtc)) {
-                // If gap starts in the past but ends in the future, start from now
-                if ($gapEnd->gt($nowUtc)) {
-                    $gapStart = $nowUtc->copy();
-                } else {
-                    continue; // Skip gaps that are completely in the past
-                }
+            // Convert to local timezone
+            $gapStartLocal = $gapStartUtc->copy()->setTimezone($locationTimezone);
+            $gapEndLocal = $gapEndUtc->copy()->setTimezone($locationTimezone);
+            
+            // Check if gap can fit the service (serviceDuration + pauseBetweenReservations)
+            if ($gapDuration < $serviceDuration + $pauseBetweenReservations) {
+                continue; // Skip gaps that are too short
             }
             
-            // Generate slots in this gap using location's slot interval
-            $currentSlot = $gapStart->copy();
+            // Check if gap is in the past (with delay) - compare in local timezone
+            if ($gapStartLocal->lt($minStartTimeLocal)) {
+                // If gap starts in the past (with delay), start from minStartTime
+                $adjustedStart = $minStartTimeLocal->copy();
+                if ($adjustedStart->gte($gapEndLocal)) {
+                    continue; // Gap is completely in the past (with delay)
+                }
+                $gapStartLocal = $adjustedStart;
+            }
             
-            while ($currentSlot->lt($gapEnd) && count($slots) < $limit) {
-                // Convert to local timezone for display
-                $slotLocal = $currentSlot->copy()->setTimezone($locationTimezone);
-                
-                $slots[] = [
-                    'date' => $slotLocal->format('Y-m-d'),
-                    'time' => $slotLocal->format('H:i'),
-                    'datetime' => $slotLocal->toIso8601String(),
-                    'workerId' => $worker->id,
-                    'workerName' => $worker->full_name,
-                ];
-                
-                $currentSlot->addMinutes($slotInterval);
+            // Simplified: Only generate rounded slots (00 and 30 minutes)
+            // Check if gap start is already on a rounded slot (00 or 30)
+            $gapStartMinutes = $gapStartLocal->minute;
+            $isGapStartRounded = ($gapStartMinutes == 0 || $gapStartMinutes == 30);
+            
+            // Start from gap start if it's already rounded, otherwise round up to next rounded slot
+            $currentSlotLocal = $gapStartLocal->copy();
+            if (!$isGapStartRounded) {
+                // Round up to next 30-minute interval (00 or 30)
+                if ($gapStartMinutes < 30) {
+                    $currentSlotLocal->minute(30);
+                } else {
+                    $currentSlotLocal->addHour();
+                    $currentSlotLocal->minute(0);
+                }
+            }
+            $currentSlotLocal->second(0);
+            $currentSlotLocal->microsecond(0);
+            
+            // Generate slots every 30 minutes (only 00 and 30)
+            // Note: After a pause, slots can be booked immediately (no pause needed in slot check)
+            while ($currentSlotLocal->lt($gapEndLocal) && count($allSlots) < $limit) {
+                // Check if slot fits - only need serviceDuration, not serviceDuration + pause
+                // because gap already accounts for pause between reservations
+                $slotEnd = $currentSlotLocal->copy()->addMinutes($serviceDuration);
+                if ($slotEnd->lte($gapEndLocal)) {
+                    $allSlots[] = [
+                        'datetime' => $currentSlotLocal->toIso8601String(),
+                        'date' => $currentSlotLocal->format('Y-m-d'),
+                        'time' => $currentSlotLocal->format('H:i'),
+                        'workerId' => $worker->id,
+                        'workerName' => $worker->full_name,
+                    ];
+                }
+                $currentSlotLocal->addMinutes($slotInterval);
             }
         }
         
         // Sort slots by datetime (earliest first) and limit
-        usort($slots, function($a, $b) {
+        usort($allSlots, function($a, $b) {
             return strcmp($a['datetime'], $b['datetime']);
         });
         
-        return array_slice($slots, 0, $limit);
+        return array_slice($allSlots, 0, $limit);
     }
 
     /**

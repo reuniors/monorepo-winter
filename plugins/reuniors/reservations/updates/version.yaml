@@ -234,3 +234,6 @@
 1.0.80:
     - "Added is_synced_category field to location_workers table"
     - builder_table_add_is_synced_category_to_location_workers.php
+1.0.81:
+    - "Add unique constraint on user_id in clients table"
+    - builder_table_add_unique_user_id_to_reuniors_reservations_clients.php

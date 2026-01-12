@@ -31,12 +31,27 @@ class LocationReservationUpdateAction extends BaseAction {
         $clientData = $attributes['clientData'] ?? null;
         if ($clientData) {
             $clientId = $clientData['id'] ?? null;
-            $client = $clientId
-                ? Client::find($clientData['id'])
-                : new Client();
+            
+            // If client ID is provided, find existing client
+            if ($clientId) {
+                $client = Client::find($clientId);
+            } else {
+                // If saveClient is true, check if client already exists for this user
+                if ($saveClient && $user && $user->id) {
+                    $client = Client::where('user_id', $user->id)->first();
+                } else {
+                    $client = null;
+                }
+                
+                // Create new client only if it doesn't exist
+                if (!$client) {
+                    $client = new Client();
+                }
+            }
+            
             $client->full_name = $clientData['full_name'];
             $client->phone_number = $clientData['phone_number'];
-            if ($saveClient) {
+            if ($saveClient && $user && $user->id) {
                 $client->user_id = $user->id;
             }
             $client->save();

@@ -26,17 +26,17 @@ class GoogleCalendarSyncListener
      */
     public function onReservationCreated(ClientReservation $reservation)
     {
-        Log::info('GoogleCalendarSyncListener: Reservation created', [
-            'reservation_id' => $reservation->id,
-        ]);
+        // Log::info('GoogleCalendarSyncListener: Reservation created', [
+        //     'reservation_id' => $reservation->id,
+        // ]);
 
         // Find active Google Calendar connection for this worker/location
         $connection = $this->findActiveConnection($reservation);
 
         if (!$connection || !$connection->sync_to_provider) {
-            Log::info('GoogleCalendarSyncListener: No active connection or sync disabled', [
-                'reservation_id' => $reservation->id,
-            ]);
+            // Log::info('GoogleCalendarSyncListener: No active connection or sync disabled', [
+            //     'reservation_id' => $reservation->id,
+            // ]);
             return;
         }
 
@@ -44,10 +44,10 @@ class GoogleCalendarSyncListener
             // Create event in Google Calendar
             $this->createEventInGoogleCalendar($reservation, $connection);
 
-            Log::info('GoogleCalendarSyncListener: Event created in Google Calendar', [
-                'reservation_id' => $reservation->id,
-                'connection_id' => $connection->id,
-            ]);
+            // Log::info('GoogleCalendarSyncListener: Event created in Google Calendar', [
+            //     'reservation_id' => $reservation->id,
+            //     'connection_id' => $connection->id,
+            // ]);
         } catch (\Exception $e) {
             Log::error('GoogleCalendarSyncListener: Failed to create event', [
                 'reservation_id' => $reservation->id,
@@ -102,9 +102,9 @@ class GoogleCalendarSyncListener
      */
     public function onReservationDeleted(ClientReservation $reservation)
     {
-        Log::info('GoogleCalendarSyncListener: Reservation deleted', [
-            'reservation_id' => $reservation->id,
-        ]);
+        // Log::info('GoogleCalendarSyncListener: Reservation deleted', [
+        //     'reservation_id' => $reservation->id,
+        // ]);
 
         // Find existing calendar event
         $pivot = ReservationCalendarEvent::where('client_reservation_id', $reservation->id)->first();
@@ -128,10 +128,10 @@ class GoogleCalendarSyncListener
             $pivot->delete();
             $calendarEvent->delete();
 
-            Log::info('GoogleCalendarSyncListener: Event deleted from Google Calendar', [
-                'reservation_id' => $reservation->id,
-                'calendar_event_id' => $calendarEvent->id,
-            ]);
+            // Log::info('GoogleCalendarSyncListener: Event deleted from Google Calendar', [
+            //     'reservation_id' => $reservation->id,
+            //     'calendar_event_id' => $calendarEvent->id,
+            // ]);
         } catch (\Exception $e) {
             Log::error('GoogleCalendarSyncListener: Failed to delete event', [
                 'reservation_id' => $reservation->id,

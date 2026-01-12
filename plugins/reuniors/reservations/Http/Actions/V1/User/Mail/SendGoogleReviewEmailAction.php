@@ -10,7 +10,7 @@ class SendGoogleReviewEmailAction extends BaseAction
 {
     public function handle(array $attributes = [])
     {
-        logger()->info("Mail google review action started");
+        // logger()->info("Mail google review action started");
 
         $promoCode = $attributes['promoCode'] ?? 'google#';
         $title = $attributes['title'] ?? "Google Review | Promo 30% popusta";
@@ -39,7 +39,7 @@ class SendGoogleReviewEmailAction extends BaseAction
                     'promoCode' => $promoCode,
                     'reservationLink' => 'https://berbernica-tanja.rzr.rs/zakazivanje'
                 ]);
-                logger()->info("Mail sent to {$user->email} id: {$user->id}, name: {$clientName}");
+                // logger()->info("Mail sent to {$user->email} id: {$user->id}, name: {$clientName}");
             }
             break;
         }

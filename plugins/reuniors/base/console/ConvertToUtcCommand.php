@@ -402,14 +402,36 @@ class ConvertToUtcCommand extends Command
 
     private function convertTimeInJson($timeString, $belgradeTz, $utcTz)
     {
+        if (!$timeString) {
+            return null;
+        }
+
         // For JSON time fields, we need to combine with a date
         // Use current date as reference point
-        $dateTime = Carbon::createFromFormat('Y-m-d H:i:s', 
-            Carbon::now()->format('Y-m-d') . ' ' . $timeString, 
-            $belgradeTz
-        );
+        // Handle different time formats (H:i:s, H:i, etc.)
+        $timeFormats = ['H:i:s', 'H:i', 'G:i:s', 'G:i'];
+        $dateString = Carbon::now()->format('Y-m-d');
         
-        return $dateTime->setTimezone($utcTz)->format('H:i:s');
+        foreach ($timeFormats as $format) {
+            try {
+                $dateTime = Carbon::createFromFormat('Y-m-d ' . $format, 
+                    $dateString . ' ' . $timeString, 
+                    $belgradeTz
+                );
+                return $dateTime->setTimezone($utcTz)->format('H:i:s');
+            } catch (\Exception $e) {
+                continue;
+            }
+        }
+        
+        // If all formats fail, try parsing as is
+        try {
+            $dateTime = Carbon::parse($dateString . ' ' . $timeString, $belgradeTz);
+            return $dateTime->setTimezone($utcTz)->format('H:i:s');
+        } catch (\Exception $e) {
+            // Return original if parsing fails
+            return $timeString;
+        }
     }
 
     private function rollback()

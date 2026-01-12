@@ -63,7 +63,7 @@ class LocationWorkingShiftsDeleteDayShiftAction extends BaseAction {
         } catch (\Exception $e) {
             // Fallback: try to clear without tags (won't work for all cache stores)
             // Log the error but don't fail the request
-            \Log::warning('Failed to clear gaps cache: ' . $e->getMessage());
+            // \Log::warning('Failed to clear gaps cache: ' . $e->getMessage());
         }
     }
 }

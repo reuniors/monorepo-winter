@@ -65,7 +65,7 @@ class SendPromoCodeToMailAction extends BaseAction {
                     'description' => $description,
                     'link' => $link,
                 ]);
-                logger()->info("Mail sent to {$user->email} id: {$user->id}, name: {$clientName}");
+                // logger()->info("Mail sent to {$user->email} id: {$user->id}, name: {$clientName}");
             }
         }
     }

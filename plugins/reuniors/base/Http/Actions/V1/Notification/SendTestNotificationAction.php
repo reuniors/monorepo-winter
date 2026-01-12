@@ -126,13 +126,13 @@ class SendTestNotificationAction
             $result = $messaging->send($message);
 
             // Log the test notification
-            Log::info('Test notification sent', [
-                'device_id' => $deviceId,
-                'user_id' => $userId,
-                'location_slug' => $locationSlug,
-                'title' => $title,
-                'result' => $result,
-            ]);
+            // Log::info('Test notification sent', [
+            //     'device_id' => $deviceId,
+            //     'user_id' => $userId,
+            //     'location_slug' => $locationSlug,
+            //     'title' => $title,
+            //     'result' => $result,
+            // ]);
 
             return response()->json([
                 'success' => true,
@@ -173,10 +173,10 @@ class SendTestNotificationAction
                             $device->save();
                         }
                         
-                        Log::info('Removed invalid FCM token', [
-                            'user_id' => $userId,
-                            'device_id' => $deviceId,
-                        ]);
+                        // Log::info('Removed invalid FCM token', [
+                        //     'user_id' => $userId,
+                        //     'device_id' => $deviceId,
+                        // ]);
                         break;
                     }
                 }

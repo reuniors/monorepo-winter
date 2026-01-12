@@ -46,17 +46,17 @@ class LocationWorkerShift extends Model
             // Invalidate worker next slots cache
             \Reuniors\Reservations\Http\Actions\V1\Location\Workers\GetWorkerNextSlotsAction::invalidateCache(['locationSlug' => $location->slug]);
             
-            Log::info('LocationWorkerShift: Invalidated gaps cache', [
-                'shiftId' => $shift->id,
-                'locationSlug' => $location->slug,
-                'locationId' => $shift->location_id,
-                'dateUtc' => $shift->date_utc,
-            ]);
+            // Log::info('LocationWorkerShift: Invalidated gaps cache', [
+            //     'shiftId' => $shift->id,
+            //     'locationSlug' => $location->slug,
+            //     'locationId' => $shift->location_id,
+            //     'dateUtc' => $shift->date_utc,
+            // ]);
         } else {
-            Log::warning('LocationWorkerShift: Could not invalidate gaps cache - location not found', [
-                'shiftId' => $shift->id,
-                'locationId' => $shift->location_id ?? 'null',
-            ]);
+            // Log::warning('LocationWorkerShift: Could not invalidate gaps cache - location not found', [
+            //     'shiftId' => $shift->id,
+            //     'locationId' => $shift->location_id ?? 'null',
+            // ]);
         }
     }
 

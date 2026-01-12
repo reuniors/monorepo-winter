@@ -93,6 +93,25 @@ class LocationReservationCreateAction extends BaseAction {
 
         $client = $clientId ? Client::find($clientId) : null;
 
+        // Check for duplicate reservation (same client, date, worker)
+        // Don't allow duplicates for DRAFT or CONFIRMED status
+        if ($clientId) {
+            $existingReservation = ClientReservation::where('client_id', $clientId)
+                ->where('date_utc', $dateUtc)
+                ->where('location_worker_id', $worker->id)
+                ->whereIn('status', [ReservationStatus::DRAFT, ReservationStatus::CONFIRMED])
+                ->whereNull('deleted_at')
+                ->first();
+            
+            if ($existingReservation) {
+                throw new HttpResponseException(
+                    response()->json([
+                        'message' => 'Rezervacija već postoji'
+                    ], Response::HTTP_CONFLICT)
+                );
+            }
+        }
+
         if (!ClientReservation::slotAvailable(
             $data['date_utc'],
             $data['location_worker_id'],

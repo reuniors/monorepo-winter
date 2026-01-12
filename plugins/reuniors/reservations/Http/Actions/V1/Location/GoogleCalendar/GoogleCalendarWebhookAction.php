@@ -31,12 +31,12 @@ class GoogleCalendarWebhookAction extends BaseAction
         $resourceState = request()->header('X-Goog-Resource-State'); // 'sync', 'exists', 'not_exists'
         $channelToken = request()->header('X-Goog-Channel-Token');
 
-        Log::info('Google Calendar webhook received', [
-            'channel_id' => $channelId,
-            'resource_id' => $resourceId,
-            'resource_state' => $resourceState,
-            'channel_token' => $channelToken,
-        ]);
+        // Log::info('Google Calendar webhook received', [
+        //     'channel_id' => $channelId,
+        //     'resource_id' => $resourceId,
+        //     'resource_state' => $resourceState,
+        //     'channel_token' => $channelToken,
+        // ]);
 
         // Ignore sync messages (sent when webhook is first registered)
         if ($resourceState === 'sync') {
@@ -50,17 +50,17 @@ class GoogleCalendarWebhookAction extends BaseAction
             ->first();
 
         if (!$connection) {
-            Log::warning('Google Calendar webhook: Connection not found', ['channel_id' => $channelId]);
+            // Log::warning('Google Calendar webhook: Connection not found', ['channel_id' => $channelId]);
             return ['message' => 'Connection not found'];
         }
 
         // Verify channel token for security
         if ($connection->webhook_channel_token !== $channelToken) {
-            Log::warning('Google Calendar webhook: Invalid token', [
-                'channel_id' => $channelId,
-                'expected' => $connection->webhook_channel_token,
-                'received' => $channelToken,
-            ]);
+            // Log::warning('Google Calendar webhook: Invalid token', [
+            //     'channel_id' => $channelId,
+            //     'expected' => $connection->webhook_channel_token,
+            //     'received' => $channelToken,
+            // ]);
             return ['message' => 'Invalid token'];
         }
 
@@ -77,10 +77,10 @@ class GoogleCalendarWebhookAction extends BaseAction
             // Sync events to database
             $synced = $this->syncEventsToDatabase($connection, $events);
 
-            Log::info('Google Calendar webhook: Events synced', [
-                'connection_id' => $connection->id,
-                'events_synced' => $synced,
-            ]);
+            // Log::info('Google Calendar webhook: Events synced', [
+            //     'connection_id' => $connection->id,
+            //     'events_synced' => $synced,
+            // ]);
 
             return [
                 'message' => 'Events synced successfully',

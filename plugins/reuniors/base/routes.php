@@ -28,6 +28,7 @@ Route::group(['prefix' => 'api/v1', 'middleware' => [
     Route::group(['middleware' => [
         'api',
         'userFromBearerTokenOptional',
+        'throttle:360,1',
     ]], function () {
         Route::post('ping', \Reuniors\Base\Http\Actions\V1\PingAction::class);
     });

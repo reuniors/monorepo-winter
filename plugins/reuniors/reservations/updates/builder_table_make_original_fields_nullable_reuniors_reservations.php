@@ -2,82 +2,63 @@
 
 use Schema;
 use Winter\Storm\Database\Updates\Migration;
+use DB;
 
 class BuilderTableMakeOriginalFieldsNullableReuniorsReservations extends Migration
 {
     public function up()
     {
         // Make original fields nullable in working_hours table
-        Schema::table('reuniors_reservations_working_hours', function($table)
-        {
-            $table->time('time_from')->nullable()->change();
-            $table->time('time_to')->nullable()->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_working_hours MODIFY COLUMN `time_from` time NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_working_hours MODIFY COLUMN `time_to` time NULL');
 
         // Make original fields nullable in location_workers_shifts table
-        Schema::table('reuniors_reservations_location_workers_shifts', function($table)
-        {
-            $table->date('date')->nullable()->change();
-            $table->time('time_from')->nullable()->change();
-            $table->time('time_to')->nullable()->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `date` date NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `time_from` time NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `time_to` time NULL');
 
         // Make original fields nullable in client_reservations table
-        Schema::table('reuniors_reservations_client_reservations', function($table)
-        {
-            $table->date('date')->nullable()->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_client_reservations MODIFY COLUMN `date` datetime NULL');
 
         // Make original fields nullable in location_worker_discounts table
-        Schema::table('reuniors_reservations_location_worker_discounts', function($table)
-        {
-            $table->date('date_from')->nullable()->change();
-            $table->date('date_to')->nullable()->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_location_worker_discounts MODIFY COLUMN `date_from` date NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_worker_discounts MODIFY COLUMN `date_to` date NULL');
 
         // Make original fields nullable in news table
-        Schema::table('reuniors_reservations_news', function($table)
-        {
-            $table->datetime('activated_at')->nullable()->change();
-            $table->datetime('deactivated_at')->nullable()->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_news MODIFY COLUMN `activated_at` timestamp NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_news MODIFY COLUMN `deactivated_at` timestamp NULL');
     }
     
     public function down()
     {
         // Revert working_hours table
-        Schema::table('reuniors_reservations_working_hours', function($table)
-        {
-            $table->time('time_from')->nullable(false)->change();
-            $table->time('time_to')->nullable(false)->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_working_hours MODIFY COLUMN `time_from` time NOT NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_working_hours MODIFY COLUMN `time_to` time NOT NULL');
 
         // Revert location_workers_shifts table
-        Schema::table('reuniors_reservations_location_workers_shifts', function($table)
-        {
-            $table->date('date')->nullable(false)->change();
-            $table->time('time_from')->nullable(false)->change();
-            $table->time('time_to')->nullable(false)->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `date` date NOT NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `time_from` time NOT NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_workers_shifts MODIFY COLUMN `time_to` time NOT NULL');
 
         // Revert client_reservations table
-        Schema::table('reuniors_reservations_client_reservations', function($table)
-        {
-            $table->date('date')->nullable(false)->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_client_reservations MODIFY COLUMN `date` datetime NOT NULL');
 
         // Revert location_worker_discounts table
-        Schema::table('reuniors_reservations_location_worker_discounts', function($table)
-        {
-            $table->date('date_from')->nullable(false)->change();
-            $table->date('date_to')->nullable(false)->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_location_worker_discounts MODIFY COLUMN `date_from` date NOT NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_location_worker_discounts MODIFY COLUMN `date_to` date NOT NULL');
 
         // Revert news table
-        Schema::table('reuniors_reservations_news', function($table)
-        {
-            $table->datetime('activated_at')->nullable(false)->change();
-            $table->datetime('deactivated_at')->nullable(false)->change();
-        });
+        // Use raw SQL to avoid changing column type, only modify nullable constraint
+        DB::statement('ALTER TABLE reuniors_reservations_news MODIFY COLUMN `activated_at` timestamp NOT NULL');
+        DB::statement('ALTER TABLE reuniors_reservations_news MODIFY COLUMN `deactivated_at` timestamp NOT NULL');
     }
 }
