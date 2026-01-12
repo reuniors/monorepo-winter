@@ -3,8 +3,10 @@
 use October\Rain\Foundation\Exception\Handler;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -63,10 +65,19 @@ class CustomHandler extends Handler
             }
 
             /* Handle database exceptions */
-            if ($throwable instanceof \PDOException) {
+            if ($throwable instanceof \PDOException || $throwable instanceof QueryException) {
+                // Log the actual error for debugging
+                Log::error('Database error: ' . $throwable->getMessage(), [
+                    'exception' => get_class($throwable),
+                    'file' => $throwable->getFile(),
+                    'line' => $throwable->getLine(),
+                    'trace' => $throwable->getTraceAsString()
+                ]);
+                
+                // Return user-friendly message without exposing SQL errors
                 return Response::json([
                     'success' => false,
-                    'message' => 'Database error: ' . $throwable->getMessage()
+                    'message' => 'Greška pri obradi zahtjeva. Molimo pokušajte ponovo.'
                 ], 500);
             }
 

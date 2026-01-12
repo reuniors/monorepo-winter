@@ -69,7 +69,17 @@ class LocationReservationCreateAction extends BaseAction {
         $worker->validateServices($servicesCollection, $servicesRequest);
 
         $dateUtc = $attributes['dateUtc'];
-        $dateObject = Carbon::parse($dateUtc);
+        // Normalize dateUtc format - ensure it has proper datetime format
+        try {
+            $dateObject = Carbon::parse($dateUtc);
+            $dateUtc = $dateObject->format('Y-m-d H:i:s');
+        } catch (\Exception $e) {
+            throw new HttpResponseException(
+                response()->json([
+                    'message' => 'Neispravan format datuma i vremena'
+                ], Response::HTTP_BAD_REQUEST)
+            );
+        }
 
         $promoCode = LocationPromoCodeFindOneAction::run([
             'code' => $promoCodeName,
@@ -96,18 +106,44 @@ class LocationReservationCreateAction extends BaseAction {
         // Check for duplicate reservation (same client, date, worker)
         // Don't allow duplicates for DRAFT or CONFIRMED status
         if ($clientId) {
-            $existingReservation = ClientReservation::where('client_id', $clientId)
-                ->where('date_utc', $dateUtc)
-                ->where('location_worker_id', $worker->id)
-                ->whereIn('status', [ReservationStatus::DRAFT, ReservationStatus::CONFIRMED])
-                ->whereNull('deleted_at')
-                ->first();
-            
-            if ($existingReservation) {
+            try {
+                $existingReservation = ClientReservation::where('client_id', $clientId)
+                    ->where('date_utc', $dateUtc)
+                    ->where('location_worker_id', $worker->id)
+                    ->whereIn('status', [ReservationStatus::DRAFT, ReservationStatus::CONFIRMED])
+                    ->whereNull('deleted_at')
+                    ->first();
+                
+                if ($existingReservation) {
+                    throw new HttpResponseException(
+                        response()->json([
+                            'message' => 'Rezervacija već postoji'
+                        ], Response::HTTP_CONFLICT)
+                    );
+                }
+            } catch (\Illuminate\Database\QueryException $e) {
+                // Catch SQL errors and return user-friendly message
+                \Log::error('Database error in LocationReservationCreateAction: ' . $e->getMessage(), [
+                    'dateUtc' => $dateUtc,
+                    'clientId' => $clientId,
+                    'locationWorkerId' => $worker->id
+                ]);
                 throw new HttpResponseException(
                     response()->json([
-                        'message' => 'Rezervacija već postoji'
-                    ], Response::HTTP_CONFLICT)
+                        'message' => 'Greška pri provjeri rezervacije. Molimo pokušajte ponovo.'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR)
+                );
+            } catch (\Exception $e) {
+                // Catch any other exceptions
+                \Log::error('Error in LocationReservationCreateAction: ' . $e->getMessage(), [
+                    'dateUtc' => $dateUtc,
+                    'clientId' => $clientId,
+                    'locationWorkerId' => $worker->id
+                ]);
+                throw new HttpResponseException(
+                    response()->json([
+                        'message' => 'Greška pri provjeri rezervacije. Molimo pokušajte ponovo.'
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR)
                 );
             }
         }
