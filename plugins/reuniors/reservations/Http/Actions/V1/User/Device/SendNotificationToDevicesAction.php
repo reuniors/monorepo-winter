@@ -2,8 +2,6 @@
 
 use Reuniors\Base\Http\Actions\BaseAction;
 use Kreait\Firebase\Messaging\CloudMessage;
-use Kreait\Firebase\Messaging\Notification;
-use Kreait\Firebase\Messaging\MessageTarget;
 use Reuniors\Base\Models\ConnectedDevice;
 use Reuniors\Reservations\Models\Location;
 
@@ -23,16 +21,43 @@ class SendNotificationToDevicesAction extends BaseAction {
     public function sendNotification(array $deviceTokens, $title, $body, $data, $icon)
     {
         $messaging = app('firebase.messaging');
-        $notification = Notification::create($title, $body);
+        
+        // Prepare notification metadata - merge with existing data
+        $notificationMeta = array_merge([
+            'timestamp' => now()->toIso8601String(),
+        ], $data);
+        
+        // FCM data payload must be a flat map of string => string.
+        // Convert all metadata values to strings, JSON-encoding complex values.
+        foreach ($notificationMeta as $key => $value) {
+            if (is_array($value) || is_object($value)) {
+                $notificationMeta[$key] = json_encode($value);
+            } elseif (!is_null($value)) {
+                $notificationMeta[$key] = (string) $value;
+            } else {
+                $notificationMeta[$key] = '';
+            }
+        }
+        
+        // Build data-only payload for SW handling (same as SendTestNotificationAction)
+        // We JSON-encode the "notification" and "data" structures so that
+        // the service worker can parse them back into objects.
+        $payloadData = [
+            'notification' => json_encode([
+                'title' => $title,
+                'body' => $body,
+                'image' => $icon ? (env('APP_URL') . $icon) : null,
+            ]),
+            'data' => json_encode($notificationMeta),
+        ];
+        
+        // Create message with data-only payload (no withNotification to avoid duplicate)
         $message = CloudMessage::new()
-            ->withNotification($notification)
+            ->withData($payloadData)
             ->withWebPushConfig([
-                'notification' => [
-                    'title' => $title,
-                    'body' => $body,
-                    'icon' => env('APP_URL') . '/themes/rzr/assets/img/ic_favicon.png',
+                'fcm_options' => [
+                    'link' => $data['url'] ?? ($data['click_action'] ?? env('APP_URL', 'https://rzr.rs')),
                 ],
-                'data' => $data,
             ]);
 
         $invalidTokens = [];
