@@ -10,7 +10,7 @@ description = "FE Head"
 {% set faviconUrl = pwaIconPath ? pwaIconPath|resize(42, 42, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null) %}
 {% set appleIconUrl = pwaIconPath ? pwaIconPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null) %}
 {% set maskIconUrl = pwaIconPath ? pwaIconPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null) %}
-{% set appVersion = '2.077' %}
+{% set appVersion = '2.078' %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -71,7 +71,7 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-Cx2ECeB9.js"></script>
+<script type="module" crossorigin src="/app/assets/index-BKBFZx2T.js"></script>
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-DChmu6Ei.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-BAn6__hR.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-BUXN7OTv.js">
