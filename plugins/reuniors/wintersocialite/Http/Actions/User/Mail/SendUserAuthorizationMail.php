@@ -13,7 +13,7 @@ class SendUserAuthorizationMail extends BaseAction
             'code' => $user->activation_code
         ], function ($message) use ($fromName) {
             $message->subject(__('Potvrda email adrese'));
-            $message->from(env('MAIL_FROM_ADDRESS', 'noreply@example.com'), $fromName);
+            $message->from(env('MAIL_FROM_ADDRESS', 'noreply@example.com'), 'RZR.rs Rezervacije');
         });
     }
 
