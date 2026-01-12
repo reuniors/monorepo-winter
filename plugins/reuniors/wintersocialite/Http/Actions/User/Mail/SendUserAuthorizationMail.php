@@ -7,7 +7,7 @@ class SendUserAuthorizationMail extends BaseAction
 {
     public function handle(array $attributes = [], $user = null)
     {
-        $fromName = env('MAIL_FROM_NAME', env('APP_NAME', 'CMS'));
+        $fromName = env('APP_NAME', 'CMS');
         
         Mail::sendTo($user, 'reuniors.wintersocialite::mail.authorization-confirmation', [
             'code' => $user->activation_code
