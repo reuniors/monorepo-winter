@@ -21,6 +21,7 @@ class LocationWorkerUpdateAction extends BaseAction
             'phone_data' => ['nullable', 'array'],
             'is_synced_service' => ['nullable', 'boolean'],
             'is_synced_category' => ['nullable', 'boolean'],
+            'max_discount_percent' => ['nullable', 'integer', 'min:0', 'max:100'],
             'service_category_ids' => ['nullable', 'array'],
             'service_category_ids.*' => ['integer'],
             // Also accept camelCase for backward compatibility

@@ -41,6 +41,7 @@ class LocationWorker extends Model
         'is_synced_service',
         'is_synced_category',
         'level',
+        'max_discount_percent',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];

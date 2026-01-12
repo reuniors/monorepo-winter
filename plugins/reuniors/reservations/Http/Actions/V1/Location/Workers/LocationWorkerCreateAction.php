@@ -18,6 +18,7 @@ class LocationWorkerCreateAction extends BaseAction
             'status' => ['nullable', 'integer'],
             'user_id' => ['nullable', 'integer'],
             'phone_data' => ['nullable', 'array'],
+            'max_discount_percent' => ['nullable', 'integer', 'min:0', 'max:100'],
             // Add other fields as needed
         ];
     }
