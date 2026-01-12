@@ -2,8 +2,14 @@ subject = "{{ title }}"
 layout = "mail/default"
 ==
 {% if title %}
-    <div style="padding: 0 15px;">
-        <h1 style="text-align: center; margin: 0 0 20px 0; color: #333; font-size: 18px; font-weight: 600;">{{ title }}</h1>
+    <div style="padding: 40px 15px 0 15px;">
+        {% set titleParts = title|split(' - Rezervacija: ') %}
+        {% if titleParts|length > 1 %}
+            <h1 style="text-align: center; margin: 0 0 5px 0; color: #333; font-size: 18px; font-weight: 600;">{{ titleParts[0] }}</h1>
+            <h2 style="text-align: center; margin: 0 0 20px 0; color: #333; font-size: 16px; font-weight: 600;">Rezervacija: {{ titleParts[1] }}</h2>
+        {% else %}
+            <h1 style="text-align: center; margin: 0 0 20px 0; color: #333; font-size: 18px; font-weight: 600;">{{ title }}</h1>
+        {% endif %}
     </div>
 {% endif %}
 {% if description %}

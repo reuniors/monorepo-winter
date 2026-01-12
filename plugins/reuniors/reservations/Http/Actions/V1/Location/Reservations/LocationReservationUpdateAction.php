@@ -140,7 +140,7 @@ class LocationReservationUpdateAction extends BaseAction {
         // Only create notification if there are users to notify
         if (!empty($usersIds)) {
             NotificationCreateAction::run([
-            'title' => 'Rezervacija: ' . ($reservation->friendlyCode ?? $reservation->hash),
+            'title' => $reservation->location->title . ' - Rezervacija: ' . ($reservation->friendlyCode ?? $reservation->hash),
             'description' => $description,
             'usersIds' => $usersIds,
             'reservationId' => $reservation->id,
@@ -152,8 +152,9 @@ class LocationReservationUpdateAction extends BaseAction {
                 'fullName' => $user->full_name,
                 'email' => $user->email,
                 'phoneNumber' => $user->phone_number,
-                'link' => env('APP_URL') . '/zakazivanje/r/' . $reservation->hash,
-                'tableData' => $tableData
+                'link' => 'https://' . $reservation->location->slug . '.rzr.rs/zakazivanje/r/' . $reservation->hash,
+                'tableData' => $tableData,
+                'locationTitle' => $reservation->location->title,
             ],
             'notificationData' => [
                 'title' => "{$reservation->location->title} (#$reservation->hash)",

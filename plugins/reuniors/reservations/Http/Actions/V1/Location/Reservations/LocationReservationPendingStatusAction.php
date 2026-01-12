@@ -38,7 +38,7 @@ class LocationReservationPendingStatusAction extends BaseAction {
                 $reservation->save();
                 if ($user) {
                     NotificationCreateAction::run([
-                        'title' => 'Rezervacija: ' . $reservation->hash,
+                        'title' => $reservation->location->title . ' - Rezervacija: ' . $reservation->hash,
                         'description' => 'Molimo vas da potvrdite rezervaciju',
                         'usersIds' => [$reservation->created_by],
                         'reservationId' => $reservation->id,
@@ -50,7 +50,8 @@ class LocationReservationPendingStatusAction extends BaseAction {
                             'fullName' => $user->full_name,
                             'email' => $user->email,
                             'phoneNumber' => $user->phone_number,
-                            'link' => env('APP_URL') . '/zakazivanje/r/' . $reservation->hash,
+                            'link' => 'https://' . $reservation->location->slug . '.rzr.rs/zakazivanje/r/' . $reservation->hash,
+                            'locationTitle' => $reservation->location->title,
                         ],
                         'notificationData' => [
                             'title' => "{$reservation->location->title} (#$reservation->hash)",

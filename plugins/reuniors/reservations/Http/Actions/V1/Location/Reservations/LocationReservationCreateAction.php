@@ -197,7 +197,7 @@ class LocationReservationCreateAction extends BaseAction {
         $newReservation->load(['locationWorker', 'client']);
 
         $notificationData = [
-            'title' => 'Rezervacija: ' . ($newReservation->friendlyCode ?? $newReservation->hash),
+            'title' => $location->title . ' - Rezervacija: ' . ($newReservation->friendlyCode ?? $newReservation->hash),
             'description' => $description,
             'usersIds' => $userIds,
             'reservationId' => $newReservation->id,
@@ -209,8 +209,9 @@ class LocationReservationCreateAction extends BaseAction {
                 'fullName' => $user->full_name,
                 'email' => $user->email,
                 'phoneNumber' => $user->phone_number,
-                'link' => env('APP_URL') . '/zakazivanje/r/' . $newReservation->hash,
-                'tableData' => $tableData
+                'link' => 'https://' . $location->slug . '.rzr.rs/zakazivanje/r/' . $newReservation->hash,
+                'tableData' => $tableData,
+                'locationTitle' => $location->title,
             ],
             'notificationData' => [
                 'title' => "{$location->title} (#$newReservation->hash)",
