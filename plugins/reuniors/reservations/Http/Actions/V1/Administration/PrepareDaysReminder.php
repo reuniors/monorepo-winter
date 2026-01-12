@@ -10,7 +10,7 @@ class PrepareDaysReminder extends BaseAction {
 
     }
 
-    public function handle()
+    public function handle(array $attributes = [])
     {
         $allWorkers = LocationWorker::active()
             ->get();

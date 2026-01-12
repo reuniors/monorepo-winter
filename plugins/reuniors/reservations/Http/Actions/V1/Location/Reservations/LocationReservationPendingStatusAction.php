@@ -8,7 +8,7 @@ use Reuniors\WinterSocialite\Http\Enum\UserGroupCode;
 use Log;
 
 class LocationReservationPendingStatusAction extends BaseAction {
-    public function handle()
+    public function handle(array $attributes = [])
     {
         $now = now();
         $pendingReservations = ClientReservation::getFeData()
