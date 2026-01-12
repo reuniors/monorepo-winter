@@ -74,6 +74,9 @@ class LocationReservationCreateAction extends BaseAction {
             $dateObject = Carbon::parse($dateUtc);
             $dateUtc = $dateObject->format('Y-m-d H:i:s');
         } catch (\Exception $e) {
+            \Log::error('Error in LocationReservationCreateAction: ' . $e->getMessage(), [
+                'dateUtc' => $dateUtc,
+            ]);
             throw new HttpResponseException(
                 response()->json([
                     'message' => 'Neispravan format datuma i vremena'
