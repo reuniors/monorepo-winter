@@ -443,6 +443,20 @@ class LocationTimeGapsGetAction extends BaseAction
             if ($gapStart->lt($gapEnd)) {
                 $gapDuration = $gapStart->diffInMinutes($gapEnd);
                 if ($gapDuration > 0) {
+                    // Check if this is the last gap (goes to end of working time)
+                    // If gapEnd is equal to or very close to shiftEnd (within 5 minutes), it's the last gap
+                    $shiftEndRounded = $shiftEnd->copy();
+                    $shiftEndRoundedMinutes = floor($shiftEndRounded->minute / 5) * 5;
+                    $shiftEndRounded->minute($shiftEndRoundedMinutes)->second(0);
+                    
+                    $isLastGap = $gapEnd->equalTo($shiftEndRounded) || $gapEnd->diffInMinutes($shiftEndRounded) <= 5;
+                    
+                    // If this is the last gap, add pause duration to allow booking at the end
+                    // This ensures that slots can be booked at the end of working time without requiring pause after
+                    if ($isLastGap && $pauseBetweenReservations > 0) {
+                        $gapDuration += $pauseBetweenReservations;
+                    }
+                    
                     $gaps[] = [
                         'time' => $gapStart->toIso8601String(),
                         'duration' => $gapDuration,
