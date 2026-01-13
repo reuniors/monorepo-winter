@@ -35,7 +35,7 @@ class WorkerStatsGetAction extends BaseAction
             ->where('location_id', $location->id)
             ->first();
 
-        $today = Carbon::today();
+        $today = Carbon::today()->utc();
 
         if ($forceUpdate || !$stat || !$stat->updated_at || $stat->updated_at->lt($today)) {
             // Calculate statistics
@@ -50,8 +50,8 @@ class WorkerStatsGetAction extends BaseAction
             $confirmedReservationsCount = $confirmedReservations->count();
             $canceledReservationsCount = $canceledReservations->count();
             $lastVisit = $confirmedReservations
-                ->where('date', '<', $today)
-                ->max('date');
+                ->where('date_utc', '<', $today)
+                ->max('date_utc');
             $costSum = $confirmedReservations->sum('services_cost');
 
             $data = [

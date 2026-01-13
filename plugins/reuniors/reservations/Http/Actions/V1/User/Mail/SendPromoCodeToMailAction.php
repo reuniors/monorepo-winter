@@ -39,7 +39,7 @@ class SendPromoCodeToMailAction extends BaseAction {
             ->whereIn('user_id', $userIds)
             ->with('clientReservations', function ($query) use ($promoCode, $slug) {
                 $query
-                    ->whereDate('date', '>=', Carbon::now('Europe/Belgrade'))
+                    ->where('date_utc', '>=', Carbon::now()->utc())
                     ->whereIn('status', [ReservationStatus::CONFIRMED, ReservationStatus::PENDING]);
             })
             ->get()

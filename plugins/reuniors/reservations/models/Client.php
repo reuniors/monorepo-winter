@@ -75,7 +75,7 @@ class Client extends Model
     {
         return $query->whereDoesntHave('clientReservations', function ($query) {
             $query
-                ->whereDate('date', '>=', Carbon::now('Europe/Belgrade'))
+                ->where('date_utc', '>=', Carbon::now()->utc())
                 ->whereIn('status', [ReservationStatus::CONFIRMED, ReservationStatus::PENDING]);
         });
     }
