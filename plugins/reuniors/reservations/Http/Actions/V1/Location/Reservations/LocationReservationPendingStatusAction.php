@@ -23,7 +23,7 @@ class LocationReservationPendingStatusAction extends BaseAction {
             $user = $reservation->createdByUser;
 
             if ($reservation->is_pending_status_reminder_sent &&
-                $reservation->created_at->diffInMinutes($now) >= 30 &&
+                abs($reservation->created_at->diffInMinutes($now)) >= 30 &&
                 $user
             ) {
                 LocationReservationUpdateAction::run([
