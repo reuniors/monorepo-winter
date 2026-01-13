@@ -237,3 +237,6 @@
 1.0.81:
     - "Add unique constraint on user_id in clients table"
     - builder_table_add_unique_user_id_to_reuniors_reservations_clients.php
+1.0.82:
+    - "Add max_discount_percent field to location_workers table"
+    - builder_table_add_max_discount_percent_to_location_workers.php
