@@ -10,7 +10,7 @@ description = "FE Head"
 {% set faviconUrl = pwaIconPath ? pwaIconPath|resize(42, 42, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(32, 32, {mode: 'exact', extension: 'png'}) : null) %}
 {% set appleIconUrl = pwaIconPath ? pwaIconPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(180, 180, {mode: 'exact', extension: 'png'}) : null) %}
 {% set maskIconUrl = pwaIconPath ? pwaIconPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : (logoPath ? logoPath|resize(192, 192, {mode: 'exact', extension: 'png'}) : null) %}
-{% set appVersion = '2.078' %}
+{% set appVersion = '2.079' %}
 
 {% if locationSnippet or locationTitle %}
 <title>{{ locationSnippet ?? locationTitle }}</title>
@@ -71,14 +71,14 @@ description = "FE Head"
 <meta name="msapplication-tap-highlight" content="no" />
 
 {# START OVERRIDE #}
-<script type="module" crossorigin src="/app/assets/index-BKBFZx2T.js"></script>
+<script type="module" crossorigin src="/app/assets/index-DN_Fulfp.js"></script>
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_leaflet-DChmu6Ei.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_react-BAn6__hR.js">
     <link rel="modulepreload" crossorigin href="/app/assets/vendor_ionic-BUXN7OTv.js">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_leaflet-Bvr-Ab8i.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_react-Z09ODb1v.css">
     <link rel="stylesheet" crossorigin href="/app/assets/vendor_ionic-D7N1wSx9.css">
-    <link rel="stylesheet" crossorigin href="/app/assets/index-D5rlS9Ja.css">
+    <link rel="stylesheet" crossorigin href="/app/assets/index-H8TKIzxt.css">
     <script type="module">import.meta.url;import("_").catch(()=>1);(async function*(){})().next();window.__vite_is_modern_browser=true</script>
     <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
 {# END OVERRIDE #}
