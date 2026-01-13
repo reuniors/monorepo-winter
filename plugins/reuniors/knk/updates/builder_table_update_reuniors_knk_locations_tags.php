@@ -7,9 +7,9 @@ class BuilderTableUpdateReuniorsKnkLocationsTags extends Migration
 {
     public function up()
     {
-        Schema::table('reuniors_knk_locations_tags', function($table) {
-            $table->integer('tag_id')->nullable()->unsigned()->change();
-        });
+        // Schema::table('reuniors_knk_locations_tags', function($table) {
+        //     $table->integer('tag_id')->nullable()->unsigned()->change();
+        // });
         Schema::table('reuniors_knk_locations_tags', function($table)
         {
             $table->foreign('tag_id', 'knk_locations_tags_tag_id')
