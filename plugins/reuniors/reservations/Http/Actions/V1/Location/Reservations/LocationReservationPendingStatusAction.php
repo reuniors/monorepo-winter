@@ -10,16 +10,14 @@ use Log;
 class LocationReservationPendingStatusAction extends BaseAction {
     public function handle(array $attributes = [])
     {
-        $now = now();
+        $now = now()->utc();
         $pendingReservations = ClientReservation::getFeData()
             ->createdUserNotHasGroups([UserGroupCode::ADMIN, UserGroupCode::OWNER])
             ->where('status', ReservationStatus::DRAFT)
-            ->where('date', '>=', $now)
-            ->where('created_at', '<=', $now->subMinutes(15))
+            ->where('date_utc', '>=', $now)
+            ->where('created_at', '<=', $now->copy()->subMinutes(15))
             ->with('createdByUser')
             ->get();
-
-        \Log::info('pendingReservations', ['pendingReservations' => $pendingReservations->count()]);
 
         foreach ($pendingReservations as $reservation) {
             $user = $reservation->createdByUser;
