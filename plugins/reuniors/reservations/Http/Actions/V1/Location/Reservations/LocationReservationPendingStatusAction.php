@@ -19,6 +19,8 @@ class LocationReservationPendingStatusAction extends BaseAction {
             ->with('createdByUser')
             ->get();
 
+        \Log::info('pendingReservations', ['pendingReservations' => $pendingReservations->count()]);
+
         foreach ($pendingReservations as $reservation) {
             $user = $reservation->createdByUser;
 

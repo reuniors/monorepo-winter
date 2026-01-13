@@ -94,7 +94,7 @@ class Plugin extends PluginBase
         );
 
         // Register Google Calendar sync listener (automatic sync to Google Calendar)
-        \Event::subscribe(\Reuniors\Reservations\Classes\Listeners\GoogleCalendarSyncListener::class);
+        // \Event::subscribe(\Reuniors\Reservations\Classes\Listeners\GoogleCalendarSyncListener::class);
 
         // Register console command for change requests
         if ($this->app->runningInConsole()) {
