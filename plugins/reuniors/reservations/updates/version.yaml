@@ -240,3 +240,6 @@
 1.0.82:
     - "Add max_discount_percent field to location_workers table"
     - builder_table_add_max_discount_percent_to_location_workers.php
+1.0.83:
+    - "Change all price columns from decimal to double (services.min_price, services.max_price, location_workers_services.price)"
+    - builder_table_change_min_max_price_to_double_in_services.php
