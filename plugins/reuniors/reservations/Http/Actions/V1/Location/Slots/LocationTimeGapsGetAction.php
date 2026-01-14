@@ -340,23 +340,13 @@ class LocationTimeGapsGetAction extends BaseAction
             $pauseTo = $pause['timeToUtc'] ?? $pause['to'] ?? null;
             
             if ($pauseFrom && $pauseTo) {
-                // Parse pause times - they might be just time strings (HH:mm) or full ISO 8601
+                // Parse pause times - they might be just time strings (HH:mm or HH:mm:ss) or full ISO 8601
                 // Combine with shift date_utc to get full datetime
-                if (strlen($pauseFrom) <= 5) {
-                    // Just time (HH:mm), combine with date_utc
-                    $pauseStart = Carbon::parse($shiftDate->format('Y-m-d') . ' ' . $pauseFrom, 'UTC');
-                } else {
-                    // Full datetime, parse directly
-                    $pauseStart = Carbon::parse($pauseFrom)->setTimezone('UTC');
-                }
+                // Check if it's a time format vs full datetime by looking for ISO 8601 datetime indicators
+               
+                $pauseStart = Carbon::parse($shiftDate->format('Y-m-d') . ' ' . $pauseFrom, 'UTC');
                 
-                if (strlen($pauseTo) <= 5) {
-                    // Just time (HH:mm), combine with date_utc
-                    $pauseEnd = Carbon::parse($shiftDate->format('Y-m-d') . ' ' . $pauseTo, 'UTC');
-                } else {
-                    // Full datetime, parse directly
-                    $pauseEnd = Carbon::parse($pauseTo)->setTimezone('UTC');
-                }
+                $pauseEnd = Carbon::parse($shiftDate->format('Y-m-d') . ' ' . $pauseTo, 'UTC');
                 
                 // Handle cross-midnight pauses
                 if ($pauseEnd->lt($pauseStart)) {
