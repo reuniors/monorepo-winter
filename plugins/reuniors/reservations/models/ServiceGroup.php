@@ -143,8 +143,10 @@ class ServiceGroup extends BaseModelWithSort
                 }]);
             } elseif ($withWorkers) {
                 // Load all services with all location_workers and their pivot data
+                // Select only id from location_workers table to minimize data
                 $query->with(['services.location_workers' => function ($query) {
                     $query->where('reuniors_reservations_location_workers_services.active', true)
+                          ->select('reuniors_reservations_location_workers.id')
                           ->withPivot(['price', 'duration', 'sort_order', 'active', 'location_id']);
                 }]);
             }
