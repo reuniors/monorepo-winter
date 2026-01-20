@@ -30,7 +30,7 @@ class FilterUserGroupsByLocation
         // Check if user is owner or worker for this location
         $isOwner = UserLocationHelper::isUserOwnerOfLocation($user->id, $locationSlug);
         $isWorker = UserLocationHelper::isUserWorkerOfLocation($user->id, $locationSlug);
-        
+
         // Filter groups: remove Owner and Worker if user doesn't have rights
         $filteredGroups = $userGroups->filter(function ($group) use ($isOwner, $isWorker) {
             $groupCode = $group->code ?? null;

@@ -51,6 +51,12 @@ class Plugin extends PluginBase
             ->job(\Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestScheduledExecuteAction::class)
             ->dailyAt('02:00')
             ->timezone('Europe/Belgrade');
+
+        // Daily cleanup of unverified users at 3:00 AM
+        $schedule
+            ->job(\Reuniors\Reservations\Http\Actions\V1\User\CleanupUnverifiedUsersAction::class)
+            ->dailyAt('03:00')
+            ->timezone('Europe/Belgrade');
     }
 
     public function boot()
@@ -105,11 +111,14 @@ class Plugin extends PluginBase
         
         // Listen to event to filter user groups by location
         \Event::listen('winter.user.groups.before.send', function ($user) {
+            // Try to get locationSlug from env variable for local testing, otherwise from request
+            $locationSlug = env('BACKUP_LOCATION') ?: null;
+            
             // Filter groups by location
             $filteredGroups = \Reuniors\Reservations\Classes\FilterUserGroupsByLocation::filter(
                 $user,
                 $user->groups,
-                null // locationSlug will be determined from request
+                $locationSlug // Will fallback to request if null
             );
             
             // Update user groups collection
