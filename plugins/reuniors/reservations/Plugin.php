@@ -31,6 +31,13 @@ class Plugin extends PluginBase
     public function register()
     {
         $this->app->register(ServiceProvider::class);
+        
+        // Register AdminOnly middleware
+        $this->app['router']->aliasMiddleware(
+            'adminOnly',
+            \Reuniors\Reservations\Http\Middleware\AdminOnly::class
+        );
+        
         parent::register();
     }
 

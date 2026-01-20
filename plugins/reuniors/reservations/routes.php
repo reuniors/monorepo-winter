@@ -1,6 +1,7 @@
 <?php
 
 require_once 'routesActions.php';
+require_once 'routesAdmin.php';
 
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use mikp\sanctum\Http\Middleware\UserFromBearerToken;
@@ -84,6 +85,8 @@ use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestExecuteActi
 use Reuniors\Reservations\Http\Actions\V1\ChangeRequest\ChangeRequestGetEntityAction;
 
 Route::get('manifest.webmanifest', LocationGetManifestAction::class);
+
+// Admin routes are loaded from routesAdmin.php
 
 Route::group(
     ['prefix' => 'api/v1/rzr', 'middleware' => [
