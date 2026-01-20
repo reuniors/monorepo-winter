@@ -1,0 +1,9 @@
+{
+  "actions": {
+    "startAutoCrop": "Start auto crop"
+  },
+  "messages": {
+    "autoCropWarning": "Not all images are cropped ({{total}})"
+  }
+}
+

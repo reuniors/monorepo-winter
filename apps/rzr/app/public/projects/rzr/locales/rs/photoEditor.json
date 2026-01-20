@@ -1,0 +1,9 @@
+{
+  "actions": {
+    "startAutoCrop": "Pokreni auto crop"
+  },
+  "messages": {
+    "autoCropWarning": "Nisu sve slike kropovane ({{total}})"
+  }
+}
+
