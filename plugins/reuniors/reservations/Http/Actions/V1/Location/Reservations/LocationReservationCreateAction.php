@@ -155,6 +155,7 @@ class LocationReservationCreateAction extends BaseAction {
             $data['date_utc'],
             $data['location_worker_id'],
             $data['services_duration'],
+            $location,
         )) {
             throw new HttpResponseException(
                 response()->json([

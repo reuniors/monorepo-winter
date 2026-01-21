@@ -1,5 +1,7 @@
 <?php
 
+require_once 'routesWizard.php';
+
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 use mikp\sanctum\http\middleware\UserFromBearerToken;
 use Reuniors\Questionnaire\Http\Actions\V1\Questionnaire\CreateQuestionnaireRegistration;

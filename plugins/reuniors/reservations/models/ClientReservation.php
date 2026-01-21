@@ -8,6 +8,7 @@ use Config;
 use Reuniors\reservations\Http\Enums\ReservationStatus;
 use Winter\User\Facades\Auth;
 use Reuniors\Reservations\Http\Actions\V1\Ping\ReservationsPingAction;
+use Reuniors\Reservations\Models\LocationWorker;
 use Reuniors\Reservations\Models\LocationWorkerShift;
 
 /**
@@ -202,16 +203,16 @@ class ClientReservation extends Model
         if (!$this->relationLoaded('locationWorker') || !$this->relationLoaded('client')) {
             return null;
         }
-        
+
         $date = $this->date_formatted->format('d-m-y');
         $time = $this->date_formatted->format('H-i');
         $workerName = $this->locationWorker ? $this->locationWorker->full_name : 'Unknown';
         $clientName = $this->client ? $this->client->full_name : 'Unknown';
-        
+
         // Create a short, readable code
         $workerInitials = $this->getInitials($workerName);
         $clientInitials = $this->getInitials($clientName);
-        
+
         return "{$date}|{$time}|{$workerInitials}-{$clientInitials}";
     }
 
@@ -230,52 +231,66 @@ class ClientReservation extends Model
         return $initials;
     }
 
-    public static function slotAvailable($dateAndTime, $locationWorkerId, $durationInMin)
+    public static function slotAvailable($dateAndTime, $locationWorkerId, $durationInMin, $location = null)
     {
         $dateOnly = Carbon::parse($dateAndTime)->format('Y-m-d');
         $start = Carbon::parse($dateAndTime);
         $end = $start->copy()->addMinutes($durationInMin);
-        
+
+        // Get location if not provided
+        if (!$location) {
+            $worker = LocationWorker::findOrFail($locationWorkerId);
+            $location = $worker->locations()->first();
+        }
+
+        // Get pause time from location settings
+        $pauseTime = $location->settings['pauseBetweenReservations'] ?? 10; // minutes
+
         // Get all reservations for this worker on this date (not just future ones)
         $reservations = ClientReservation::where('location_worker_id', $locationWorkerId)
             ->where('date_utc', '>=', $dateAndTime)
             ->where('status', '!=', ReservationStatus::CANCELLED)
             ->get();
-            
-        // Check if the start and end time is between the working hours
+
+        // Check if the start and end time is OUTSIDE working hours
         $workingHours = LocationWorkerShift::isWorkingDay($dateOnly, $locationWorkerId)->first();
         if ($workingHours) {
-            if ($start->between($workingHours->start_time_utc, $workingHours->end_time_utc) || $end->between($workingHours->start_time_utc, $workingHours->end_time_utc)) {
+            // Combine date with time (time_from_utc and time_to_utc are time-only strings)
+            $workingStart = Carbon::parse($workingHours->date_utc->format('Y-m-d') . ' ' . $workingHours->time_from_utc);
+            $workingEnd = Carbon::parse($workingHours->date_utc->format('Y-m-d') . ' ' . $workingHours->time_to_utc);
+            
+            // Slot is NOT available if start or end is OUTSIDE working hours
+            if ($start->lt($workingStart) || $start->gte($workingEnd) || $end->gt($workingEnd)) {
                 return false;
             }
         }
-        
+
         // Check for overlapping times and pause requirements
         foreach ($reservations as $reservation) {
             $reservationStart = Carbon::parse($reservation->date_utc);
             $reservationEnd = $reservationStart->copy()->addMinutes($reservation->services_duration);
-            
+
             // Check for direct overlap
             if ($start->between($reservationStart, $reservationEnd) || $end->between($reservationStart, $reservationEnd)) {
                 return false;
             }
-            
-            // Check for pause time requirement (10 minutes)
-            $pauseTime = 10; // PAUSE_BETWEEN_SLOTS_MINUTES
-            
+
+            // Check for pause time requirement (from location settings)
+            // $pauseTime is loaded from location->settings['pauseBetweenReservations']
+
             // Check if new reservation starts too soon after existing reservation ends
             $timeBetweenNewStartAndExistingEnd = $start->diffInMinutes($reservationEnd);
             if ($timeBetweenNewStartAndExistingEnd < $pauseTime && $timeBetweenNewStartAndExistingEnd >= 0) {
                 return false;
             }
-            
+
             // Check if existing reservation starts too soon after new reservation ends
             $timeBetweenExistingStartAndNewEnd = $reservationStart->diffInMinutes($end);
             if ($timeBetweenExistingStartAndNewEnd < $pauseTime && $timeBetweenExistingStartAndNewEnd >= 0) {
                 return false;
             }
         }
-        
+
         // Check Calendar events (any provider)
         $calendarEvents = \Reuniors\Calendar\Models\CalendarEvent::whereHas('calendarConnection', function ($query) use ($locationWorkerId) {
             $query->whereHas('reservationsConnections', function($q) use ($locationWorkerId) {
@@ -289,11 +304,11 @@ class ClientReservation extends Model
         ->blockingSlots()
         ->inTimeRange($start->toDateTimeString(), $end->toDateTimeString())
         ->get();
-        
+
         if ($calendarEvents->count() > 0) {
             return false; // Slot is blocked by calendar event
         }
-        
+
         return true;
     }
 
@@ -405,7 +420,7 @@ class ClientReservation extends Model
 
         $description = "Rezervacija ID: {$reservation->id}\n";
         $description .= "Hash: {$reservation->hash}\n\n";
-        
+
         if ($client) {
             $description .= "Klijent: {$client->full_name}\n";
             if ($client->email) {
@@ -415,22 +430,22 @@ class ClientReservation extends Model
                 $description .= "Telefon: {$client->phone_number}\n";
             }
         }
-        
+
         $description .= "\nUsluge: {$serviceNames}\n";
         $description .= "Trajanje: {$reservation->services_duration} minuta\n";
         $description .= "Cena: {$reservation->services_cost} RSD\n";
-        
+
         if ($worker) {
             $description .= "Radnik: {$worker->full_name}\n";
         }
-        
+
         if ($location) {
             $description .= "Lokacija: {$location->name}\n";
             if (isset($location->address_data['address'])) {
                 $description .= "Adresa: {$location->address_data['address']}\n";
             }
         }
-        
+
         if ($reservation->notice) {
             $description .= "\nNapomena: {$reservation->notice}\n";
         }
@@ -440,15 +455,15 @@ class ClientReservation extends Model
             'description' => $description,
             'start_time_utc' => $reservation->date_utc,
             'end_time_utc' => Carbon::parse($reservation->date_utc)->addMinutes($reservation->services_duration)->toDateTimeString(),
-            'location' => $location && isset($location->address_data['address']) 
-                ? $location->address_data['address'] 
+            'location' => $location && isset($location->address_data['address'])
+                ? $location->address_data['address']
                 : null,
         ];
     }
 
     /**
      * Format services request array for sync operation
-     * 
+     *
      * @param array $servicesRequest Array of service requests with 'id' and 'quantity'
      * @return array Formatted array for sync operation
      */

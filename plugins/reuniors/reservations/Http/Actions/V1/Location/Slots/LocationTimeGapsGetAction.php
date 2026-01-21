@@ -319,13 +319,18 @@ class LocationTimeGapsGetAction extends BaseAction
         
         foreach ($reservations as $reservation) {
             $reservationStart = Carbon::parse($reservation->date_utc);
-            // Add pause after reservation end time
-            $reservationEnd = $reservationStart->copy()
+            
+            // Subtract pause BEFORE reservation start (pause needed before this reservation)
+            $occupiedStart = $reservationStart->copy()->subMinutes($pauseBetweenReservations);
+            
+            // Add pause AFTER reservation end time
+            $occupiedEnd = $reservationStart->copy()
                 ->addMinutes($reservation->services_duration)
                 ->addMinutes($pauseBetweenReservations);
+            
             $occupiedPeriods[] = [
-                'start' => $reservationStart,
-                'end' => $reservationEnd,
+                'start' => $occupiedStart,
+                'end' => $occupiedEnd,
             ];
         }
 

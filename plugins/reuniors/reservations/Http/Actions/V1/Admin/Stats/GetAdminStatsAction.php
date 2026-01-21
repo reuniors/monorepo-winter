@@ -4,7 +4,7 @@ namespace Reuniors\Reservations\Http\Actions\V1\Admin\Stats;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
-use Reuniors\Reservations\Models\Reservation;
+use Reuniors\Reservations\Models\ClientReservation;
 use Winter\User\Models\User;
 use Carbon\Carbon;
 
@@ -26,11 +26,11 @@ class GetAdminStatsAction extends BaseAction
         // Reservations this month
         $startOfMonth = Carbon::now()->startOfMonth();
         $endOfMonth = Carbon::now()->endOfMonth();
-        $reservationsThisMonth = Reservation::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+        $reservationsThisMonth = ClientReservation::whereBetween('created_at', [$startOfMonth, $endOfMonth])
             ->count();
 
         // Reservations today
-        $reservationsToday = Reservation::whereDate('created_at', Carbon::today())
+        $reservationsToday = ClientReservation::whereDate('created_at', Carbon::today())
             ->count();
 
         // New users this month
