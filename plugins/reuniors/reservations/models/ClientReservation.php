@@ -225,7 +225,7 @@ class ClientReservation extends Model
         $initials = '';
         foreach ($names as $name) {
             if (!empty($name)) {
-                $initials .= strtoupper(substr($name, 0, 1));
+                $initials .= mb_strtoupper(mb_substr($name, 0, 1, 'UTF-8'), 'UTF-8');
             }
         }
         return $initials;
