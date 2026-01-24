@@ -12,7 +12,7 @@ class LocationReservationPendingStatusAction extends BaseAction {
     {
         $now = now()->utc();
         $pendingReservations = ClientReservation::getFeData()
-            ->createdUserNotHasGroups([UserGroupCode::ADMIN, UserGroupCode::OWNER])
+            ->createdUserNotHasGroups([UserGroupCode::ADMIN, UserGroupCode::OWNER, UserGroupCode::WORKER])
             ->where('status', ReservationStatus::DRAFT)
             ->where('date_utc', '>=', $now)
             ->where('created_at', '<=', $now->copy()->subMinutes(15))

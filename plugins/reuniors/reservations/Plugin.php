@@ -44,14 +44,14 @@ class Plugin extends PluginBase
     public function registerSchedule($schedule)
     {
         $schedule->job(LocationReservationPendingStatusAction::class)->everyMinute();
-        $schedule
-            ->job(SendPromoCodeToMailAction::class)
-            ->yearlyOn(11, 19, '21:50')
-            ->timezone('Europe/Belgrade');
-        $schedule
-            ->job(SendGoogleReviewEmailAction::class)
-            ->yearlyOn(3, 20, '17:00')
-            ->timezone('Europe/Belgrade');
+        // $schedule
+        //     ->job(SendPromoCodeToMailAction::class)
+        //     ->yearlyOn(11, 19, '21:50')
+        //     ->timezone('Europe/Belgrade');
+        // $schedule
+        //     ->job(SendGoogleReviewEmailAction::class)
+        //     ->yearlyOn(3, 20, '17:00')
+        //     ->timezone('Europe/Belgrade');
 
         // Daily change request execution at 2:00 AM
         $schedule
