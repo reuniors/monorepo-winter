@@ -1,0 +1,15 @@
+title = "admin"
+url = "/admin"
+layout = "FeLayout"
+is_hidden = 0
+
+[viewBag]
+localeUrl[eng] = "/admin"
+==
+{% put headersScripts %}
+    {% partial 'fe/feHead' %}
+{% endput %}
+
+{% put bodyScripts %}
+    {% partial 'fe/feBody' %}
+{% endput %}
