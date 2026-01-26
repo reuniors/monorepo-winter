@@ -15,6 +15,8 @@ class GetAllUsersAction extends BaseAction
         $perPage = $attributes['perPage'] ?? 20;
         $page = $attributes['page'] ?? 1;
         $groupCode = $attributes['groupCode'] ?? null;
+        $sortBy = $attributes['sortBy'] ?? 'created_at';
+        $sortDirection = $attributes['sortDirection'] ?? 'desc';
 
         $query = User::query()
             ->with(['groups'])
@@ -35,7 +37,17 @@ class GetAllUsersAction extends BaseAction
             });
         }
 
-        $query->orderBy('created_at', 'desc');
+        // Map camelCase to snake_case for database columns
+        $columnMap = [
+            'name' => 'name',
+            'email' => 'email',
+            'createdAt' => 'created_at',
+            'lastLogin' => 'last_login',
+        ];
+
+        $dbColumn = $columnMap[$sortBy] ?? 'created_at';
+        $query->orderBy($dbColumn, $sortDirection);
+
         $users = $query->paginate($perPage, ['*'], 'page', $page);
 
         return [
