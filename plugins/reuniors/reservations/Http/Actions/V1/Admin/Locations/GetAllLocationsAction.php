@@ -23,6 +23,8 @@ class GetAllLocationsAction extends BaseAction
         $active = isset($attributes['active']) ? filter_var($attributes['active'], FILTER_VALIDATE_BOOLEAN) : null;
         $type = $attributes['type'] ?? null;
         $cityId = $attributes['cityId'] ?? null;
+        $sortBy = $attributes['sortBy'] ?? 'created_at';
+        $sortDirection = $attributes['sortDirection'] ?? 'desc';
 
         $query = Location::query()
             ->with(['city'])
@@ -52,7 +54,16 @@ class GetAllLocationsAction extends BaseAction
             $query->where('city_id', $cityId);
         }
 
-        $query->orderBy('created_at', 'desc');
+        // Map camelCase to snake_case for database columns
+        $columnMap = [
+            'name' => 'name',
+            'type' => 'type',
+            'active' => 'active',
+            'createdAt' => 'created_at',
+        ];
+
+        $dbColumn = $columnMap[$sortBy] ?? 'created_at';
+        $query->orderBy($dbColumn, $sortDirection);
 
         $locations = $query->paginate($perPage, ['*'], 'page', $page);
 
