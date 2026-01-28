@@ -29,6 +29,12 @@ use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\CreateWizardAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\UpdateWizardAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\DeleteWizardAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\ToggleWizardActiveAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\CreateWizardStepAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\UpdateWizardStepAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\CreateWizardFieldAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\UpdateWizardFieldAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\DeleteWizardFieldAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\ReorderWizardFieldsAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Questionnaires\GetAllQuestionnairesAction;
 
 // ========================================
@@ -84,15 +90,23 @@ Route::group([
     // Wizards Management
     // ========================================
     Route::group(['prefix' => 'wizards'], function () {
-        // Routes with parameters MUST be defined first (Laravel registers in order)
+        // Routes without parameters first
+        Route::get('', GetAllWizardsAction::class);
+        Route::post('', CreateWizardAction::class);
+
+        // Wizard step and field routes (more specific than {id})
+        Route::post('{wizardId}/steps', CreateWizardStepAction::class);
+        Route::patch('steps/{stepId}', UpdateWizardStepAction::class);
+        Route::post('steps/{stepId}/fields', CreateWizardFieldAction::class);
+        Route::patch('steps/{stepId}/fields/reorder', ReorderWizardFieldsAction::class);
+        Route::patch('fields/{fieldId}', UpdateWizardFieldAction::class);
+        Route::delete('fields/{fieldId}', DeleteWizardFieldAction::class);
+
+        // Wizard resource routes
         Route::get('{id}', GetWizardDetailsAction::class);
         Route::patch('{id}', UpdateWizardAction::class);
         Route::delete('{id}', DeleteWizardAction::class);
         Route::patch('{id}/toggle-active', ToggleWizardActiveAction::class);
-
-        // Routes without parameters
-        Route::get('', GetAllWizardsAction::class);
-        Route::post('', CreateWizardAction::class);
     });
     
     

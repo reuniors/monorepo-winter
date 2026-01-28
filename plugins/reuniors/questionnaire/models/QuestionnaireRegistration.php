@@ -19,6 +19,7 @@ class QuestionnaireRegistration extends Model
         'title',
         'metadata',
         'deactivate_at_utc',
+        'user_id',
         // Wizard support
         'wizard_definition_id',
         'current_step_id',

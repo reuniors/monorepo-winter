@@ -38,6 +38,7 @@ class StartWizardAction extends BaseAction
 
         // Create new wizard session
         $registration = new QuestionnaireRegistration();
+        $registration->user_id = $user?->id;
         $registration->wizard_definition_id = $wizard->id;
         $registration->wizard_status = 'draft';
         $registration->total_steps_count = $wizard->steps->count();

@@ -14,11 +14,14 @@ class SeedTestWizard extends Seeder
 {
     public function run()
     {
-        // Check if wizard already exists
-        $existingWizard = WizardDefinition::where('slug', 'create-salon')->first();
+        // Remove any existing wizard (including soft-deleted) so slug is free and we can re-seed
+        $existingWizard = WizardDefinition::withTrashed()->where('slug', 'create-salon')->first();
         if ($existingWizard) {
-            echo "⚠️  Wizard 'create-salon' already exists. Skipping seed.\n";
-            return;
+            foreach ($existingWizard->steps()->withTrashed()->get() as $step) {
+                $step->fields()->withTrashed()->forceDelete();
+                $step->forceDelete();
+            }
+            $existingWizard->forceDelete();
         }
 
         // Create Wizard Definition
@@ -73,7 +76,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'name',
             'field_type' => 'TextField',
             'field_label' => 'Naziv Salona',
-            'field_order' => 1,
+            'sort_order' => 1,
             'is_required' => true,
             'validation_rules' => [
                 'required' => true,
@@ -94,7 +97,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'description',
             'field_type' => 'TextAreaField',
             'field_label' => 'Opis',
-            'field_order' => 2,
+            'sort_order' => 2,
             'is_required' => false,
             'validation_rules' => [
                 'max' => 500,
@@ -108,13 +111,13 @@ class SeedTestWizard extends Seeder
             'field_key' => 'type',
             'field_type' => 'SelectField',
             'field_label' => 'Tip Salona',
-            'field_order' => 3,
+            'sort_order' => 3,
             'is_required' => true,
             'validation_rules' => [
                 'required' => true,
                 'in' => [0, 1],
             ],
-            'field_config' => [
+            'field_options' => [
                 'options' => [
                     ['value' => 0, 'label' => 'Berberin'],
                     ['value' => 1, 'label' => 'Restoran'],
@@ -141,7 +144,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'phone',
             'field_type' => 'TextField',
             'field_label' => 'Telefon',
-            'field_order' => 1,
+            'sort_order' => 1,
             'is_required' => true,
             'validation_rules' => [
                 'required' => true,
@@ -160,7 +163,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'email',
             'field_type' => 'TextField',
             'field_label' => 'Email',
-            'field_order' => 2,
+            'sort_order' => 2,
             'is_required' => false,
             'validation_rules' => [
                 'email' => true,
@@ -174,7 +177,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'website',
             'field_type' => 'TextField',
             'field_label' => 'Website',
-            'field_order' => 3,
+            'sort_order' => 3,
             'is_required' => false,
             'validation_rules' => [
                 'url' => true,
@@ -201,7 +204,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'street',
             'field_type' => 'TextField',
             'field_label' => 'Ulica',
-            'field_order' => 1,
+            'sort_order' => 1,
             'is_required' => false,
             'target_field_name' => 'street',
         ]);
@@ -211,7 +214,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'street_number',
             'field_type' => 'TextField',
             'field_label' => 'Broj',
-            'field_order' => 2,
+            'sort_order' => 2,
             'is_required' => false,
             'target_field_name' => 'street_number',
         ]);
@@ -221,7 +224,7 @@ class SeedTestWizard extends Seeder
             'field_key' => 'city',
             'field_type' => 'TextField',
             'field_label' => 'Grad',
-            'field_order' => 3,
+            'sort_order' => 3,
             'is_required' => false,
             'target_field_name' => 'city',
         ]);

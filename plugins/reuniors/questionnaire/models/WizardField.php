@@ -33,11 +33,12 @@ class WizardField extends Model
         'target_field_path',
         'field_options',
         'validation_rules',
+        'validation_messages',
         'conditions',
         'metadata',
     ];
 
-    protected $jsonable = ['field_options', 'validation_rules', 'conditions', 'metadata'];
+    protected $jsonable = ['field_options', 'validation_rules', 'validation_messages', 'conditions', 'metadata'];
     
     protected $casts = [
         'is_required' => 'boolean',

@@ -19,6 +19,7 @@ use Reuniors\Questionnaire\Http\Actions\V1\Wizard\SaveWizardStepAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\CompleteWizardAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\GetWizardProgressAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\SkipWizardStepAction;
+use Reuniors\Questionnaire\Http\Actions\V1\Wizard\ListMyWizardRegistrationsAction;
 
 // ========================================
 // WIZARD ROUTES
@@ -40,6 +41,11 @@ Route::group([
     ]
 ], function () {
     
+    // My wizard runs list (requires auth) - must be before {slug}
+    Route::group(['middleware' => [UserFromBearerToken::class]], function () {
+        Route::get('my-registrations', ListMyWizardRegistrationsAction::class);
+    });
+
     // Public routes - Get wizard definition (no auth required initially)
     Route::get('{slug}', GetWizardDefinitionAction::class);
     
