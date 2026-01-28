@@ -1,0 +1,14 @@
+steps:
+    label: Steps
+    view:
+        list: $/reuniors/questionnaire/models/wizardstep/columns.yaml
+        form: $/reuniors/questionnaire/models/wizardstep/fields.yaml
+        toolbarButtons: create|delete
+        showReorder: true
+        showCheckboxes: true
+    manage:
+        form: $/reuniors/questionnaire/models/wizardstep/fields.yaml
+        list: $/reuniors/questionnaire/models/wizardstep/columns.yaml
+        showReorder: true
+    pivot:
+        form: $/reuniors/questionnaire/models/wizardstep/fields.yaml

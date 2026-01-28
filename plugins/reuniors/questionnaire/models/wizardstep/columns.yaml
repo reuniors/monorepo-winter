@@ -1,0 +1,46 @@
+columns:
+    sort_order:
+        label: Order
+        type: number
+        sortable: true
+        width: 80px
+    
+    slug:
+        label: Slug
+        searchable: true
+        sortable: true
+        type: text
+    
+    name:
+        label: Name
+        searchable: true
+        sortable: true
+        type: text
+    
+    is_informational:
+        label: Info Only
+        type: switch
+        sortable: true
+        align: center
+        width: 100px
+    
+    is_skippable:
+        label: Skippable
+        type: switch
+        sortable: true
+        align: center
+        width: 100px
+    
+    fields_count:
+        label: Fields
+        relation: fields
+        select: count(*)
+        sortable: false
+        align: center
+        width: 80px
+        type: number
+    
+    target_entity_type:
+        label: Target Entity
+        type: text
+        width: 150px

@@ -1,0 +1,14 @@
+fields:
+    label: Fields
+    view:
+        list: $/reuniors/questionnaire/models/wizardfield/columns.yaml
+        form: $/reuniors/questionnaire/models/wizardfield/fields.yaml
+        toolbarButtons: create|delete
+        showReorder: true
+        showCheckboxes: true
+    manage:
+        form: $/reuniors/questionnaire/models/wizardfield/fields.yaml
+        list: $/reuniors/questionnaire/models/wizardfield/columns.yaml
+        showReorder: true
+    pivot:
+        form: $/reuniors/questionnaire/models/wizardfield/fields.yaml

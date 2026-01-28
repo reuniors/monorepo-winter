@@ -1,0 +1,14 @@
+name: Wizard Definition
+form: $/reuniors/questionnaire/models/wizarddefinition/fields.yaml
+modelClass: Reuniors\Questionnaire\Models\WizardDefinition
+defaultRedirect: reuniors/questionnaire/wizarddefinitions
+create:
+    title: Create Wizard
+    redirect: reuniors/questionnaire/wizarddefinitions/update/:id
+    redirectClose: reuniors/questionnaire/wizarddefinitions
+update:
+    title: Edit Wizard
+    redirect: reuniors/questionnaire/wizarddefinitions
+    redirectClose: reuniors/questionnaire/wizarddefinitions
+preview:
+    title: Preview Wizard

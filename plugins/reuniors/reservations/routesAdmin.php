@@ -23,6 +23,13 @@ use Reuniors\Reservations\Http\Actions\V1\Admin\Locations\GetLocationDetailsActi
 use Reuniors\Reservations\Http\Actions\V1\Admin\Locations\UpdateLocationStatusAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Users\GetAllUsersAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Users\GetUserDetailsAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\GetAllWizardsAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\GetWizardDetailsAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\CreateWizardAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\UpdateWizardAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\DeleteWizardAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\ToggleWizardActiveAction;
+use Reuniors\Reservations\Http\Actions\V1\Admin\Questionnaires\GetAllQuestionnairesAction;
 
 // ========================================
 // ADMIN ROUTES (RZR Admin Panel)
@@ -57,30 +64,41 @@ Route::group([
     // ========================================
     // Locations Management
     // ========================================
-    // List all locations with pagination, search, and filters
-    Route::get('locations', GetAllLocationsAction::class);
-    
-    // Get single location details with relations
-    Route::get('locations/{id}', GetLocationDetailsAction::class);
-    
-    // Update location active/inactive status
-    Route::patch('locations/{id}/status', UpdateLocationStatusAction::class);
+    Route::group(['prefix' => 'locations'], function () {
+        Route::get('/', GetAllLocationsAction::class);
+        Route::get('{id}', GetLocationDetailsAction::class);
+        Route::patch('{id}/status', UpdateLocationStatusAction::class);
+    });
     
     
     // ========================================
     // Users Management
     // ========================================
-    // List all users with pagination, search, and filters
-    Route::get('users', GetAllUsersAction::class);
-    
-    // Get single user details with groups and avatar
-    Route::get('users/{id}', GetUserDetailsAction::class);
+    Route::group(['prefix' => 'users'], function () {
+        Route::get('/', GetAllUsersAction::class);
+        Route::get('{id}', GetUserDetailsAction::class);
+    });
     
     
     // ========================================
-    // Future Routes (Planned)
+    // Wizards Management
     // ========================================
-    // Route::get('wizards', GetAllWizardsAction::class);
-    // Route::get('questionnaires', GetAllQuestionnairesAction::class);
-    // Route::get('analytics', GetPlatformAnalyticsAction::class);
+    Route::group(['prefix' => 'wizards'], function () {
+        // Routes with parameters MUST be defined first (Laravel registers in order)
+        Route::get('{id}', GetWizardDetailsAction::class);
+        Route::patch('{id}', UpdateWizardAction::class);
+        Route::delete('{id}', DeleteWizardAction::class);
+        Route::patch('{id}/toggle-active', ToggleWizardActiveAction::class);
+
+        // Routes without parameters
+        Route::get('', GetAllWizardsAction::class);
+        Route::post('', CreateWizardAction::class);
+    });
+    
+    
+    // ========================================
+    // Questionnaires Management
+    // ========================================
+    // List all questionnaire registrations with pagination, search, and filters
+    Route::get('questionnaires', GetAllQuestionnairesAction::class);
 });

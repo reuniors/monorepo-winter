@@ -1,6 +1,7 @@
 <?php namespace Reuniors\Questionnaire\Models;
 
 use Model;
+use October\Rain\Database\Traits\Sortable;
 
 /**
  * WizardStep Model
@@ -11,6 +12,7 @@ class WizardStep extends Model
 {
     use \Winter\Storm\Database\Traits\Validation;
     use \Winter\Storm\Database\Traits\SoftDelete;
+    use Sortable;
 
     protected $table = 'reuniors_wizard_steps';
     
@@ -39,6 +41,14 @@ class WizardStep extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    /**
+     * Sortable configuration
+     */
+    public $sortable = [
+        'orderColumnName' => 'sort_order',
+        'scope' => 'wizard_definition_id'
+    ];
 
     public $rules = [
         'wizard_definition_id' => 'required|exists:reuniors_wizard_definitions,id',

@@ -1,0 +1,14 @@
+list: $/reuniors/questionnaire/models/wizarddefinition/columns.yaml
+title: Wizard Definitions
+modelClass: Reuniors\Questionnaire\Models\WizardDefinition
+recordUrl: reuniors/questionnaire/wizarddefinitions/update/:id
+recordsPerPage: 20
+showTree: false
+noRecordsMessage: backend::lang.list.no_records
+showSetup: true
+showCheckboxes: true
+toolbar:
+    buttons: list_toolbar
+    search:
+        prompt: backend::lang.list.search_prompt
+filter: config_filter.yaml

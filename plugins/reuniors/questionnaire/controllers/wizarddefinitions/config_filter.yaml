@@ -1,0 +1,17 @@
+scopes:
+    is_active:
+        label: Active Status
+        type: switch
+        conditions: is_active = :filtered
+    type:
+        label: Type
+        type: dropdown
+        options:
+            location_onboarding: Location Onboarding
+            worker_onboarding: Worker Onboarding
+            custom: Custom
+        conditions: type = :filtered
+    requires_approval:
+        label: Requires Approval
+        type: switch
+        conditions: requires_approval = :filtered

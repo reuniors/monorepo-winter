@@ -20,8 +20,34 @@ abstract class BaseAction
             }
         }
         
+        // Merge request data with route parameters
+        $attributes = request()->all();
+        
+        // Add route parameters to attributes (e.g., {id} becomes attributes['id'])
+        // Route parameters are passed as additional arguments to asController()
+        // We need to map them to the attributes array
+        $route = request()->route();
+        if ($route) {
+            $routeParams = $route->parameters();
+            $attributes = array_merge($attributes, $routeParams);
+        }
+        
+        // Also add any direct arguments (for backwards compatibility)
+        foreach ($args as $index => $arg) {
+            // If it's a model instance, use its ID
+            if (is_object($arg) && method_exists($arg, 'getKey')) {
+                $attributes['id'] = $arg->getKey();
+            } elseif (is_scalar($arg)) {
+                // For scalar values, try to infer the parameter name
+                // Common pattern: first arg is usually 'id'
+                if ($index === 0 && !isset($attributes['id'])) {
+                    $attributes['id'] = $arg;
+                }
+            }
+        }
+        
         return [
-            'data' => $this->handle(request()->all(), ...$args),
+            'data' => $this->handle($attributes),
             'success' => true,
         ];
     }

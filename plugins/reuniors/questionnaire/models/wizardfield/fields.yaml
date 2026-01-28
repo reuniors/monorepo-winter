@@ -1,0 +1,136 @@
+fields:
+    # Basic Info
+    field_key:
+        label: Field Key
+        type: text
+        span: left
+        required: true
+        comment: Unique identifier (snake_case, e.g., "salon_name")
+    
+    field_type:
+        label: Field Type
+        type: dropdown
+        span: right
+        required: true
+        options:
+            TextField: Text Field
+            TextAreaField: Text Area
+            NumberField: Number Field
+            EmailField: Email Field
+            PhoneField: Phone Field
+            SelectField: Select Dropdown
+            MultiSelectField: Multi Select
+            CheckboxField: Checkbox
+            RadioField: Radio Buttons
+            DateField: Date Picker
+            DateTimeField: Date & Time
+            TimeField: Time Picker
+            FileField: File Upload
+            PhotoUploader: Photo Upload
+            WorkingHours: Working Hours
+            AddressField: Address
+            MapField: Map Picker
+            RangeField: Range Slider
+            SwitchField: Switch/Toggle
+            RichTextField: Rich Text Editor
+    
+    field_label:
+        label: Label
+        type: text
+        span: full
+        required: true
+        comment: Display label for user
+    
+    sort_order:
+        label: Sort Order
+        type: number
+        span: left
+        default: 0
+        comment: Display order within step
+    
+    # Configuration
+    is_required:
+        label: Required
+        type: switch
+        span: left
+        default: false
+    
+    is_visible:
+        label: Visible
+        type: switch
+        span: right
+        default: true
+    
+    is_readonly:
+        label: Read Only
+        type: switch
+        span: left
+        default: false
+    
+    placeholder:
+        label: Placeholder
+        type: text
+        span: right
+        comment: Placeholder text
+    
+    help_text:
+        label: Help Text
+        type: textarea
+        size: small
+        comment: Help text shown below field
+    
+    default_value:
+        label: Default Value
+        type: text
+        comment: Default value (JSON for complex types)
+    
+    # Field Options (JSON)
+    field_options:
+        label: Field Options
+        type: codeeditor
+        language: json
+        comment: Field-specific configuration (options for SelectField, min/max for NumberField, etc.)
+        height: 200
+    
+    # Validation
+    validation_rules:
+        label: Validation Rules
+        type: codeeditor
+        language: json
+        comment: Validation rules (required, min, max, email, regex, etc.)
+        height: 200
+    
+    conditions:
+        label: Display Conditions
+        type: codeeditor
+        language: json
+        comment: Conditional display logic (JSON)
+        height: 200
+    
+    # Target
+    target_field_name:
+        label: Target Field Name
+        type: text
+        span: left
+        comment: Maps to entity field name
+    
+    target_field_path:
+        label: Target Field Path
+        type: text
+        span: right
+        comment: Nested path (e.g., "address.street")
+    
+    # Nested Fields
+    parent_field_id:
+        label: Parent Field
+        type: relation
+        span: left
+        comment: For nested/grouped fields
+    
+    # Metadata
+    metadata:
+        label: Metadata
+        type: codeeditor
+        language: json
+        comment: Additional field configuration (JSON)
+        height: 200

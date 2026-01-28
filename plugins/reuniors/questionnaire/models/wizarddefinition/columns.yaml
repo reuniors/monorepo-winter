@@ -1,0 +1,53 @@
+columns:
+    id:
+        label: ID
+        searchable: true
+        sortable: true
+        width: 60px
+    
+    slug:
+        label: Slug
+        searchable: true
+        sortable: true
+        type: text
+    
+    name:
+        label: Name
+        searchable: true
+        sortable: true
+        type: text
+    
+    type:
+        label: Type
+        sortable: true
+        type: text
+        width: 150px
+    
+    steps_count:
+        label: Steps
+        relation: steps
+        select: count(*)
+        sortable: false
+        align: center
+        width: 80px
+        type: number
+    
+    is_active:
+        label: Active
+        type: switch
+        sortable: true
+        align: center
+        width: 80px
+    
+    requires_approval:
+        label: Approval Required
+        type: switch
+        sortable: true
+        align: center
+        width: 130px
+    
+    created_at:
+        label: Created
+        type: datetime
+        sortable: true
+        width: 150px

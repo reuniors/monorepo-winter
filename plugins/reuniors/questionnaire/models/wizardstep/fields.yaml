@@ -1,0 +1,100 @@
+fields:
+    # Basic Info
+    slug:
+        label: Slug
+        type: text
+        span: left
+        required: true
+        comment: Unique identifier within wizard (e.g., "basic-info")
+    
+    name:
+        label: Name
+        type: text
+        span: right
+        required: true
+    
+    description:
+        label: Description
+        type: textarea
+        size: small
+        comment: Instructions shown to user
+    
+    sort_order:
+        label: Sort Order
+        type: number
+        span: left
+        default: 0
+        comment: Display order (lower = first)
+    
+    # Behavior
+    is_skippable:
+        label: Can Be Skipped
+        type: switch
+        span: left
+        default: false
+        comment: User can skip this step
+    
+    is_informational:
+        label: Informational Only
+        type: switch
+        span: right
+        default: false
+        comment: No input fields, just information display
+    
+    # Target
+    target_entity_type:
+        label: Target Entity Type
+        type: text
+        span: left
+        comment: Entity class name (e.g., Location)
+    
+    target_entity_table:
+        label: Target Entity Table
+        type: text
+        span: right
+        comment: Database table name
+    
+    data_storage_strategy:
+        label: Storage Strategy
+        type: dropdown
+        span: left
+        default: json
+        options:
+            json: JSON
+            separate_fields: Separate Fields
+            multiple_tables: Multiple Tables
+    
+    # Validation
+    validation_rules:
+        label: Validation Rules
+        type: codeeditor
+        language: json
+        comment: Step-level validation rules (JSON)
+        height: 200
+    
+    # Advanced
+    conditions:
+        label: Display Conditions
+        type: codeeditor
+        language: json
+        comment: Conditional display logic (JSON)
+        height: 200
+    
+    metadata:
+        label: Metadata
+        type: codeeditor
+        language: json
+        comment: Additional step configuration (JSON)
+        height: 200
+
+secondaryTabs:
+    fields:
+        fields:
+            label: Fields
+            type: relation
+            tab: Fields
+            nameFrom: field_label
+            descriptionFrom: field_key
+            defaultSort:
+                column: sort_order
+                direction: asc

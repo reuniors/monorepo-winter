@@ -1,0 +1,100 @@
+tabs:
+    fields:
+        # Basic Info Tab
+        slug:
+            label: Slug
+            type: text
+            span: left
+            required: true
+            tab: Basic Info
+            comment: Unique identifier (e.g., "create-salon")
+        
+        name:
+            label: Name
+            type: text
+            span: right
+            required: true
+            tab: Basic Info
+        
+        description:
+            label: Description
+            type: textarea
+            size: small
+            tab: Basic Info
+        
+        type:
+            label: Type
+            type: dropdown
+            span: left
+            options:
+                location_onboarding: Location Onboarding
+                worker_onboarding: Worker Onboarding
+                custom: Custom
+            tab: Basic Info
+            required: true
+        
+        # Configuration Tab
+        is_active:
+            label: Active
+            type: switch
+            default: true
+            span: left
+            tab: Configuration
+        
+        requires_auth:
+            label: Requires Authentication
+            type: switch
+            default: true
+            span: right
+            tab: Configuration
+        
+        requires_approval:
+            label: Requires Admin Approval
+            type: switch
+            default: true
+            span: left
+            tab: Configuration
+        
+        auto_create_entities:
+            label: Auto Create Entities
+            type: switch
+            default: false
+            span: right
+            tab: Configuration
+            comment: Automatically create entities when wizard completes (without approval)
+        
+        # Target Entity Tab
+        primary_entity_type:
+            label: Primary Entity Type
+            type: text
+            span: left
+            tab: Target Entity
+            comment: Class name (e.g., Location)
+        
+        primary_entity_table:
+            label: Primary Entity Table
+            type: text
+            span: right
+            tab: Target Entity
+            comment: Database table name
+        
+        # Metadata Tab
+        metadata:
+            label: Metadata
+            type: codeeditor
+            language: json
+            tab: Metadata
+            comment: Additional configuration as JSON
+            height: 300
+
+secondaryTabs:
+    fields:
+        steps:
+            label: Steps
+            type: relation
+            tab: Steps
+            nameFrom: name
+            descriptionFrom: description
+            defaultSort:
+                column: sort_order
+                direction: asc
