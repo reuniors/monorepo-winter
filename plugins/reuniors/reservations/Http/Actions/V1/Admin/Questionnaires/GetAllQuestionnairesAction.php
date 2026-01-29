@@ -1,7 +1,6 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Questionnaires;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
@@ -13,8 +12,6 @@ use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
  */
 class GetAllQuestionnairesAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $search = $attributes['search'] ?? '';

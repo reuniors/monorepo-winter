@@ -1,7 +1,6 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Wizards;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\WizardStep;
 
@@ -13,8 +12,6 @@ use Reuniors\Questionnaire\Models\WizardStep;
  */
 class UpdateWizardStepAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $stepId = $attributes['stepId'] ?? $attributes['id'] ?? null;

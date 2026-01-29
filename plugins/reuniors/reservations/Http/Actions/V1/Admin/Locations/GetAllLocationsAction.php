@@ -1,7 +1,6 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Locations;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 
@@ -13,8 +12,6 @@ use Reuniors\Reservations\Models\Location;
  */
 class GetAllLocationsAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $search = $attributes['search'] ?? '';

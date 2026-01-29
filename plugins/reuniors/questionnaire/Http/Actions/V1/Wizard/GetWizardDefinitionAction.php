@@ -1,27 +1,18 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\WizardDefinition;
 
 /**
  * GetWizardDefinitionAction
- * 
- * Returns complete wizard definition with all steps and fields
- * Used to initialize wizard on frontend
+ *
+ * Returns complete wizard definition with all steps and fields.
+ * Used to initialize wizard on frontend. Slug comes from URL path.
  */
 class GetWizardDefinitionAction extends BaseAction
 {
-    use AsAction;
-
-    public function handle(array $attributes = [])
+    public function handle(array $attributes = [], $slug = null)
     {
-        $slug = $attributes['slug'] ?? null;
-
-        if (!$slug) {
-            throw new \Exception('Wizard slug is required');
-        }
-
         $wizard = WizardDefinition::query()
             ->where('slug', $slug)
             ->where('is_active', true)
@@ -29,5 +20,10 @@ class GetWizardDefinitionAction extends BaseAction
             ->firstOrFail();
 
         return $wizard;
+    }
+
+    public function asController($slug = null): array
+    {
+        return parent::asController($slug);
     }
 }

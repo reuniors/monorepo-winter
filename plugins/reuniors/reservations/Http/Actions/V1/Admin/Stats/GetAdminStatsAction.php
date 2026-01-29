@@ -1,7 +1,6 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Stats;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 use Reuniors\Reservations\Models\ClientReservation;
@@ -15,8 +14,6 @@ use Carbon\Carbon;
  */
 class GetAdminStatsAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $totalLocations = Location::count();

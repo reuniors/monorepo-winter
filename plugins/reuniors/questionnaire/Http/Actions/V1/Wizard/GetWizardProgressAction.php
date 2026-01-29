@@ -1,27 +1,41 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
 /**
  * GetWizardProgressAction
- * 
- * Returns current wizard progress and saved data
- * Used to resume wizard from where user left off
+ *
+ * Returns current wizard progress and saved data.
+ * Used to resume wizard from where user left off.
  */
 class GetWizardProgressAction extends BaseAction
 {
-    use AsAction;
+    public function rules(): array
+    {
+        return [
+            'registration_id' => ['nullable', 'integer'],
+            'registrationId' => ['nullable', 'integer'],
+            'registration_code' => ['nullable', 'string'],
+            'registrationCode' => ['nullable', 'string'],
+        ];
+    }
 
     public function handle(array $attributes = [])
     {
-        $registrationId = $attributes['registration_id'] ?? null;
-        $registrationCode = $attributes['registration_code'] ?? null;
+        Validator::make($attributes, $this->rules())->validate();
 
-        if (!$registrationId && !$registrationCode) {
-            throw new \Exception('Registration ID or code is required');
-        }
+        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
+        $registrationCode = $attributes['registration_code'] ?? $attributes['registrationCode'] ?? null;
+
+        $v = Validator::make($attributes, []);
+        $v->after(function ($validator) use ($registrationId, $registrationCode) {
+            if (!$registrationId && !$registrationCode) {
+                $validator->errors()->add('registration_id', __('Registration ID or code is required'));
+            }
+        });
+        $v->validate();
 
         $query = QuestionnaireRegistration::with(['wizard_definition', 'current_step']);
 

@@ -1,20 +1,18 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Classes\WizardValidationService;
+use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
 /**
  * CompleteWizardAction
- * 
- * Marks wizard as completed
- * Validates all wizard data before marking complete
+ *
+ * Marks wizard as completed.
+ * Validates all wizard data before marking complete.
  */
 class CompleteWizardAction extends BaseAction
 {
-    use AsAction;
-
     protected $validationService;
 
     public function __construct()
@@ -22,13 +20,19 @@ class CompleteWizardAction extends BaseAction
         $this->validationService = new WizardValidationService();
     }
 
+    public function rules(): array
+    {
+        return [
+            'registration_id' => ['required_without:registrationId', 'integer'],
+            'registrationId' => ['required_without:registration_id', 'integer'],
+        ];
+    }
+
     public function handle(array $attributes = [])
     {
-        $registrationId = $attributes['registration_id'] ?? null;
+        Validator::make($attributes, $this->rules())->validate();
 
-        if (!$registrationId) {
-            throw new \Exception('Registration ID is required');
-        }
+        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
 
         $registration = QuestionnaireRegistration::with('wizard_definition')
             ->findOrFail($registrationId);

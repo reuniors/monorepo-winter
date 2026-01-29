@@ -11,8 +11,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
-use mikp\sanctum\Http\Middleware\UserFromBearerToken;
 use Reuniors\WinterSocialite\Http\Middlewares\JsonMiddleware;
+use mikp\sanctum\http\middleware\UserFromBearerToken;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\GetWizardDefinitionAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\StartWizardAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Wizard\SaveWizardStepAction;
@@ -46,12 +46,13 @@ Route::group([
         Route::get('my-registrations', ListMyWizardRegistrationsAction::class);
     });
 
-    // Public routes - Get wizard definition (no auth required initially)
+    // // Public routes - Get wizard definition (no auth required initially)
     Route::get('{slug}', GetWizardDefinitionAction::class);
     
     // Wizard session routes (may require auth depending on wizard config)
     Route::group([
         'middleware' => [
+            UserFromBearerToken::class
             // UserFromBearerToken is optional - checked in action based on wizard config
         ]
     ], function () {

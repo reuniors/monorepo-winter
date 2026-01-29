@@ -1,29 +1,30 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Lorisleiva\Actions\Concerns\AsAction;
-use Reuniors\Base\Http\Actions\BaseAction;
-use Reuniors\Questionnaire\Models\WizardDefinition;
-use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Carbon\Carbon;
+use Reuniors\Base\Http\Actions\BaseAction;
+use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
+use Reuniors\Questionnaire\Models\WizardDefinition;
+use Auth;
 
 /**
  * StartWizardAction
- * 
- * Initializes a new wizard session
- * Creates a QuestionnaireRegistration record to track progress
+ *
+ * Initializes a new wizard session.
+ * Creates a QuestionnaireRegistration record to track progress.
  */
 class StartWizardAction extends BaseAction
 {
-    use AsAction;
+    public function rules(): array
+    {
+        return [
+            'wizardSlug' => ['required', 'string'],
+        ];
+    }
 
     public function handle(array $attributes = [])
     {
-        $wizardSlug = $attributes['wizard_slug'] ?? null;
-        $user = request()->user();
-
-        if (!$wizardSlug) {
-            throw new \Exception('Wizard slug is required');
-        }
+        $wizardSlug = $attributes['wizardSlug'];
+        $user = Auth::getUser();
 
         $wizard = WizardDefinition::query()
             ->where('slug', $wizardSlug)
@@ -38,16 +39,17 @@ class StartWizardAction extends BaseAction
 
         // Create new wizard session
         $registration = new QuestionnaireRegistration();
+        $registration->title = $wizard->name ?? $wizardSlug;
         $registration->user_id = $user?->id;
         $registration->wizard_definition_id = $wizard->id;
         $registration->wizard_status = 'draft';
         $registration->total_steps_count = $wizard->steps->count();
         $registration->completed_steps_count = 0;
         $registration->wizard_data = [];
-        
+
         // Set expiration (30 days from now)
         $registration->expires_at = Carbon::now()->addDays(30);
-        
+
         $registration->save();
 
         return [

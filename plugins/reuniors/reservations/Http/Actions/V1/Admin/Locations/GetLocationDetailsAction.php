@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Locations;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Reservations\Models\Location;
 
 class GetLocationDetailsAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $id = $attributes['id'] ?? null;

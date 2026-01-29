@@ -1,21 +1,19 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Lorisleiva\Actions\Concerns\AsAction;
+use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
+use Reuniors\Questionnaire\Classes\WizardValidationService;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\WizardStep;
-use Reuniors\Questionnaire\Classes\WizardValidationService;
 
 /**
  * SaveWizardStepAction
- * 
- * Saves data for a specific wizard step
- * Validates data before saving
+ *
+ * Saves data for a specific wizard step.
+ * Validates input and step data before saving.
  */
 class SaveWizardStepAction extends BaseAction
 {
-    use AsAction;
-
     protected $validationService;
 
     public function __construct()
@@ -23,15 +21,24 @@ class SaveWizardStepAction extends BaseAction
         $this->validationService = new WizardValidationService();
     }
 
+    public function rules(): array
+    {
+        return [
+            'registration_id' => ['required_without:registrationId', 'integer'],
+            'registrationId' => ['required_without:registration_id', 'integer'],
+            'step_slug' => ['required_without:stepSlug', 'string'],
+            'stepSlug' => ['required_without:step_slug', 'string'],
+            'data' => ['nullable', 'array'],
+        ];
+    }
+
     public function handle(array $attributes = [])
     {
-        $registrationId = $attributes['registration_id'] ?? null;
-        $stepSlug = $attributes['step_slug'] ?? null;
-        $stepData = $attributes['data'] ?? [];
+        Validator::make($attributes, $this->rules())->validate();
 
-        if (!$registrationId || !$stepSlug) {
-            throw new \Exception('Registration ID and step slug are required');
-        }
+        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
+        $stepSlug = $attributes['step_slug'] ?? $attributes['stepSlug'] ?? null;
+        $stepData = $attributes['data'] ?? [];
 
         $registration = QuestionnaireRegistration::with(['wizard_definition.steps'])
             ->findOrFail($registrationId);

@@ -1,7 +1,6 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Wizards;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\WizardField;
 
@@ -13,8 +12,6 @@ use Reuniors\Questionnaire\Models\WizardField;
  */
 class DeleteWizardFieldAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $id = $attributes['id'] ?? $attributes['fieldId'] ?? null;

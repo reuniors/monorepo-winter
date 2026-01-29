@@ -1,14 +1,11 @@
 <?php
 namespace Reuniors\Reservations\Http\Actions\V1\Admin\Users;
 
-use Lorisleiva\Actions\Concerns\AsAction;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Winter\User\Models\User;
 
 class GetUserDetailsAction extends BaseAction
 {
-    use AsAction;
-
     public function handle(array $attributes = [])
     {
         $id = $attributes['id'] ?? null;
