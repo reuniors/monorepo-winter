@@ -43,6 +43,11 @@ class SaveWizardStepAction extends BaseAction
             throw new \Exception('Wizard session has expired');
         }
 
+        // Only draft, in_progress, or returned_for_edit can be edited
+        if (!$registration->isEditable()) {
+            throw new \Exception('Wizard is no longer editable');
+        }
+
         // Find the step
         $step = WizardStep::query()
             ->where('wizard_definition_id', $registration->wizard_definition_id)

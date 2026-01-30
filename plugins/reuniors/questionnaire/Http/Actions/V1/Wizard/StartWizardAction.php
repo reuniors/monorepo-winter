@@ -55,7 +55,7 @@ class StartWizardAction extends BaseAction
         // Check if user already has a draft for this wizard - return existing draft instead of creating new
         $existingDraft = QuestionnaireRegistration::query()
             ->where('wizard_definition_id', $wizard->id)
-            ->where('wizard_status', 'draft')
+            ->where('wizard_status', QuestionnaireRegistration::STATUS_DRAFT)
             ->where('user_id', $user?->id)
             ->whereNull('deleted_at')
             ->first();
@@ -75,7 +75,7 @@ class StartWizardAction extends BaseAction
         $registration->title = $wizard->name ?? $wizardSlug;
         $registration->user_id = $user?->id;
         $registration->wizard_definition_id = $wizard->id;
-        $registration->wizard_status = 'draft';
+        $registration->wizard_status = QuestionnaireRegistration::STATUS_DRAFT;
         $registration->total_steps_count = $wizard->steps->count();
         $registration->completed_steps_count = 0;
         $registration->wizard_data = [];

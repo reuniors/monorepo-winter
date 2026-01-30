@@ -63,7 +63,8 @@ class GetWizardProgressAction extends BaseAction
             'wizard_data' => $registration->wizard_data ?? [],
             'current_step' => $registration->current_step,
             'progress' => $registration->wizard_progress,
-            'is_completed' => $registration->wizard_status === 'completed',
+            'is_completed' => $registration->wizard_status === QuestionnaireRegistration::STATUS_SUBMITTED,
+            'is_editable' => $registration->isEditable(),
         ];
     }
 }

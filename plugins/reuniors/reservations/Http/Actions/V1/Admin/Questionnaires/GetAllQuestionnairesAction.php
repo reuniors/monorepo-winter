@@ -80,7 +80,7 @@ class GetAllQuestionnairesAction extends BaseAction
                     'user' => null, // User info not stored directly
                     'status' => $questionnaire->wizard_status ?? 'draft',
                     'currentStepId' => $questionnaire->current_step_id,
-                    'wizardCompleted' => ($questionnaire->wizard_status === 'completed'),
+                    'wizardCompleted' => ($questionnaire->wizard_status === QuestionnaireRegistration::STATUS_SUBMITTED),
                     'wizardProgress' => $progress,
                     'submittedAt' => $questionnaire->wizard_completed_at?->toIso8601String(),
                     'createdAt' => $questionnaire->created_at?->toIso8601String(),

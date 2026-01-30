@@ -40,6 +40,25 @@ class QuestionnaireRegistration extends Model
     const DEACTIVATION_TIME_DURATION = 60 * 60 * 24; // 1 day
 
     /**
+     * Wizard status values.
+     * draft: not started or just created
+     * in_progress: user is filling steps
+     * returned_for_edit: admin returned for user to edit again
+     * submitted: user completed, no more edits; pending admin review
+     * approved: admin approved
+     * rejected: admin rejected (see rejection_reason)
+     */
+    const STATUS_DRAFT = 'draft';
+    const STATUS_IN_PROGRESS = 'in_progress';
+    const STATUS_RETURNED_FOR_EDIT = 'returned_for_edit';
+    const STATUS_SUBMITTED = 'submitted';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_REJECTED = 'rejected';
+
+    /** Statuses that allow user to edit wizard steps */
+    const EDITABLE_STATUSES = [self::STATUS_DRAFT, self::STATUS_IN_PROGRESS, self::STATUS_RETURNED_FOR_EDIT];
+
+    /**
      * @var string The database table used by the model.
      */
     public $table = 'reuniors_questionnaire_registration';
@@ -100,12 +119,25 @@ class QuestionnaireRegistration extends Model
 
     public function scopeWizardInProgress($query)
     {
-        return $query->where('wizard_status', 'in_progress');
+        return $query->where('wizard_status', self::STATUS_IN_PROGRESS);
     }
 
     public function scopeWizardCompleted($query)
     {
-        return $query->where('wizard_status', 'completed');
+        return $query->where('wizard_status', self::STATUS_SUBMITTED);
+    }
+
+    public function scopeWizardSubmitted($query)
+    {
+        return $query->where('wizard_status', self::STATUS_SUBMITTED);
+    }
+
+    /**
+     * Whether the user can edit this wizard (draft, in_progress, or returned_for_edit).
+     */
+    public function isEditable(): bool
+    {
+        return in_array($this->wizard_status, self::EDITABLE_STATUSES, true);
     }
 
     /**
@@ -171,8 +203,8 @@ class QuestionnaireRegistration extends Model
         );
         $this->completed_steps_count = count($completedSteps);
         
-        if ($this->wizard_status === 'draft') {
-            $this->wizard_status = 'in_progress';
+        if ($this->wizard_status === self::STATUS_DRAFT) {
+            $this->wizard_status = self::STATUS_IN_PROGRESS;
             $this->wizard_started_at = now();
         }
         
@@ -180,12 +212,21 @@ class QuestionnaireRegistration extends Model
     }
 
     /**
-     * Mark wizard as completed
+     * Mark wizard as completed (submitted – no more edits by user).
      */
     public function completeWizard()
     {
-        $this->wizard_status = 'completed';
+        $this->wizard_status = self::STATUS_SUBMITTED;
         $this->wizard_completed_at = now();
+        $this->save();
+    }
+
+    /**
+     * Admin: return wizard for edit so user can edit again.
+     */
+    public function returnForEdit(): void
+    {
+        $this->wizard_status = self::STATUS_RETURNED_FOR_EDIT;
         $this->save();
     }
 }

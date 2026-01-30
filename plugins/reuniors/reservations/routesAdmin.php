@@ -36,6 +36,7 @@ use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\UpdateWizardFieldAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\DeleteWizardFieldAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\ReorderWizardFieldsAction;
 use Reuniors\Reservations\Http\Actions\V1\Admin\Questionnaires\GetAllQuestionnairesAction;
+use Reuniors\Questionnaire\Http\Actions\V1\Admin\ReturnWizardForEditAction;
 
 // ========================================
 // ADMIN ROUTES (RZR Admin Panel)
@@ -115,4 +116,6 @@ Route::group([
     // ========================================
     // List all questionnaire registrations with pagination, search, and filters
     Route::get('questionnaires', GetAllQuestionnairesAction::class);
+    // Admin: return questionnaire for edit (user can edit again)
+    Route::post('questionnaires/{id}/return-for-edit', ReturnWizardForEditAction::class);
 });
