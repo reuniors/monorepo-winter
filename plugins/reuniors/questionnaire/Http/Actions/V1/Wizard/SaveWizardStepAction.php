@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Classes\WizardValidationService;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
@@ -32,8 +31,6 @@ class SaveWizardStepAction extends BaseAction
 
     public function handle(array $attributes = [])
     {
-        Validator::make($attributes, $this->rules())->validate();
-
         $registrationId = $attributes['registrationId'];
         $stepSlug = $attributes['stepSlug'];
         $stepData = $attributes['data'] ?? [];
