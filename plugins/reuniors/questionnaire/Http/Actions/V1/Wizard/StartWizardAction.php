@@ -1,6 +1,7 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
 use Carbon\Carbon;
+use Illuminate\Validation\ValidationException;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\WizardDefinition;
@@ -35,6 +36,38 @@ class StartWizardAction extends BaseAction
         // Check if user authentication is required
         if ($wizard->requires_auth && !$user) {
             throw new \Exception('Authentication required for this wizard');
+        }
+
+        // Max 3 registrations per user per wizard
+        $maxPerWizard = 3;
+        $count = QuestionnaireRegistration::query()
+            ->where('wizard_definition_id', $wizard->id)
+            ->where('user_id', $user?->id)
+            ->whereNull('deleted_at')
+            ->count();
+
+        if ($count >= $maxPerWizard) {
+            throw ValidationException::withMessages([
+                'limit' => [__('Maksimalan broj wizarda (3) je dostignut.')],
+            ]);
+        }
+
+        // Check if user already has a draft for this wizard - return existing draft instead of creating new
+        $existingDraft = QuestionnaireRegistration::query()
+            ->where('wizard_definition_id', $wizard->id)
+            ->where('wizard_status', 'draft')
+            ->where('user_id', $user?->id)
+            ->whereNull('deleted_at')
+            ->first();
+
+        if ($existingDraft) {
+            // Return existing draft registration
+            return [
+                'registration_id' => $existingDraft->id,
+                'registration_code' => $existingDraft->code,
+                'wizard' => $wizard,
+                'expires_at' => $existingDraft->expires_at->toIso8601String(),
+            ];
         }
 
         // Create new wizard session

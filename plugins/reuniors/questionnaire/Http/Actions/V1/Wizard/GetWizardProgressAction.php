@@ -15,29 +15,37 @@ class GetWizardProgressAction extends BaseAction
     public function rules(): array
     {
         return [
-            'registration_id' => ['nullable', 'integer'],
             'registrationId' => ['nullable', 'integer'],
-            'registration_code' => ['nullable', 'string'],
             'registrationCode' => ['nullable', 'string'],
         ];
     }
 
     public function handle(array $attributes = [])
     {
+        // For GET /wizard/progress/{registration_id}: merge route param (snake_case) into attributes as camelCase
+        if (request()->route('registration_id')) {
+            $attributes['registrationId'] = $attributes['registrationId'] ?? request()->route('registration_id');
+        }
+
         Validator::make($attributes, $this->rules())->validate();
 
-        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
-        $registrationCode = $attributes['registration_code'] ?? $attributes['registrationCode'] ?? null;
+        $registrationId = $attributes['registrationId'] ?? null;
+        $registrationCode = $attributes['registrationCode'] ?? null;
 
         $v = Validator::make($attributes, []);
         $v->after(function ($validator) use ($registrationId, $registrationCode) {
             if (!$registrationId && !$registrationCode) {
-                $validator->errors()->add('registration_id', __('Registration ID or code is required'));
+                $validator->errors()->add('registrationId', __('Registration ID or code is required'));
             }
         });
         $v->validate();
 
-        $query = QuestionnaireRegistration::with(['wizard_definition', 'current_step']);
+        $query = QuestionnaireRegistration::with([
+            'wizard_definition' => function ($q) {
+                $q->withFullDefinition();
+            },
+            'current_step'
+        ]);
 
         if ($registrationId) {
             $registration = $query->findOrFail($registrationId);

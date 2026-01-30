@@ -34,6 +34,9 @@ class QuestionnaireRegistration extends Model
 
     protected $jsonable = ['metadata', 'wizard_data'];
 
+    /** Appended to JSON for list responses (e.g. resume URL needs wizard slug) */
+    protected $appends = ['wizard_slug'];
+
     const DEACTIVATION_TIME_DURATION = 60 * 60 * 24; // 1 day
 
     /**
@@ -118,6 +121,14 @@ class QuestionnaireRegistration extends Model
     }
 
     /**
+     * Slug of the wizard definition (for list/resume URLs).
+     */
+    public function getWizardSlugAttribute()
+    {
+        return $this->wizard_definition?->slug;
+    }
+
+    /**
      * Get wizard progress percentage
      */
     public function getWizardProgressAttribute()
@@ -135,7 +146,30 @@ class QuestionnaireRegistration extends Model
     public function updateWizardProgress($stepId)
     {
         $this->current_step_id = $stepId;
-        $this->completed_steps_count = $this->completed_steps_count + 1;
+        
+        // Calculate completed steps from wizard_data (count all steps that have an entry)
+        // Don't blindly increment - user can go back and re-save steps
+        $wizardData = $this->wizard_data ?? [];
+        
+        // Count steps: any step with data (even empty array for informational steps)
+        // Exclude only steps with just __skipped marker
+        $completedSteps = array_filter(
+            array_keys($wizardData),
+            function($key) use ($wizardData) {
+                $stepValue = $wizardData[$key];
+                
+                // If it's only a skip marker, don't count
+                if (is_array($stepValue) && 
+                    isset($stepValue['__skipped']) && 
+                    count($stepValue) === 1) {
+                    return false;
+                }
+                
+                // Count everything else (including empty arrays for informational steps)
+                return true;
+            }
+        );
+        $this->completed_steps_count = count($completedSteps);
         
         if ($this->wizard_status === 'draft') {
             $this->wizard_status = 'in_progress';

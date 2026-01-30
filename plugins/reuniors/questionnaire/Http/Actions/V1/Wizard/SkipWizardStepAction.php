@@ -16,10 +16,8 @@ class SkipWizardStepAction extends BaseAction
     public function rules(): array
     {
         return [
-            'registration_id' => ['required_without:registrationId', 'integer'],
-            'registrationId' => ['required_without:registration_id', 'integer'],
-            'step_slug' => ['required_without:stepSlug', 'string'],
-            'stepSlug' => ['required_without:step_slug', 'string'],
+            'registrationId' => ['required', 'integer'],
+            'stepSlug' => ['required', 'string'],
         ];
     }
 
@@ -27,8 +25,8 @@ class SkipWizardStepAction extends BaseAction
     {
         Validator::make($attributes, $this->rules())->validate();
 
-        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
-        $stepSlug = $attributes['step_slug'] ?? $attributes['stepSlug'] ?? null;
+        $registrationId = $attributes['registrationId'];
+        $stepSlug = $attributes['stepSlug'];
 
         $registration = QuestionnaireRegistration::with('wizard_definition')
             ->findOrFail($registrationId);

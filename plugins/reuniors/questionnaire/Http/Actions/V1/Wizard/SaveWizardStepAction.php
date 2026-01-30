@@ -24,10 +24,8 @@ class SaveWizardStepAction extends BaseAction
     public function rules(): array
     {
         return [
-            'registration_id' => ['required_without:registrationId', 'integer'],
-            'registrationId' => ['required_without:registration_id', 'integer'],
-            'step_slug' => ['required_without:stepSlug', 'string'],
-            'stepSlug' => ['required_without:step_slug', 'string'],
+            'registrationId' => ['required', 'integer'],
+            'stepSlug' => ['required', 'string'],
             'data' => ['nullable', 'array'],
         ];
     }
@@ -36,8 +34,8 @@ class SaveWizardStepAction extends BaseAction
     {
         Validator::make($attributes, $this->rules())->validate();
 
-        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
-        $stepSlug = $attributes['step_slug'] ?? $attributes['stepSlug'] ?? null;
+        $registrationId = $attributes['registrationId'];
+        $stepSlug = $attributes['stepSlug'];
         $stepData = $attributes['data'] ?? [];
 
         $registration = QuestionnaireRegistration::with(['wizard_definition.steps'])
@@ -67,13 +65,17 @@ class SaveWizardStepAction extends BaseAction
         $wizardData[$stepSlug] = $stepData;
         $registration->wizard_data = $wizardData;
 
-        // Update progress
-        $registration->updateWizardProgress($step->id);
+        // Get next step BEFORE updating progress
+        $nextStep = $this->getNextStep($registration, $step);
+
+        // Update progress - use next step ID (so GET progress returns correct current_step), or keep current if last step
+        $progressStepId = $nextStep ? $nextStep->id : $step->id;
+        $registration->updateWizardProgress($progressStepId);
 
         return [
             'success' => true,
             'registration' => $registration,
-            'next_step' => $this->getNextStep($registration, $step),
+            'next_step' => $nextStep,
             'progress' => $registration->wizard_progress,
         ];
     }

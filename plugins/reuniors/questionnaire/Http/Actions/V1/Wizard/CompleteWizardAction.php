@@ -23,8 +23,7 @@ class CompleteWizardAction extends BaseAction
     public function rules(): array
     {
         return [
-            'registration_id' => ['required_without:registrationId', 'integer'],
-            'registrationId' => ['required_without:registration_id', 'integer'],
+            'registrationId' => ['required', 'integer'],
         ];
     }
 
@@ -32,7 +31,7 @@ class CompleteWizardAction extends BaseAction
     {
         Validator::make($attributes, $this->rules())->validate();
 
-        $registrationId = $attributes['registration_id'] ?? $attributes['registrationId'] ?? null;
+        $registrationId = $attributes['registrationId'];
 
         $registration = QuestionnaireRegistration::with('wizard_definition')
             ->findOrFail($registrationId);
