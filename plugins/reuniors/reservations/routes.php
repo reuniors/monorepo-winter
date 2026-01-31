@@ -54,6 +54,7 @@ use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodeC
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodeUpdateAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\PromoCodes\LocationPromoCodeDeleteAction;
 use Reuniors\Reservations\Http\Actions\V1\Location\LocationGetOneAction;
+use Reuniors\Reservations\Http\Actions\V1\Location\CreateReservationsLocationFromQuestionnaireAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsCreateAction;
 use Reuniors\Reservations\Http\Actions\V1\Translation\TranslationsGetLanguagesAction;
@@ -106,6 +107,7 @@ Route::group(
             'prefix' => 'locations',
         ], function () {
             Route::get('data', LocationGetOneAction::class);
+            Route::post('from-questionnaire', CreateReservationsLocationFromQuestionnaireAction::class);
             Route::get('services-groups', LocationServiceGroupsGet::class);
             Route::get('service-categories', LocationServiceCategoriesGetAction::class);
             Route::get('working-shifts-days', LocationWorkingShiftsByDayGetAction::class);

@@ -243,3 +243,6 @@
 1.0.83:
     - "Change all price columns from decimal to double (services.min_price, services.max_price, location_workers_services.price)"
     - builder_table_change_min_max_price_to_double_in_services.php
+1.0.84:
+    - "Add setup_progress field to locations table"
+    - builder_table_add_setup_progress_to_reuniors_reservations_locations.php

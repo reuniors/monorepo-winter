@@ -48,6 +48,7 @@ class Location extends Model
         'settings',
         'pwa_metadata',
         'has_multiple_activities',
+        'setup_progress',
     ];
 
     public $implement = ['RainLab.Translate.Behaviors.TranslatableModel'];
@@ -60,6 +61,8 @@ class Location extends Model
 
     public $appends = [
         'street_full',
+        'setup_complete',
+        'missing_setup_steps',
     ];
 
     public $jsonable = [
@@ -68,6 +71,7 @@ class Location extends Model
         'phone_data',
         'settings',
         'pwa_metadata',
+        'setup_progress',
     ];
 
     public $belongsTo = [
@@ -138,6 +142,104 @@ class Location extends Model
     public function getStreetFullAttribute()
     {
         return $this->address_data['street'] . ' ' . $this->address_data['street_number'] . ', ' . $this->address_data['municipality'];
+    }
+
+    /**
+     * Recalculate setup progress based on current database state.
+     * Relations checked: workers(), services_groups(), working_hours(), serviceCategories().
+     */
+    public function recalculateSetupProgress(): void
+    {
+        if ($this->setup_progress === null) {
+            $this->setup_progress = [
+                'wizard_completed' => false,
+                'workers_added' => false,
+                'activities_added' => false,
+                'services_added' => false,
+                'working_hours_set' => false,
+            ];
+        }
+
+        $wizardCompleted = $this->setup_progress['wizard_completed'] ?? false;
+
+        $this->setup_progress = [
+            'wizard_completed' => $wizardCompleted,
+            'workers_added' => $this->workers()->exists(),
+            'activities_added' => $this->serviceCategories()->exists(),
+            'services_added' => $this->services_groups()->exists(),
+            'working_hours_set' => $this->working_hours()->exists(),
+        ];
+
+        $this->save();
+    }
+
+    /**
+     * Check if location setup is complete (null = legacy, consider complete).
+     */
+    public function isSetupComplete(): bool
+    {
+        if ($this->setup_progress === null) {
+            return true;
+        }
+
+        $progress = $this->setup_progress;
+        $required = ['wizard_completed', 'workers_added', 'services_added', 'working_hours_set'];
+
+        if ($this->has_multiple_activities) {
+            $required[] = 'activities_added';
+        }
+
+        foreach ($required as $key) {
+            if (!isset($progress[$key]) || !$progress[$key]) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Get list of missing setup step keys for API/banner.
+     */
+    public function getMissingSetupSteps(): array
+    {
+        if ($this->setup_progress === null) {
+            return [];
+        }
+
+        $progress = $this->setup_progress;
+        $missing = [];
+
+        if (!($progress['workers_added'] ?? false)) {
+            $missing[] = 'workers_added';
+        }
+        if ($this->has_multiple_activities && !($progress['activities_added'] ?? false)) {
+            $missing[] = 'activities_added';
+        }
+        if (!($progress['services_added'] ?? false)) {
+            $missing[] = 'services_added';
+        }
+        if (!($progress['working_hours_set'] ?? false)) {
+            $missing[] = 'working_hours_set';
+        }
+
+        return $missing;
+    }
+
+    /**
+     * Accessor for API response (appended to array/JSON).
+     */
+    public function getSetupCompleteAttribute(): bool
+    {
+        return $this->isSetupComplete();
+    }
+
+    /**
+     * Accessor for API response (appended to array/JSON).
+     */
+    public function getMissingSetupStepsAttribute(): array
+    {
+        return $this->getMissingSetupSteps();
     }
 
     protected static function boot()

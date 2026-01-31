@@ -31,8 +31,13 @@ class LocationGetOneAction extends BaseAction {
             $locationQuery->where('slug', $slug);
         }
 
-        return $locationQuery
+        $location = $locationQuery
             ->with(['working_hours', 'workers', 'logo', 'cover', 'pwa_icon', 'gallery', 'serviceCategories'])
             ->firstOrFail();
+
+        // Recalculate setup progress from current DB state before returning
+        $location->recalculateSetupProgress();
+
+        return $location;
     }
 }
