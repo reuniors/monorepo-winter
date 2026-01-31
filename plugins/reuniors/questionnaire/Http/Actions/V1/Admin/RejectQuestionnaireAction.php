@@ -4,11 +4,11 @@ use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
 /**
- * ReturnWizardForEditAction
+ * RejectQuestionnaireAction
  *
- * Admin-only. Sets registration status to returned_for_edit so the user can edit the wizard again.
+ * Admin-only. Sets registration status to rejected.
  */
-class ReturnWizardForEditAction extends BaseAction
+class RejectQuestionnaireAction extends BaseAction
 {
     public function rules(): array
     {
@@ -20,7 +20,7 @@ class ReturnWizardForEditAction extends BaseAction
     public function handle(array $attributes = [], QuestionnaireRegistration $registration = null)
     {
         $reason = $attributes['reason'] ?? null;
-        $registration->returnForEdit(is_string($reason) ? trim($reason) : null);
+        $registration->reject(is_string($reason) ? trim($reason) : null);
 
         return $registration->fresh(['wizard_definition']);
     }

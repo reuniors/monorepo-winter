@@ -21,3 +21,11 @@
 ## Auth in PHP
 
 - **Always use `use Auth;`** (facade alias), not `use Winter\User\Facades\Auth;`, when you need the auth facade in actions/controllers.
+
+## Actions: input from $attributes only
+
+- **In actions, always read input from `$attributes`**, never from `request()->input()` or other request helpers. The caller (controller/route) is responsible for passing request data into `$attributes`; the action only uses `$attributes`.
+
+## Actions: no manual validation
+
+- **Never add manual validation** (e.g. `Validator::make($attributes, $this->rules())->validate()`) inside action `handle()`. Validation is performed automatically by the action framework via `rules()`. Define validation in `rules()` only; do not call the validator in `handle()`.

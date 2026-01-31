@@ -4,7 +4,6 @@ namespace Reuniors\Reservations\Models;
 use Reuniors\Reservations\Models\FileImage\FileImageSquare;
 use Reuniors\Reservations\Models\FileImage\FileImageWide;
 use Model;
-use System\Models\File;
 
 /**
  * Model
@@ -125,7 +124,7 @@ class Location extends Model
     public $attachOne = [
         'logo' => [FileImageSquare::class, 'delete' => true],
         'cover' => [FileImageWide::class, 'delete' => true],
-        'pwa_icon' => [File::class, 'delete' => true],
+        'pwa_icon' => ['System\Models\File', 'delete' => true],
     ];
 
     public function getTypeOptions()

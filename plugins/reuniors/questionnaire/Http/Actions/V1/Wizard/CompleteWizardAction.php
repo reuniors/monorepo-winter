@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Classes\WizardValidationService;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
@@ -29,8 +28,6 @@ class CompleteWizardAction extends BaseAction
 
     public function handle(array $attributes = [])
     {
-        Validator::make($attributes, $this->rules())->validate();
-
         $registrationId = $attributes['registrationId'];
 
         $registration = QuestionnaireRegistration::with('wizard_definition')
@@ -61,11 +58,10 @@ class CompleteWizardAction extends BaseAction
         }
 
         return [
-            'success' => true,
             'registration' => $registration,
             'requires_approval' => $registration->wizard_definition->requires_approval,
-            'message' => $registration->wizard_definition->requires_approval 
-                ? 'Wizard completed. Awaiting admin approval.' 
+            'message' => $registration->wizard_definition->requires_approval
+                ? 'Wizard completed. Awaiting admin approval.'
                 : 'Wizard completed successfully!',
         ];
     }

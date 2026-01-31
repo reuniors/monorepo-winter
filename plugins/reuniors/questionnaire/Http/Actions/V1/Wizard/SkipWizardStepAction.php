@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 use Reuniors\Questionnaire\Models\WizardStep;
@@ -23,8 +22,6 @@ class SkipWizardStepAction extends BaseAction
 
     public function handle(array $attributes = [])
     {
-        Validator::make($attributes, $this->rules())->validate();
-
         $registrationId = $attributes['registrationId'];
         $stepSlug = $attributes['stepSlug'];
 
@@ -64,7 +61,6 @@ class SkipWizardStepAction extends BaseAction
             ->first();
 
         return [
-            'success' => true,
             'registration' => $registration,
             'next_step' => $nextStep,
             'progress' => $registration->wizard_progress,

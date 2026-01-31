@@ -75,7 +75,6 @@ class SaveWizardStepAction extends BaseAction
         $registration->updateWizardProgress($progressStepId);
 
         return [
-            'success' => true,
             'registration' => $registration,
             'next_step' => $nextStep,
             'progress' => $registration->wizard_progress,

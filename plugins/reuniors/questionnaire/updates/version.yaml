@@ -42,3 +42,6 @@
 1.1.6:
     - "Add user_id to questionnaire_registration"
     - add_user_id_to_questionnaire_registration.php
+1.1.7:
+    - "Add admin_message to questionnaire_registration"
+    - add_admin_message_to_questionnaire_registration.php

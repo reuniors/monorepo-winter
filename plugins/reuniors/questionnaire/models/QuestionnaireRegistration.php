@@ -26,6 +26,7 @@ class QuestionnaireRegistration extends Model
         'completed_steps_count',
         'total_steps_count',
         'wizard_status',
+        'admin_message',
         'wizard_data',
         'wizard_started_at',
         'wizard_completed_at',
@@ -46,7 +47,7 @@ class QuestionnaireRegistration extends Model
      * returned_for_edit: admin returned for user to edit again
      * submitted: user completed, no more edits; pending admin review
      * approved: admin approved
-     * rejected: admin rejected (see rejection_reason)
+     * rejected: admin rejected (see admin_message)
      */
     const STATUS_DRAFT = 'draft';
     const STATUS_IN_PROGRESS = 'in_progress';
@@ -85,7 +86,7 @@ class QuestionnaireRegistration extends Model
             'key' => 'questionnaire_registration_id',
         ],
         'location_images' => [
-            'File',
+            'System\Models\File',
             'key' => 'questionnaire_registration_id',
             'scope' => 'locationImages',
         ]
@@ -223,10 +224,32 @@ class QuestionnaireRegistration extends Model
 
     /**
      * Admin: return wizard for edit so user can edit again.
+     * @param string|null $reason Optional message to the user.
      */
-    public function returnForEdit(): void
+    public function returnForEdit(?string $reason = null): void
     {
         $this->wizard_status = self::STATUS_RETURNED_FOR_EDIT;
+        $this->admin_message = $reason;
+        $this->save();
+    }
+
+    /**
+     * Admin: approve the submitted wizard.
+     */
+    public function approve(): void
+    {
+        $this->wizard_status = self::STATUS_APPROVED;
+        $this->save();
+    }
+
+    /**
+     * Admin: reject the submitted wizard.
+     * @param string|null $reason Optional message to the user.
+     */
+    public function reject(?string $reason = null): void
+    {
+        $this->wizard_status = self::STATUS_REJECTED;
+        $this->admin_message = $reason;
         $this->save();
     }
 }

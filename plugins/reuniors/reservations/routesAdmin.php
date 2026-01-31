@@ -38,6 +38,9 @@ use Reuniors\Reservations\Http\Actions\V1\Admin\Wizards\ReorderWizardFieldsActio
 use Reuniors\Reservations\Http\Actions\V1\Admin\Questionnaires\GetAllQuestionnairesAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Admin\GetQuestionnaireDetailsAction;
 use Reuniors\Questionnaire\Http\Actions\V1\Admin\ReturnWizardForEditAction;
+use Reuniors\Questionnaire\Http\Actions\V1\Admin\ApproveQuestionnaireAction;
+use Reuniors\Questionnaire\Http\Actions\V1\Admin\RejectQuestionnaireAction;
+use Reuniors\Questionnaire\Http\Actions\V1\Admin\DeleteQuestionnaireAdminAction;
 
 // ========================================
 // ADMIN ROUTES (RZR Admin Panel)
@@ -121,4 +124,8 @@ Route::group([
     Route::get('questionnaires/{registration}', GetQuestionnaireDetailsAction::class);
     // Admin: return questionnaire for edit (user can edit again)
     Route::post('questionnaires/{registration}/return-for-edit', ReturnWizardForEditAction::class);
+    // Admin: approve / reject / delete questionnaire
+    Route::post('questionnaires/{registration}/approve', ApproveQuestionnaireAction::class);
+    Route::post('questionnaires/{registration}/reject', RejectQuestionnaireAction::class);
+    Route::delete('questionnaires/{registration}', DeleteQuestionnaireAdminAction::class);
 });

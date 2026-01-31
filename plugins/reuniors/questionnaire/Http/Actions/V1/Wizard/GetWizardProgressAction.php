@@ -1,6 +1,5 @@
 <?php namespace Reuniors\Questionnaire\Http\Actions\V1\Wizard;
 
-use Illuminate\Support\Facades\Validator;
 use Reuniors\Base\Http\Actions\BaseAction;
 use Reuniors\Questionnaire\Models\QuestionnaireRegistration;
 
@@ -15,30 +14,18 @@ class GetWizardProgressAction extends BaseAction
     public function rules(): array
     {
         return [
-            'registrationId' => ['nullable', 'integer'],
             'registrationCode' => ['nullable', 'string'],
         ];
     }
 
-    public function handle(array $attributes = [])
+    public function handle(array $attributes = [], $registration_id = null)
     {
-        // For GET /wizard/progress/{registration_id}: merge route param (snake_case) into attributes as camelCase
-        if (request()->route('registration_id')) {
-            $attributes['registrationId'] = $attributes['registrationId'] ?? request()->route('registration_id');
+        if ($registration_id !== null) {
+            $attributes['registrationId'] = $attributes['registrationId'] ?? $registration_id;
         }
-
-        Validator::make($attributes, $this->rules())->validate();
 
         $registrationId = $attributes['registrationId'] ?? null;
         $registrationCode = $attributes['registrationCode'] ?? null;
-
-        $v = Validator::make($attributes, []);
-        $v->after(function ($validator) use ($registrationId, $registrationCode) {
-            if (!$registrationId && !$registrationCode) {
-                $validator->errors()->add('registrationId', __('Registration ID or code is required'));
-            }
-        });
-        $v->validate();
 
         $query = QuestionnaireRegistration::with([
             'wizard_definition' => function ($q) {
@@ -49,8 +36,10 @@ class GetWizardProgressAction extends BaseAction
 
         if ($registrationId) {
             $registration = $query->findOrFail($registrationId);
-        } else {
+        } else if ($registrationCode) {
             $registration = $query->where('code', $registrationCode)->firstOrFail();
+        } else {
+            throw new \Exception('Registration ID or code is required');
         }
 
         // Check if expired
@@ -66,5 +55,10 @@ class GetWizardProgressAction extends BaseAction
             'is_completed' => $registration->wizard_status === QuestionnaireRegistration::STATUS_SUBMITTED,
             'is_editable' => $registration->isEditable(),
         ];
+    }
+
+    public function asController($registration_id = null): array
+    {
+        return parent::asController($registration_id);
     }
 }
